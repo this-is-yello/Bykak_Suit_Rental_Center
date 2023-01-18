@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "443995392320",
+    "project_id": "bykakrentalcenter",
+    "storage_bucket": "bykakrentalcenter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443995392320:android:7a06ef2e0c4d5bf6bd12a5",
+        "android_client_info": {
+          "package_name": "com.designer.bykaksuitrentalcenter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443995392320-mqo3h30e9it856ogdrbbildcac5gfvq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgD1Zy46y1emnFfJfu6iS6i2Njrl9-Bpw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443995392320-mqo3h30e9it856ogdrbbildcac5gfvq7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "443995392320-n8dceqdr6j01acajjlr0ftmapit5civl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.designer.bykaksuitrentalcenter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
