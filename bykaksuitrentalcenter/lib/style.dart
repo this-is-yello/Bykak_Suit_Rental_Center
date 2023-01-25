@@ -11,5 +11,5 @@ var theme = ThemeData(
     actionsIconTheme: IconThemeData(color: blackColor),
     iconTheme: IconThemeData(color: blackColor),
     toolbarHeight: 72,
-  )
+  ),
 );
