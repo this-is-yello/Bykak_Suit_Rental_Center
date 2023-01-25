@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+
+import 'package:bykaksuitrentalcenter/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -8,17 +11,14 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(),
-    );
-  }
+  runApp(
+    MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Lineseed',
+      ),
+      debugShowCheckedModeBanner: false,
+      title: '순양렌탈센터',
+      home: HomeScreen(),
+    ),
+  );
 }
