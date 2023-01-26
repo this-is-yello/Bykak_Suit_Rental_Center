@@ -72,7 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-
 // -------------------------------------------------- AppBar ---------------------------------------------------
 // Phone-AppBar
 class PhoneAppBar extends StatelessWidget {
@@ -100,6 +99,7 @@ class PhoneAppBar extends StatelessWidget {
     );
   }
 }
+
 // Wide-AppBar
 class WideAppBar extends StatelessWidget {
   const WideAppBar({super.key});
@@ -162,7 +162,6 @@ class WideAppBar extends StatelessWidget {
   }
 }
 
-
 // -------------------------------------------------- Main-Banner ---------------------------------------------------
 class MainBanner extends StatelessWidget {
   const MainBanner({super.key});
@@ -193,7 +192,6 @@ class MainBanner extends StatelessWidget {
     });
   }
 }
-
 
 // -------------------------------------------------- Contents ---------------------------------------------------
 // Contents-1
@@ -326,287 +324,359 @@ class FirstContents extends StatelessWidget {
     });
   }
 }
+
 // Contents-2
 class SecondContents extends StatelessWidget {
   const SecondContents({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return Container(
-          width: style.widgetSize(context),
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-              Container(
-                padding: EdgeInsets.all(style.paddingSize(context)),
-                child: Text('인기상품', style: TextStyle(color: style.blackColor, fontSize: style.h2FontSize(context), fontWeight: style.boldText),),
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return Container(
+        width: style.widgetSize(context),
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.all(style.paddingSize(context))),
+            Container(
+              padding: EdgeInsets.all(style.paddingSize(context)),
+              child: Text(
+                '인기상품',
+                style: TextStyle(
+                    color: style.blackColor,
+                    fontSize: style.h2FontSize(context),
+                    fontWeight: style.boldText),
               ),
-              Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-              Container(
-                width: style.widgetSize(context),
-                padding: EdgeInsets.all(16),
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    viewportFraction: 0.45,
-                    enlargeCenterPage: true,
-                    autoPlay: true,
-                  ),
-                  items: [
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: style.lightGreyColor, width: 2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: InkWell(
-                        child: Column(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                //height: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  color: style.mainColor,
-                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.all(style.paddingSize(context)),
-                              decoration: BoxDecoration(
-                                color: style.whiteColor,
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('상품명', style: TextStyle(fontSize: style.h4FontSize(context), color: style.blackColor)),
-                                  Padding(padding: EdgeInsets.all(2)),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('대여샵', style: TextStyle(fontSize: style.h4FontSize(context) - 2, color: style.greyColor)),
-                                      Text('50000원', style: TextStyle(fontSize: style.h4FontSize(context), color: style.mainColor, fontWeight: style.boldText)),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailScreen()));
-                        },
-                      ),
-                    ),
-                  ],
+            ),
+            Padding(padding: EdgeInsets.all(style.paddingSize(context))),
+            Container(
+              width: style.widgetSize(context),
+              padding: EdgeInsets.all(16),
+              child: CarouselSlider(
+                options: CarouselOptions(
+                  viewportFraction: 0.45,
+                  enlargeCenterPage: true,
+                  autoPlay: true,
                 ),
+                items: [
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: style.lightGreyColor, width: 2),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: InkWell(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              //height: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                color: style.mainColor,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(8),
+                                    topRight: Radius.circular(8)),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.all(style.paddingSize(context)),
+                            decoration: BoxDecoration(
+                              color: style.whiteColor,
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8)),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('상품명',
+                                    style: TextStyle(
+                                        fontSize: style.h4FontSize(context),
+                                        color: style.blackColor)),
+                                Padding(padding: EdgeInsets.all(2)),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('대여샵',
+                                        style: TextStyle(
+                                            fontSize:
+                                                style.h4FontSize(context) - 2,
+                                            color: style.greyColor)),
+                                    Text('50000원',
+                                        style: TextStyle(
+                                            fontSize: style.h4FontSize(context),
+                                            color: style.mainColor,
+                                            fontWeight: style.boldText)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductDetailScreen()));
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        );
-      }
-    );
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
+
 // Contents-3
 class ThirdContents extends StatelessWidget {
   const ThirdContents({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return Container(
-          width: style.widgetSize(context),
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-              Container(
-                padding: EdgeInsets.all(style.paddingSize(context)),
-                child: Text('패키지 상품', style: TextStyle(color: style.blackColor, fontSize: style.h2FontSize(context), fontWeight: style.boldText),),
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return Container(
+        width: style.widgetSize(context),
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.all(style.paddingSize(context))),
+            Container(
+              padding: EdgeInsets.all(style.paddingSize(context)),
+              child: Text(
+                '패키지 상품',
+                style: TextStyle(
+                    color: style.blackColor,
+                    fontSize: style.h2FontSize(context),
+                    fontWeight: style.boldText),
               ),
-              Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-              Container(
-                width: style.widgetSize(context),
-                height: style.c3GridHeight(context),
-                padding: EdgeInsets.all(16),
-                child: GridView.builder(
-                  itemCount: 6,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1 / 1.5,
-                    crossAxisCount: MediaQuery.of(context).size.width < 1080 ? 2 : 3,
-                    mainAxisSpacing: style.paddingSize(context),
-                    crossAxisSpacing: style.paddingSize(context),
-                  ),
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: style.lightGreyColor, width: 2),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Column(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: style.mainColor,
-                                  borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: double.infinity,
-                              padding: EdgeInsets.all(style.paddingSize(context)),
-                              decoration: BoxDecoration(
-                                color: style.whiteColor,
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8), bottomRight: Radius.circular(8)),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('패키지 명', style: TextStyle(fontSize: style.h4FontSize(context), color: style.blackColor)),
-                                  Padding(padding: EdgeInsets.all(2)),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('대여샵', style: TextStyle(fontSize: style.h4FontSize(context) - 2, color: style.greyColor)),
-                                      Text('500000원', style: TextStyle(fontSize: style.h4FontSize(context), color: style.mainColor, fontWeight: style.boldText)),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailScreen()));
-                      },
-                    );
-                  },
+            ),
+            Padding(padding: EdgeInsets.all(style.paddingSize(context))),
+            Container(
+              width: style.widgetSize(context),
+              height: style.c3GridHeight(context),
+              padding: EdgeInsets.all(16),
+              child: GridView.builder(
+                itemCount: 6,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1 / 1.5,
+                  crossAxisCount:
+                      MediaQuery.of(context).size.width < 1080 ? 2 : 3,
+                  mainAxisSpacing: style.paddingSize(context),
+                  crossAxisSpacing: style.paddingSize(context),
                 ),
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: style.lightGreyColor, width: 2),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: style.mainColor,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(8),
+                                    topRight: Radius.circular(8)),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.all(style.paddingSize(context)),
+                            decoration: BoxDecoration(
+                              color: style.whiteColor,
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(8),
+                                  bottomRight: Radius.circular(8)),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('패키지 명',
+                                    style: TextStyle(
+                                        fontSize: style.h4FontSize(context),
+                                        color: style.blackColor)),
+                                Padding(padding: EdgeInsets.all(2)),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('대여샵',
+                                        style: TextStyle(
+                                            fontSize:
+                                                style.h4FontSize(context) - 2,
+                                            color: style.greyColor)),
+                                    Text('500000원',
+                                        style: TextStyle(
+                                            fontSize: style.h4FontSize(context),
+                                            color: style.mainColor,
+                                            fontWeight: style.boldText)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProductDetailScreen()));
+                    },
+                  );
+                },
               ),
-            ],
-          ),
-        );
-      }
-    );
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
+
 // Contents-4
 class FourthContents extends StatelessWidget {
   const FourthContents({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return Container(
-          width: style.widgetSize(context),
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-              Container(
-                padding: EdgeInsets.all(style.paddingSize(context)),
-                child: Text('서비스 이용안내', style: TextStyle(color: style.blackColor, fontSize: style.h2FontSize(context), fontWeight: style.boldText)),
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return Container(
+        width: style.widgetSize(context),
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Padding(padding: EdgeInsets.all(style.paddingSize(context))),
+            Container(
+              padding: EdgeInsets.all(style.paddingSize(context)),
+              child: Text('서비스 이용안내',
+                  style: TextStyle(
+                      color: style.blackColor,
+                      fontSize: style.h2FontSize(context),
+                      fontWeight: style.boldText)),
+            ),
+            Padding(padding: EdgeInsets.all(style.paddingSize(context))),
+            Container(
+              padding: EdgeInsets.all(16),
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: style.c4BoxSize(context),
+                          height: style.c4BoxSize(context),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF1E1E1E),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(
+                                top: style.paddingSize(context))),
+                        Text(
+                          '예약안내',
+                          style: TextStyle(fontSize: style.h4FontSize(context)),
+                        )
+                      ],
+                    ),
+                    onTap: () {},
+                  ),
+                  InkWell(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: style.c4BoxSize(context),
+                          height: style.c4BoxSize(context),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF1E1E1E),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(
+                                top: style.paddingSize(context))),
+                        Text(
+                          '대여/반납',
+                          style: TextStyle(fontSize: style.h4FontSize(context)),
+                        )
+                      ],
+                    ),
+                    onTap: () {},
+                  ),
+                  InkWell(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: style.c4BoxSize(context),
+                          height: style.c4BoxSize(context),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF1E1E1E),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(
+                                top: style.paddingSize(context))),
+                        Text(
+                          '취소/환불',
+                          style: TextStyle(fontSize: style.h4FontSize(context)),
+                        )
+                      ],
+                    ),
+                    onTap: () {},
+                  ),
+                  InkWell(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: style.c4BoxSize(context),
+                          height: style.c4BoxSize(context),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF1E1E1E),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(
+                                top: style.paddingSize(context))),
+                        Text(
+                          '위약금',
+                          style: TextStyle(fontSize: style.h4FontSize(context)),
+                        )
+                      ],
+                    ),
+                    onTap: () {},
+                  ),
+                ],
               ),
-              Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-              Container(
-                padding: EdgeInsets.all(16),
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      child: Column(
-                        children: [
-                          Container(
-                            width: style.c4BoxSize(context),
-                            height: style.c4BoxSize(context),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF1E1E1E),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
-                          Text('예약안내', style: TextStyle(fontSize: style.h4FontSize(context)),)
-                        ],
-                      ),
-                      onTap: () {},
-                    ),
-                    InkWell(
-                      child: Column(
-                        children: [
-                          Container(
-                            width: style.c4BoxSize(context),
-                            height: style.c4BoxSize(context),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF1E1E1E),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
-                          Text('대여/반납', style: TextStyle(fontSize: style.h4FontSize(context)),)
-                        ],
-                      ),
-                      onTap: () {},
-                    ),
-                    InkWell(
-                      child: Column(
-                        children: [
-                          Container(
-                            width: style.c4BoxSize(context),
-                            height: style.c4BoxSize(context),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF1E1E1E),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
-                          Text('취소/환불', style: TextStyle(fontSize: style.h4FontSize(context)),)
-                        ],
-                      ),
-                      onTap: () {},
-                    ),
-                    InkWell(
-                      child: Column(
-                        children: [
-                          Container(
-                            width: style.c4BoxSize(context),
-                            height: style.c4BoxSize(context),
-                            decoration: BoxDecoration(
-                              color: Color(0xFF1E1E1E),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
-                          Text('위약금', style: TextStyle(fontSize: style.h4FontSize(context)),)
-                        ],
-                      ),
-                      onTap: () {},
-                    ),
-                  ],
-                ),
-              ),
-              Padding(padding: EdgeInsets.all(style.paddingSize(context)))
-            ],
-          ),
-        );
-      }
-    );
+            ),
+            Padding(padding: EdgeInsets.all(style.paddingSize(context)))
+          ],
+        ),
+      );
+    });
   }
 }
-
 
 // -------------------------------------------------- Main-Fotter ---------------------------------------------------
 class Footer extends StatelessWidget {
@@ -614,63 +684,82 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return Container(
-          width: 100.w,
-          height: style.footerSize(context),
-          padding: EdgeInsets.all(20),
-          color: style.mainColor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return Container(
+        width: 100.w,
+        height: style.footerSize(context),
+        padding: EdgeInsets.all(20),
+        color: style.mainColor,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: Text('순양 렌탈센터',
+                      style: TextStyle(
+                          color: style.whiteColor,
+                          fontSize: style.footerLogoSize(context),
+                          fontWeight: style.boldText)),
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      Container(
+                        width: style.footerBoxSize(context),
+                        height: style.footerBoxSize(context),
+                        color: style.whiteColor,
+                      ),
+                      Padding(
+                          padding: EdgeInsets.all(style.paddingSize(context))),
+                      Container(
+                        width: style.footerBoxSize(context),
+                        height: style.footerBoxSize(context),
+                        color: style.whiteColor,
+                      ),
+                      Padding(
+                          padding: EdgeInsets.all(style.paddingSize(context))),
+                      Container(
+                        width: style.footerBoxSize(context),
+                        height: style.footerBoxSize(context),
+                        color: style.whiteColor,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    child: Text('순양 렌탈센터', style: TextStyle(color: style.whiteColor, fontSize: style.footerLogoSize(context), fontWeight: style.boldText)),
+                  Text(
+                    '(주)데시그너 대표이사 : 김주현' + ' | ' + '사업자등록번호 : 000-00-00000',
+                    style: TextStyle(
+                        color: style.whiteColor,
+                        fontSize: style.h5FontSize(context)),
                   ),
-                  Container(
-                    child: Row(
-                      children: [
-                        Container(
-                          width: style.footerBoxSize(context),
-                          height: style.footerBoxSize(context),
-                          color: style.whiteColor,
-                        ),
-                        Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-                        Container(
-                          width: style.footerBoxSize(context),
-                          height: style.footerBoxSize(context),
-                          color: style.whiteColor,
-                        ),
-                        Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-                        Container(
-                          width: style.footerBoxSize(context),
-                          height: style.footerBoxSize(context),
-                          color: style.whiteColor,
-                        ),
-                      ],
-                    ),
+                  Text(
+                    '인천광역시 미추홀구 석정로 200' + ' | ' + '우편번호 : 000000',
+                    style: TextStyle(
+                        color: style.whiteColor,
+                        fontSize: style.h5FontSize(context)),
+                  ),
+                  Text(
+                    'Copyright ⓒ 2023 by Designer',
+                    style: TextStyle(
+                        color: style.whiteColor,
+                        fontSize: style.h5FontSize(context)),
                   ),
                 ],
               ),
-              Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('(주)데시그너 대표이사 : 김주현' + ' | ' + '사업자등록번호 : 000-00-00000', style: TextStyle(color: style.whiteColor, fontSize: style.h5FontSize(context)),),
-                    Text('인천광역시 미추홀구 석정로 200' + ' | ' + '우편번호 : 000000', style: TextStyle(color: style.whiteColor, fontSize: style.h5FontSize(context)),),
-                    Text('Copyright ⓒ 2023 by Designer', style: TextStyle(color: style.whiteColor, fontSize: style.h5FontSize(context)),),
-                  ],
-                ),
-              )
-            ],
-          ),
-        );
-      }
-    );
+            )
+          ],
+        ),
+      );
+    });
   }
 }
