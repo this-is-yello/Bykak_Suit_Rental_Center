@@ -24,6 +24,56 @@ widgetSize(c) {
   }
 }
 
+productPicHeight(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 380;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 560;
+  } else {
+    return 640;
+  }
+}
+
+h2FontSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 20;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 24;
+  } else {
+    return 32;
+  }
+}
+
+h3FontSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 16;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 20;
+  } else {
+    return 24;
+  }
+}
+
+h4FontSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 14;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 16;
+  } else {
+    return 20;
+  }
+}
+
+h5FontSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 12;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 14;
+  } else {
+    return 16;
+  }
+}
+
 paddingSize(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 8;
@@ -31,5 +81,53 @@ paddingSize(c) {
     return 12;
   } else {
     return 16;
+  }
+}
+
+c3GridHeight(c) {
+  if(MediaQuery.of(c).size.width < 640) {
+    return 750;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 1180;
+  } else {
+    return 1040;
+  }
+}
+
+c4BoxSize(c) {
+  if(MediaQuery.of(c).size.width < 640) {
+    return 60;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 80;
+  } else {
+    return 100;
+  }
+}
+
+footerSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 200;
+  } else {
+    return 300;
+  }
+}
+
+footerLogoSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 30;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 40;
+  } else {
+    return 50;
+  }
+}
+
+footerBoxSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 40;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 50;
+  } else {
+    return 60;
   }
 }

@@ -1,9 +1,12 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 import 'package:bykaksuitrentalcenter/home_page.dart';
+import 'package:bykaksuitrentalcenter/product_detail_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,4 +24,5 @@ void main() async {
       home: HomeScreen(),
     ),
   );
+
 }
