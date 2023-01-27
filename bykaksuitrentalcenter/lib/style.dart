@@ -104,30 +104,10 @@ c4BoxSize(c) {
   }
 }
 
-footerSize(c) {
+userInfoBoxHeight(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 200;
   } else {
     return 300;
-  }
-}
-
-footerLogoSize(c) {
-  if (MediaQuery.of(c).size.width < 640) {
-    return 30;
-  } else if (MediaQuery.of(c).size.width < 1080) {
-    return 40;
-  } else {
-    return 50;
-  }
-}
-
-footerBoxSize(c) {
-  if (MediaQuery.of(c).size.width < 640) {
-    return 40;
-  } else if (MediaQuery.of(c).size.width < 1080) {
-    return 50;
-  } else {
-    return 60;
   }
 }

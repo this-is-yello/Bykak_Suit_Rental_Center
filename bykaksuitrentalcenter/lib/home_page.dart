@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:bykaksuitrentalcenter/product_detail_page.dart';
+import 'package:bykaksuitrentalcenter/rent/product_detail_page.dart';
+import 'package:bykaksuitrentalcenter/account/log_in_page.dart';
+import 'package:bykaksuitrentalcenter/account/my_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: style.whiteColor,
-        iconTheme: IconThemeData(color: style.blackColor),
+        backgroundColor: style.mainColor,
+        // iconTheme: IconThemeData(color: style.whiteColor),
         title: Center(
           child: MediaQuery.of(context).size.width < 640
               ? PhoneAppBar()
@@ -80,6 +82,7 @@ class PhoneAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left: 16, right: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -89,10 +92,14 @@ class PhoneAppBar extends StatelessWidget {
           ),
           Text('순양 렌탈센터',
               style: TextStyle(
-                  color: style.blackColor, fontWeight: style.boldText)),
+                  color: style.whiteColor, fontWeight: style.boldText)),
           IconButton(
             icon: Icon(Icons.account_circle),
-            onPressed: () {},
+            onPressed: () {
+              // 로그인 상태 확인해서 마이페이지 또는 로그인 화면
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => MyPageScreen()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen()));
+            },
           ),
         ],
       ),
@@ -114,7 +121,7 @@ class WideAppBar extends StatelessWidget {
         children: [
           Text('순양 렌탈센터',
               style: TextStyle(
-                  color: style.blackColor, fontWeight: style.boldText)),
+                  color: style.whiteColor, fontWeight: style.boldText)),
           Container(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,7 +135,7 @@ class WideAppBar extends StatelessWidget {
                     '예약내역',
                     style: TextStyle(
                         fontSize: 16,
-                        color: style.blackColor,
+                        color: style.whiteColor,
                         fontWeight: style.boldText),
                   ),
                   onPressed: () {},
@@ -138,20 +145,26 @@ class WideAppBar extends StatelessWidget {
                     '마이페이지',
                     style: TextStyle(
                         fontSize: 16,
-                        color: style.blackColor,
+                        color: style.whiteColor,
                         fontWeight: style.boldText),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    // 로그인 상태 확인해서 마이페이지 또는 로그인 화면
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyPageScreen()));
+                  },
                 ),
                 TextButton(
                   child: Text(
-                    '로그인',
+                    '로그인', //혹은 로그아웃
                     style: TextStyle(
                         fontSize: 16,
-                        color: style.blackColor,
+                        color: style.whiteColor,
                         fontWeight: style.boldText),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen()));
+                  },
                 ),
               ],
             ),
@@ -180,12 +193,13 @@ class MainBanner extends StatelessWidget {
             width: 100.w,
             height: 40.w,
             color: style.mainColor,
-            child: Center(
-              child: Text(
-                'K!mjuhyeon by 覺 BANNER',
-                style: TextStyle(fontWeight: style.boldText),
-              ),
-            ),
+            child: Image.asset('assets/images/banner2.jpg', fit: BoxFit.cover),
+            // child: Center(
+            //   child: Text(
+            //     'K!mjuhyeon by 覺 BANNER',
+            //     style: TextStyle(fontWeight: style.boldText),
+            //   ),
+            // ),
           ),
         ],
       );
@@ -679,15 +693,48 @@ class FourthContents extends StatelessWidget {
 }
 
 // -------------------------------------------------- Main-Fotter ---------------------------------------------------
-class Footer extends StatelessWidget {
+class Footer extends StatefulWidget {
   const Footer({super.key});
+
+  @override
+  State<Footer> createState() => _FooterState();
+}
+
+class _FooterState extends State<Footer> {
+  footerSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 200;
+  } else {
+    return 300;
+  }
+}
+
+footerLogoSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 30;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 40;
+  } else {
+    return 50;
+  }
+}
+
+footerBoxSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 40;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 50;
+  } else {
+    return 60;
+  }
+}
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return Container(
         width: 100.w,
-        height: style.footerSize(context),
+        height: footerSize(context),
         padding: EdgeInsets.all(20),
         color: style.mainColor,
         child: Column(
@@ -702,30 +749,39 @@ class Footer extends StatelessWidget {
                   child: Text('순양 렌탈센터',
                       style: TextStyle(
                           color: style.whiteColor,
-                          fontSize: style.footerLogoSize(context),
+                          fontSize: footerLogoSize(context),
                           fontWeight: style.boldText)),
                 ),
                 Container(
                   child: Row(
                     children: [
-                      Container(
-                        width: style.footerBoxSize(context),
-                        height: style.footerBoxSize(context),
-                        color: style.whiteColor,
+                      InkWell(
+                        child: Container(
+                          width: footerBoxSize(context),
+                          height: footerBoxSize(context),
+                          color: style.whiteColor,
+                        ),
+                        onTap: () {},
                       ),
                       Padding(
                           padding: EdgeInsets.all(style.paddingSize(context))),
-                      Container(
-                        width: style.footerBoxSize(context),
-                        height: style.footerBoxSize(context),
-                        color: style.whiteColor,
+                      InkWell(
+                        child: Container(
+                          width: footerBoxSize(context),
+                          height: footerBoxSize(context),
+                          color: style.whiteColor,
+                        ),
+                        onTap: () {},
                       ),
                       Padding(
                           padding: EdgeInsets.all(style.paddingSize(context))),
-                      Container(
-                        width: style.footerBoxSize(context),
-                        height: style.footerBoxSize(context),
-                        color: style.whiteColor,
+                      InkWell(
+                        child: Container(
+                          width: footerBoxSize(context),
+                          height: footerBoxSize(context),
+                          color: style.whiteColor,
+                        ),
+                        onTap: () {},
                       ),
                     ],
                   ),

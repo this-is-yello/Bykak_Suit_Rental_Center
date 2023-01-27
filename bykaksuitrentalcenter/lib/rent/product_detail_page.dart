@@ -38,8 +38,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: style.whiteColor,
-          iconTheme: IconThemeData(color: style.blackColor),
+          backgroundColor: style.mainColor,
+          // iconTheme: IconThemeData(color: style.blackColor),
           title: Center(
             child: MediaQuery.of(context).size.width < 640
                 ? PhoneAppBar()
@@ -133,7 +133,8 @@ class ProductPic extends StatelessWidget {
         decoration: BoxDecoration(
             // color: style.whiteColor,
             // borderRadius: BorderRadius.circular(8),
-            boxShadow: [style.boxShadows]),
+            boxShadow: [style.boxShadows],
+        ),
         child: CarouselSlider(
           options: CarouselOptions(
             height: style.productPicHeight(context),
@@ -168,7 +169,8 @@ class ProductNamePrice extends StatelessWidget {
         decoration: BoxDecoration(
             color: style.whiteColor,
             borderRadius: BorderRadius.circular(8),
-            boxShadow: [style.boxShadows]),
+            boxShadow: [style.boxShadows],
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,12 +178,12 @@ class ProductNamePrice extends StatelessWidget {
             Text('대여샵',
                 style: TextStyle(
                     fontSize: style.h3FontSize(context),
-                    color: style.greyColor)),
+                    color: style.greyColor,),),
             Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
             Text('상품명',
                 style: TextStyle(
                     fontSize: style.h3FontSize(context),
-                    color: style.blackColor)),
+                    color: style.blackColor,),),
             Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -190,7 +192,9 @@ class ProductNamePrice extends StatelessWidget {
                     style: TextStyle(
                         fontSize: style.h3FontSize(context) + 4,
                         color: style.blackColor,
-                        fontWeight: style.boldText)),
+                        fontWeight: style.boldText,
+                    ),
+                ),
                 Container(
                   child: Row(
                     children: [
