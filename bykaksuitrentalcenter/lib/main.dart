@@ -6,10 +6,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 import 'package:bykaksuitrentalcenter/home_page.dart';
-import 'package:bykaksuitrentalcenter/rent/product_detail_page.dart';
-import 'package:bykaksuitrentalcenter/account/log_in_page.dart';
-import 'package:bykaksuitrentalcenter/account/sign_up_page.dart';
-import 'package:bykaksuitrentalcenter/account/my_page.dart';
+import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
+import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
+import 'package:bykaksuitrentalcenter/screens/account/sign_up_page.dart';
+import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,5 +27,4 @@ void main() async {
       home: HomeScreen(),
     ),
   );
-
 }

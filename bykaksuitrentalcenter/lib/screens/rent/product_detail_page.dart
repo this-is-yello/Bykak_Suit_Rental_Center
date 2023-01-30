@@ -131,9 +131,9 @@ class ProductPic extends StatelessWidget {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return Container(
         decoration: BoxDecoration(
-            // color: style.whiteColor,
-            // borderRadius: BorderRadius.circular(8),
-            boxShadow: [style.boxShadows],
+          // color: style.whiteColor,
+          // borderRadius: BorderRadius.circular(8),
+          boxShadow: [style.boxShadows],
         ),
         child: CarouselSlider(
           options: CarouselOptions(
@@ -167,33 +167,40 @@ class ProductNamePrice extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            color: style.whiteColor,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [style.boxShadows],
+          color: style.whiteColor,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [style.boxShadows],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('대여샵',
-                style: TextStyle(
-                    fontSize: style.h3FontSize(context),
-                    color: style.greyColor,),),
+            Text(
+              '대여샵',
+              style: TextStyle(
+                fontSize: style.h3FontSize(context),
+                color: style.greyColor,
+              ),
+            ),
             Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
-            Text('상품명',
-                style: TextStyle(
-                    fontSize: style.h3FontSize(context),
-                    color: style.blackColor,),),
+            Text(
+              '상품명',
+              style: TextStyle(
+                fontSize: style.h3FontSize(context),
+                color: style.blackColor,
+              ),
+            ),
             Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('50000원',
-                    style: TextStyle(
-                        fontSize: style.h3FontSize(context) + 4,
-                        color: style.blackColor,
-                        fontWeight: style.boldText,
-                    ),
+                Text(
+                  '50000원',
+                  style: TextStyle(
+                    fontSize: style.h3FontSize(context) + 4,
+                    color: style.blackColor,
+                    fontWeight: style.boldText,
+                  ),
                 ),
                 Container(
                   child: Row(

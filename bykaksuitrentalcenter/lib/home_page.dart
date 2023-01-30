@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import 'package:bykaksuitrentalcenter/rent/product_detail_page.dart';
-import 'package:bykaksuitrentalcenter/account/log_in_page.dart';
-import 'package:bykaksuitrentalcenter/account/my_page.dart';
+import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
+import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
+import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
+import 'package:bykaksuitrentalcenter/screens/account/book_history_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -98,7 +99,8 @@ class PhoneAppBar extends StatelessWidget {
             onPressed: () {
               // 로그인 상태 확인해서 마이페이지 또는 로그인 화면
               // Navigator.push(context, MaterialPageRoute(builder: (context) => MyPageScreen()));
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LogInScreen()));
             },
           ),
         ],
@@ -138,7 +140,12 @@ class WideAppBar extends StatelessWidget {
                         color: style.whiteColor,
                         fontWeight: style.boldText),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BookHistoryScreen()));
+                  },
                 ),
                 TextButton(
                   child: Text(
@@ -151,7 +158,10 @@ class WideAppBar extends StatelessWidget {
                   onPressed: () {
                     // 로그인 상태 확인해서 마이페이지 또는 로그인 화면
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen()));
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyPageScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MyPageScreen()));
                   },
                 ),
                 TextButton(
@@ -163,7 +173,8 @@ class WideAppBar extends StatelessWidget {
                         fontWeight: style.boldText),
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LogInScreen()));
                   },
                 ),
               ],
@@ -702,32 +713,32 @@ class Footer extends StatefulWidget {
 
 class _FooterState extends State<Footer> {
   footerSize(c) {
-  if (MediaQuery.of(c).size.width < 640) {
-    return 200;
-  } else {
-    return 300;
+    if (MediaQuery.of(c).size.width < 640) {
+      return 200;
+    } else {
+      return 300;
+    }
   }
-}
 
-footerLogoSize(c) {
-  if (MediaQuery.of(c).size.width < 640) {
-    return 30;
-  } else if (MediaQuery.of(c).size.width < 1080) {
-    return 40;
-  } else {
-    return 50;
+  footerLogoSize(c) {
+    if (MediaQuery.of(c).size.width < 640) {
+      return 30;
+    } else if (MediaQuery.of(c).size.width < 1080) {
+      return 40;
+    } else {
+      return 50;
+    }
   }
-}
 
-footerBoxSize(c) {
-  if (MediaQuery.of(c).size.width < 640) {
-    return 40;
-  } else if (MediaQuery.of(c).size.width < 1080) {
-    return 50;
-  } else {
-    return 60;
+  footerBoxSize(c) {
+    if (MediaQuery.of(c).size.width < 640) {
+      return 40;
+    } else if (MediaQuery.of(c).size.width < 1080) {
+      return 50;
+    } else {
+      return 60;
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {

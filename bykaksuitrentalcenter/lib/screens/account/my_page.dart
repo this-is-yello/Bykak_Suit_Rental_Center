@@ -8,8 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bykaksuitrentalcenter/firebase_options.dart';
 
-import 'package:bykaksuitrentalcenter/home_page.dart';
-
 class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
 
@@ -55,81 +53,87 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   color: style.mainColor,
                 ),
               ),
-            ): 
-            ResponsiveSizer(
-              builder: (context, orientation, screenType) {
-                return ListView(
-                  children: [
-                    Container(
-                      width: 100.w,
-                      height: style.userInfoBoxHeight(context),
-                      color: style.mainColor,
-                      child: Center(
-                        child: Container(
-                          width: style.widgetSize(context),
-                          child: _columnState ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ProfileNameNumber(),
-                              // Manegement(),
-                              PointBookSizeInfo(),
-                            ],
-                          ) : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              ProfileNameNumber(),
-                              Manegement(),
-                              // PointBookSizeInfo(),
-                            ],
-                          ),
-                        ),
+            )
+          : ResponsiveSizer(builder: (context, orientation, screenType) {
+              return ListView(
+                children: [
+                  Container(
+                    width: 100.w,
+                    height: style.userInfoBoxHeight(context),
+                    color: style.mainColor,
+                    child: Center(
+                      child: Container(
+                        width: style.widgetSize(context),
+                        child: _columnState
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ProfileNameNumber(),
+                                  Manegement(),
+                                  // PointBookSizeInfo(),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ProfileNameNumber(),
+                                  Manegement(),
+                                  // PointBookSizeInfo(),
+                                ],
+                              ),
                       ),
                     ),
-                    Container(
-                      width: style.widgetSize(context),
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-                          Container(
-                            child: Text(
-                              '대여일정',
-                              style: TextStyle(
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Padding(
+                            padding:
+                                EdgeInsets.all(style.paddingSize(context))),
+                        Container(
+                          child: Text(
+                            '대여일정',
+                            style: TextStyle(
                                 fontSize: style.h2FontSize(context),
                                 color: style.blackColor,
-                                fontWeight: style.boldText
-                              ),
-                            ),
+                                fontWeight: style.boldText),
                           ),
-                          Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-                          Container(
-                            width: style.widgetSize(context),
-                            child: MediaQuery.of(context).size.width < 1080 ? Column(
-                              children: [
-                                Calender(),
-                                Padding(padding: EdgeInsets.all(20)),
-                                Schedule(),
-                              ],
-                            ) : Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Calender(),
-                                // Padding(padding: EdgeInsets.all(20)),
-                                Schedule(),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                        ),
+                        Padding(
+                            padding:
+                                EdgeInsets.all(style.paddingSize(context))),
+                        Container(
+                          width: style.widgetSize(context),
+                          child: MediaQuery.of(context).size.width < 1080
+                              ? Column(
+                                  children: [
+                                    Calender(),
+                                    Padding(padding: EdgeInsets.all(20)),
+                                    Schedule(),
+                                  ],
+                                )
+                              : Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Calender(),
+                                    // Padding(padding: EdgeInsets.all(20)),
+                                    Schedule(),
+                                  ],
+                                ),
+                        )
+                      ],
                     ),
-                  ],
-                );
-              }
-      ),
+                  ),
+                ],
+              );
+            }),
     );
   }
 }
-
 
 // -------------------------------------------------- AppBar ---------------------------------------------------
 class MyPageAppBar extends StatelessWidget {
@@ -143,9 +147,10 @@ class MyPageAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('마이페이지',
-              style: TextStyle(
-                  color: style.whiteColor, fontWeight: style.boldText),
+          Text(
+            '마이페이지',
+            style:
+                TextStyle(color: style.whiteColor, fontWeight: style.boldText),
           ),
           Row(
             children: [
@@ -159,8 +164,7 @@ class MyPageAppBar extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       color: style.whiteColor,
-                      fontWeight: style.boldText
-                  ),
+                      fontWeight: style.boldText),
                 ),
                 onPressed: () {},
               ),
@@ -171,7 +175,6 @@ class MyPageAppBar extends StatelessWidget {
     );
   }
 }
-
 
 // -------------------------------------------------- Proflie ---------------------------------------------------
 // NameNumber
@@ -193,9 +196,8 @@ class ProfileNameNumber extends StatelessWidget {
                 width: style.c4BoxSize(context),
                 height: style.c4BoxSize(context),
                 decoration: BoxDecoration(
-                  color: style.blackColor,
-                  borderRadius: BorderRadius.circular(200)
-                ),
+                    color: style.blackColor,
+                    borderRadius: BorderRadius.circular(200)),
               ),
               Padding(padding: EdgeInsets.all(8)),
               Column(
@@ -204,22 +206,26 @@ class ProfileNameNumber extends StatelessWidget {
                   Container(
                     child: Text(
                       '유저네임',
-                      style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor, fontWeight: style.boldText),
+                      style: TextStyle(
+                          fontSize: style.h3FontSize(context),
+                          color: style.whiteColor,
+                          fontWeight: style.boldText),
                     ),
                   ),
                   Padding(padding: EdgeInsets.all(2)),
                   Container(
                     child: Text(
                       '010-0000-0000',
-                      style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor, fontWeight: style.boldText),
+                      style: TextStyle(
+                          fontSize: style.h3FontSize(context),
+                          color: style.whiteColor,
+                          fontWeight: style.boldText),
                     ),
                   ),
                 ],
               ),
             ],
           ),
-          // Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-          // PointBookSizeInfo()
         ],
       ),
     );
@@ -233,56 +239,64 @@ class PointBookSizeInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width > 1080 ? 560 : style.widgetSize(context),
+      width: MediaQuery.of(context).size.width > 1080
+          ? 560
+          : style.widgetSize(context),
       padding: EdgeInsets.all(16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '포인트',
-                  style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
-                ),
-                Padding(padding: EdgeInsets.all(4)),
-                Text(
-                  '1000' + 'P',
-                  style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
-                ),
-              ],
-            ),
-            onTap: () {},
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        InkWell(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '포인트',
+                style: TextStyle(
+                    fontSize: style.h3FontSize(context),
+                    color: style.whiteColor),
+              ),
+              Padding(padding: EdgeInsets.all(4)),
+              Text(
+                '1000' + 'P',
+                style: TextStyle(
+                    fontSize: style.h3FontSize(context),
+                    color: style.whiteColor),
+              ),
+            ],
           ),
-          InkWell(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '예약내역',
-                  style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
-                ),
-                Padding(padding: EdgeInsets.all(4)),
-                Text(
-                  '2' + '건',
-                  style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
-                ),
-              ],
-            ),
-            onTap: () {},
+          onTap: () {},
+        ),
+        InkWell(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '예약내역',
+                style: TextStyle(
+                    fontSize: style.h3FontSize(context),
+                    color: style.whiteColor),
+              ),
+              Padding(padding: EdgeInsets.all(4)),
+              Text(
+                '2' + '건',
+                style: TextStyle(
+                    fontSize: style.h3FontSize(context),
+                    color: style.whiteColor),
+              ),
+            ],
           ),
-          InkWell(
-            child: Text(
-              '마이 사이즈',
-              style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
-            ),
-            onTap: () {},
+          onTap: () {},
+        ),
+        InkWell(
+          child: Text(
+            '마이 사이즈',
+            style: TextStyle(
+                fontSize: style.h3FontSize(context), color: style.whiteColor),
           ),
-        ]
-      ),
+          onTap: () {},
+        ),
+      ]),
     );
   }
 }
@@ -294,7 +308,9 @@ class Manegement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width > 1080 ? 560 : style.widgetSize(context),
+      width: MediaQuery.of(context).size.width > 1080
+          ? 560
+          : style.widgetSize(context),
       padding: EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -309,7 +325,9 @@ class Manegement extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '회원관리',
-                        style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
+                        style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor),
                       ),
                     ),
                   ),
@@ -328,7 +346,9 @@ class Manegement extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '예약관리',
-                        style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
+                        style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor),
                       ),
                     ),
                   ),
@@ -347,7 +367,9 @@ class Manegement extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '문의관리',
-                        style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
+                        style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor),
                       ),
                     ),
                   ),
@@ -373,7 +395,9 @@ class Manegement extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '제품관리',
-                        style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
+                        style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor),
                       ),
                     ),
                   ),
@@ -392,7 +416,9 @@ class Manegement extends StatelessWidget {
                     child: Center(
                       child: Text(
                         '바코드로 제품검색',
-                        style: TextStyle(fontSize: style.h3FontSize(context), color: style.whiteColor),
+                        style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor),
                       ),
                     ),
                   ),
@@ -406,7 +432,6 @@ class Manegement extends StatelessWidget {
     );
   }
 }
-
 
 // -------------------------------------------------- RentSchedule ---------------------------------------------------
 class Calender extends StatelessWidget {
