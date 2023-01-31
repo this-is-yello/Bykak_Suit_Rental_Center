@@ -177,55 +177,30 @@ class _LogInScreenState extends State<LogInScreen> {
                             maxWidth: 480,
                           ),
                           child: Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  fit: FlexFit.tight,
-                                  child: Container(
-                                    height: 56,
-                                    decoration: BoxDecoration(
-                                        color: Colors.yellow,
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: InkWell(
-                                      child: Center(
-                                        child: Text(
-                                          '카카오톡',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: style.blackColor,
-                                            fontWeight: style.boldText,
-                                          ),
-                                        ),
+                            child: Container(
+                              height: 56,
+                              decoration: BoxDecoration(
+                                  color: Colors.yellow,
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: InkWell(
+                                child:  Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    // 카톡 아이콘으로 바꿔야합니다.
+                                    Icon(Icons.messenger_sharp, color: style.blackColor,),
+                                    Padding(padding: EdgeInsets.all(16)),
+                                    Text(
+                                      '카카오톡으로 로그인',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: style.blackColor,
+                                        fontWeight: style.boldText,
                                       ),
-                                      onTap: () {},
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Padding(padding: EdgeInsets.all(16)),
-                                Flexible(
-                                  fit: FlexFit.tight,
-                                  child: Container(
-                                    height: 56,
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: InkWell(
-                                      child: Center(
-                                        child: Text(
-                                          '애플',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: style.whiteColor,
-                                            fontWeight: style.boldText,
-                                          ),
-                                        ),
-                                      ),
-                                      onTap: () {},
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                onTap: () {},
+                              ),
                             ),
                           ),
                         ),

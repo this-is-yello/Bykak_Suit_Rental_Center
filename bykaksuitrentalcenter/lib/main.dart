@@ -10,6 +10,7 @@ import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/sign_up_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
+import 'package:bykaksuitrentalcenter/screens/account/shopping_bag_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

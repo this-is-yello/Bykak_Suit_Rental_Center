@@ -80,29 +80,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                       ),
-                      Padding(padding: EdgeInsets.all(8)),
-                      ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: 480,
-                        ),
-                        child: TextField(
-                          controller: _inputNewPhone,
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                            hintText: '전화번호',
-                            labelText: '전화번호',
-                            floatingLabelStyle:
-                                TextStyle(color: style.mainColor),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(width: 1),
-                                borderRadius: BorderRadius.circular(8)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    width: 2, color: style.mainColor),
-                                borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                      ),
+                      // Padding(padding: EdgeInsets.all(8)),
+                      // ConstrainedBox(
+                      //   constraints: BoxConstraints(
+                      //     maxWidth: 480,
+                      //   ),
+                      //   child: TextField(
+                      //     controller: _inputNewPhone,
+                      //     keyboardType: TextInputType.phone,
+                      //     decoration: InputDecoration(
+                      //       hintText: '전화번호',
+                      //       labelText: '전화번호',
+                      //       floatingLabelStyle:
+                      //           TextStyle(color: style.mainColor),
+                      //       border: OutlineInputBorder(
+                      //           borderSide: BorderSide(width: 1),
+                      //           borderRadius: BorderRadius.circular(8)),
+                      //       focusedBorder: OutlineInputBorder(
+                      //           borderSide: BorderSide(
+                      //               width: 2, color: style.mainColor),
+                      //           borderRadius: BorderRadius.circular(8)),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

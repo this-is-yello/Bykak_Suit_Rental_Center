@@ -8,6 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bykaksuitrentalcenter/firebase_options.dart';
 
+import 'package:bykaksuitrentalcenter/screens/account/shopping_bag_page.dart';
+
 class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
 
@@ -156,7 +158,9 @@ class MyPageAppBar extends StatelessWidget {
             children: [
               IconButton(
                 icon: Icon(Icons.shopping_bag),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShoppingBagScreen()));
+                },
               ),
               TextButton(
                 child: Text(
@@ -322,6 +326,7 @@ class Manegement extends StatelessWidget {
                 fit: FlexFit.tight,
                 child: InkWell(
                   child: Container(
+                    height: 56,
                     child: Center(
                       child: Text(
                         '회원관리',
@@ -334,15 +339,16 @@ class Manegement extends StatelessWidget {
                   onTap: () {},
                 ),
               ),
-              Container(
-                width: 2,
-                height: 24,
-                color: style.lightGreyColor,
-              ),
+              // Container(
+              //   width: 2,
+              //   height: 24,
+              //   color: style.lightGreyColor,
+              // ),
               Flexible(
                 fit: FlexFit.tight,
                 child: InkWell(
                   child: Container(
+                    height: 56,
                     child: Center(
                       child: Text(
                         '예약관리',
@@ -355,15 +361,16 @@ class Manegement extends StatelessWidget {
                   onTap: () {},
                 ),
               ),
-              Container(
-                width: 2,
-                height: 24,
-                color: style.lightGreyColor,
-              ),
+              // Container(
+              //   width: 2,
+              //   height: 24,
+              //   color: style.lightGreyColor,
+              // ),
               Flexible(
                 fit: FlexFit.tight,
                 child: InkWell(
                   child: Container(
+                    height: 56,
                     child: Center(
                       child: Text(
                         '문의관리',
@@ -392,6 +399,7 @@ class Manegement extends StatelessWidget {
                 fit: FlexFit.tight,
                 child: InkWell(
                   child: Container(
+                    height: 56,
                     child: Center(
                       child: Text(
                         '제품관리',
@@ -404,15 +412,16 @@ class Manegement extends StatelessWidget {
                   onTap: () {},
                 ),
               ),
-              Container(
-                width: 2,
-                height: 24,
-                color: style.lightGreyColor,
-              ),
+              // Container(
+              //   width: 2,
+              //   height: 24,
+              //   color: style.lightGreyColor,
+              // ),
               Flexible(
                 fit: FlexFit.tight,
                 child: InkWell(
                   child: Container(
+                    height: 56,
                     child: Center(
                       child: Text(
                         '바코드로 제품검색',

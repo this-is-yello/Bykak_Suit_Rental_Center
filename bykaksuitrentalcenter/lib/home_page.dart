@@ -89,7 +89,9 @@ class PhoneAppBar extends StatelessWidget {
         children: [
           IconButton(
             icon: Icon(Icons.menu),
-            onPressed: () {},
+            onPressed: () {
+              // 검색, 예약내역 나타내기
+            },
           ),
           Text('순양 렌탈센터',
               style: TextStyle(

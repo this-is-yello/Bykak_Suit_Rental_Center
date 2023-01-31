@@ -106,7 +106,7 @@ c4BoxSize(c) {
 
 userInfoBoxHeight(c) {
   if (MediaQuery.of(c).size.width < 640) {
-    return 200;
+    return 260;
   } else {
     return 300;
   }
