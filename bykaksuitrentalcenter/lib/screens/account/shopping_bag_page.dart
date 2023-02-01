@@ -91,6 +91,7 @@ class _ShoppingBagScreenState extends State<ShoppingBagScreen> {
                 );
               },
       ),
+      bottomNavigationBar: ShoppingBagBottomSheet(),
     );
   }
 }
@@ -124,6 +125,8 @@ class ShoppingBagAppBar extends StatelessWidget {
 }
 
 
+// -------------------------------------------------- Contents ---------------------------------------------------
+// Shopping-Bag-List
 class ShoppingBagProductList extends StatefulWidget {
   const ShoppingBagProductList({super.key});
 
@@ -166,7 +169,7 @@ class _ShoppingBagProductListState extends State<ShoppingBagProductList> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(bottom: 16),
+                padding: EdgeInsets.only(top: 8, bottom: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,11 +179,11 @@ class _ShoppingBagProductListState extends State<ShoppingBagProductList> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('[면접대여] 블랙 솔리드 슈트', style: TextStyle(color: style.blackColor, fontSize: 18, fontWeight: style.boldText)),
+                          Text('[면접대여] 블랙 솔리드 슈트', style: TextStyle(color: style.blackColor, fontSize: style.h4FontSize(context), fontWeight: style.boldText)),
                           Padding(padding: EdgeInsets.all(2)),
-                          Text('50000원', style: TextStyle(color: style.blackColor, fontSize: 18, fontWeight: style.boldText)),
+                          Text('50000원', style: TextStyle(color: style.blackColor, fontSize: style.h4FontSize(context), fontWeight: style.boldText)),
                           Padding(padding: EdgeInsets.all(2)),
-                          Text('옵션:' + ' ' + '자켓L 바지L', style: TextStyle(fontSize: 15, color: style.greyColor)),
+                          Text('옵션:' + ' ' + '자켓 L' + ' ' + '바지 L', style: TextStyle(fontSize: style.h5FontSize(context), color: style.greyColor)),
                           Padding(padding: EdgeInsets.all(4)),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -193,9 +196,9 @@ class _ShoppingBagProductListState extends State<ShoppingBagProductList> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.all(8),
-                      width: MediaQuery.of(context).size.width < 1080 ? 100 : 160,
-                      height: MediaQuery.of(context).size.width < 1080 ? 100 : 160,
+                      // margin: EdgeInsets.all(8),
+                      width: MediaQuery.of(context).size.width < 1080 ? 96 : 160,
+                      height: MediaQuery.of(context).size.width < 1080 ? 96 : 160,
                       color: style.mainColor,
                     )
                   ],
@@ -210,6 +213,65 @@ class _ShoppingBagProductListState extends State<ShoppingBagProductList> {
           ),
         );
       },
+    );
+  }
+}
+
+// Shopping-Bag-BottomSheet
+class ShoppingBagBottomSheet extends StatelessWidget {
+  const ShoppingBagBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      height: 200,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            blurRadius: 4,
+            offset: Offset(0, -4), 
+          )
+        ], 
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: style.widgetSize(context),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('선택 상품 수', style: TextStyle(fontSize: style.h3FontSize(context), color: style.blackColor, fontWeight: style.boldText)),
+                Text('총 0개', style: TextStyle(fontSize: style.h3FontSize(context), color: style.blackColor, fontWeight: style.boldText))
+              ],
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
+          Container(
+            width: style.widgetSize(context),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('총 금액', style: TextStyle(fontSize: style.h3FontSize(context), color: style.blackColor, fontWeight: style.boldText)),
+                Text('약' + ' ' + '0원', style: TextStyle(fontSize: style.h3FontSize(context), color: style.blackColor, fontWeight: style.boldText))
+              ],
+            ),
+          ),
+          Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: style.mainColor,
+              minimumSize: Size(style.widgetSize(context), 56)
+            ),
+            child: Text('예약하기', style: TextStyle(fontSize: style.h4FontSize(context)),),
+            onPressed: () {},
+          ),
+        ],
+      ),
     );
   }
 }

@@ -489,7 +489,7 @@ class ThirdContents extends StatelessWidget {
             Padding(padding: EdgeInsets.all(style.paddingSize(context))),
             Container(
               width: style.widgetSize(context),
-              height: style.c3GridHeight(context),
+              height: style.homeGridHeight(context),
               padding: EdgeInsets.all(16),
               child: GridView.builder(
                 itemCount: 6,

@@ -9,6 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bykaksuitrentalcenter/firebase_options.dart';
 
 import 'package:bykaksuitrentalcenter/screens/account/shopping_bag_page.dart';
+import 'package:bykaksuitrentalcenter/screens/manegment/user_manegement_page.dart';
+import 'package:bykaksuitrentalcenter/screens/manegment/product_manegement_page.dart';
 
 class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
@@ -336,14 +338,11 @@ class Manegement extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>UserManegementScreen()));
+                  },
                 ),
               ),
-              // Container(
-              //   width: 2,
-              //   height: 24,
-              //   color: style.lightGreyColor,
-              // ),
               Flexible(
                 fit: FlexFit.tight,
                 child: InkWell(
@@ -361,11 +360,6 @@ class Manegement extends StatelessWidget {
                   onTap: () {},
                 ),
               ),
-              // Container(
-              //   width: 2,
-              //   height: 24,
-              //   color: style.lightGreyColor,
-              // ),
               Flexible(
                 fit: FlexFit.tight,
                 child: InkWell(
@@ -409,14 +403,11 @@ class Manegement extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductManegementScreen()));
+                  },
                 ),
               ),
-              // Container(
-              //   width: 2,
-              //   height: 24,
-              //   color: style.lightGreyColor,
-              // ),
               Flexible(
                 fit: FlexFit.tight,
                 child: InkWell(

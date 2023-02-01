@@ -123,6 +123,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 }
 
+
+// -------------------------------------------------- Contents ---------------------------------------------------
+// Product-Picture
 class ProductPic extends StatelessWidget {
   const ProductPic({super.key});
 
@@ -157,6 +160,7 @@ class ProductPic extends StatelessWidget {
   }
 }
 
+// Product-Name&Price
 class ProductNamePrice extends StatelessWidget {
   const ProductNamePrice({super.key});
 
@@ -280,6 +284,7 @@ class ProductNamePrice extends StatelessWidget {
   }
 }
 
+// Product-Information
 class ProductInfo extends StatelessWidget {
   const ProductInfo({super.key});
 
@@ -299,6 +304,7 @@ class ProductInfo extends StatelessWidget {
   }
 }
 
+// Product-Book-BottomSheet
 class ProductBookBottomSheet extends StatefulWidget {
   const ProductBookBottomSheet({super.key});
 

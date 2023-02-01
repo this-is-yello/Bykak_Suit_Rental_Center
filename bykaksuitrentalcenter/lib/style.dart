@@ -84,7 +84,7 @@ paddingSize(c) {
   }
 }
 
-c3GridHeight(c) {
+homeGridHeight(c) {
   if(MediaQuery.of(c).size.width < 640) {
     return 750;
   } else if (MediaQuery.of(c).size.width < 1080) {
@@ -101,6 +101,16 @@ c4BoxSize(c) {
     return 80;
   } else {
     return 100;
+  }
+}
+
+c5BoxSize(c) {
+  if(MediaQuery.of(c).size.width < 640) {
+    return 56;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 60;
+  } else {
+    return 80;
   }
 }
 
