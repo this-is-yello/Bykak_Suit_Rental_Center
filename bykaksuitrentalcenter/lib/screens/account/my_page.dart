@@ -11,6 +11,8 @@ import 'package:bykaksuitrentalcenter/firebase_options.dart';
 import 'package:bykaksuitrentalcenter/screens/account/shopping_bag_page.dart';
 import 'package:bykaksuitrentalcenter/screens/manegment/user_manegement_page.dart';
 import 'package:bykaksuitrentalcenter/screens/manegment/product_manegement_page.dart';
+import 'package:bykaksuitrentalcenter/screens/manegment/book_manegement_page.dart';
+import 'package:bykaksuitrentalcenter/screens/manegment/Inquiry_manegement_page.dart';
 
 class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
@@ -73,8 +75,8 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ProfileNameNumber(),
-                                  Manegement(),
-                                  // PointBookSizeInfo(),
+                                  AdminMenu(),
+                                  // UserMenu(),
                                 ],
                               )
                             : Row(
@@ -82,8 +84,8 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   ProfileNameNumber(),
-                                  Manegement(),
-                                  // PointBookSizeInfo(),
+                                  AdminMenu(),
+                                  // UserMenu(),
                                 ],
                               ),
                       ),
@@ -239,8 +241,8 @@ class ProfileNameNumber extends StatelessWidget {
 }
 
 // UserMenu
-class PointBookSizeInfo extends StatelessWidget {
-  const PointBookSizeInfo({super.key});
+class UserMenu extends StatelessWidget {
+  const UserMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -308,8 +310,8 @@ class PointBookSizeInfo extends StatelessWidget {
 }
 
 //AdminMenu
-class Manegement extends StatelessWidget {
-  const Manegement({super.key});
+class AdminMenu extends StatelessWidget {
+  const AdminMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -339,7 +341,7 @@ class Manegement extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>UserManegementScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => UserManegementScreen()));
                   },
                 ),
               ),
@@ -357,7 +359,9 @@ class Manegement extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BookManegementScreen()));
+                  },
                 ),
               ),
               Flexible(
@@ -374,7 +378,9 @@ class Manegement extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => InquiryManegementScreen()));
+                  },
                 ),
               ),
             ],
@@ -404,7 +410,7 @@ class Manegement extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>ProductManegementScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProductManegementScreen()));
                   },
                 ),
               ),

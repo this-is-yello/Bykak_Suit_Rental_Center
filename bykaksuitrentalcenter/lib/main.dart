@@ -12,6 +12,9 @@ import 'package:bykaksuitrentalcenter/screens/account/sign_up_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/shopping_bag_page.dart';
 
+import 'package:bykaksuitrentalcenter/screens/manegment/user_manegement_page.dart';
+import 'package:bykaksuitrentalcenter/screens/manegment/product_manegement_page.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

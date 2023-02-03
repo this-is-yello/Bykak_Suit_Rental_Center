@@ -198,12 +198,85 @@ class ProductTabBarScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                onTap: () {},
+                onTap: () {
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    
+                    context: context,
+                    builder: (BuildContext context) {
+                      return ResponsiveSizer(builder: (context, orientation, screenType) {
+                        return Container(
+                          height: 100.h,
+                          child: Column(
+                            children: [
+                              Container(
+                                width: 100,
+                                height: 500,
+                                color: Colors.red,
+                              ),
+                              Container(
+                                width: 100,
+                                height: 500,
+                                color: Colors.green,
+                              ),
+                              Container(
+                                width: 100,
+                                height: 500,
+                                color: Colors.blue,
+                              ),
+                            ],
+                          ),
+                        );
+                      });
+                    }
+                  );
+                },
               ),
             )
           )
         )
       ]  
       );
+  }
+}
+
+
+class ProductInformation extends StatefulWidget {
+  const ProductInformation({super.key});
+
+  @override
+  State<ProductInformation> createState() => _ProductInformationState();
+}
+
+class _ProductInformationState extends State<ProductInformation> {
+  bool _isLoading = true;
+
+  @override
+  Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+
+    return Scaffold(
+      body: _isLoading
+        ? Center(
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: CircularProgressIndicator(
+                color: style.mainColor,
+              ),
+            ),
+          )
+        : ResponsiveSizer(builder: (context, orientation, screenType) {
+          return CustomScrollView(
+            slivers: [
+
+            ],
+          );
+        }),
+    );
   }
 }

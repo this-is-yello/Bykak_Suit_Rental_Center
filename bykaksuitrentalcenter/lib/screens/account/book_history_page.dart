@@ -38,14 +38,63 @@ class _BookHistoryScreenState extends State<BookHistoryScreen> {
             )
           : ResponsiveSizer(
               builder: (context, orientation, screenType) {
-                return Center(
-                  child: Expanded(
-                    child: Container(
-                      width: style.widgetSize(context),
-                      padding: EdgeInsets.all(16),
-                      child: BookHistoryProductList(),
+                return CustomScrollView(
+                  slivers: [
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: 20,
+                        (context, index) => Center(
+                          child: Container(
+                            width: style.widgetSize(context),
+                            padding: EdgeInsets.all(16),
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(bottom: 16),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(8),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text('[면접대여] 블랙 솔리드 슈트', style: TextStyle(color: style.blackColor, fontSize: style.h4FontSize(context), fontWeight: style.boldText)),
+                                            Padding(padding: EdgeInsets.all(2)),
+                                            Text('YY.MM.DD' + ' - ' + 'YY.MM.DD', style: TextStyle(fontSize: style.h4FontSize(context), color: style.greyColor)),
+                                            Padding(padding: EdgeInsets.all(4)),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: style.mainColor,
+                                              ),
+                                              child: Text('상세보기'),
+                                              onPressed: () {},
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        // margin: EdgeInsets.all(8),
+                                        width: MediaQuery.of(context).size.width < 1080 ? 96 : 160,
+                                        height: MediaQuery.of(context).size.width < 1080 ? 96 : 160,
+                                        color: style.mainColor,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  height: 2,
+                                  color: style.lightGreyColor,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ),
                     ),
-                  ),
+                  ],
                 );
               },
       ),
@@ -64,8 +113,16 @@ class BookHistoryAppBar extends StatelessWidget {
       padding: EdgeInsets.only(left: 16, right: 16),
       width: style.widgetSize(context),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // IconButton(
+          //   icon: Icon(Icons.arrow_back, size: 30,),
+          //   onPressed: () {
+          //     Navigator.pop(context);
+          //   },
+          // ),
+          // Padding(padding: EdgeInsets.all(16)),
           Text(
             '예약내역',
             style:
@@ -79,61 +136,67 @@ class BookHistoryAppBar extends StatelessWidget {
 
 
 // -------------------------------------------------- Contents ---------------------------------------------------
-class BookHistoryProductList extends StatelessWidget {
-  const BookHistoryProductList({super.key});
+// class BookHistoryProductList extends StatelessWidget {
+//   const BookHistoryProductList({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 3,
-      itemBuilder: (context, index) {
-        return Container(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(bottom: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('[면접대여] 블랙 솔리드 슈트', style: TextStyle(color: style.blackColor, fontSize: style.h4FontSize(context), fontWeight: style.boldText)),
-                          Padding(padding: EdgeInsets.all(2)),
-                          Text('YY.MM.DD' + ' - ' + 'YY.MM.DD', style: TextStyle(fontSize: style.h4FontSize(context), color: style.greyColor)),
-                          Padding(padding: EdgeInsets.all(4)),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: style.mainColor,
-                            ),
-                            child: Text('상세보기'),
-                            onPressed: () {},
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      // margin: EdgeInsets.all(8),
-                      width: MediaQuery.of(context).size.width < 1080 ? 96 : 160,
-                      height: MediaQuery.of(context).size.width < 1080 ? 96 : 160,
-                      color: style.mainColor,
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                width: double.infinity,
-                height: 2,
-                color: style.lightGreyColor,
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return CustomScrollView(
+//       slivers: [
+//         SliverList(
+//           delegate: SliverChildBuilderDelegate(
+//             childCount: 20,
+//             (context, index) =>Center(
+//               child: Container(
+//                 padding: EdgeInsets.all(16),
+//                 child: Column(
+//                   children: [
+//                     Container(
+//                       padding: EdgeInsets.only(bottom: 16),
+//                       child: Row(
+//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         children: [
+//                           Container(
+//                             padding: EdgeInsets.all(8),
+//                             child: Column(
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: [
+//                                 Text('[면접대여] 블랙 솔리드 슈트', style: TextStyle(color: style.blackColor, fontSize: style.h4FontSize(context), fontWeight: style.boldText)),
+//                                 Padding(padding: EdgeInsets.all(2)),
+//                                 Text('YY.MM.DD' + ' - ' + 'YY.MM.DD', style: TextStyle(fontSize: style.h4FontSize(context), color: style.greyColor)),
+//                                 Padding(padding: EdgeInsets.all(4)),
+//                                 ElevatedButton(
+//                                   style: ElevatedButton.styleFrom(
+//                                     backgroundColor: style.mainColor,
+//                                   ),
+//                                   child: Text('상세보기'),
+//                                   onPressed: () {},
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                           Container(
+//                             // margin: EdgeInsets.all(8),
+//                             width: MediaQuery.of(context).size.width < 1080 ? 96 : 160,
+//                             height: MediaQuery.of(context).size.width < 1080 ? 96 : 160,
+//                             color: style.mainColor,
+//                           )
+//                         ],
+//                       ),
+//                     ),
+//                     Container(
+//                       width: double.infinity,
+//                       height: 2,
+//                       color: style.lightGreyColor,
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             )
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

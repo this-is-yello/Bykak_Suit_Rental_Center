@@ -314,12 +314,12 @@ class ProductBookBottomSheet extends StatefulWidget {
 
 class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
   final _valueList = ['S', 'M', 'L', '선택안함'];
-  String? _upselectedValue;
-  String? _downselectedValue;
+  String? _upSelectedValue;
+  String? _downSelectedValue;
   void initState() {
     setState(() {
-      _upselectedValue = _valueList[3];
-      _downselectedValue = _valueList[3];
+      _upSelectedValue = _valueList[3];
+      _downSelectedValue = _valueList[3];
     });
   }
 
@@ -360,7 +360,7 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                 Padding(padding: EdgeInsets.all(8)),
                 DropdownButton(
                   style: TextStyle(fontSize: 18),
-                  value: _upselectedValue,
+                  value: _upSelectedValue,
                   items: _valueList.map((e) {
                     return DropdownMenuItem(
                       value: e,
@@ -369,7 +369,7 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                   }).toList(),
                   onChanged: (value) {
                     setState(() {
-                      _upselectedValue = value!;
+                      _upSelectedValue = value!;
                     });
                   },
                 ),
@@ -390,7 +390,7 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                 Padding(padding: EdgeInsets.all(8)),
                 DropdownButton(
                   style: TextStyle(fontSize: 18),
-                  value: _downselectedValue,
+                  value: _downSelectedValue,
                   items: _valueList.map((e) {
                     return DropdownMenuItem(
                       value: e,
@@ -399,7 +399,7 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                   }).toList(),
                   onChanged: (value) {
                     setState(() {
-                      _downselectedValue = value!;
+                      _downSelectedValue = value!;
                     });
                   },
                 ),
@@ -459,8 +459,8 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                                   color: style.whiteColor))),
                     ),
                     onTap: () {
-                      print(_upselectedValue);
-                      print(_downselectedValue);
+                      print(_upSelectedValue);
+                      print(_downSelectedValue);
                     },
                   ),
                 ),
