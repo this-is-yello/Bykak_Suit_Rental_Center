@@ -98,7 +98,15 @@ class _UserManegementScreenState extends State<UserManegementScreen> {
                             ],
                           ),
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => UserInformation()));
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Color.fromARGB(0, 0, 0, 0),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return UserInformation();
+                              }
+                            );
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) => UserInformation()));
                           },
                         ),
                       ),
@@ -121,40 +129,32 @@ class UserInformation extends StatefulWidget {
 }
 
 class _UserInformationState extends State<UserInformation> {
-  bool _isLoading = true;
-
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: style.mainColor,
-        shadowColor: Color.fromARGB(0, 0, 0, 0),
-        title: Center(child: UserInfoAppBar()),
-      ),
-      body: _isLoading
-        ? Center(
-            child: SizedBox(
-              width: 40,
-              height: 40,
-              child: CircularProgressIndicator(
-                color: style.mainColor,
-              ),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return Container(
+          width: style.widgetSize(context),
+          height: 96.h,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: style.whiteColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
             ),
-          )
-        : ResponsiveSizer(builder: (context, orientation, screenType) {
-        return ListView(
-          children: [
-            Container(
-              padding: EdgeInsets.all(16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+          child: ListView(
+            children: [
+              IconButton(
+                icon: Icon(Icons.keyboard_double_arrow_down_rounded,
+                    size: 30, color: style.blackColor),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Padding(padding: EdgeInsets.all(16)),
+              Column(
                 children: [
                   Container(
                     width: style.widgetSize(context),
@@ -179,7 +179,8 @@ class _UserInformationState extends State<UserInformation> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('이름', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText)),
-                                Text('01012345678', style: TextStyle(fontSize: style.h4FontSize(context), color: style.greyColor))
+                                Padding(padding: EdgeInsets.only(top: 4)),
+                                Text('01012345678', style: TextStyle(fontSize: style.h3FontSize(context), color: style.greyColor))
                               ],
                             ),
                           ],
@@ -187,9 +188,9 @@ class _UserInformationState extends State<UserInformation> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: style.mainColor,
-                            minimumSize: Size(100, 56)
+                            minimumSize: Size(80, 48)
                           ),
-                          child: Text('정보수정', style: TextStyle(fontSize: style.h4FontSize(context)),),
+                          child: Text('정보수정', style: TextStyle(fontSize: style.h5FontSize(context)),),
                           onPressed: () {},
                         ),
                       ],
@@ -211,16 +212,16 @@ class _UserInformationState extends State<UserInformation> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('포인트', style: TextStyle(color: style.blackColor, fontSize: style.h2FontSize(context), fontWeight: style.boldText),),
-                            Text('0' + ' ' + 'P', style: TextStyle(fontSize: style.h2FontSize(context), fontWeight: style.boldText))
+                            Text('포인트', style: TextStyle(color: style.blackColor, fontSize: style.h3FontSize(context), fontWeight: style.boldText),),
+                            Text('0' + ' ' + 'P', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText))
                           ],
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: style.mainColor,
-                            minimumSize: Size(100, 56)
+                            minimumSize: Size(100, 48)
                           ),
-                          child: Text('포인트 지급', style: TextStyle(fontSize: style.h4FontSize(context)),),
+                          child: Text('포인트 변경', style: TextStyle(fontSize: style.h5FontSize(context)),),
                           onPressed: () {},
                         ),
                       ],
@@ -236,22 +237,211 @@ class _UserInformationState extends State<UserInformation> {
                     padding: EdgeInsets.all(16),
                     child: Column(
                       children: [
-                        Text('마이 사이즈', style: TextStyle(fontSize: style.h2FontSize(context), fontWeight: style.boldText)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              child: Text(
+                                '마이 사이즈',
+                                style: TextStyle(
+                                  fontSize: style.h3FontSize(context),
+                                  fontWeight: style.boldText,
+                                ),
+                              ),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: style.mainColor,
+                                minimumSize: Size(100, 48)
+                              ),
+                              child: Text('사이즈 수정', style: TextStyle(fontSize: style.h5FontSize(context)),),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
                         Padding(padding: EdgeInsets.all(8)),
                         Container(
-                          width: double.infinity,
-                          height: 500,
-                          color: style.greyColor,
+                          width: style.widgetSize(context),
+                          height: MediaQuery.of(context).size.width < 640 ? 380 : MediaQuery.of(context).size.width < 1080 ? 400 : 440,
+                          child: Column(
+                            children: [
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '키' + ' : ' + '222' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '몸무게' + ' : ' + '99' + ' ' + 'kg',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Padding(padding: EdgeInsets.all(8)),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '상의총장' + ' : ' + '60' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '어깨너비' + ' : ' + '500' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '가슴둘레' + ' : ' + '200' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '소매길이' + ' : ' + '56' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Padding(padding: EdgeInsets.all(8)),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '하의총장' + ' : ' + '120' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '허리둘레' + ' : ' + '80' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '엉덩이 둘레' + ' : ' + '90' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '밑위' + ' : ' + '20' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '허벅지 둘레' + ' : ' + '60' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '밑통' + ' : ' + '30' + ' ' + 'cm',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 2,
+                    color: style.lightGreyColor,
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: style.widgetSize(context),
+                          child: Text(
+                            '대여이력' + ' ' + 'n' + '회',
+                            style: TextStyle(
+                              fontSize: style.h3FontSize(context),
+                              fontWeight: style.boldText,
+                            ),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Container(
+                          width: style.widgetSize(context),
+                          height: 200,
+                          child: ListView.builder(
+                            itemCount: 20,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '22.10.06' + ' ' + 'n' + '개',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         )
                       ],
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
+            ]
+          ),
         );
-      }),
+      }
     );
   }
 }

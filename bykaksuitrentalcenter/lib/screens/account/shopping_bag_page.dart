@@ -58,10 +58,8 @@ class _ShoppingBagScreenState extends State<ShoppingBagScreen> {
                                     value: _checkAllProduct,
                                     onChanged: (value) {
                                       setState(() {
-                                        _checkAllProduct = true;
-                                        // _checkProductAll = false;
+                                        _checkAllProduct = value!;
                                       });
-
                                     },
                                   ),
                                   Text('전체선택', style: TextStyle(fontSize: 16, fontWeight: style.boldText))
@@ -136,11 +134,12 @@ class ShoppingBagProductList extends StatefulWidget {
 
 class _ShoppingBagProductListState extends State<ShoppingBagProductList> {
   bool _checkProduct = false;
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: 6,
-      itemBuilder: (context, index) {
+      itemBuilder: (context, int index) {
         return Container(
           padding: EdgeInsets.all(16),
           child: Column(
@@ -155,10 +154,8 @@ class _ShoppingBagProductListState extends State<ShoppingBagProductList> {
                       value: _checkProduct,
                       onChanged: (value) {
                         setState(() {
-                          _checkProduct = true;
-                          // _checkProductAll = false;
+                          _checkProduct = value!;
                         });
-
                       },
                     ),
                     TextButton(

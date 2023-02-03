@@ -102,7 +102,7 @@ class PhoneAppBar extends StatelessWidget {
               // 로그인 상태 확인해서 마이페이지 또는 로그인 화면
               // Navigator.push(context, MaterialPageRoute(builder: (context) => MyPageScreen()));
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LogInScreen()));
+                  MaterialPageRoute(builder: (context) => MyPageScreen()));
             },
           ),
         ],
@@ -253,7 +253,7 @@ class FirstContents extends StatelessWidget {
                     ],
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: style.whiteColor,
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [style.boxShadows],
                   ),
@@ -284,7 +284,7 @@ class FirstContents extends StatelessWidget {
                           ],
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: style.whiteColor,
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [style.boxShadows],
                         ),
@@ -312,7 +312,7 @@ class FirstContents extends StatelessWidget {
                           ],
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: style.whiteColor,
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [style.boxShadows],
                         ),
@@ -395,9 +395,9 @@ class SecondContents extends StatelessWidget {
                       child: Column(
                         children: [
                           Expanded(
-                            flex: 2,
+                            flex: 4,
                             child: Container(
-                              //height: MediaQuery.of(context).size.width,
+                              height: 80.w,
                               decoration: BoxDecoration(
                                 color: style.mainColor,
                                 borderRadius: BorderRadius.only(
@@ -493,6 +493,7 @@ class ThirdContents extends StatelessWidget {
               padding: EdgeInsets.all(16),
               child: GridView.builder(
                 itemCount: 6,
+                physics: ScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 1 / 1.5,
                   crossAxisCount:

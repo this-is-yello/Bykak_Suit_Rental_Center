@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:flutter/scheduler.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -97,9 +98,10 @@ class _MyPageScreenState extends State<MyPageScreen> {
                     child: Column(
                       children: [
                         Padding(
-                            padding:
-                                EdgeInsets.all(style.paddingSize(context))),
+                          padding: EdgeInsets.all(style.paddingSize(context)),
+                        ),
                         Container(
+                          width: style.widgetSize(context),
                           child: Text(
                             '대여일정',
                             style: TextStyle(
@@ -116,18 +118,18 @@ class _MyPageScreenState extends State<MyPageScreen> {
                           child: MediaQuery.of(context).size.width < 1080
                               ? Column(
                                   children: [
-                                    Calender(),
+                                    CalenderWidget(),
                                     Padding(padding: EdgeInsets.all(20)),
-                                    Schedule(),
+                                    ScheduleWidget(),
                                   ],
                                 )
                               : Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Calender(),
+                                    CalenderWidget(),
                                     // Padding(padding: EdgeInsets.all(20)),
-                                    Schedule(),
+                                    ScheduleWidget(),
                                   ],
                                 ),
                         )
@@ -220,7 +222,7 @@ class ProfileNameNumber extends StatelessWidget {
                           fontWeight: style.boldText),
                     ),
                   ),
-                  Padding(padding: EdgeInsets.all(2)),
+                  Padding(padding: EdgeInsets.only(top: 8)),
                   Container(
                     child: Text(
                       '010-0000-0000',
@@ -440,40 +442,52 @@ class AdminMenu extends StatelessWidget {
 }
 
 // -------------------------------------------------- RentSchedule ---------------------------------------------------
-class Calender extends StatelessWidget {
-  const Calender({super.key});
+class CalenderWidget extends StatelessWidget {
+  const CalenderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: 560,
+        maxWidth: MediaQuery.of(context).size.width < 1080 ? 560 : 500,
       ),
       child: Container(
         // width: style.widgetSize(context),
         height: 400,
         padding: EdgeInsets.all(16),
-        color: style.greyColor,
-        child: Center(child: Text('달력')),
+        decoration: BoxDecoration(
+          color: style.whiteColor,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [style.boxShadows],
+        ),
+        child: CalendarDatePicker(
+          initialDate: DateTime.now(),
+          firstDate: DateTime(2019),
+          lastDate: DateTime(2099),
+          onDateChanged: (value) => value!,
+        ),
       ),
     );
   }
 }
 
-class Schedule extends StatelessWidget {
-  const Schedule({super.key});
+class ScheduleWidget extends StatelessWidget {
+  const ScheduleWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: MediaQuery.of(context).size.width < 1080 ? 560 : 480,
+        maxWidth: MediaQuery.of(context).size.width < 1080 ? 560 : 420,
       ),
       child: Container(
         height: 400,
         padding: EdgeInsets.all(16),
-        child: Center(child: Text('스케줄 목록')),
-        color: style.greyColor,
+        decoration: BoxDecoration(
+          color: style.whiteColor,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [style.boxShadows],
+        ),
       ),
     );
   }

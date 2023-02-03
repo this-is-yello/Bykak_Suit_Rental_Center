@@ -45,30 +45,14 @@ class _InquiryManegementScreenState extends State<InquiryManegementScreen> {
                   floating: true,
                   centerTitle: true,
                   automaticallyImplyLeading: false,
-                  expandedHeight: 200,
-                  toolbarHeight: 200,
+                  expandedHeight: 144,
+                  toolbarHeight: 144,
                   backgroundColor: style.mainColor,
                   title: Column(
                     children: [
                       Container(
                         width: style.widgetSize(context),
-                        child: Text('예약관리', style: TextStyle(fontSize: 24, fontWeight: style.boldText)),
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 20)),
-                      Container(
-                        width: style.widgetSize(context),
-                        child: TextField(
-                          // controller: _inputUserSearch,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: style.whiteColor,
-                            prefixIcon: Icon(Icons.search, color: style.mainColor),
-                            hintText: '예약자의 이름을 입력하세요.',
-                            border: OutlineInputBorder(borderSide: BorderSide(width: 1), borderRadius: BorderRadius.circular(8)),
-                            focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 2, color: style.blackColor), borderRadius: BorderRadius.circular(8)),
-                          ),
-                          cursorColor: style.blackColor,
-                        ),
+                        child: Text('문의관리', style: TextStyle(fontSize: 24, fontWeight: style.boldText)),
                       ),
                       Padding(padding: EdgeInsets.only(bottom: 20)),
                       Container(
@@ -77,20 +61,17 @@ class _InquiryManegementScreenState extends State<InquiryManegementScreen> {
                           children: [
                             Flexible(
                               flex: 3,
-                              child: InkWell(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      right: BorderSide(
-                                        color: Colors.grey,
-                                        width: 1
-                                      )
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    right: BorderSide(
+                                      color: Colors.grey,
+                                      width: 1
                                     )
-                                  ),
-                                  height: 48,
-                                  child: Center(child: Text('이름', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
+                                  )
                                 ),
-                                onTap: () {},
+                                height: 48,
+                                child: Center(child: Text('이름', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
                               ),
                             ),
                             Flexible(
@@ -160,7 +141,16 @@ class _InquiryManegementScreenState extends State<InquiryManegementScreen> {
                               ],
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Color.fromARGB(0, 0, 0, 0),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return InquiryInformation();
+                              }
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -174,26 +164,127 @@ class _InquiryManegementScreenState extends State<InquiryManegementScreen> {
 }
 
 
-// -------------------------------------------------- AppBar ---------------------------------------------------
-class InquiryManegementAppBar extends StatelessWidget {
-  const InquiryManegementAppBar({super.key});
+class InquiryInformation extends StatefulWidget {
+  const InquiryInformation({super.key});
 
   @override
+  State<InquiryInformation> createState() => _InquiryInformationState();
+}
+
+class _InquiryInformationState extends State<InquiryInformation> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 16, right: 16),
-      width: style.widgetSize(context),
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            '문의관리',
-            style:
-                TextStyle(color: style.whiteColor, fontWeight: style.boldText),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return Container(
+          width: style.widgetSize(context),
+          height: 96.h,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: style.whiteColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+            ),
           ),
-        ],
-      ),
+          child: ListView(
+            children: [
+              IconButton(
+                icon: Icon(Icons.keyboard_double_arrow_down_rounded,
+                size: 30, color: style.blackColor),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Padding(padding: EdgeInsets.all(8)),
+              Column(
+                children: [
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: style.c5BoxSize(context),
+                          height: style.c5BoxSize(context),
+                          decoration: BoxDecoration(
+                            color: style.blackColor,
+                            borderRadius: BorderRadius.circular(1000)
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('이름', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText)),
+                            Padding(padding: EdgeInsets.only(top: 4)),
+                            Text('01012345678', style: TextStyle(fontSize: style.h4FontSize(context), color: style.greyColor)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 2,
+                    color: style.lightGreyColor,
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 240,
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('제목', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText)),
+                        Padding(padding: EdgeInsets.all(4)),
+                        Text('대여상품 기본구성이 궁금합니다.', style: TextStyle(fontSize: style.h3FontSize(context))),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 2,
+                    color: style.lightGreyColor,
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Text('대기중', // 연락완료
+                            style: TextStyle(
+                              fontSize: style.h3FontSize(context),
+                              fontWeight: style.boldText,
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: style.mainColor,
+                            minimumSize: Size(96, 48)
+                          ),
+                          child: Text('상태변경', style: TextStyle(fontSize: style.h5FontSize(context)),),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 2,
+                    color: style.lightGreyColor,
+                  ),
+                ],
+              ),
+            ]
+          ),
+        );
+      }
     );
   }
 }

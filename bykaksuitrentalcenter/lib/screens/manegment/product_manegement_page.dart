@@ -94,6 +94,7 @@ class _ProductManegementScreenState extends State<ProductManegementScreen> {
                     Container(
                       color: style.mainColor,
                       child: Container(
+                        // width: style.widgetSize(context),
                         color: style.mainColor,
                         child: TabBar(
                           indicatorSize: TabBarIndicatorSize.tab,
@@ -193,7 +194,7 @@ class ProductTabBarScreen extends StatelessWidget {
                       children: [
                         Text('제품명' + ' ' + '사이즈', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText)),
                         Padding(padding: EdgeInsets.all(2)),
-                        Text('0101110101010110', style: TextStyle(fontSize: style.h4FontSize(context), color: style.greyColor))
+                        Text('0101110101010110', style: TextStyle(fontSize: style.h3FontSize(context), color: style.greyColor))
                       ],
                     ),
                   ],
@@ -201,33 +202,10 @@ class ProductTabBarScreen extends StatelessWidget {
                 onTap: () {
                   showModalBottomSheet(
                     isScrollControlled: true,
-                    
+                    backgroundColor: Color.fromARGB(0, 0, 0, 0),
                     context: context,
                     builder: (BuildContext context) {
-                      return ResponsiveSizer(builder: (context, orientation, screenType) {
-                        return Container(
-                          height: 100.h,
-                          child: Column(
-                            children: [
-                              Container(
-                                width: 100,
-                                height: 500,
-                                color: Colors.red,
-                              ),
-                              Container(
-                                width: 100,
-                                height: 500,
-                                color: Colors.green,
-                              ),
-                              Container(
-                                width: 100,
-                                height: 500,
-                                color: Colors.blue,
-                              ),
-                            ],
-                          ),
-                        );
-                      });
+                      return ProductInformation();
                     }
                   );
                 },
@@ -249,34 +227,222 @@ class ProductInformation extends StatefulWidget {
 }
 
 class _ProductInformationState extends State<ProductInformation> {
-  bool _isLoading = true;
-
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-
-    return Scaffold(
-      body: _isLoading
-        ? Center(
-            child: SizedBox(
-              width: 40,
-              height: 40,
-              child: CircularProgressIndicator(
-                color: style.mainColor,
-              ),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return Container(
+          width: style.widgetSize(context),
+          height: 96.h,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: style.whiteColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
             ),
-          )
-        : ResponsiveSizer(builder: (context, orientation, screenType) {
-          return CustomScrollView(
-            slivers: [
-
-            ],
-          );
-        }),
+          ),
+          child: ListView(
+            children: [
+              IconButton(
+                icon: Icon(Icons.keyboard_double_arrow_down_rounded,
+                    size: 30, color: style.blackColor),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Padding(padding: EdgeInsets.all(8)),
+              Column(
+                children: [
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('제품명' + ' ' + '사이즈', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText)),
+                            Padding(padding: EdgeInsets.only(top: 4)),
+                            Text('01011011011101', style: TextStyle(fontSize: style.h4FontSize(context), color: style.greyColor))
+                          ],
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: style.mainColor,
+                            minimumSize: Size(96, 48)
+                          ),
+                          child: Text('정보수정', style: TextStyle(fontSize: style.h5FontSize(context)),),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 2,
+                    color: style.lightGreyColor,
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 200,
+                            height: 200,
+                            color: style.mainColor,
+                          ),
+                          Padding(padding: EdgeInsets.all(8)),
+                          Container(
+                            width: 200,
+                            height: 200,
+                            color: style.mainColor,
+                          ),
+                          Padding(padding: EdgeInsets.all(8)),
+                          Container(
+                            width: 200,
+                            height: 200,
+                            color: style.mainColor,
+                          ),
+                          Padding(padding: EdgeInsets.all(8)),
+                          Container(
+                            width: 200,
+                            height: 200,
+                            color: style.mainColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 2,
+                    color: style.lightGreyColor,
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          child: Text('대여중', // 대기중, 상담중 , 대여중, 세탁중
+                            style: TextStyle(
+                              fontSize: style.h3FontSize(context),
+                              fontWeight: style.boldText,
+                            ),
+                          ),
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: style.mainColor,
+                            minimumSize: Size(96, 48)
+                          ),
+                          child: Text('상태변경', style: TextStyle(fontSize: style.h5FontSize(context)),),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 2,
+                    color: style.lightGreyColor,
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: style.widgetSize(context),
+                          child: Text(
+                            '제품이력',
+                            style: TextStyle(
+                              fontSize: style.h3FontSize(context),
+                              fontWeight: style.boldText,
+                            ),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Container(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    child: Text(
+                                      '대여횟수' + ' ' + ':' + ' ',
+                                      style: TextStyle(
+                                        fontWeight: style.boldText,
+                                        fontSize: style.h4FontSize(context)
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      'n' + '회',
+                                      style: TextStyle(
+                                        fontSize: style.h4FontSize(context)
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Padding(padding: EdgeInsets.all(4)),
+                              Column(
+                                children: [
+                                  Container(
+                                    width: style.widgetSize(context),
+                                    child: Text(
+                                      '제품이력(특이사항) :',
+                                      style: TextStyle(
+                                        fontWeight: style.boldText,
+                                        fontSize: style.h4FontSize(context)
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(padding: EdgeInsets.all(2)),
+                                  Container(
+                                    width: style.widgetSize(context),
+                                    height: 240,
+                                    padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+                                    child: ListView.builder(
+                                      itemCount: 14,
+                                      itemBuilder: (context, index) {
+                                        return Container(
+                                          width: style.widgetSize(context),
+                                          child: Text(
+                                            '22.11.14' + ' ' + '대여',
+                                            style: TextStyle(
+                                              fontSize: style.h4FontSize(context)
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ]
+          ),
+        );
+      }
     );
   }
 }

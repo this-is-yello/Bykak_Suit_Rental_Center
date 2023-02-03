@@ -67,6 +67,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             ),
                           ),
                         ),
+                        Padding(padding: EdgeInsets.all(2)),
                         ConstrainedBox(
                           constraints: BoxConstraints(
                             maxWidth: 480,
@@ -139,7 +140,9 @@ class _LogInScreenState extends State<LogInScreen> {
                                 ),
                               ),
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              
+                            },
                           ),
                         ),
                         Padding(padding: EdgeInsets.all(16)),

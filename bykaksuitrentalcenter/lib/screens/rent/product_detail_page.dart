@@ -453,10 +453,13 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Center(
-                          child: Text('예약하기',
-                              style: TextStyle(
-                                  fontSize: style.h3FontSize(context),
-                                  color: style.whiteColor))),
+                        child: Text('예약하기',
+                          style: TextStyle(
+                              fontSize: style.h3FontSize(context),
+                              color: style.whiteColor,
+                          ),
+                        ),
+                      ),
                     ),
                     onTap: () {
                       print(_upSelectedValue);

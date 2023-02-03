@@ -21,11 +21,6 @@ class _BookManegementScreenState extends State<BookManegementScreen> {
     });
 
     return Scaffold(
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   backgroundColor: style.mainColor,
-      //   title: Center(child: BookManegementAppBar()),
-      // ),
       body: _isLoading
           ? Center(
               child: SizedBox(
@@ -160,7 +155,16 @@ class _BookManegementScreenState extends State<BookManegementScreen> {
                               ],
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Color.fromARGB(0, 0, 0, 0),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return BookInformation();
+                              }
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -174,26 +178,169 @@ class _BookManegementScreenState extends State<BookManegementScreen> {
 }
 
 
-// -------------------------------------------------- AppBar ---------------------------------------------------
-class BookManegementAppBar extends StatelessWidget {
-  const BookManegementAppBar({super.key});
+class BookInformation extends StatefulWidget {
+  const BookInformation({super.key});
 
   @override
+  State<BookInformation> createState() => _BookInformationState();
+}
+
+class _BookInformationState extends State<BookInformation> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 16, right: 16),
-      width: style.widgetSize(context),
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            '예약관리',
-            style:
-                TextStyle(color: style.whiteColor, fontWeight: style.boldText),
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return Container(
+          width: style.widgetSize(context),
+          height: 96.h,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: style.whiteColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+            ),
           ),
-        ],
-      ),
+          child: ListView(
+            children: [
+              IconButton(
+                icon: Icon(Icons.keyboard_double_arrow_down_rounded,
+                    size: 30, color: style.blackColor),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Padding(padding: EdgeInsets.all(8)),
+              Column(
+                children: [
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: style.c5BoxSize(context),
+                          height: style.c5BoxSize(context),
+                          decoration: BoxDecoration(
+                            color: style.blackColor,
+                            borderRadius: BorderRadius.circular(1000)
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('이름', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText)),
+                            Padding(padding: EdgeInsets.only(top: 4)),
+                            Text('01012345678', style: TextStyle(fontSize: style.h3FontSize(context), color: style.greyColor))
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 2,
+                    color: style.lightGreyColor,
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('예약번호', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText)),
+                                Padding(padding: EdgeInsets.only(top: 4)),
+                                Text('23020301001001', style: TextStyle(fontSize: style.h3FontSize(context), color: style.greyColor))
+                              ],
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: style.mainColor,
+                                minimumSize: Size(80, 48)
+                              ),
+                              child: Text('예약변경', style: TextStyle(fontSize: style.h5FontSize(context)),),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                        Padding(padding: EdgeInsets.all(4)),
+                        Row(
+                          children: [
+                            Text('대여기간', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText, color: style.blackColor)),
+                            Padding(padding: EdgeInsets.all(4)),
+                            Text('YY.MM.DD' + ' - ' + 'YY.MM.DD', style: TextStyle(fontSize: style.h3FontSize(context), color: style.blackColor))
+                          ],
+                        ),
+                        Padding(padding: EdgeInsets.all(4)),
+                        Row(
+                          children: [
+                            Text('상담일정', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText, color: style.blackColor)),
+                            Padding(padding: EdgeInsets.all(4)),
+                            Text('YY.MM.DD' + ' / ' + 'HH.MM', style: TextStyle(fontSize: style.h3FontSize(context), color: style.blackColor))
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 2,
+                    color: style.lightGreyColor,
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: style.widgetSize(context),
+                          child: Text(
+                            '예약상품',
+                            style: TextStyle(
+                              fontSize: style.h3FontSize(context),
+                              fontWeight: style.boldText,
+                            ),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Container(
+                          width: style.widgetSize(context),
+                          height: 300,
+                          padding: EdgeInsets.fromLTRB(8, 0, 8, 8),
+                          child: ListView.builder(
+                            itemCount: 8,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: style.widgetSize(context),
+                                padding: EdgeInsets.all(4),
+                                child: Text(
+                                  '[대여형태]' + ' ' + '상품이름' + ' ' + '사이즈',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context)
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ]
+          ),
+        );
+      }
     );
   }
 }

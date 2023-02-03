@@ -18,7 +18,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   var _inputNewName = TextEditingController();
-  var _inputNewPhone = TextEditingController();
+  // var _inputNewPhone = TextEditingController();
   var _inputNewId = TextEditingController();
   var _inputNewPassword = TextEditingController();
   var _inputNewPasswordCheck = TextEditingController();

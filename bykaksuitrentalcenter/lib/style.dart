@@ -20,7 +20,7 @@ widgetSize(c) {
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 560;
   } else {
-    return 1080;
+    return 960;
   }
 }
 
@@ -36,11 +36,11 @@ productPicHeight(c) {
 
 h2FontSize(c) {
   if (MediaQuery.of(c).size.width < 640) {
-    return 20;
+    return 18;
   } else if (MediaQuery.of(c).size.width < 1080) {
-    return 24;
+    return 20;
   } else {
-    return 32;
+    return 24;
   }
 }
 
@@ -48,9 +48,9 @@ h3FontSize(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 16;
   } else if (MediaQuery.of(c).size.width < 1080) {
-    return 20;
+    return 18;
   } else {
-    return 24;
+    return 20;
   }
 }
 
@@ -60,7 +60,7 @@ h4FontSize(c) {
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 16;
   } else {
-    return 20;
+    return 18;
   }
 }
 
@@ -94,9 +94,29 @@ homeGridHeight(c) {
   }
 }
 
+c2BoxSize(c) {
+  if(MediaQuery.of(c).size.width < 640) {
+    return 80;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 100;
+  } else {
+    return 120;
+  }
+}
+
+c3BoxSize(c) {
+  if(MediaQuery.of(c).size.width < 640) {
+    return 80;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 100;
+  } else {
+    return 120;
+  }
+}
+
 c4BoxSize(c) {
   if(MediaQuery.of(c).size.width < 640) {
-    return 60;
+    return 64;
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 80;
   } else {
@@ -108,7 +128,7 @@ c5BoxSize(c) {
   if(MediaQuery.of(c).size.width < 640) {
     return 56;
   } else if (MediaQuery.of(c).size.width < 1080) {
-    return 60;
+    return 64;
   } else {
     return 80;
   }
@@ -116,7 +136,7 @@ c5BoxSize(c) {
 
 userInfoBoxHeight(c) {
   if (MediaQuery.of(c).size.width < 640) {
-    return 260;
+    return 264;
   } else {
     return 300;
   }
