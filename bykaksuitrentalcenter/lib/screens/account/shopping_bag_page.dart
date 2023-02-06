@@ -22,72 +22,70 @@ class _ShoppingBagScreenState extends State<ShoppingBagScreen> {
       });
     });
 
-    return Scaffold(
+    return _isLoading ? Center(
+      child: SizedBox(
+        width: 40,
+        height: 40,
+        child: CircularProgressIndicator(
+          color: style.mainColor,
+        ),
+      ),
+    ) : Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: style.mainColor,
         title: Center(child: ShoppingBagAppBar()),
       ),
-      body: _isLoading
-          ? Center(
-              child: SizedBox(
-                width: 40,
-                height: 40,
-                child: CircularProgressIndicator(
-                  color: style.mainColor,
-                ),
-              ),
-            )
-          : ResponsiveSizer(
-              builder: (context, orientation, screenType) {
-                return Center(
-                  child: Column(
+      body: ResponsiveSizer(
+        builder: (context, orientation, screenType) {
+          return Center(
+            child: Column(
+              children: [
+                Container(
+                  width: style.widgetSize(context),
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        width: style.widgetSize(context),
-                        padding: EdgeInsets.all(16),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                    activeColor: style.mainColor,
-                                    checkColor: style.whiteColor,
-                                    value: _checkAllProduct,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _checkAllProduct = value!;
-                                      });
-                                    },
-                                  ),
-                                  Text('전체선택', style: TextStyle(fontSize: 16, fontWeight: style.boldText))
-                                ],
-                              ),
+                            Checkbox(
+                              activeColor: style.mainColor,
+                              checkColor: style.whiteColor,
+                              value: _checkAllProduct,
+                              onChanged: (value) {
+                                setState(() {
+                                  _checkAllProduct = value!;
+                                });
+                              },
                             ),
-                            TextButton(
-                              child: Text('선택삭제', style: TextStyle(color: style.blackColor, fontSize: 16, fontWeight: style.boldText)),
-                              onPressed: () {},
-                            )
+                            Text('전체선택', style: TextStyle(fontSize: 16, fontWeight: style.boldText))
                           ],
                         ),
                       ),
-                      Container(
-                        width: style.widgetSize(context),
-                        height: 2,
-                        color: style.lightGreyColor,
-                      ),
-                      Expanded(
-                        child: Container(
-                          width: style.widgetSize(context),
-                          child: ShoppingBagProductList(),
-                        ),
-                      ),
+                      TextButton(
+                        child: Text('선택삭제', style: TextStyle(color: style.blackColor, fontSize: 16, fontWeight: style.boldText)),
+                        onPressed: () {},
+                      )
                     ],
                   ),
-                );
-              },
+                ),
+                Container(
+                  width: style.widgetSize(context),
+                  height: 2,
+                  color: style.lightGreyColor,
+                ),
+                Expanded(
+                  child: Container(
+                    width: style.widgetSize(context),
+                    child: ShoppingBagProductList(),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
       bottomNavigationBar: ShoppingBagBottomSheet(),
     );

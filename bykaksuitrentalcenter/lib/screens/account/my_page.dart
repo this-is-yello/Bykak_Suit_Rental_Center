@@ -10,10 +10,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bykaksuitrentalcenter/firebase_options.dart';
 
 import 'package:bykaksuitrentalcenter/screens/account/shopping_bag_page.dart';
-import 'package:bykaksuitrentalcenter/screens/manegment/user_manegement_page.dart';
-import 'package:bykaksuitrentalcenter/screens/manegment/product_manegement_page.dart';
-import 'package:bykaksuitrentalcenter/screens/manegment/book_manegement_page.dart';
-import 'package:bykaksuitrentalcenter/screens/manegment/Inquiry_manegement_page.dart';
+import 'package:bykaksuitrentalcenter/screens/admin/user_manegement_page.dart';
+import 'package:bykaksuitrentalcenter/screens/admin/product_manegement_page.dart';
+import 'package:bykaksuitrentalcenter/screens/admin/book_manegement_page.dart';
+import 'package:bykaksuitrentalcenter/screens/admin/Inquiry_manegement_page.dart';
+import 'package:bykaksuitrentalcenter/screens/admin/search_barcode_page.dart';
+import 'package:bykaksuitrentalcenter/screens/user/my_point_page.dart';
+import 'package:bykaksuitrentalcenter/screens/user/my_size_page.dart';
+import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
+import 'package:bykaksuitrentalcenter/screens/user/like_product_page.dart';
+
 
 class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
@@ -44,101 +50,100 @@ class _MyPageScreenState extends State<MyPageScreen> {
       });
     }
 
-    return Scaffold(
+    return _isLoading ? Center(
+      child: SizedBox(
+        width: 40,
+        height: 40,
+        child: CircularProgressIndicator(
+          color: style.mainColor,
+        ),
+      ),
+    ) : Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: style.mainColor,
         shadowColor: Color.fromARGB(0, 0, 0, 0),
         title: Center(child: MyPageAppBar()),
       ),
-      body: _isLoading
-          ? Center(
-              child: SizedBox(
-                width: 40,
-                height: 40,
-                child: CircularProgressIndicator(
-                  color: style.mainColor,
+      body: ResponsiveSizer(builder: (context, orientation, screenType) {
+        return ListView(
+          children: [
+            Container(
+              width: 100.w,
+              height: style.userInfoBoxHeight(context),
+              color: style.mainColor,
+              child: Center(
+                child: Container(
+                  width: style.widgetSize(context),
+                  child: _columnState
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ProfileNameNumber(),
+                            // AdminMenu(),
+                            UserMenu(),
+                          ],
+                        )
+                      : Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+                          children: [
+                            ProfileNameNumber(),
+                            // AdminMenu(),
+                            UserMenu(),
+                          ],
+                        ),
                 ),
               ),
-            )
-          : ResponsiveSizer(builder: (context, orientation, screenType) {
-              return ListView(
+            ),
+            Container(
+              width: style.widgetSize(context),
+              padding: EdgeInsets.all(16),
+              child: Column(
                 children: [
-                  Container(
-                    width: 100.w,
-                    height: style.userInfoBoxHeight(context),
-                    color: style.mainColor,
-                    child: Center(
-                      child: Container(
-                        width: style.widgetSize(context),
-                        child: _columnState
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ProfileNameNumber(),
-                                  AdminMenu(),
-                                  // UserMenu(),
-                                ],
-                              )
-                            : Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ProfileNameNumber(),
-                                  AdminMenu(),
-                                  // UserMenu(),
-                                ],
-                              ),
-                      ),
-                    ),
+                  Padding(
+                    padding: EdgeInsets.all(style.paddingSize(context)),
                   ),
                   Container(
                     width: style.widgetSize(context),
                     padding: EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(style.paddingSize(context)),
-                        ),
-                        Container(
-                          width: style.widgetSize(context),
-                          child: Text(
-                            '대여일정',
-                            style: TextStyle(
-                                fontSize: style.h2FontSize(context),
-                                color: style.blackColor,
-                                fontWeight: style.boldText),
-                          ),
-                        ),
-                        Padding(
-                            padding:
-                                EdgeInsets.all(style.paddingSize(context))),
-                        Container(
-                          width: style.widgetSize(context),
-                          child: MediaQuery.of(context).size.width < 1080
-                              ? Column(
-                                  children: [
-                                    CalenderWidget(),
-                                    Padding(padding: EdgeInsets.all(20)),
-                                    ScheduleWidget(),
-                                  ],
-                                )
-                              : Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    CalenderWidget(),
-                                    // Padding(padding: EdgeInsets.all(20)),
-                                    ScheduleWidget(),
-                                  ],
-                                ),
-                        )
-                      ],
+                    child: Text(
+                      '대여일정',
+                      style: TextStyle(
+                          fontSize: style.h2FontSize(context),
+                          color: style.blackColor,
+                          fontWeight: style.boldText),
                     ),
                   ),
+                  Padding(
+                      padding:
+                          EdgeInsets.all(style.paddingSize(context))),
+                  Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(16),
+                    child: MediaQuery.of(context).size.width < 1080
+                        ? Column(
+                            children: [
+                              CalenderWidget(),
+                              Padding(padding: EdgeInsets.all(20)),
+                              ScheduleWidget(),
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                            children: [
+                              CalenderWidget(),
+                              ScheduleWidget(),
+                            ],
+                          ),
+                  )
                 ],
-              );
-            }),
+              ),
+            ),
+          ],
+        );
+      }),
     );
   }
 }
@@ -165,7 +170,7 @@ class MyPageAppBar extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.shopping_bag),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShoppingBagScreen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShoppingBagScreen(),),);
                 },
               ),
               TextButton(
@@ -253,60 +258,158 @@ class UserMenu extends StatelessWidget {
           ? 560
           : style.widgetSize(context),
       padding: EdgeInsets.all(16),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        InkWell(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '포인트',
-                style: TextStyle(
-                    fontSize: style.h3FontSize(context),
-                    color: style.whiteColor),
+              Flexible(
+                fit: FlexFit.tight,
+                child: InkWell(
+                  child: Container(
+                    height: 56,
+                    child: Center(
+                      child: Text(
+                        '마이사이즈',
+                        style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor),
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MySizeScreen(),),);
+                  },
+                ),
               ),
-              Padding(padding: EdgeInsets.all(4)),
-              Text(
-                '1000' + 'P',
-                style: TextStyle(
-                    fontSize: style.h3FontSize(context),
-                    color: style.whiteColor),
+              Flexible(
+                fit: FlexFit.tight,
+                child: InkWell(
+                  child: Container(
+                    height: 56,
+                    child: Center(
+                      child: Text(
+                        '좋아요',
+                        style: TextStyle(
+                          fontSize: style.h3FontSize(context),
+                          color: style.whiteColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LikeProductScreen(),),);
+                  },
+                ),
+              ),
+              Flexible(
+                fit: FlexFit.tight,
+                child: InkWell(
+                  child: Container(
+                    height: 56,
+                    child: Center(
+                      child: Text(
+                        '문의내역',
+                        style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor),
+                      ),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
               ),
             ],
           ),
-          onTap: () {},
-        ),
-        InkWell(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
+          Padding(padding: EdgeInsets.all(4)),
+          Container(
+            width: double.infinity,
+            height: 2,
+            color: style.lightGreyColor,
+          ),
+          Padding(padding: EdgeInsets.all(6)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '예약내역',
-                style: TextStyle(
-                    fontSize: style.h3FontSize(context),
-                    color: style.whiteColor),
+              Flexible(
+                fit: FlexFit.tight,
+                child: InkWell(
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Center(
+                          child: Text(
+                            '포인트',
+                            style: TextStyle(
+                                fontSize: style.h3FontSize(context),
+                                color: style.whiteColor),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: Center(
+                          child: Text(
+                            '1000' + 'P',
+                            style: TextStyle(
+                                fontSize: style.h3FontSize(context),
+                                color: style.whiteColor),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyPointScreen(),
+                      ),
+                    );
+                  },
+                ),
               ),
-              Padding(padding: EdgeInsets.all(4)),
-              Text(
-                '2' + '건',
-                style: TextStyle(
-                    fontSize: style.h3FontSize(context),
-                    color: style.whiteColor),
+              Flexible(
+                fit: FlexFit.tight,
+                child: InkWell(
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Center(
+                          child: Text(
+                            '예약내역',
+                            style: TextStyle(
+                                fontSize: style.h3FontSize(context),
+                                color: style.whiteColor),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: Center(
+                          child: Text(
+                            '2' + '건',
+                            style: TextStyle(
+                                fontSize: style.h3FontSize(context),
+                                color: style.whiteColor),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookHistoryScreen(),
+                        ),
+                      );
+                    },
+                ),
               ),
             ],
           ),
-          onTap: () {},
-        ),
-        InkWell(
-          child: Text(
-            '마이 사이즈',
-            style: TextStyle(
-                fontSize: style.h3FontSize(context), color: style.whiteColor),
-          ),
-          onTap: () {},
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
@@ -343,7 +446,7 @@ class AdminMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => UserManegementScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => UserManegementScreen(),),);
                   },
                 ),
               ),
@@ -362,7 +465,7 @@ class AdminMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => BookManegementScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BookManegementScreen(),),);
                   },
                 ),
               ),
@@ -381,7 +484,7 @@ class AdminMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => InquiryManegementScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => InquiryManegementScreen(),),);
                   },
                 ),
               ),
@@ -412,7 +515,7 @@ class AdminMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProductManegementScreen()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProductManegementScreen(),),);
                   },
                 ),
               ),
@@ -430,7 +533,9 @@ class AdminMenu extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchBarcodeScreen(),),);
+                  },
                 ),
               ),
             ],
@@ -454,17 +559,19 @@ class CalenderWidget extends StatelessWidget {
       child: Container(
         // width: style.widgetSize(context),
         height: 400,
-        padding: EdgeInsets.all(16),
+        // padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: style.whiteColor,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [style.boxShadows],
         ),
-        child: CalendarDatePicker(
-          initialDate: DateTime.now(),
-          firstDate: DateTime(2019),
-          lastDate: DateTime(2099),
-          onDateChanged: (value) => value!,
+        child: Center(
+          child: CalendarDatePicker(
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2019),
+            lastDate: DateTime(2099),
+            onDateChanged: (value) => value!,
+          ),
         ),
       ),
     );
@@ -478,7 +585,7 @@ class ScheduleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxWidth: MediaQuery.of(context).size.width < 1080 ? 560 : 420,
+        maxWidth: MediaQuery.of(context).size.width < 1080 ? 560 : 400,
       ),
       child: Container(
         height: 400,

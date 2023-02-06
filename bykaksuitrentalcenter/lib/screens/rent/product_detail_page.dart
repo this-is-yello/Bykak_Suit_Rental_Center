@@ -35,7 +35,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     }
 
     return ResponsiveSizer(builder: (context, orientation, screenType) {
-      return Scaffold(
+      return _isLoading ? Center(
+        child: SizedBox(
+          width: 40,
+          height: 40,
+          child: CircularProgressIndicator(
+            color: style.mainColor,
+          ),
+        ),
+      ) : Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: style.mainColor,
@@ -46,78 +54,69 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 : WideAppBar(),
           ),
         ),
-        body: _isLoading
-            ? Center(
-                child: SizedBox(
-                  width: 40,
-                  height: 40,
-                  child: CircularProgressIndicator(
-                    color: style.mainColor,
-                  ),
-                ),
-              )
-            : ListView(
-                children: [
-                  _columnState
-                      ? Center(
-                          child: Container(
-                            width: style.widgetSize(context),
-                            padding: EdgeInsets.all(16),
+        body: ListView(
+          children: [
+            _columnState
+                ? Center(
+                    child: Container(
+                      width: style.widgetSize(context),
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          ProductPic(),
+                          Padding(
+                              padding: EdgeInsets.all(
+                                  style.paddingSize(context))),
+                          ProductNamePrice(),
+                          Padding(
+                              padding: EdgeInsets.all(
+                                  style.paddingSize(context))),
+                          ProductInfo(),
+                        ],
+                      ),
+                    ),
+                  )
+                : Center(
+                    child: Container(
+                      width: style.widgetSize(context),
+                      padding: EdgeInsets.all(16),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            flex: 4,
+                            // fit: FlexFit.tight,
                             child: Column(
                               children: [
                                 ProductPic(),
                                 Padding(
-                                    padding: EdgeInsets.all(
-                                        style.paddingSize(context))),
-                                ProductNamePrice(),
-                                Padding(
-                                    padding: EdgeInsets.all(
-                                        style.paddingSize(context))),
+                                    padding: EdgeInsets.only(
+                                        top: style.paddingSize(context))),
                                 ProductInfo(),
                               ],
                             ),
                           ),
-                        )
-                      : Center(
-                          child: Container(
-                            width: style.widgetSize(context),
-                            padding: EdgeInsets.all(16),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Flexible(
-                                  flex: 4,
-                                  // fit: FlexFit.tight,
-                                  child: Column(
-                                    children: [
-                                      ProductPic(),
-                                      Padding(
-                                          padding: EdgeInsets.only(
-                                              top: style.paddingSize(context))),
-                                      ProductInfo(),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        left: style.paddingSize(context))),
-                                Flexible(
-                                  flex: 2,
-                                  // fit: FlexFit.tight,
-                                  child: ProductNamePrice(),
-                                ),
-                              ],
-                            ),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: style.paddingSize(context))),
+                          Flexible(
+                            flex: 2,
+                            // fit: FlexFit.tight,
+                            child: ProductNamePrice(),
                           ),
-                        ),
-                  Padding(padding: EdgeInsets.all(style.paddingSize(context))),
-                  Footer(),
-                ],
-              ),
+                        ],
+                      ),
+                    ),
+                  ),
+            Padding(padding: EdgeInsets.all(style.paddingSize(context))),
+            Footer(),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.headset_mic_rounded),
-            backgroundColor: style.mainColor,
-            onPressed: () {}),
+          child: Icon(Icons.headset_mic_rounded),
+          backgroundColor: style.mainColor,
+          onPressed: () {},
+        ),
       );
     });
   }
@@ -246,10 +245,13 @@ class ProductNamePrice extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Center(
-                    child: Text('예약하기',
-                        style: TextStyle(
-                            fontSize: style.h3FontSize(context),
-                            color: style.whiteColor))),
+                  child: Text('예약하기',
+                    style: TextStyle(
+                      fontSize: style.h3FontSize(context),
+                      color: style.whiteColor,
+                    ),
+                  ),
+                ),
               ),
               onTap: () {
                 showModalBottomSheet(
@@ -270,10 +272,14 @@ class ProductNamePrice extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Center(
-                    child: Text('장바구니',
-                        style: TextStyle(
-                            fontSize: style.h3FontSize(context),
-                            color: style.mainColor))),
+                  child: Text(
+                    '장바구니',
+                    style: TextStyle(
+                      fontSize: style.h3FontSize(context),
+                      color: style.mainColor
+                    ),
+                  ),
+                ),
               ),
               onTap: () {},
             ),
@@ -296,9 +302,10 @@ class ProductInfo extends StatelessWidget {
         height: 4000,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            color: style.whiteColor,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [style.boxShadows]),
+          color: style.whiteColor,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [style.boxShadows],
+        ),
       );
     });
   }
@@ -339,8 +346,10 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            icon: Icon(Icons.keyboard_double_arrow_down_rounded,
-                size: 30, color: style.blackColor),
+            icon: Icon(
+              Icons.keyboard_double_arrow_down_rounded,
+              size: 30, color: style.blackColor,
+            ),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -353,10 +362,12 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text('상의 사이즈: ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: style.blackColor,
-                        fontWeight: style.boldText)),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: style.blackColor,
+                    fontWeight: style.boldText,
+                  ),
+                ),
                 Padding(padding: EdgeInsets.all(8)),
                 DropdownButton(
                   style: TextStyle(fontSize: 18),

@@ -20,145 +20,163 @@ class _InquiryManegementScreenState extends State<InquiryManegementScreen> {
       });
     });
 
-    return Scaffold(
-      // appBar: AppBar(
-      //   automaticallyImplyLeading: false,
-      //   backgroundColor: style.mainColor,
-      //   title: Center(child: BookManegementAppBar()),
-      // ),
-      body: _isLoading
-          ? Center(
-              child: SizedBox(
-                width: 40,
-                height: 40,
-                child: CircularProgressIndicator(
-                  color: style.mainColor,
-                ),
+    return _isLoading ? Center(
+      child: SizedBox(
+        width: 40,
+        height: 40,
+        child: CircularProgressIndicator(
+          color: style.mainColor,
+        ),
+      ),
+    ) : Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: style.mainColor,
+        shadowColor: Color.fromARGB(0, 0, 0, 0),
+        title: Center(child: InquiryManegementAppBar()),
+      ),
+      body: ResponsiveSizer(builder: (context, orientation, screenType) {
+        return CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              elevation: 0,
+              pinned: true,
+              floating: true,
+              centerTitle: true,
+              automaticallyImplyLeading: false,
+              expandedHeight: 50,
+              toolbarHeight: 50,
+              backgroundColor: style.mainColor,
+              title: Column(
+                children: [
+                  Container(
+                    width: style.widgetSize(context),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          flex: 3,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                right: BorderSide(
+                                  color: Colors.grey,
+                                  width: 1
+                                )
+                              )
+                            ),
+                            height: 48,
+                            child: Center(child: Text('이름', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
+                          ),
+                        ),
+                        Flexible(
+                          flex: 4,
+                          child: Container(
+                          decoration: BoxDecoration(
+                              border: Border(
+                                right: BorderSide(
+                                  color: style.lightGreyColor,
+                                  width: 1
+                                )
+                              )
+                            ),
+                            height: 48,
+                            child: Center(child: Text('제목', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
+                          ),
+                        ),
+                        Flexible(
+                          flex: 4,
+                          child: InkWell(
+                            child: Container(
+                              height: 48,
+                              child: Center(child: Text('문의일자', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            )
-          : ResponsiveSizer(builder: (context, orientation, screenType) {
-            return CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  elevation: 0,
-                  pinned: true,
-                  floating: true,
-                  centerTitle: true,
-                  automaticallyImplyLeading: false,
-                  expandedHeight: 144,
-                  toolbarHeight: 144,
-                  backgroundColor: style.mainColor,
-                  title: Column(
-                    children: [
-                      Container(
-                        width: style.widgetSize(context),
-                        child: Text('문의관리', style: TextStyle(fontSize: 24, fontWeight: style.boldText)),
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 20)),
-                      Container(
-                        width: style.widgetSize(context),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: 12,
+                (context, index) => Center(
+                  child: Container(
+                    width: style.widgetSize(context),
+                    padding: EdgeInsets.all(8),
+                    child: InkWell(
+                      child: Container(
+                        height: 50,
                         child: Row(
                           children: [
                             Flexible(
                               flex: 3,
                               child: Container(
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    right: BorderSide(
-                                      color: Colors.grey,
-                                      width: 1
-                                    )
-                                  )
-                                ),
-                                height: 48,
-                                child: Center(child: Text('이름', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
+                                // height: 40,
+                                child: Center(child: Text('이름', style: TextStyle(fontSize: style.h5FontSize(context)),))
                               ),
                             ),
                             Flexible(
                               flex: 4,
                               child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                    right: BorderSide(
-                                      color: style.lightGreyColor,
-                                      width: 1
-                                    )
-                                  )
-                                ),
-                                height: 48,
-                                child: Center(child: Text('제목', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
+                                // height: 40,
+                                child: Center(child: Text('사이즈 문의', style: TextStyle(fontSize: style.h5FontSize(context)),))
                               ),
                             ),
                             Flexible(
                               flex: 4,
-                              child: InkWell(
-                                child: Container(
-                                  height: 48,
-                                  child: Center(child: Text('문의일자', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
-                                ),
-                                onTap: () {},
+                              child: Container(
+                                // height: 40,
+                                child: Center(child: Text('23.02.02(목)', style: TextStyle(fontSize: style.h5FontSize(context)),))
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: 12,
-                    (context, index) => Center(
-                      child: Container(
-                        width: style.widgetSize(context),
-                        padding: EdgeInsets.all(8),
-                        child: InkWell(
-                          child: Container(
-                            height: 50,
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  flex: 3,
-                                  child: Container(
-                                    // height: 40,
-                                    child: Center(child: Text('이름', style: TextStyle(fontSize: style.h5FontSize(context)),))
-                                  ),
-                                ),
-                                Flexible(
-                                  flex: 4,
-                                  child: Container(
-                                    // height: 40,
-                                    child: Center(child: Text('사이즈 문의', style: TextStyle(fontSize: style.h5FontSize(context)),))
-                                  ),
-                                ),
-                                Flexible(
-                                  flex: 4,
-                                  child: Container(
-                                    // height: 40,
-                                    child: Center(child: Text('23.02.02(목)', style: TextStyle(fontSize: style.h5FontSize(context)),))
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Color.fromARGB(0, 0, 0, 0),
-                              context: context,
-                              builder: (BuildContext context) {
-                                return InquiryInformation();
-                              }
-                            );
-                          },
-                        ),
-                      ),
+                      onTap: () {
+                        showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Color.fromARGB(0, 0, 0, 0),
+                          context: context,
+                          builder: (BuildContext context) {
+                            return InquiryInformation();
+                          }
+                        );
+                      },
                     ),
                   ),
                 ),
-              ],
-            );
-          })
+              ),
+            ),
+          ],
+        );
+      }),
+    );
+  }
+}
+
+
+// -------------------------------------------------- AppBar ---------------------------------------------------
+class InquiryManegementAppBar extends StatelessWidget {
+  const InquiryManegementAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 16, right: 16),
+      width: style.widgetSize(context),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            '문의관리',
+            style:
+                TextStyle(color: style.whiteColor, fontWeight: style.boldText),
+          ),
+        ],
+      ),
     );
   }
 }

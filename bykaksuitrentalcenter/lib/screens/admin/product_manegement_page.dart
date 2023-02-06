@@ -20,145 +20,164 @@ class _ProductManegementScreenState extends State<ProductManegementScreen> {
       });
     });
 
-    return Scaffold(
-      body: _isLoading
-          ? Center(
-              child: SizedBox(
-                width: 40,
-                height: 40,
-                child: CircularProgressIndicator(
-                  color: style.mainColor,
-                ),
-              ),
-            )
-          : ResponsiveSizer(builder: (context, orientation, screenType) {
-            return DefaultTabController(
-              length: 6,
-              child: Container(
-                child: Column(
-                  children: [
-                    Container(
-                      height: 160,
-                      child: CustomScrollView(      
-                        slivers: [
-                          SliverAppBar(
-                            elevation: 0,
-                            pinned: true,
-                            floating: true,
-                            centerTitle: true,
-                            automaticallyImplyLeading: false,
-                            expandedHeight: 160,
-                            toolbarHeight: 160,
-                            backgroundColor: style.mainColor,
-                            title: Column(
-                              children: [
-                                Container(
-                                  width: style.widgetSize(context),
-                                  padding: EdgeInsets.only(bottom: 16),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('제품관리', style: TextStyle(fontSize: 24, fontWeight: style.boldText)),
-                                      IconButton(
-                                        icon: Icon(Icons.add, size: 30,),
-                                        onPressed: () {},
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: style.widgetSize(context),
-                                  padding: EdgeInsets.only(bottom: 16),
-                                  child: TextField(
-                                    // controller: inputSearch,
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: style.whiteColor,
-                                      prefixIcon: Icon(Icons.search, color: style.mainColor),
-                                      hintText: '제품의 이름이나 번호를 입력하세요.',
-                                      border: OutlineInputBorder(borderSide: BorderSide(width: 2), borderRadius: BorderRadius.circular(8)),
-                                      focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 2, color: style.whiteColor), borderRadius: BorderRadius.circular(8)),
-                                      suffixIcon: IconButton(
-                                        icon: Icon(Icons.qr_code_scanner_rounded, color: style.mainColor),
-                                        onPressed: () {},
-                                      )
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ]
-                      )
-                    ),
-                    Container(
-                      color: style.mainColor,
-                      child: Container(
-                        // width: style.widgetSize(context),
-                        color: style.mainColor,
-                        child: TabBar(
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          indicatorColor: style.whiteColor,
-                          labelColor: style.whiteColor,
-                          unselectedLabelColor: style.greyColor,
-                          tabs: [
-                            Tab(
-                              text: '자켓',
-                            ),
-                            Tab(
-                              text: '팬츠',
-                            ),
-                            Tab(
-                              text: '셔츠',
-                            ),
-                            Tab(
-                              text: '조끼',
-                            ),
-                            Tab(
-                              text: '구두',
-                            ),
-                            Tab(
-                              text: '잡화',
-                            )
-                          ],
-                        ),
-                      )
-                    ),
-                    Expanded(
-                      child: Container(
-                        width: style.widgetSize(context),
-                        height: double.infinity,
-                        child: TabBarView(
+    return _isLoading ? Center(
+      child: SizedBox(
+        width: 40,
+        height: 40,
+        child: CircularProgressIndicator(
+          color: style.mainColor,
+        ),
+      ),
+    ) : Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: style.mainColor,
+        shadowColor: Color.fromARGB(0, 0, 0, 0),
+        title: Center(child: ProductManegementAppBar(),),
+      ),
+      body: ResponsiveSizer(builder: (context, orientation, screenType) {
+        return DefaultTabController(
+          length: 6,
+          child: Container(
+            child: Column(
+              children: [
+                Container(
+                  height: 120,
+                  child: CustomScrollView(      
+                    slivers: [
+                      SliverAppBar(
+                        elevation: 0,
+                        pinned: true,
+                        floating: true,
+                        centerTitle: true,
+                        automaticallyImplyLeading: false,
+                        expandedHeight: 120,
+                        toolbarHeight: 120,
+                        backgroundColor: style.mainColor,
+                        title: Column(
                           children: [
-                            Center(
-                              child: ProductTabBarScreen(),
+                            Container(
+                              width: style.widgetSize(context),
+                              padding: EdgeInsets.all(16),
+                              child: TextField(
+                                // controller: inputSearch,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: style.whiteColor,
+                                  prefixIcon: Icon(Icons.search, color: style.mainColor),
+                                  hintText: '제품의 이름이나 번호를 입력하세요.',
+                                  border: OutlineInputBorder(borderSide: BorderSide(width: 2), borderRadius: BorderRadius.circular(8)),
+                                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 2, color: style.whiteColor), borderRadius: BorderRadius.circular(8)),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(Icons.qr_code_scanner_rounded, color: style.mainColor),
+                                    onPressed: () {},
+                                  )
+                                ),
+                              ),
                             ),
-                            Center(
-                              child: ProductTabBarScreen(),
-                            ),
-                            Center(
-                              child: ProductTabBarScreen(),
-                            ),
-                            Center(
-                              child: ProductTabBarScreen(),
-                            ),
-                            Center(
-                              child: ProductTabBarScreen(),
-                            ),
-                            Center(
-                              child: ProductTabBarScreen(),
-                            ),
-                            
                           ],
                         ),
                       ),
-                    )
-                  ],
+                    ]
+                  )
                 ),
-              ),
-            );
-          }),
+                Container(
+                  color: style.mainColor,
+                  child: Container(
+                    // width: style.widgetSize(context),
+                    color: style.mainColor,
+                    child: TabBar(
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      indicatorColor: style.whiteColor,
+                      labelColor: style.whiteColor,
+                      unselectedLabelColor: style.greyColor,
+                      tabs: [
+                        Tab(
+                          text: '자켓',
+                        ),
+                        Tab(
+                          text: '팬츠',
+                        ),
+                        Tab(
+                          text: '셔츠',
+                        ),
+                        Tab(
+                          text: '조끼',
+                        ),
+                        Tab(
+                          text: '구두',
+                        ),
+                        Tab(
+                          text: '잡화',
+                        )
+                      ],
+                    ),
+                  )
+                ),
+                Expanded(
+                  child: Container(
+                    width: style.widgetSize(context),
+                    height: double.infinity,
+                    child: TabBarView(
+                      children: [
+                        Center(
+                          child: ProductTabBarScreen(),
+                        ),
+                        Center(
+                          child: ProductTabBarScreen(),
+                        ),
+                        Center(
+                          child: ProductTabBarScreen(),
+                        ),
+                        Center(
+                          child: ProductTabBarScreen(),
+                        ),
+                        Center(
+                          child: ProductTabBarScreen(),
+                        ),
+                        Center(
+                          child: ProductTabBarScreen(),
+                        ),
+                        
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         );
+      }),
+    );
+  }
+}
+
+
+// -------------------------------------------------- AppBar ---------------------------------------------------
+class ProductManegementAppBar extends StatelessWidget {
+  const ProductManegementAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 16, right: 16),
+      width: style.widgetSize(context),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            '제품관리',
+            style:
+                TextStyle(color: style.whiteColor, fontWeight: style.boldText),
+          ),
+          IconButton(
+            icon: Icon(Icons.add,),
+            onPressed: () {},
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -214,7 +233,7 @@ class ProductTabBarScreen extends StatelessWidget {
           )
         )
       ]  
-      );
+    );
   }
 }
 

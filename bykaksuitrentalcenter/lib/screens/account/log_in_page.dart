@@ -101,10 +101,11 @@ class _LogInScreenState extends State<LogInScreen> {
                                   child: Text('회원가입'),
                                   onTap: () {
                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SignUpScreen()));
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SignUpScreen(),
+                                      ),
+                                    );
                                   },
                                 ),
                                 Padding(padding: EdgeInsets.all(4)),

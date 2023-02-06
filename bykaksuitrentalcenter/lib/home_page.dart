@@ -8,7 +8,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
-import 'package:bykaksuitrentalcenter/screens/account/book_history_page.dart';
+import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,7 +28,15 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
 
-    return Scaffold(
+    return _isLoading ? Center(
+      child: SizedBox(
+        width: 40,
+        height: 40,
+        child: CircularProgressIndicator(
+          color: style.mainColor,
+        ),
+      ),
+    ) : Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: style.mainColor,
@@ -39,38 +47,28 @@ class _HomeScreenState extends State<HomeScreen> {
               : WideAppBar(),
         ),
       ),
-      body: _isLoading
-          ? Center(
-              child: SizedBox(
-                width: 40,
-                height: 40,
-                child: CircularProgressIndicator(
-                  color: style.mainColor,
-                ),
-              ),
-            )
-          : ListView(
-              children: [
-                Container(
-                  child: Center(child: MainBanner()),
-                ),
-                Container(
-                  child: Center(child: FirstContents()),
-                ),
-                Container(
-                  child: Center(child: SecondContents()),
-                ),
-                Container(
-                  child: Center(child: ThirdContents()),
-                ),
-                Container(
-                  child: Center(child: FourthContents()),
-                ),
-                Container(
-                  child: Center(child: Footer()),
-                ),
-              ],
-            ),
+      body: ListView(
+        children: [
+          Container(
+            child: Center(child: MainBanner()),
+          ),
+          Container(
+            child: Center(child: FirstContents()),
+          ),
+          Container(
+            child: Center(child: SecondContents()),
+          ),
+          Container(
+            child: Center(child: ThirdContents()),
+          ),
+          Container(
+            child: Center(child: FourthContents()),
+          ),
+          Container(
+            child: Center(child: Footer()),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -94,15 +92,21 @@ class PhoneAppBar extends StatelessWidget {
             },
           ),
           Text('순양 렌탈센터',
-              style: TextStyle(
-                  color: style.whiteColor, fontWeight: style.boldText)),
+            style: TextStyle(
+              color: style.whiteColor,
+              fontWeight: style.boldText,
+            ),
+          ),
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
               // 로그인 상태 확인해서 마이페이지 또는 로그인 화면
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => MyPageScreen()));
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MyPageScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyPageScreen(),
+                ),
+              );
             },
           ),
         ],
@@ -144,9 +148,11 @@ class WideAppBar extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BookHistoryScreen()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookHistoryScreen(),
+                      ),
+                    );
                   },
                 ),
                 TextButton(
@@ -159,11 +165,13 @@ class WideAppBar extends StatelessWidget {
                   ),
                   onPressed: () {
                     // 로그인 상태 확인해서 마이페이지 또는 로그인 화면
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen()));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),),);
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MyPageScreen()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyPageScreen(),
+                      ),
+                    );
                   },
                 ),
                 TextButton(
@@ -175,8 +183,12 @@ class WideAppBar extends StatelessWidget {
                         fontWeight: style.boldText),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LogInScreen()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LogInScreen(),
+                      ),
+                    );
                   },
                 ),
               ],
@@ -207,12 +219,6 @@ class MainBanner extends StatelessWidget {
             height: 40.w,
             color: style.mainColor,
             child: Image.asset('assets/images/banner2.jpg', fit: BoxFit.cover),
-            // child: Center(
-            //   child: Text(
-            //     'K!mjuhyeon by 覺 BANNER',
-            //     style: TextStyle(fontWeight: style.boldText),
-            //   ),
-            // ),
           ),
         ],
       );
@@ -434,10 +440,12 @@ class SecondContents extends StatelessWidget {
                                                 style.h4FontSize(context) - 2,
                                             color: style.greyColor)),
                                     Text('50000원',
-                                        style: TextStyle(
-                                            fontSize: style.h4FontSize(context),
-                                            color: style.mainColor,
-                                            fontWeight: style.boldText)),
+                                      style: TextStyle(
+                                        fontSize: style.h4FontSize(context),
+                                        color: style.mainColor,
+                                        fontWeight: style.boldText,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -447,9 +455,11 @@ class SecondContents extends StatelessWidget {
                       ),
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProductDetailScreen()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductDetailScreen(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -505,8 +515,10 @@ class ThirdContents extends StatelessWidget {
                   return InkWell(
                     child: Container(
                       decoration: BoxDecoration(
-                        border:
-                            Border.all(color: style.lightGreyColor, width: 2),
+                        border: Border.all(
+                          color: style.lightGreyColor,
+                          width: 2
+                        ),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Column(
@@ -517,8 +529,9 @@ class ThirdContents extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: style.mainColor,
                                 borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    topRight: Radius.circular(8)),
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(8),
+                                ),
                               ),
                             ),
                           ),
@@ -564,9 +577,11 @@ class ThirdContents extends StatelessWidget {
                     ),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProductDetailScreen()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetailScreen(),
+                        ),
+                      );
                     },
                   );
                 },
