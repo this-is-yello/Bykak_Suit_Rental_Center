@@ -34,7 +34,6 @@ paddingSize(c) {
   }
 }
 
-
 productPicHeight(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 380;
@@ -55,6 +54,7 @@ h1FontSize(c) {
     return 28;
   }
 }
+
 h2FontSize(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 18;
@@ -64,6 +64,7 @@ h2FontSize(c) {
     return 24;
   }
 }
+
 h3FontSize(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 16;
@@ -73,6 +74,7 @@ h3FontSize(c) {
     return 20;
   }
 }
+
 h4FontSize(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 14;
@@ -82,6 +84,7 @@ h4FontSize(c) {
     return 18;
   }
 }
+
 h5FontSize(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 12;
@@ -92,9 +95,8 @@ h5FontSize(c) {
   }
 }
 
-
 homeGridHeight(c) {
-  if(MediaQuery.of(c).size.width < 640) {
+  if (MediaQuery.of(c).size.width < 640) {
     return 750;
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 1180;
@@ -103,10 +105,19 @@ homeGridHeight(c) {
   }
 }
 
-
 // -------------------- BoxSize --------------------
 c1BoxSize(c) {
-  if(MediaQuery.of(c).size.width < 640) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 120;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 140;
+  } else {
+    return 160;
+  }
+}
+
+c2BoxSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
     return 100;
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 120;
@@ -114,17 +125,9 @@ c1BoxSize(c) {
     return 140;
   }
 }
-c2BoxSize(c) {
-  if(MediaQuery.of(c).size.width < 640) {
-    return 80;
-  } else if (MediaQuery.of(c).size.width < 1080) {
-    return 100;
-  } else {
-    return 120;
-  }
-}
+
 c3BoxSize(c) {
-  if(MediaQuery.of(c).size.width < 640) {
+  if (MediaQuery.of(c).size.width < 640) {
     return 80;
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 100;
@@ -132,8 +135,9 @@ c3BoxSize(c) {
     return 120;
   }
 }
+
 c4BoxSize(c) {
-  if(MediaQuery.of(c).size.width < 640) {
+  if (MediaQuery.of(c).size.width < 640) {
     return 64;
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 80;
@@ -141,8 +145,9 @@ c4BoxSize(c) {
     return 100;
   }
 }
+
 c5BoxSize(c) {
-  if(MediaQuery.of(c).size.width < 640) {
+  if (MediaQuery.of(c).size.width < 640) {
     return 56;
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 64;
@@ -150,7 +155,6 @@ c5BoxSize(c) {
     return 80;
   }
 }
-
 
 userInfoBoxHeight(c) {
   if (MediaQuery.of(c).size.width < 640) {

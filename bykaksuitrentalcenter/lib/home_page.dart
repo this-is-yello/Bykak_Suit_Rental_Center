@@ -29,48 +29,50 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
 
-    return _isLoading ? Center(
-      child: SizedBox(
-        width: 40,
-        height: 40,
-        child: CircularProgressIndicator(
-          color: style.mainColor,
-        ),
-      ),
-    ) : Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: style.mainColor,
-        // iconTheme: IconThemeData(color: style.whiteColor),
-        title: Center(
-          child: MediaQuery.of(context).size.width < 640
-              ? PhoneAppBar()
-              : WideAppBar(),
-        ),
-      ),
-      body: ListView(
-        children: [
-          Container(
-            child: Center(child: MainBanner()),
-          ),
-          Container(
-            child: Center(child: FirstContents()),
-          ),
-          Container(
-            child: Center(child: SecondContents()),
-          ),
-          Container(
-            child: Center(child: ThirdContents()),
-          ),
-          Container(
-            child: Center(child: FourthContents()),
-          ),
-          Container(
-            child: Center(child: Footer()),
-          ),
-        ],
-      ),
-    );
+    return _isLoading
+        ? Center(
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: CircularProgressIndicator(
+                color: style.mainColor,
+              ),
+            ),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: style.mainColor,
+              // iconTheme: IconThemeData(color: style.whiteColor),
+              title: Center(
+                child: MediaQuery.of(context).size.width < 640
+                    ? PhoneAppBar()
+                    : WideAppBar(),
+              ),
+            ),
+            body: ListView(
+              children: [
+                Container(
+                  child: Center(child: MainBanner()),
+                ),
+                Container(
+                  child: Center(child: FirstContents()),
+                ),
+                Container(
+                  child: Center(child: SecondContents()),
+                ),
+                Container(
+                  child: Center(child: ThirdContents()),
+                ),
+                Container(
+                  child: Center(child: FourthContents()),
+                ),
+                Container(
+                  child: Center(child: Footer()),
+                ),
+              ],
+            ),
+          );
   }
 }
 
@@ -92,7 +94,8 @@ class PhoneAppBar extends StatelessWidget {
               // 검색, 예약내역 나타내기
             },
           ),
-          Text('순양 렌탈센터',
+          Text(
+            '순양 렌탈센터',
             style: TextStyle(
               color: style.whiteColor,
               fontWeight: style.boldText,
@@ -138,7 +141,12 @@ class WideAppBar extends StatelessWidget {
                 IconButton(
                   icon: Icon(Icons.search),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SearchScreen(),
+                      ),
+                    );
                   },
                 ),
                 TextButton(
@@ -370,13 +378,31 @@ class SecondContents extends StatefulWidget {
 }
 
 class _SecondContentsState extends State<SecondContents> {
-  boxSize(context) {
-    if(MediaQuery.of(context).size.width < 640) {
-      return 160;
+  picSize(context) {
+    if (MediaQuery.of(context).size.width < 640) {
+      return 180;
     } else if (MediaQuery.of(context).size.width < 1080) {
-      return 200;
+      return 220;
     } else {
-      return 300;
+      return 260;
+    }
+  }
+
+  boxSize(context) {
+    if (MediaQuery.of(context).size.width < 640) {
+      return 64;
+    } else {
+      return 80;
+    }
+  }
+
+  viewportSize(context) {
+    if (MediaQuery.of(context).size.width < 640) {
+      return 0.7;
+    } else if (MediaQuery.of(context).size.width < 1080) {
+      return 0.5;
+    } else {
+      return 0.4;
     }
   }
 
@@ -406,23 +432,28 @@ class _SecondContentsState extends State<SecondContents> {
               padding: EdgeInsets.all(16),
               child: CarouselSlider(
                 options: CarouselOptions(
-                  viewportFraction: 0.5,
-                  enlargeCenterPage: true,
+                  viewportFraction: viewportSize(context),
+                  // enlargeCenterPage: true,
                   autoPlay: true,
-                  // aspectRatio: 1 / 1.5
+                  height: picSize(context) + boxSize(context),
                 ),
                 items: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: style.lightGreyColor, width: 2),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: InkWell(
+                  InkWell(
+                    child: Container(
+                      width: picSize(context),
+                      height: picSize(context) + boxSize(context),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          width: 2,
+                          color: style.lightGreyColor,
+                        ),
+                      ),
                       child: Column(
                         children: [
                           Container(
-                            width: boxSize(context),
-                            height: boxSize(context),
+                            width: picSize(context),
+                            height: picSize(context),
                             decoration: BoxDecoration(
                               color: style.mainColor,
                               borderRadius: BorderRadius.only(
@@ -432,9 +463,9 @@ class _SecondContentsState extends State<SecondContents> {
                             ),
                           ),
                           Container(
-                            width: boxSize(context),
-                            height: 100,
-                            padding: EdgeInsets.all(style.paddingSize(context)),
+                            width: picSize(context),
+                            height: boxSize(context) - 4,
+                            padding: EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               color: style.whiteColor,
                               borderRadius: BorderRadius.only(
@@ -443,7 +474,7 @@ class _SecondContentsState extends State<SecondContents> {
                               ),
                             ),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
@@ -453,7 +484,6 @@ class _SecondContentsState extends State<SecondContents> {
                                     color: style.blackColor,
                                   ),
                                 ),
-                                Padding(padding: EdgeInsets.all(2)),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -462,10 +492,11 @@ class _SecondContentsState extends State<SecondContents> {
                                       '대여샵',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
-                                        color: style.greyColor),
+                                        color: style.greyColor,
                                       ),
+                                    ),
                                     Text(
-                                      '50000원',
+                                      '50000' + ' 원',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
                                         color: style.mainColor,
@@ -479,15 +510,15 @@ class _SecondContentsState extends State<SecondContents> {
                           ),
                         ],
                       ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProductDetailScreen(),
-                          ),
-                        );
-                      },
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetailScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -541,10 +572,8 @@ class ThirdContents extends StatelessWidget {
                   return InkWell(
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(
-                          color: style.lightGreyColor,
-                          width: 2
-                        ),
+                        border:
+                            Border.all(color: style.lightGreyColor, width: 2),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Column(
@@ -590,7 +619,8 @@ class ThirdContents extends StatelessWidget {
                                         color: style.greyColor,
                                       ),
                                     ),
-                                    Text('500000원',
+                                    Text(
+                                      '500000원',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
                                         color: style.mainColor,
@@ -659,7 +689,7 @@ class FourthContents extends StatelessWidget {
                           width: style.c4BoxSize(context),
                           height: style.c4BoxSize(context),
                           decoration: BoxDecoration(
-                            color: Color(0xFF1E1E1E),
+                            color: style.blackColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
@@ -681,7 +711,7 @@ class FourthContents extends StatelessWidget {
                           width: style.c4BoxSize(context),
                           height: style.c4BoxSize(context),
                           decoration: BoxDecoration(
-                            color: Color(0xFF1E1E1E),
+                            color: style.blackColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
@@ -703,7 +733,7 @@ class FourthContents extends StatelessWidget {
                           width: style.c4BoxSize(context),
                           height: style.c4BoxSize(context),
                           decoration: BoxDecoration(
-                            color: Color(0xFF1E1E1E),
+                            color: style.blackColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
@@ -725,7 +755,7 @@ class FourthContents extends StatelessWidget {
                           width: style.c4BoxSize(context),
                           height: style.c4BoxSize(context),
                           decoration: BoxDecoration(
-                            color: Color(0xFF1E1E1E),
+                            color: style.blackColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
@@ -805,11 +835,14 @@ class _FooterState extends State<Footer> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  child: Text('순양 렌탈센터',
-                      style: TextStyle(
-                          color: style.whiteColor,
-                          fontSize: footerLogoSize(context),
-                          fontWeight: style.boldText)),
+                  child: Text(
+                    '순양 렌탈센터',
+                    style: TextStyle(
+                      color: style.whiteColor,
+                      fontSize: footerLogoSize(context),
+                      fontWeight: style.boldText,
+                    ),
+                  ),
                 ),
                 Container(
                   child: Row(
@@ -818,27 +851,52 @@ class _FooterState extends State<Footer> {
                         child: Container(
                           width: footerBoxSize(context),
                           height: footerBoxSize(context),
-                          color: style.whiteColor,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.yellow,
+                          ),
                         ),
                         onTap: () {},
                       ),
                       Padding(
-                          padding: EdgeInsets.all(style.paddingSize(context))),
+                        padding: EdgeInsets.all(style.paddingSize(context)),
+                      ),
                       InkWell(
                         child: Container(
                           width: footerBoxSize(context),
                           height: footerBoxSize(context),
-                          color: style.whiteColor,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.purple,
+                          ),
                         ),
                         onTap: () {},
                       ),
                       Padding(
-                          padding: EdgeInsets.all(style.paddingSize(context))),
+                        padding: EdgeInsets.all(style.paddingSize(context)),
+                      ),
                       InkWell(
                         child: Container(
                           width: footerBoxSize(context),
                           height: footerBoxSize(context),
-                          color: style.whiteColor,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.green,
+                          ),
+                        ),
+                        onTap: () {},
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(style.paddingSize(context)),
+                      ),
+                      InkWell(
+                        child: Container(
+                          width: footerBoxSize(context),
+                          height: footerBoxSize(context),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.red,
+                          ),
                         ),
                         onTap: () {},
                       ),

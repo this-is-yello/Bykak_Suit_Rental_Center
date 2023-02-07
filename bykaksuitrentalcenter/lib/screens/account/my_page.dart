@@ -22,7 +22,6 @@ import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
 import 'package:bykaksuitrentalcenter/screens/user/like_product_page.dart';
 import 'package:bykaksuitrentalcenter/screens/user/inquiry_history_page.dart';
 
-
 class MyPageScreen extends StatefulWidget {
   const MyPageScreen({super.key});
 
@@ -52,101 +51,103 @@ class _MyPageScreenState extends State<MyPageScreen> {
       });
     }
 
-    return _isLoading ? Center(
-      child: SizedBox(
-        width: 40,
-        height: 40,
-        child: CircularProgressIndicator(
-          color: style.mainColor,
-        ),
-      ),
-    ) : Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: style.mainColor,
-        shadowColor: Color.fromARGB(0, 0, 0, 0),
-        title: Center(child: MyPageAppBar()),
-      ),
-      body: ResponsiveSizer(builder: (context, orientation, screenType) {
-        return ListView(
-          children: [
-            Container(
-              width: 100.w,
-              height: style.userInfoBoxHeight(context),
-              color: style.mainColor,
-              child: Center(
-                child: Container(
-                  width: style.widgetSize(context),
-                  child: _columnState
-                      ? Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ProfileNameNumber(),
-                            AdminMenu(),
-                            // UserMenu(),
-                          ],
-                        )
-                      : Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                          children: [
-                            ProfileNameNumber(),
-                            AdminMenu(),
-                            // UserMenu(),
-                          ],
-                        ),
-                ),
+    return _isLoading
+        ? Center(
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: CircularProgressIndicator(
+                color: style.mainColor,
               ),
             ),
-            Container(
-              width: style.widgetSize(context),
-              padding: EdgeInsets.all(16),
-              child: Column(
+          )
+        : Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: style.mainColor,
+              shadowColor: Color.fromARGB(0, 0, 0, 0),
+              title: Center(child: MyPageAppBar()),
+            ),
+            body: ResponsiveSizer(builder: (context, orientation, screenType) {
+              return ListView(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.all(style.paddingSize(context)),
-                  ),
                   Container(
-                    width: style.widgetSize(context),
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      '대여일정',
-                      style: TextStyle(
-                          fontSize: style.h2FontSize(context),
-                          color: style.blackColor,
-                          fontWeight: style.boldText),
+                    width: 100.w,
+                    height: style.userInfoBoxHeight(context),
+                    color: style.mainColor,
+                    child: Center(
+                      child: Container(
+                        width: style.widgetSize(context),
+                        child: _columnState
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ProfileNameNumber(),
+                                  AdminMenu(),
+                                  // UserMenu(),
+                                ],
+                              )
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ProfileNameNumber(),
+                                  AdminMenu(),
+                                  // UserMenu(),
+                                ],
+                              ),
+                      ),
                     ),
                   ),
-                  Padding(
-                      padding:
-                          EdgeInsets.all(style.paddingSize(context))),
                   Container(
                     width: style.widgetSize(context),
                     padding: EdgeInsets.all(16),
-                    child: MediaQuery.of(context).size.width < 1080
-                        ? Column(
-                            children: [
-                              CalenderWidget(),
-                              Padding(padding: EdgeInsets.all(20)),
-                              ScheduleWidget(),
-                            ],
-                          )
-                        : Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                            children: [
-                              CalenderWidget(),
-                              ScheduleWidget(),
-                            ],
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(style.paddingSize(context)),
+                        ),
+                        Container(
+                          width: style.widgetSize(context),
+                          padding: EdgeInsets.all(16),
+                          child: Text(
+                            '대여일정',
+                            style: TextStyle(
+                                fontSize: style.h2FontSize(context),
+                                color: style.blackColor,
+                                fontWeight: style.boldText),
                           ),
-                  )
+                        ),
+                        Padding(
+                            padding:
+                                EdgeInsets.all(style.paddingSize(context))),
+                        Container(
+                          width: style.widgetSize(context),
+                          padding: EdgeInsets.all(16),
+                          child: MediaQuery.of(context).size.width < 1080
+                              ? Column(
+                                  children: [
+                                    CalenderWidget(),
+                                    Padding(padding: EdgeInsets.all(20)),
+                                    ScheduleWidget(),
+                                  ],
+                                )
+                              : Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CalenderWidget(),
+                                    ScheduleWidget(),
+                                  ],
+                                ),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
-              ),
-            ),
-          ],
-        );
-      }),
-    );
+              );
+            }),
+          );
   }
 }
 
@@ -172,7 +173,12 @@ class MyPageAppBar extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.shopping_bag),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ShoppingBagScreen(),),);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ShoppingBagScreen(),
+                    ),
+                  );
                 },
               ),
               TextButton(
@@ -249,7 +255,12 @@ class ProfileNameNumber extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ModifyAccountScreen(),),);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ModifyAccountScreen(),
+          ),
+        );
       },
     );
   }
@@ -287,7 +298,12 @@ class UserMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MySizeScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MySizeScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -307,7 +323,12 @@ class UserMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => LikeProductScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LikeProductScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -326,7 +347,12 @@ class UserMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => InquiryHistoryScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InquiryHistoryScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -407,13 +433,13 @@ class UserMenu extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BookHistoryScreen(),
-                        ),
-                      );
-                    },
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookHistoryScreen(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
@@ -456,7 +482,12 @@ class AdminMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => UserManegementScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserManegementScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -475,7 +506,12 @@ class AdminMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => BookManegementScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookManegementScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -494,7 +530,12 @@ class AdminMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => InquiryManegementScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InquiryManegementScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -525,7 +566,12 @@ class AdminMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ProductManegementScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductManegementScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
@@ -544,7 +590,12 @@ class AdminMenu extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchBarcodeScreen(),),);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SearchBarcodeScreen(),
+                      ),
+                    );
                   },
                 ),
               ),
