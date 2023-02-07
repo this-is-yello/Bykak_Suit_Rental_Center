@@ -330,6 +330,16 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
     });
   }
 
+  textFieldSize(context) {
+    if(MediaQuery.of(context).size.width < 640) {
+    return 200;
+  } else if (MediaQuery.of(context).size.width < 1080) {
+    return 400;
+  } else {
+    return 600;
+  }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -361,28 +371,37 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('상의 사이즈: ',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: style.blackColor,
-                    fontWeight: style.boldText,
+                Container(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Text(
+                    '상의 사이즈: ',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: style.blackColor,
+                      fontWeight: style.boldText,
+                    ),
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
-                DropdownButton(
-                  style: TextStyle(fontSize: 18),
-                  value: _upSelectedValue,
-                  items: _valueList.map((e) {
-                    return DropdownMenuItem(
-                      value: e,
-                      child: Text(e),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _upSelectedValue = value!;
-                    });
-                  },
+                Container(
+                  width: textFieldSize(context),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    underline: SizedBox.shrink(),
+                    style: TextStyle(fontSize: 18),
+                    value: _upSelectedValue,
+                    items: _valueList.map((e) {
+                      return DropdownMenuItem(
+                        value: e,
+                        child: Text(e),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _upSelectedValue = value!;
+                      });
+                    },
+                  ),
                 ),
               ],
             ),
@@ -393,26 +412,36 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('하의 사이즈: ',
+                Container(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Text(
+                    '하의 사이즈: ',
                     style: TextStyle(
-                        fontSize: 18,
-                        color: style.blackColor,
-                        fontWeight: style.boldText)),
+                      fontSize: 18,
+                      color: style.blackColor,
+                      fontWeight: style.boldText),
+                    ),
+                ),
                 Padding(padding: EdgeInsets.all(8)),
-                DropdownButton(
-                  style: TextStyle(fontSize: 18),
-                  value: _downSelectedValue,
-                  items: _valueList.map((e) {
-                    return DropdownMenuItem(
-                      value: e,
-                      child: Text(e),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      _downSelectedValue = value!;
-                    });
-                  },
+                Container(
+                  width: textFieldSize(context),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    underline: SizedBox.shrink(),
+                    style: TextStyle(fontSize: 18),
+                    value: _downSelectedValue,
+                    items: _valueList.map((e) {
+                      return DropdownMenuItem(
+                        value: e,
+                        child: Text(e),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _downSelectedValue = value!;
+                      });
+                    },
+                  ),
                 ),
               ],
             ),

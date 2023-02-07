@@ -12,6 +12,14 @@ class BookHistoryScreen extends StatefulWidget {
 class _BookHistoryScreenState extends State<BookHistoryScreen> {
   bool _isLoading= true;
 
+  final _valueList = ['날짜 오름차순', '날짜 내림차순'];
+  String? _arraySelectedValue;
+  void initState() {
+    setState(() {
+      _arraySelectedValue = _valueList[0];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 1), () {

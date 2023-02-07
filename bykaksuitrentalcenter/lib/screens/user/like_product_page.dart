@@ -17,7 +17,7 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
   String? _arraySelectedValue;
   void initState() {
     setState(() {
-      _arraySelectedValue = _valueList[2];
+      _arraySelectedValue = _valueList[0];
     });
   }
 
@@ -61,7 +61,7 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            padding: EdgeInsets.only(top: 12),
+                            padding: EdgeInsets.only(top: 10),
                             child: Text(
                               '전체' + ' ' + '0' + '개',
                               style: TextStyle(

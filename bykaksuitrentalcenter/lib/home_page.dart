@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:bykaksuitrentalcenter/screens/rent/search_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
@@ -136,7 +137,9 @@ class WideAppBar extends StatelessWidget {
               children: [
                 IconButton(
                   icon: Icon(Icons.search),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen(),),);
+                  },
                 ),
                 TextButton(
                   child: Text(
@@ -359,8 +362,23 @@ class FirstContents extends StatelessWidget {
 }
 
 // Contents-2
-class SecondContents extends StatelessWidget {
+class SecondContents extends StatefulWidget {
   const SecondContents({super.key});
+
+  @override
+  State<SecondContents> createState() => _SecondContentsState();
+}
+
+class _SecondContentsState extends State<SecondContents> {
+  boxSize(context) {
+    if(MediaQuery.of(context).size.width < 640) {
+      return 160;
+    } else if (MediaQuery.of(context).size.width < 1080) {
+      return 200;
+    } else {
+      return 300;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -376,9 +394,10 @@ class SecondContents extends StatelessWidget {
               child: Text(
                 '인기상품',
                 style: TextStyle(
-                    color: style.blackColor,
-                    fontSize: style.h2FontSize(context),
-                    fontWeight: style.boldText),
+                  color: style.blackColor,
+                  fontSize: style.h2FontSize(context),
+                  fontWeight: style.boldText,
+                ),
               ),
             ),
             Padding(padding: EdgeInsets.all(style.paddingSize(context))),
@@ -387,9 +406,10 @@ class SecondContents extends StatelessWidget {
               padding: EdgeInsets.all(16),
               child: CarouselSlider(
                 options: CarouselOptions(
-                  viewportFraction: 0.45,
+                  viewportFraction: 0.5,
                   enlargeCenterPage: true,
                   autoPlay: true,
+                  // aspectRatio: 1 / 1.5
                 ),
                 items: [
                   Container(
@@ -400,46 +420,52 @@ class SecondContents extends StatelessWidget {
                     child: InkWell(
                       child: Column(
                         children: [
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              height: 80.w,
-                              decoration: BoxDecoration(
-                                color: style.mainColor,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(8),
-                                    topRight: Radius.circular(8)),
+                          Container(
+                            width: boxSize(context),
+                            height: boxSize(context),
+                            decoration: BoxDecoration(
+                              color: style.mainColor,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(8),
                               ),
                             ),
                           ),
                           Container(
-                            width: double.infinity,
+                            width: boxSize(context),
+                            height: 100,
                             padding: EdgeInsets.all(style.paddingSize(context)),
                             decoration: BoxDecoration(
                               color: style.whiteColor,
                               borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(8),
-                                  bottomRight: Radius.circular(8)),
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8),
+                              ),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('상품명',
-                                    style: TextStyle(
-                                        fontSize: style.h4FontSize(context),
-                                        color: style.blackColor)),
+                                Text(
+                                  '상품명',
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context),
+                                    color: style.blackColor,
+                                  ),
+                                ),
                                 Padding(padding: EdgeInsets.all(2)),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('대여샵',
-                                        style: TextStyle(
-                                            fontSize:
-                                                style.h4FontSize(context) - 2,
-                                            color: style.greyColor)),
-                                    Text('50000원',
+                                    Text(
+                                      '대여샵',
+                                      style: TextStyle(
+                                        fontSize: style.h4FontSize(context),
+                                        color: style.greyColor),
+                                      ),
+                                    Text(
+                                      '50000원',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
                                         color: style.mainColor,
@@ -557,16 +583,20 @@ class ThirdContents extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text('대여샵',
-                                        style: TextStyle(
-                                            fontSize:
-                                                style.h4FontSize(context) - 2,
-                                            color: style.greyColor)),
+                                    Text(
+                                      '대여샵',
+                                      style: TextStyle(
+                                        fontSize: style.h4FontSize(context),
+                                        color: style.greyColor,
+                                      ),
+                                    ),
                                     Text('500000원',
-                                        style: TextStyle(
-                                            fontSize: style.h4FontSize(context),
-                                            color: style.mainColor,
-                                            fontWeight: style.boldText)),
+                                      style: TextStyle(
+                                        fontSize: style.h4FontSize(context),
+                                        color: style.mainColor,
+                                        fontWeight: style.boldText,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],

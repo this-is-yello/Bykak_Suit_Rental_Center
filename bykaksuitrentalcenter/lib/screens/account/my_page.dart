@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:bykaksuitrentalcenter/screens/account/modify_account_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:flutter/scheduler.dart';
@@ -19,6 +20,7 @@ import 'package:bykaksuitrentalcenter/screens/user/my_point_page.dart';
 import 'package:bykaksuitrentalcenter/screens/user/my_size_page.dart';
 import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
 import 'package:bykaksuitrentalcenter/screens/user/like_product_page.dart';
+import 'package:bykaksuitrentalcenter/screens/user/inquiry_history_page.dart';
 
 
 class MyPageScreen extends StatefulWidget {
@@ -80,8 +82,8 @@ class _MyPageScreenState extends State<MyPageScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             ProfileNameNumber(),
-                            // AdminMenu(),
-                            UserMenu(),
+                            AdminMenu(),
+                            // UserMenu(),
                           ],
                         )
                       : Row(
@@ -89,8 +91,8 @@ class _MyPageScreenState extends State<MyPageScreen> {
                               MainAxisAlignment.spaceBetween,
                           children: [
                             ProfileNameNumber(),
-                            // AdminMenu(),
-                            UserMenu(),
+                            AdminMenu(),
+                            // UserMenu(),
                           ],
                         ),
                 ),
@@ -198,51 +200,57 @@ class ProfileNameNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // width: style.widgetSize(context),
-      padding: EdgeInsets.all(16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: style.c4BoxSize(context),
-                height: style.c4BoxSize(context),
-                decoration: BoxDecoration(
+    return InkWell(
+      child: Container(
+        // width: style.widgetSize(context),
+        padding: EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: style.c4BoxSize(context),
+                  height: style.c4BoxSize(context),
+                  decoration: BoxDecoration(
                     color: style.blackColor,
-                    borderRadius: BorderRadius.circular(200)),
-              ),
-              Padding(padding: EdgeInsets.all(8)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    child: Text(
-                      '유저네임',
-                      style: TextStyle(
-                          fontSize: style.h3FontSize(context),
-                          color: style.whiteColor,
-                          fontWeight: style.boldText),
-                    ),
+                    borderRadius: BorderRadius.circular(200),
                   ),
-                  Padding(padding: EdgeInsets.only(top: 8)),
-                  Container(
-                    child: Text(
-                      '010-0000-0000',
-                      style: TextStyle(
-                          fontSize: style.h3FontSize(context),
-                          color: style.whiteColor,
-                          fontWeight: style.boldText),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Text(
+                        '유저네임',
+                        style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor,
+                            fontWeight: style.boldText),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                    Padding(padding: EdgeInsets.only(top: 8)),
+                    Container(
+                      child: Text(
+                        '010-0000-0000',
+                        style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor,
+                            fontWeight: style.boldText),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ModifyAccountScreen(),),);
+      },
     );
   }
 }
@@ -317,7 +325,9 @@ class UserMenu extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => InquiryHistoryScreen(),),);
+                  },
                 ),
               ),
             ],

@@ -51,7 +51,7 @@ class _MySizeScreenState extends State<MySizeScreen> {
                     unselectedLabelColor: style.greyColor,
                     tabs: [
                       Tab(
-                        text: '기본 신체지수',
+                        text: '신체지수',
                       ),
                       Tab(
                         text: '상의',
@@ -136,10 +136,10 @@ class MyHeightWeight extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('키 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -148,9 +148,12 @@ class MyHeightWeight extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewHeight,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -171,10 +174,10 @@ class MyHeightWeight extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -189,10 +192,10 @@ class MyHeightWeight extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('몸무게 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -201,9 +204,12 @@ class MyHeightWeight extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewWeight,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -224,10 +230,10 @@ class MyHeightWeight extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('kg',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -264,10 +270,10 @@ class MyUpSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('상의총장 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -276,9 +282,12 @@ class MyUpSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewUpLength,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -299,10 +308,10 @@ class MyUpSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -317,10 +326,10 @@ class MyUpSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('어깨너비 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -329,9 +338,12 @@ class MyUpSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewShoulder,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -352,10 +364,10 @@ class MyUpSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -370,10 +382,10 @@ class MyUpSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('가슴둘레 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -382,9 +394,12 @@ class MyUpSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewChest,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -405,10 +420,10 @@ class MyUpSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -423,10 +438,10 @@ class MyUpSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('소매길이 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -435,9 +450,12 @@ class MyUpSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewArmLength,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -458,10 +476,10 @@ class MyUpSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -498,10 +516,10 @@ class MyDownSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('하의총장 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -510,9 +528,12 @@ class MyDownSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewUpLength,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -533,10 +554,10 @@ class MyDownSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -551,10 +572,10 @@ class MyDownSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('허리둘레 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -563,9 +584,12 @@ class MyDownSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewShoulder,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -586,10 +610,10 @@ class MyDownSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -604,10 +628,10 @@ class MyDownSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('엉덩이둘레 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -616,9 +640,12 @@ class MyDownSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewChest,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -639,10 +666,10 @@ class MyDownSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -657,10 +684,10 @@ class MyDownSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('밑위 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -669,9 +696,12 @@ class MyDownSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewArmLength,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -692,10 +722,10 @@ class MyDownSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -710,10 +740,10 @@ class MyDownSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('허벅지둘레 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -722,9 +752,12 @@ class MyDownSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewArmLength,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -745,10 +778,10 @@ class MyDownSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -763,10 +796,10 @@ class MyDownSize extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('밑통 :',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -775,9 +808,12 @@ class MyDownSize extends StatelessWidget {
                     Padding(padding: EdgeInsets.all(8)),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: style.c1BoxSize(context),
+                        maxWidth: style.c2BoxSize(context),
+                        maxHeight: 40
                       ),
                       child: TextField(
+                        textAlign: TextAlign.end,
+                        textAlignVertical: TextAlignVertical.bottom,
                         // controller: _inputNewArmLength,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
@@ -798,10 +834,10 @@ class MyDownSize extends StatelessWidget {
                     ),
                     Padding(padding: EdgeInsets.all(8)),
                     Container(
-                      width: style.c1BoxSize(context),
+                      width: style.c2BoxSize(context),
                       child: Text('cm',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
+                          fontSize: style.h3FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),

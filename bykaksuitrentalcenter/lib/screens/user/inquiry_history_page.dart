@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-class InquiryManegementScreen extends StatefulWidget {
-  const InquiryManegementScreen({super.key});
+class InquiryHistoryScreen extends StatefulWidget {
+  const InquiryHistoryScreen({super.key});
 
   @override
-  State<InquiryManegementScreen> createState() => _InquiryManegementScreenState();
+  State<InquiryHistoryScreen> createState() => _InquiryHistoryScreenState();
 }
 
-class _InquiryManegementScreenState extends State<InquiryManegementScreen> {
+class _InquiryHistoryScreenState extends State<InquiryHistoryScreen> {
   bool _isLoading= true;
 
   @override
@@ -33,7 +33,7 @@ class _InquiryManegementScreenState extends State<InquiryManegementScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: style.mainColor,
         shadowColor: Color.fromARGB(0, 0, 0, 0),
-        title: Center(child: InquiryManegementAppBar()),
+        title: Center(child: InquiryHistoryAppBar()),
       ),
       body: ResponsiveSizer(builder: (context, orientation, screenType) {
         return CustomScrollView(
@@ -159,8 +159,8 @@ class _InquiryManegementScreenState extends State<InquiryManegementScreen> {
 
 
 // -------------------------------------------------- AppBar ---------------------------------------------------
-class InquiryManegementAppBar extends StatelessWidget {
-  const InquiryManegementAppBar({super.key});
+class InquiryHistoryAppBar extends StatelessWidget {
+  const InquiryHistoryAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -268,71 +268,14 @@ class _InquiryInformationState extends State<InquiryInformation> {
                   ),
                   Container(
                     width: style.widgetSize(context),
-                    padding: EdgeInsets.all(16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: Text('대기중', // 연락완료
-                            style: TextStyle(
-                              fontSize: style.h3FontSize(context),
-                              fontWeight: style.boldText,
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: style.mainColor,
-                            minimumSize: Size(96, 48)
-                          ),
-                          child: Text('상태변경', style: TextStyle(fontSize: style.h5FontSize(context)),),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: style.widgetSize(context),
-                    height: 2,
-                    color: style.lightGreyColor,
-                  ),
-                  Container(
-                    width: style.widgetSize(context),
-                    height: 290,
+                    height: 240,
                     padding: EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('답변', style: TextStyle(fontSize: style.h3FontSize(context), fontWeight: style.boldText)),
                         Padding(padding: EdgeInsets.all(4)),
-                        TextField(
-                          // controller: _inputAnswer,
-                          decoration: InputDecoration(
-                            hintText: '문의에 대한 답변을 입력해주세요.',
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(width: 1),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                width: 2,
-                                color: style.mainColor
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          maxLines: 8,
-                        ),
-                        Padding(padding: EdgeInsets.all(8)),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: style.mainColor,
-                            minimumSize: Size(style.widgetSize(context), 48)
-                          ),
-                          child: Text('답변저장', style: TextStyle(fontSize: style.h5FontSize(context)),),
-                          onPressed: () {},
-                        ),
+                        Text('기본구성은 자켓과 바지입니다.', style: TextStyle(fontSize: style.h3FontSize(context))),
                       ],
                     ),
                   ),
