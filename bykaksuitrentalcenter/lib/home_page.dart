@@ -402,7 +402,7 @@ class _SecondContentsState extends State<SecondContents> {
     } else if (MediaQuery.of(context).size.width < 1080) {
       return 0.5;
     } else {
-      return 0.4;
+      return 0.35;
     }
   }
 
@@ -478,9 +478,10 @@ class _SecondContentsState extends State<SecondContents> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '상품명',
+                                  '[대여형태] 상품명',
                                   style: TextStyle(
                                     fontSize: style.h4FontSize(context),
+                                    fontWeight: style.boldText,
                                     color: style.blackColor,
                                   ),
                                 ),
@@ -499,8 +500,8 @@ class _SecondContentsState extends State<SecondContents> {
                                       '50000' + ' 원',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
-                                        color: style.mainColor,
                                         fontWeight: style.boldText,
+                                        color: style.mainColor,
                                       ),
                                     ),
                                   ],
@@ -531,8 +532,23 @@ class _SecondContentsState extends State<SecondContents> {
 }
 
 // Contents-3
-class ThirdContents extends StatelessWidget {
+class ThirdContents extends StatefulWidget {
   const ThirdContents({super.key});
+
+  @override
+  State<ThirdContents> createState() => _ThirdContentsState();
+}
+
+class _ThirdContentsState extends State<ThirdContents> {
+  gridHeight(c) {
+    if (MediaQuery.of(c).size.width < 640) {
+      return 750;
+    } else if (MediaQuery.of(c).size.width < 1080) {
+      return 1180;
+    } else {
+      return 1040;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -548,15 +564,16 @@ class ThirdContents extends StatelessWidget {
               child: Text(
                 '패키지 상품',
                 style: TextStyle(
-                    color: style.blackColor,
-                    fontSize: style.h2FontSize(context),
-                    fontWeight: style.boldText),
+                  color: style.blackColor,
+                  fontSize: style.h2FontSize(context),
+                  fontWeight: style.boldText,
+                ),
               ),
             ),
             Padding(padding: EdgeInsets.all(style.paddingSize(context))),
             Container(
               width: style.widgetSize(context),
-              height: style.homeGridHeight(context),
+              height: gridHeight(context),
               padding: EdgeInsets.all(16),
               child: GridView.builder(
                 itemCount: 6,
@@ -604,9 +621,12 @@ class ThirdContents extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('패키지 명',
-                                    style: TextStyle(
-                                        fontSize: style.h4FontSize(context),
-                                        color: style.blackColor)),
+                                  style: TextStyle(
+                                    fontSize: style.h4FontSize(context),
+                                    fontWeight: style.boldText,
+                                    color: style.blackColor,
+                                  ),
+                                ),
                                 Padding(padding: EdgeInsets.all(2)),
                                 Row(
                                   mainAxisAlignment:

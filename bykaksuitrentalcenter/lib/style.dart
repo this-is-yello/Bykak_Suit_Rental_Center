@@ -20,7 +20,7 @@ widgetSize(c) {
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 560;
   } else {
-    return 960;
+    return 1000;
   }
 }
 
@@ -95,15 +95,6 @@ h5FontSize(c) {
   }
 }
 
-homeGridHeight(c) {
-  if (MediaQuery.of(c).size.width < 640) {
-    return 750;
-  } else if (MediaQuery.of(c).size.width < 1080) {
-    return 1180;
-  } else {
-    return 1040;
-  }
-}
 
 // -------------------- BoxSize --------------------
 c1BoxSize(c) {

@@ -7,6 +7,7 @@ import 'firebase_options.dart';
 
 import 'package:bykaksuitrentalcenter/home_page.dart';
 import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
+import 'package:bykaksuitrentalcenter/screens/rent/make_a_book_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/sign_up_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';

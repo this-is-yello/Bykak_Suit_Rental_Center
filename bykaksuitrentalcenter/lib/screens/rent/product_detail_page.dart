@@ -1,9 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:bykaksuitrentalcenter/home_page.dart';
+import 'package:bykaksuitrentalcenter/screens/rent/make_a_book_page.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});
@@ -90,15 +91,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               children: [
                                 ProductPic(),
                                 Padding(
-                                    padding: EdgeInsets.only(
-                                        top: style.paddingSize(context))),
+                                  padding: EdgeInsets.only(
+                                    top: style.paddingSize(context),
+                                  ),
+                                ),
                                 ProductInfo(),
                               ],
                             ),
                           ),
                           Padding(
-                              padding: EdgeInsets.only(
-                                  left: style.paddingSize(context))),
+                            padding: EdgeInsets.only(
+                              left: style.paddingSize(context),
+                            ),
+                          ),
                           Flexible(
                             flex: 2,
                             // fit: FlexFit.tight,
@@ -187,7 +192,7 @@ class ProductNamePrice extends StatelessWidget {
             ),
             Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
             Text(
-              '상품명',
+              '[대여형태] 상품명',
               style: TextStyle(
                 fontSize: style.h3FontSize(context),
                 color: style.blackColor,
@@ -221,6 +226,36 @@ class ProductNamePrice extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
+            Container(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextButton(
+                    child: Text(
+                      '대여일정 ' + 'YY.MM.DD' + ' - ' + 'YY.MM.DD',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: style.blackColor,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                  Padding(padding: EdgeInsets.all(4)),
+                  TextButton(
+                    child: Text(
+                      '상담시간 ' + 'YY.MM.DD' + ' / ' + 'HH.MM 오후',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: style.blackColor,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+              )
             ),
             Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
             Container(
@@ -330,210 +365,225 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
     });
   }
 
-  textFieldSize(context) {
-    if(MediaQuery.of(context).size.width < 640) {
-    return 200;
-  } else if (MediaQuery.of(context).size.width < 1080) {
-    return 400;
-  } else {
-    return 600;
-  }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 420,
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: style.whiteColor,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(15),
-          topRight: Radius.circular(15),
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: Icon(
-              Icons.keyboard_double_arrow_down_rounded,
-              size: 30, color: style.blackColor,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-          Padding(padding: EdgeInsets.all(4)),
-          Container(
-            height: 56,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top: 8),
-                  child: Text(
-                    '상의 사이즈: ',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: style.blackColor,
-                      fontWeight: style.boldText,
-                    ),
-                  ),
-                ),
-                Padding(padding: EdgeInsets.all(8)),
-                Container(
-                  width: textFieldSize(context),
-                  child: DropdownButton(
-                    isExpanded: true,
-                    underline: SizedBox.shrink(),
-                    style: TextStyle(fontSize: 18),
-                    value: _upSelectedValue,
-                    items: _valueList.map((e) {
-                      return DropdownMenuItem(
-                        value: e,
-                        child: Text(e),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _upSelectedValue = value!;
-                      });
-                    },
-                  ),
-                ),
-              ],
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return Container(
+          // height: 600,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: style.whiteColor,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
             ),
           ),
-          Container(
-            height: 56,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top: 8),
-                  child: Text(
-                    '하의 사이즈: ',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: style.blackColor,
-                      fontWeight: style.boldText),
-                    ),
-                ),
-                Padding(padding: EdgeInsets.all(8)),
-                Container(
-                  width: textFieldSize(context),
-                  child: DropdownButton(
-                    isExpanded: true,
-                    underline: SizedBox.shrink(),
-                    style: TextStyle(fontSize: 18),
-                    value: _downSelectedValue,
-                    items: _valueList.map((e) {
-                      return DropdownMenuItem(
-                        value: e,
-                        child: Text(e),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        _downSelectedValue = value!;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(padding: EdgeInsets.all(8)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
             children: [
-              Container(
-                child: Text('※평소에 입으시는 옷의 사이즈를 선택해주세요.',
-                    style: TextStyle(fontSize: 12)),
-              ),
-              Container(
-                child: Text('※고르신 사이즈와 매장에서 대여하실 옷의 사이즈는 다를 수 있습니다.',
-                    style: TextStyle(fontSize: 12)),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.keyboard_double_arrow_down_rounded,
+                      size: 30, color: style.blackColor,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  Padding(padding: EdgeInsets.all(8)),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 56,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 100,
+                          padding: EdgeInsets.only(top: 8),
+                          child: Text(
+                            '상의 사이즈 : ',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: style.blackColor,
+                              fontWeight: style.boldText,
+                            ),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Container(
+                          width: style.widgetSize(context) - 116,
+                          child: DropdownButton(
+                            isExpanded: true,
+                            underline: SizedBox.shrink(),
+                            style: TextStyle(fontSize: 18),
+                            value: _upSelectedValue,
+                            items: _valueList.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _upSelectedValue = value!;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: style.widgetSize(context),
+                    height: 56,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 100,
+                          padding: EdgeInsets.only(top: 8),
+                          child: Text(
+                            '하의 사이즈 : ',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: style.blackColor,
+                              fontWeight: style.boldText),
+                            ),
+                        ),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Container(
+                          width: style.widgetSize(context) - 116,
+                          child: DropdownButton(
+                            isExpanded: true,
+                            underline: SizedBox.shrink(),
+                            style: TextStyle(fontSize: 18),
+                            value: _downSelectedValue,
+                            items: _valueList.map((e) {
+                              return DropdownMenuItem(
+                                value: e,
+                                child: Text(e),
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                _downSelectedValue = value!;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.all(8)),
+                  Container(
+                    width: style.widgetSize(context),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: Text(
+                            '※평소에 입으시는 옷의 사이즈를 선택해주세요.',
+                            style: TextStyle(fontSize: style.h5FontSize(context)),
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            '※고르신 사이즈와 매장에서 대여하실 옷의 사이즈는 다를 수 있습니다.',
+                            style: TextStyle(fontSize: style.h5FontSize(context)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.all(8)),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: style.widgetSize(context),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(16),
+                      width: double.infinity,
+                      height: 56,
+                      color: Colors.grey[200],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [Text('상품 0개'), Text('약 0 원')],
+                      ),
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.all(8)),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: style.widgetSize(context),
+                    ),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          fit: FlexFit.tight,
+                          child: InkWell(
+                            child: Container(
+                              height: 56,
+                              decoration: BoxDecoration(
+                                color: style.mainColor,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Center(
+                                child: Text('예약하기',
+                                  style: TextStyle(
+                                      fontSize: style.h3FontSize(context),
+                                      color: style.whiteColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              print('상의 ' + '$_upSelectedValue');
+                              print('하의 ' + '$_downSelectedValue');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MakeABookScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(left: style.paddingSize(context))),
+                        Flexible(
+                          fit: FlexFit.tight,
+                          child: InkWell(
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: style.whiteColor,
+                                border: Border.all(color: style.mainColor, width: 2),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Center(
+                                  child: Text('장바구니',
+                                      style: TextStyle(
+                                          fontSize: style.h3FontSize(context),
+                                          color: style.mainColor))),
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.all(8)),
+                ],
               ),
             ],
           ),
-          Padding(padding: EdgeInsets.all(8)),
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: style.widgetSize(context),
-            ),
-            child: Container(
-              padding: EdgeInsets.all(16),
-              width: double.infinity,
-              height: 56,
-              color: Colors.grey[200],
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text('상품 0개'), Text('약 0 원')],
-              ),
-            ),
-          ),
-          Padding(padding: EdgeInsets.all(8)),
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: style.widgetSize(context),
-            ),
-            child: Row(
-              children: [
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: InkWell(
-                    child: Container(
-                      height: 56,
-                      decoration: BoxDecoration(
-                        color: style.mainColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Text('예약하기',
-                          style: TextStyle(
-                              fontSize: style.h3FontSize(context),
-                              color: style.whiteColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                    onTap: () {
-                      print(_upSelectedValue);
-                      print(_downSelectedValue);
-                    },
-                  ),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(left: style.paddingSize(context))),
-                Flexible(
-                  fit: FlexFit.tight,
-                  child: InkWell(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: style.whiteColor,
-                        border: Border.all(color: style.mainColor, width: 2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                          child: Text('장바구니',
-                              style: TextStyle(
-                                  fontSize: style.h3FontSize(context),
-                                  color: style.mainColor))),
-                    ),
-                    onTap: () {},
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(padding: EdgeInsets.all(8)),
-        ],
-      ),
+        );
+      }
     );
   }
 }
