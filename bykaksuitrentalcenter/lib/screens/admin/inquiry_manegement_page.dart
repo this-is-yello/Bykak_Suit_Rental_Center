@@ -88,7 +88,7 @@ class _InquiryManegementScreenState extends State<InquiryManegementScreen> {
                           child: InkWell(
                             child: Container(
                               height: 48,
-                              child: Center(child: Text('문의일자', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
+                              child: Center(child: Text('문의일자 ↓', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
                             ),
                             onTap: () {},
                           ),

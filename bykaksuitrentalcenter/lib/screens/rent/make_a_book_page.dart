@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'package:bykaksuitrentalcenter/screens/rent/booked_detail_page.dart';
+
 class MakeABookScreen extends StatefulWidget {
   const MakeABookScreen({super.key});
 
@@ -90,90 +92,6 @@ class _MakeABookScreenState extends State<MakeABookScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '[대여형태] 상품명',
-                          style: TextStyle(
-                            fontSize: style.h2FontSize(context),
-                            fontWeight: style.boldText,
-                            color: style.blackColor,
-                          ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 2,
-                          color: style.lightGreyColor,
-                        ),
-                        Padding(padding: EdgeInsets.all(8)),
-                        Row(
-                          children: [
-                            Text(
-                              '사이즈',
-                              style: TextStyle(
-                                fontSize: style.h3FontSize(context),
-                                fontWeight: style.boldText,
-                                color: style.blackColor,
-                              ),
-                            ),
-                            Padding(padding: EdgeInsets.all(4)),
-                            Text(
-                              '상의 ' + 'L' + ' / ' + '하의 ' + 'L',
-                              style: TextStyle(
-                                fontSize: style.h3FontSize(context),
-                                color: style.blackColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(padding: EdgeInsets.all(4)),
-                        Container(
-                          child: _columnState ? Row(
-                            children: [
-                              rentRange,
-                              Padding(padding: EdgeInsets.all(4)),
-                              Container(
-                                width: 2,
-                                height:24,
-                                color: style.greyColor,
-                              ),
-                              Padding(padding: EdgeInsets.all(4)),
-                              counselTime,
-                            ],
-                          ) : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              rentRange,
-                              Padding(padding: EdgeInsets.all(4)),
-                              counselTime,
-                            ],
-                          )
-                        ),
-                        Padding(padding: EdgeInsets.all(4)),
-                        Text(
-                          '대여샵',
-                          style: TextStyle(
-                            fontSize: style.h3FontSize(context),
-                            color: style.greyColor,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Center(
-                child: Container(
-                  width: style.widgetSize(context),
-                  padding: EdgeInsets.all(16),
-                  child: Container(
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: style.whiteColor,
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [style.boxShadows]
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
                           '예약자 정보',
                           style: TextStyle(
                             fontSize: style.h2FontSize(context),
@@ -200,7 +118,7 @@ class _MakeABookScreenState extends State<MakeABookScreen> {
                               ),
                               Padding(padding: EdgeInsets.all(4)),
                               Text(
-                                '유제네임',
+                                '유저네임',
                                 style: TextStyle(
                                   fontSize: style.h3FontSize(context),
                                   color: style.blackColor,
@@ -244,6 +162,69 @@ class _MakeABookScreenState extends State<MakeABookScreen> {
                   width: style.widgetSize(context),
                   padding: EdgeInsets.all(16),
                   child: Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: style.whiteColor,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [style.boxShadows]
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '대여 및 상담정보',
+                          style: TextStyle(
+                            fontSize: style.h2FontSize(context),
+                            fontWeight: style.boldText,
+                            color: style.blackColor,
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 2,
+                          color: style.lightGreyColor,
+                        ),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Container(
+                          child: _columnState ? Row(
+                            children: [
+                              rentRange,
+                              Padding(padding: EdgeInsets.all(4)),
+                              Container(
+                                width: 2,
+                                height:24,
+                                color: style.greyColor,
+                              ),
+                              Padding(padding: EdgeInsets.all(4)),
+                              counselTime,
+                            ],
+                          ) : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              rentRange,
+                              Padding(padding: EdgeInsets.all(4)),
+                              counselTime,
+                            ],
+                          )
+                        ),
+                        Padding(padding: EdgeInsets.all(4)),
+                        Text(
+                          '대여샵',
+                          style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.greyColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  width: style.widgetSize(context),
+                  padding: EdgeInsets.all(16),
+                  child: Container(
                     // padding: EdgeInsets.all(16),
                     child: Row(
                       children: [
@@ -267,7 +248,9 @@ class _MakeABookScreenState extends State<MakeABookScreen> {
                                 ),
                               ),
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                           ),
                         ),
                         Padding(padding: EdgeInsets.all(8)),
@@ -289,7 +272,14 @@ class _MakeABookScreenState extends State<MakeABookScreen> {
                                 ),
                               ),
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return ClickBookBtnDialog();
+                                },
+                              );
+                            },
                           ),
                         ),
                       ],
@@ -327,6 +317,61 @@ class MakeABookAppBar extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+
+class ClickBookBtnDialog extends StatelessWidget {
+  const ClickBookBtnDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: Text(
+        '예약을 하시겠습니까?',
+        style: TextStyle(
+          fontSize: style.h3FontSize(context),
+          color: style.blackColor,
+        ),
+      ),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(
+              child: Text(
+                '아니오',
+                style: TextStyle(
+                  fontSize: style.h4FontSize(context),
+                  color: style.mainColor,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            Padding(padding: EdgeInsets.all(4)),
+            TextButton(
+              child: Text(
+                '예',
+                style: TextStyle(
+                  fontSize: style.h4FontSize(context),
+                  color: style.mainColor,
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BookedDetailScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
+        )
+      ],
     );
   }
 }

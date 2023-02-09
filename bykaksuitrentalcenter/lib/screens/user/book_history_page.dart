@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'package:bykaksuitrentalcenter/screens/rent/booked_detail_page.dart';
+
+
 class BookHistoryScreen extends StatefulWidget {
   const BookHistoryScreen({super.key});
 
@@ -75,7 +78,9 @@ class _BookHistoryScreenState extends State<BookHistoryScreen> {
                                           backgroundColor: style.mainColor,
                                         ),
                                         child: Text('상세보기'),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(context, MaterialPageRoute(builder: (context) => BookedDetailScreen(),),);
+                                        },
                                       ),
                                     ],
                                   ),

@@ -223,6 +223,7 @@ class MainBanner extends StatelessWidget {
           height: 40.w,
           viewportFraction: 1,
           autoPlay: true,
+          autoPlayInterval: Duration(milliseconds: 5000),
         ),
         items: [
           Container(
@@ -433,7 +434,6 @@ class _SecondContentsState extends State<SecondContents> {
               child: CarouselSlider(
                 options: CarouselOptions(
                   viewportFraction: viewportSize(context),
-                  // enlargeCenterPage: true,
                   autoPlay: true,
                   height: picSize(context) + boxSize(context),
                 ),

@@ -71,20 +71,17 @@ class _BookManegementScreenState extends State<BookManegementScreen> {
                       children: [
                         Flexible(
                           flex: 3,
-                          child: InkWell(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  right: BorderSide(
-                                    color: Colors.grey,
-                                    width: 1
-                                  )
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                right: BorderSide(
+                                  color: Colors.grey,
+                                  width: 1
                                 )
-                              ),
-                              height: 48,
-                              child: Center(child: Text('예약자', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
+                              )
                             ),
-                            onTap: () {},
+                            height: 48,
+                            child: Center(child: Text('예약자', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
                           ),
                         ),
                         Flexible(
@@ -107,7 +104,7 @@ class _BookManegementScreenState extends State<BookManegementScreen> {
                           child: InkWell(
                             child: Container(
                               height: 48,
-                              child: Center(child: Text('방문일정', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
+                              child: Center(child: Text('방문일정 ↓', style: TextStyle(color: style.whiteColor, fontSize: 18, fontWeight: style.boldText)))
                             ),
                             onTap: () {},
                           ),
