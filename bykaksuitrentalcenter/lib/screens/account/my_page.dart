@@ -83,8 +83,8 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ProfileNameNumber(),
-                                  AdminMenu(),
-                                  // UserMenu(),
+                                  // AdminMenu(),
+                                  UserMenu(),
                                 ],
                               )
                             : Row(
@@ -92,8 +92,8 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   ProfileNameNumber(),
-                                  AdminMenu(),
-                                  // UserMenu(),
+                                  // AdminMenu(),
+                                  UserMenu(),
                                 ],
                               ),
                       ),

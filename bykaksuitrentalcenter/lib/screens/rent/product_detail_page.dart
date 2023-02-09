@@ -233,26 +233,44 @@ class ProductNamePrice extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextButton(
-                    child: Text(
-                      '대여일정 ' + 'YY.MM.DD' + ' - ' + 'YY.MM.DD',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: style.blackColor,
+                  InkWell(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: style.whiteColor,
+                        border: Border.all(color: style.mainColor, width: 2),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Text('대여일정 ' + 'YY.MM.DD' + ' - ' + 'YY.MM.DD',
+                          style: TextStyle(
+                            fontSize: style.h5FontSize(context),
+                            color: style.mainColor,
+                          ),
+                        ),
                       ),
                     ),
-                    onPressed: () {},
+                    onTap: () {},
                   ),
                   Padding(padding: EdgeInsets.all(4)),
-                  TextButton(
-                    child: Text(
-                      '상담시간 ' + 'YY.MM.DD' + ' / ' + 'HH.MM 오후',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: style.blackColor,
+                  InkWell(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: style.whiteColor,
+                        border: Border.all(color: style.mainColor, width: 2),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Text('상담시간 ' + 'YY.MM.DD' + ' / ' + 'HH.MM 오후',
+                          style: TextStyle(
+                            fontSize: style.h5FontSize(context),
+                            color: style.mainColor,
+                          ),
+                        ),
                       ),
                     ),
-                    onPressed: () {},
+                    onTap: () {},
                   ),
                 ],
               )

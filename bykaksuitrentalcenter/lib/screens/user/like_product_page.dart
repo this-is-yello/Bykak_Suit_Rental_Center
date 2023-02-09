@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
+
 
 class LikeProductScreen extends StatefulWidget {
   const LikeProductScreen({super.key});
@@ -151,7 +153,9 @@ class _LikeProductScreenState extends State<LikeProductScreen> {
                               ),
                             ],
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailScreen(),),);
+                          },
                         );
                       },
                     ),

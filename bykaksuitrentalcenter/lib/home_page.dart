@@ -1,15 +1,16 @@
-import 'dart:html';
-
-import 'package:bykaksuitrentalcenter/screens/rent/search_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/link.dart';
 
 import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
+import 'package:bykaksuitrentalcenter/screens/rent/search_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
 import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
+import 'package:side_sheet/side_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -90,9 +91,90 @@ class PhoneAppBar extends StatelessWidget {
         children: [
           IconButton(
             icon: Icon(Icons.menu),
-            onPressed: () {
-              // 검색, 예약내역 나타내기
-            },
+            onPressed: () => SideSheet.left(
+              context: context,
+              width: MediaQuery.of(context).size.width * 0.5,
+              body: Container(
+                padding: EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_back_outlined,),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                    InkWell(
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(bottom: BorderSide(width: 2, color: style.lightGreyColor))
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.search, color: style.mainColor,),
+                            Padding(padding: EdgeInsets.all(4),),
+                            Text('검색', style: TextStyle(fontWeight: style.boldText, color: style.blackColor),),
+                            Padding(padding: EdgeInsets.all(4),),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen(),),);
+                      },
+                    ),
+                    InkWell(
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(bottom: BorderSide(width: 2, color: style.lightGreyColor))
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.bookmark_border_outlined, color: style.mainColor,),
+                            Padding(padding: EdgeInsets.all(4),),
+                            Text('예약내역', style: TextStyle(fontWeight: style.boldText, color: style.blackColor),),
+                            Padding(padding: EdgeInsets.all(4),),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => BookHistoryScreen(),),);
+                      },
+                    ),
+                    InkWell(
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(bottom: BorderSide(width: 2, color: style.lightGreyColor))
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(Icons.login, color: style.mainColor,),
+                            Padding(padding: EdgeInsets.all(4),),
+                            Text('로그인', style: TextStyle(fontWeight: style.boldText, color: style.blackColor),),
+                            // 혹은 로그아웃
+                            Padding(padding: EdgeInsets.all(4),),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),),);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
           Text(
             '순양 렌탈센터',
@@ -810,6 +892,8 @@ class Footer extends StatefulWidget {
 }
 
 class _FooterState extends State<Footer> {
+   
+
   footerSize(c) {
     if (MediaQuery.of(c).size.width < 640) {
       return 200;
@@ -876,7 +960,7 @@ class _FooterState extends State<Footer> {
                             color: Colors.yellow,
                           ),
                         ),
-                        onTap: () {},
+                        onTap: () async {},
                       ),
                       Padding(
                         padding: EdgeInsets.all(style.paddingSize(context)),

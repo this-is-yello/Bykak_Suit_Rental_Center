@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'package:bykaksuitrentalcenter/screens/rent/search_result_page.dart';
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -206,16 +208,22 @@ class SearchAppBar extends StatelessWidget {
         height: 40,
         child: TextField(
           // controller: inputSearch,
+          textInputAction: TextInputAction.go,
+          onSubmitted: (value) async {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResultScreen(),),);
+          },
           textAlignVertical: TextAlignVertical.bottom,
           decoration: InputDecoration(
-            hintText: '검색어를 입력하세요.',
+            hintText: '검색어를 입력하세요.', // 검색어로 바뀌도록 해야합니다.
             filled: true,
             fillColor: style.whiteColor,
             border: OutlineInputBorder(borderSide: BorderSide(width: 1)),
             focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 2, color: style.blackColor,),),
             suffixIcon: IconButton(
               icon: Icon(Icons.search, color: style.mainColor,),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchResultScreen(),),);
+              },
             ),
           ),
         ),

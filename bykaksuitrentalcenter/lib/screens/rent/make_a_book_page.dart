@@ -225,6 +225,45 @@ class _MakeABookScreenState extends State<MakeABookScreen> {
                   width: style.widgetSize(context),
                   padding: EdgeInsets.all(16),
                   child: Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: style.whiteColor,
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [style.boxShadows]
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '렌탈샵 위치',
+                          style: TextStyle(
+                            fontSize: style.h2FontSize(context),
+                            fontWeight: style.boldText,
+                            color: style.blackColor,
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 2,
+                          color: style.lightGreyColor,
+                        ),
+                        Padding(padding: EdgeInsets.all(8)),
+                        Container(
+                          width: double.infinity,
+                          height: 400,
+                          color: style.lightGreyColor,
+                          child: Center(child: Text('지도'),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  width: style.widgetSize(context),
+                  padding: EdgeInsets.all(16),
+                  child: Container(
                     // padding: EdgeInsets.all(16),
                     child: Row(
                       children: [
