@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final auth = FirebaseAuth.instance;
+final firestore = FirebaseFirestore.instance;
 
 var mainColor = Color(0xFF205B48);
 var blackColor = Color(0xFF1E1E1E);
