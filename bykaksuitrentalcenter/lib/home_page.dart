@@ -20,6 +20,37 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool loginState = false;
+  bool adminGrade = false;
+
+  getData() async {
+    var resultAccount = await style.firestore.collection('account').get();
+
+    if (style.auth.currentUser?.uid == null) {
+      print('no login');
+    } else if (style.auth.currentUser?.uid.isNotEmpty == true) {
+      setState(() {
+        loginState = true;
+      });
+      print('yes login');
+      
+      for(int i = 0; i<=resultAccount.docs.length-1; i++) {
+        if(resultAccount.docs[i]['id'] == style.auth.currentUser?.email && resultAccount.docs[i]['grade'] == 'admin') {
+          setState(() {
+            adminGrade = true;
+          });
+        }
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+
   bool _isLoading = true;
 
   @override
@@ -79,8 +110,59 @@ class _HomeScreenState extends State<HomeScreen> {
 
 // -------------------------------------------------- AppBar ---------------------------------------------------
 // Phone-AppBar
-class PhoneAppBar extends StatelessWidget {
+class PhoneAppBar extends StatefulWidget {
   const PhoneAppBar({super.key});
+
+  @override
+  State<PhoneAppBar> createState() => _PhoneAppBarState();
+}
+
+class _PhoneAppBarState extends State<PhoneAppBar> {
+  bool loginState = false;
+  
+  var logInText = '로그인';
+
+  clickLogInBtn() async {
+    if (style.auth.currentUser?.uid.isNotEmpty == true) {
+      await style.auth.signOut();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LogInScreen(),
+        ),
+      );
+    }
+  } 
+
+  getData() async {
+    var resultAccount = await style.firestore.collection('account').get();
+
+    if (style.auth.currentUser?.uid == null) {
+      print('no login');
+      setState(() {
+        logInText = '로그인';
+      });
+    } else if (style.auth.currentUser?.uid.isNotEmpty == true) {
+      setState(() {
+        loginState = true;
+        logInText = '로그아웃';
+      });
+      print('yes login');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,9 +207,15 @@ class PhoneAppBar extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen(),),);
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(
+                            builder: (context) => SearchScreen(),
+                          ),
+                        );
                       },
                     ),
+                    loginState ?
                     InkWell(
                       child: Container(
                         width: double.infinity,
@@ -148,7 +236,7 @@ class PhoneAppBar extends StatelessWidget {
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => BookHistoryScreen(),),);
                       },
-                    ),
+                    ) : Container(),
                     InkWell(
                       child: Container(
                         width: double.infinity,
@@ -161,14 +249,13 @@ class PhoneAppBar extends StatelessWidget {
                           children: [
                             Icon(Icons.login, color: style.mainColor,),
                             Padding(padding: EdgeInsets.all(4),),
-                            Text('로그인', style: TextStyle(fontWeight: style.boldText, color: style.blackColor),),
-                            // 혹은 로그아웃
+                            Text('${logInText}', style: TextStyle(fontWeight: style.boldText, color: style.blackColor),),
                             Padding(padding: EdgeInsets.all(4),),
                           ],
                         ),
                       ),
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),),);
+                      onTap: () async {
+                        clickLogInBtn();
                       },
                     ),
                   ],
@@ -186,11 +273,10 @@ class PhoneAppBar extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              // 로그인 상태 확인해서 마이페이지 또는 로그인 화면
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyPageScreen(),
+                  builder: (context) => loginState ? MyPageScreen() : LogInScreen(),
                 ),
               );
             },
@@ -202,8 +288,59 @@ class PhoneAppBar extends StatelessWidget {
 }
 
 // Wide-AppBar
-class WideAppBar extends StatelessWidget {
+class WideAppBar extends StatefulWidget {
   const WideAppBar({super.key});
+
+  @override
+  State<WideAppBar> createState() => _WideAppBarState();
+}
+
+class _WideAppBarState extends State<WideAppBar> {
+  bool loginState = false;
+  
+  var logInText = '로그인';
+
+  clickLogInBtn() async {
+    if (style.auth.currentUser?.uid.isNotEmpty == true) {
+      await style.auth.signOut();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LogInScreen(),
+        ),
+      );
+    }
+  } 
+
+  getData() async {
+    var resultAccount = await style.firestore.collection('account').get();
+
+    if (style.auth.currentUser?.uid == null) {
+      print('no login');
+      setState(() {
+        logInText = '로그인';
+      });
+    } else if (style.auth.currentUser?.uid.isNotEmpty == true) {
+      setState(() {
+        loginState = true;
+        logInText = '로그아웃';
+      });
+      print('yes login');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -231,6 +368,7 @@ class WideAppBar extends StatelessWidget {
                     );
                   },
                 ),
+                loginState ?
                 TextButton(
                   child: Text(
                     '예약내역',
@@ -247,7 +385,8 @@ class WideAppBar extends StatelessWidget {
                       ),
                     );
                   },
-                ),
+                ) : Container(),
+                loginState ?
                 TextButton(
                   child: Text(
                     '마이페이지',
@@ -257,8 +396,6 @@ class WideAppBar extends StatelessWidget {
                         fontWeight: style.boldText),
                   ),
                   onPressed: () {
-                    // 로그인 상태 확인해서 마이페이지 또는 로그인 화면
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => LogInScreen(),),);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -266,22 +403,17 @@ class WideAppBar extends StatelessWidget {
                       ),
                     );
                   },
-                ),
+                ) : Container(),
                 TextButton(
                   child: Text(
-                    '로그인', //혹은 로그아웃
+                    '${logInText}', //혹은 로그아웃
                     style: TextStyle(
                         fontSize: 16,
                         color: style.whiteColor,
                         fontWeight: style.boldText),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LogInScreen(),
-                      ),
-                    );
+                    clickLogInBtn();
                   },
                 ),
               ],

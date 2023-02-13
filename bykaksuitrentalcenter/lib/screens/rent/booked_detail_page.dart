@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import 'package:bykaksuitrentalcenter/home_page.dart';
+
 
 class BookedDetailScreen extends StatefulWidget {
   const BookedDetailScreen({super.key});
@@ -371,6 +373,38 @@ class _BookedDetailScreenState extends State<BookedDetailScreen> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  width: style.widgetSize(context),
+                  padding: EdgeInsets.all(16),
+                  child: InkWell(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: style.mainColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Text('홈으로',
+                          style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.whiteColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ),
+                        (route) => false,
+                      );
+                    },
                   ),
                 ),
               ),

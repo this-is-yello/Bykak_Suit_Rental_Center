@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:bykaksuitrentalcenter/firebase_options.dart';
 
-final auth = FirebaseAuth.instance;
-final firestore = FirebaseFirestore.instance;
+import 'package:bykaksuitrentalcenter/home_page.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -21,7 +17,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // var _inputNewPhone = TextEditingController();
   var _inputNewId = TextEditingController();
   var _inputNewPassword = TextEditingController();
-  var _inputNewPasswordCheck = TextEditingController();
+  var _inputNewPasswordConfirm = TextEditingController();
+
+  letsSignUp() async {
+    try {
+      await style.auth.createUserWithEmailAndPassword(
+        email: _inputNewId.text,
+        password: _inputNewPassword.text,
+      );
+      await style.auth.currentUser?.updateDisplayName(_inputNewName.text);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  addAccount() {
+    style.firestore.collection('account').doc(_inputNewId.text).set({'grade' : 'user', 'name' : _inputNewName.text, 'id' : _inputNewId.text, 'password' : _inputNewPassword.text});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +184,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             maxWidth: 480,
                           ),
                           child: TextField(
-                            controller: _inputNewPasswordCheck,
+                            controller: _inputNewPasswordConfirm,
                             keyboardType: TextInputType.name,
                             obscureText: true,
                             decoration: InputDecoration(
@@ -214,7 +226,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        if(_inputNewId.text != '' || _inputNewName.text != '' || _inputNewPassword.text != '' || _inputNewPasswordConfirm.text != '') {
+                          letsSignUp();
+                          addAccount();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(),
+                            ),
+                          );
+                        } else {
+                          print('입력안해?');
+                        }
+                      },
                     ),
                   ),
                 ],

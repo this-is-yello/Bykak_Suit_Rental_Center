@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:bykaksuitrentalcenter/home_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/modify_account_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
@@ -30,6 +31,35 @@ class MyPageScreen extends StatefulWidget {
 }
 
 class _MyPageScreenState extends State<MyPageScreen> {
+  bool loginState = false;
+  bool adminGrade = false;
+
+  getData() async {
+    var resultAccount = await style.firestore.collection('account').get();
+
+    if (style.auth.currentUser?.uid == null) {
+      print('no login');
+    } else if (style.auth.currentUser?.uid.isNotEmpty == true) {
+      setState(() {
+        loginState = true;
+      });
+      print('yes login');
+      
+      for(int i = 0; i<=resultAccount.docs.length-1; i++) {
+        if(resultAccount.docs[i]['id'] == style.auth.currentUser?.email && resultAccount.docs[i]['grade'] == 'admin') {
+          setState(() {
+            adminGrade = true;
+          });
+        }
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
   bool _isLoading = true;
   bool _columnState = true;
 
@@ -83,6 +113,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ProfileNameNumber(),
+                                  // loginState ? adminGrade ? AdminMenu() : UserMenu() : UserMenu(),
                                   // AdminMenu(),
                                   UserMenu(),
                                 ],
@@ -189,7 +220,15 @@ class MyPageAppBar extends StatelessWidget {
                       color: style.whiteColor,
                       fontWeight: style.boldText),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  await style.auth.signOut();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
@@ -201,8 +240,34 @@ class MyPageAppBar extends StatelessWidget {
 
 // -------------------------------------------------- Proflie ---------------------------------------------------
 // NameNumber
-class ProfileNameNumber extends StatelessWidget {
-  const ProfileNameNumber({super.key});
+class ProfileNameNumber extends StatefulWidget {
+  const ProfileNameNumber({super.key,});
+
+  @override
+  State<ProfileNameNumber> createState() => _ProfileNameNumberState();
+}
+
+class _ProfileNameNumberState extends State<ProfileNameNumber> {
+  var dbPhone;
+
+  emailCheck() async{
+    var checkEmail = await style.firestore.collection('account').get();
+
+    for (int i = 0; i <= checkEmail.docs.length-1; i++) {
+      if (checkEmail.docs[i]['id'] == style.auth.currentUser?.email) {
+        setState(() {
+          dbPhone = checkEmail.docs[i]['phone'];
+        });
+        print(dbPhone);
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    emailCheck();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -230,7 +295,7 @@ class ProfileNameNumber extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        '유저네임',
+                        '${style.auth.currentUser?.displayName}',
                         style: TextStyle(
                             fontSize: style.h3FontSize(context),
                             color: style.whiteColor,
@@ -240,7 +305,7 @@ class ProfileNameNumber extends StatelessWidget {
                     Padding(padding: EdgeInsets.only(top: 8)),
                     Container(
                       child: Text(
-                        '010-0000-0000',
+                        '${dbPhone}',
                         style: TextStyle(
                             fontSize: style.h3FontSize(context),
                             color: style.whiteColor,

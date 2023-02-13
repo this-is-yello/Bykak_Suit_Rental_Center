@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bykaksuitrentalcenter/firebase_options.dart';
 
+import 'package:bykaksuitrentalcenter/home_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/sign_up_page.dart';
 
 final auth = FirebaseAuth.instance;
@@ -21,6 +22,23 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   var _inputId = TextEditingController();
   var _inputPassword = TextEditingController();
+
+  inputAccountState() async{
+    if(_inputId.text == '' || _inputPassword.text == '') {
+      print('아이디, 비밀번호를 입력해라.');
+    } else {
+      print(auth.currentUser?.displayName.toString());
+      print(auth.currentUser?.email);
+      print(auth.currentUser?.uid);
+      print('로그인 완료');
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +159,16 @@ class _LogInScreenState extends State<LogInScreen> {
                                 ),
                               ),
                             ),
-                            onTap: () {
+                            onTap: () async {
+                              inputAccountState();
+                              try {
+                                await style.auth.signInWithEmailAndPassword(
+                                  email: _inputId.text,
+                                  password: _inputPassword.text,
+                                );
+                              } catch (e) {
+                                print(e);
+                              }
                               
                             },
                           ),
