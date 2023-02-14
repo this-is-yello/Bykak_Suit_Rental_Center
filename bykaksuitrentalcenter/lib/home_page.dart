@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    productCheck();
     getData();
   }
 
@@ -583,7 +584,22 @@ class FirstContents extends StatelessWidget {
     });
   }
 }
+  var shop;
+  var productValue;
+  var productName;
+  var price;
+  var productImage;
 
+    productCheck() async {
+    var checkProduct = await style.firestore.collection('product').get();
+
+    // 반복문처리 해야 합니다.
+    shop = checkProduct.docs[0]['shop']; 
+    productValue = checkProduct.docs[0]['value'];
+    productName = checkProduct.docs[0]['name'];
+    price = checkProduct.docs[0]['price'];
+    productImage = checkProduct.docs[0]['prooduct_image'];
+  }
 // Contents-2
 class SecondContents extends StatefulWidget {
   const SecondContents({super.key});
@@ -622,28 +638,15 @@ class _SecondContentsState extends State<SecondContents> {
   }
 
 
-  var shop;
-  var productValue;
-  var productName;
-  var price;
-  var productImage;
 
-  productCheck() async {
-    var checkProduct = await style.firestore.collection('product').get();
 
-    // 반복문처리 해야 합니다.
-    shop = checkProduct.docs[0]['shop']; 
-    productValue = checkProduct.docs[0]['value'];
-    productName = checkProduct.docs[0]['name'];
-    price = checkProduct.docs[0]['price'];
-    productImage = checkProduct.docs[0]['prooduct_image'];
-  }
 
-  @override
-  void initState() {
-    super.initState();
-    productCheck();
-  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   //productCheck();
+  // }
 
   @override
   Widget build(BuildContext context) {
