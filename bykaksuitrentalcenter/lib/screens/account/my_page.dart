@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:bykaksuitrentalcenter/home_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/modify_account_page.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/link.dart';
 
@@ -621,6 +621,33 @@ class _SecondContentsState extends State<SecondContents> {
     }
   }
 
+
+  var shop;
+  var productValue;
+  var productName;
+  var price;
+  var productImage;
+
+  productCheck() async {
+    var checkProduct = await style.firestore.collection('product').get();
+
+    // 반복문처리 해야 합니다.
+    shop = checkProduct.docs[0]['shop'];
+
+    
+    productValue = checkProduct.docs[0]['value'];
+    productName = checkProduct.docs[0]['name'];
+    price = checkProduct.docs[0]['price'];
+    productImage = checkProduct.docs[0]['prooduct_image'];
+     
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    productCheck();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
@@ -669,12 +696,13 @@ class _SecondContentsState extends State<SecondContents> {
                             width: picSize(context),
                             height: picSize(context),
                             decoration: BoxDecoration(
-                              color: style.mainColor,
+                              // color: style.mainColor,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(8),
                                 topRight: Radius.circular(8),
                               ),
                             ),
+                            child: Image.network(productImage, fit: BoxFit.cover,),
                           ),
                           Container(
                             width: picSize(context),
@@ -692,7 +720,7 @@ class _SecondContentsState extends State<SecondContents> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '[대여형태] 상품명',
+                                  '[${productValue}]' + '$productName',
                                   style: TextStyle(
                                     fontSize: style.h4FontSize(context),
                                     fontWeight: style.boldText,
@@ -704,14 +732,14 @@ class _SecondContentsState extends State<SecondContents> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '대여샵',
+                                      '$shop',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
                                         color: style.greyColor,
                                       ),
                                     ),
                                     Text(
-                                      '50000' + ' 원',
+                                      '$price' + ' 원',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
                                         fontWeight: style.boldText,
