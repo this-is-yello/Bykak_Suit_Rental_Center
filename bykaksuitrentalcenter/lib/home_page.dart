@@ -632,14 +632,11 @@ class _SecondContentsState extends State<SecondContents> {
     var checkProduct = await style.firestore.collection('product').get();
 
     // 반복문처리 해야 합니다.
-    shop = checkProduct.docs[0]['shop'];
-
-    
+    shop = checkProduct.docs[0]['shop']; 
     productValue = checkProduct.docs[0]['value'];
     productName = checkProduct.docs[0]['name'];
     price = checkProduct.docs[0]['price'];
     productImage = checkProduct.docs[0]['prooduct_image'];
-     
   }
 
   @override
@@ -701,8 +698,18 @@ class _SecondContentsState extends State<SecondContents> {
                                 topLeft: Radius.circular(8),
                                 topRight: Radius.circular(8),
                               ),
+                              // image: DecorationImage(
+                              //   image: NetworkImage(
+                              //     '$productImage',
+                              //   ),
+                              //   fit: BoxFit.cover
+                              // ),
                             ),
-                            child: Image.network(productImage, fit: BoxFit.cover,),
+                            child: Image.network(
+                              '$productImage',
+                              fit: BoxFit.cover,
+                              
+                            ),
                           ),
                           Container(
                             width: picSize(context),
@@ -720,7 +727,7 @@ class _SecondContentsState extends State<SecondContents> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '[${productValue}]' + '$productName',
+                                  '[${productValue}]' + ' ' + '$productName',
                                   style: TextStyle(
                                     fontSize: style.h4FontSize(context),
                                     fontWeight: style.boldText,
