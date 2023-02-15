@@ -147,9 +147,9 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
   clickLogInBtn() async {
     if (style.auth.currentUser?.uid.isNotEmpty == true) {
       await style.auth.signOut();
-      Get.to(HomeScreen());
+      Get.toNamed('/');
     } else {
-      Get.to(LogInScreen());
+      Get.toNamed('/login');
     }
   }
 
@@ -176,7 +176,7 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
                           Icons.arrow_back_outlined,
                         ),
                         onPressed: () {
-                          Navigator.pop(context);
+                          Get.back();
                         },
                       ),
                     ),
@@ -211,7 +211,7 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
                         ),
                       ),
                       onTap: () {
-                        Get.to(SearchScreen());
+                        Get.toNamed('/search');
                       },
                     ),
                     loginState
@@ -247,7 +247,7 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
                               ),
                             ),
                             onTap: () {
-                              Get.to(BookHistoryScreen());
+                              Get.toNamed('/bookHistory');
                             },
                           )
                         : Container(),
@@ -300,7 +300,7 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              loginState ? Get.to(MyPageScreen()) : Get.to(LogInScreen());
+              loginState ? Get.toNamed('/myPage') : Get.toNamed('/login');
             },
           ),
         ],
@@ -325,9 +325,9 @@ class _WideAppBarState extends State<WideAppBar> {
   clickLogInBtn() async {
     if (style.auth.currentUser?.uid.isNotEmpty == true) {
       await style.auth.signOut();
-      Get.to(HomeScreen());
+      Get.toNamed('/');
     } else {
-      Get.to(LogInScreen());
+      Get.toNamed('/login');
     }
   }
 
@@ -372,7 +372,7 @@ class _WideAppBarState extends State<WideAppBar> {
                 IconButton(
                   icon: Icon(Icons.search),
                   onPressed: () {
-                    Get.to(SearchScreen());
+                    Get.toNamed('/search');
                   },
                 ),
                 loginState
@@ -385,7 +385,7 @@ class _WideAppBarState extends State<WideAppBar> {
                               fontWeight: style.boldText),
                         ),
                         onPressed: () {
-                          Get.to(BookHistoryScreen());
+                          Get.toNamed('/bookHistory');
                         },
                       )
                     : Container(),
@@ -399,7 +399,8 @@ class _WideAppBarState extends State<WideAppBar> {
                               fontWeight: style.boldText),
                         ),
                         onPressed: () {
-                          Get.to(MyPageScreen());
+                          Get.toNamed('/myPage');
+                          ;
                         },
                       )
                     : Container(),
@@ -753,7 +754,7 @@ class _SecondContentsState extends State<SecondContents> {
                       ),
                     ),
                     onTap: () {
-                      Get.to(ProductDetailScreen());
+                      Get.toNamed('/productDetail');
                     },
                   ),
                 ],
@@ -918,7 +919,7 @@ class _ThirdContentsState extends State<ThirdContents> {
                       ),
                     ),
                     onTap: () {
-                      Get.to(ProductDetailScreen());
+                      Get.toNamed('/productDetail');
                     },
                   );
                 },
