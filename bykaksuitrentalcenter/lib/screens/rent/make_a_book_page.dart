@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:bykaksuitrentalcenter/screens/rent/booked_detail_page.dart';
@@ -288,7 +289,7 @@ class _MakeBookScreenState extends State<MakeBookScreen> {
                               ),
                             ),
                             onTap: () {
-                              Navigator.pop(context);
+                              Get.back();
                             },
                           ),
                         ),

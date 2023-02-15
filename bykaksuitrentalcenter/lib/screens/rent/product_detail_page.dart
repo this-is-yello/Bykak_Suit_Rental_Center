@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:intl/intl.dart';
 
 import 'package:bykaksuitrentalcenter/home_page.dart';
 import 'package:bykaksuitrentalcenter/screens/rent/make_a_book_page.dart';
+
+var numFormat = NumberFormat('###,###,###,###');
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({super.key});
@@ -16,6 +20,12 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   bool _isLoading = true;
   bool _columnState = true;
+
+  @override
+  void initState() {
+    super.initState();
+    productCheck();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +76,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         children: [
                           ProductPic(),
                           Padding(
-                              padding: EdgeInsets.all(
-                                  style.paddingSize(context))),
+                            padding: EdgeInsets.all(
+                              style.paddingSize(context),
+                            ),
+                          ),
                           ProductNamePrice(),
                           Padding(
-                              padding: EdgeInsets.all(
-                                  style.paddingSize(context))),
+                            padding: EdgeInsets.all(
+                              style.paddingSize(context),
+                            ),
+                          ),
                           ProductInfo(),
+                          Padding(
+                            padding: EdgeInsets.all(
+                              style.paddingSize(context),
+                            ),
+                          ),
+                          Review(),
                         ],
                       ),
                     ),
@@ -96,6 +116,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                   ),
                                 ),
                                 ProductInfo(),
+                                Padding(
+                                  padding: EdgeInsets.all(
+                                    style.paddingSize(context),
+                                  ),
+                                ),
+                                Review(),
                               ],
                             ),
                           ),
@@ -151,10 +177,18 @@ class ProductPic extends StatelessWidget {
           ),
           items: [
             Container(
+              width: double.infinity,
               height: style.productPicHeight(context),
               decoration: BoxDecoration(
                 color: style.mainColor,
                 borderRadius: BorderRadius.circular(8),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  '$productImage',
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ],
@@ -165,6 +199,25 @@ class ProductPic extends StatelessWidget {
 }
 
 // Product-Name&Price
+var productShop;
+var productValue;
+var productName;
+var productPrice;
+var productImage;
+var productDetailImage;
+// List productImageCarousel;
+
+productCheck() async {
+  var checkProduct = await style.firestore.collection('product').get();
+  
+  productShop = checkProduct.docs[1]['shop'];
+  productValue = checkProduct.docs[1]['productValue'];
+  productName = checkProduct.docs[1]['name'];
+  productPrice = checkProduct.docs[1]['price'];
+  productImage = checkProduct.docs[1]['productImage'][0];
+  productDetailImage = checkProduct.docs[1]['productDetailImage'];
+}
+
 class ProductNamePrice extends StatelessWidget {
   const ProductNamePrice({super.key});
 
@@ -184,7 +237,7 @@ class ProductNamePrice extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '대여샵',
+              '$productShop',
               style: TextStyle(
                 fontSize: style.h3FontSize(context),
                 color: style.greyColor,
@@ -192,7 +245,7 @@ class ProductNamePrice extends StatelessWidget {
             ),
             Padding(padding: EdgeInsets.only(top: style.paddingSize(context))),
             Text(
-              '[대여형태] 상품명',
+              '[${productValue}]' + ' ' + '$productName',
               style: TextStyle(
                 fontSize: style.h3FontSize(context),
                 color: style.blackColor,
@@ -203,9 +256,9 @@ class ProductNamePrice extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '50000원',
+                  numFormat.format(productPrice) + '원',
                   style: TextStyle(
-                    fontSize: style.h3FontSize(context) + 4,
+                    fontSize: style.h2FontSize(context) ,
                     color: style.blackColor,
                     fontWeight: style.boldText,
                   ),
@@ -250,7 +303,9 @@ class ProductNamePrice extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      // DateRangePicker
+                    },
                   ),
                   Padding(padding: EdgeInsets.all(4)),
                   InkWell(
@@ -270,7 +325,9 @@ class ProductNamePrice extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      // DatePicker, TimePicker
+                    },
                   ),
                 ],
               )
@@ -352,15 +409,177 @@ class ProductInfo extends StatelessWidget {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return Container(
         width: double.infinity,
-        height: 4000,
+        // height: 4000,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: style.whiteColor,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [style.boxShadows],
         ),
+        child: ClipRRect(
+          // borderRadius: BorderRadius.circular(8),
+          child: Image.network(
+            '$productDetailImage',
+            fit: BoxFit.cover,
+          ),
+        ),
       );
     });
+  }
+}
+class Review extends StatelessWidget {
+  const Review({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: style.whiteColor,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [style.boxShadows],
+          ),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.only(bottom: 16),
+                child: Text(
+                  '후기',
+                  style: TextStyle(
+                    fontSize: style.h1FontSize(context),
+                    fontWeight: style.boldText,
+                  ),
+                ),
+              ),
+              Container(
+                width: double.infinity,
+                height: 500, // 더보기
+                child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(bottom: 16),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: style.c5BoxSize(context),
+                                  height: style.c5BoxSize(context),
+                                  decoration: BoxDecoration(
+                                    color: style.blackColor,
+                                    borderRadius: BorderRadius.circular(200),
+                                  ),
+                                ),
+                                Padding(padding: EdgeInsets.all(8)),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Text(
+                                        '유저바이각',
+                                        style: TextStyle(
+                                          fontSize: style.h3FontSize(context),
+                                          color: style.blackColor,
+                                          fontWeight: style.boldText,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(padding: EdgeInsets.only(top: 2)),
+                                    Container(
+                                      child: Text(
+                                        'yy.mm.dd',
+                                        style: TextStyle(
+                                          fontSize: style.h3FontSize(context),
+                                          color: style.blackColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.only(bottom: 8),
+                            child: Text(
+                              '리뷰 후기의 내용이 담기겠습니다.리뷰 후기의 내용이 담기겠습니다.리뷰 후기의 내용이 담기겠습니다.리뷰 후기의 내용이 담기겠습니다.리뷰 후기의 내용이 담기겠습니다.',
+                              style: TextStyle(
+                                fontSize: style.h5FontSize(context),
+                                color: style.blackColor,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.only(bottom: 16),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 16),
+                                    child: Container(
+                                      width: style.c2BoxSize(context),
+                                      height: style.c2BoxSize(context),
+                                      color: style.mainColor,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 16),
+                                    child: Container(
+                                      width: style.c2BoxSize(context),
+                                      height: style.c2BoxSize(context),
+                                      color: style.mainColor,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 16),
+                                    child: Container(
+                                      width: style.c2BoxSize(context),
+                                      height: style.c2BoxSize(context),
+                                      color: style.mainColor,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 16),
+                                    child: Container(
+                                      width: style.c2BoxSize(context),
+                                      height: style.c2BoxSize(context),
+                                      color: style.mainColor,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 16),
+                                    child: Container(
+                                      width: style.c2BoxSize(context),
+                                      height: style.c2BoxSize(context),
+                                      color: style.mainColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              
+            ],
+          ),
+        );
+      }
+    );
   }
 }
 
@@ -376,6 +595,7 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
   final _valueList = ['S', 'M', 'L', '선택안함'];
   String? _upSelectedValue;
   String? _downSelectedValue;
+
   void initState() {
     setState(() {
       _upSelectedValue = _valueList[3];
@@ -404,11 +624,12 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                 children: [
                   IconButton(
                     icon: Icon(
-                      Icons.keyboard_double_arrow_down_rounded,
-                      size: 30, color: style.blackColor,
+                      Icons.keyboard_arrow_down,
+                      size: 36,
+                      color: style.blackColor,
                     ),
                     onPressed: () {
-                      Navigator.pop(context);
+                      Get.back();
                     },
                   ),
                   Padding(padding: EdgeInsets.all(8)),
@@ -421,7 +642,6 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                       children: [
                         Container(
                           width: 100,
-                          padding: EdgeInsets.only(top: 8),
                           child: Text(
                             '상의 사이즈 : ',
                             style: TextStyle(
@@ -437,7 +657,7 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                           child: DropdownButton(
                             isExpanded: true,
                             underline: SizedBox.shrink(),
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontFamily: 'Lineseed', fontSize: 18, color: style.blackColor),
                             value: _upSelectedValue,
                             items: _valueList.map((e) {
                               return DropdownMenuItem(
@@ -464,7 +684,6 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                       children: [
                         Container(
                           width: 100,
-                          padding: EdgeInsets.only(top: 8),
                           child: Text(
                             '하의 사이즈 : ',
                             style: TextStyle(
@@ -479,7 +698,7 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                           child: DropdownButton(
                             isExpanded: true,
                             underline: SizedBox.shrink(),
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontFamily: 'Lineseed', fontSize: 18, color: style.blackColor),
                             value: _downSelectedValue,
                             items: _valueList.map((e) {
                               return DropdownMenuItem(
@@ -562,12 +781,13 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                             onTap: () {
                               print('상의 ' + '$_upSelectedValue');
                               print('하의 ' + '$_downSelectedValue');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MakeBookScreen(),
-                                ),
-                              );
+                              Get.to(MakeBookScreen());
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => MakeBookScreen(),
+                              //   ),
+                              // );
                             },
                           ),
                         ),
