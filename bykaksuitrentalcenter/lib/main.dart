@@ -3,6 +3,7 @@ import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
 import 'firebase_options.dart';
 
 import 'package:bykaksuitrentalcenter/home_page.dart';
@@ -25,7 +26,7 @@ void main() async {
   );
 
   runApp(
-    MaterialApp(
+    GetMaterialApp(
       theme: ThemeData(
         fontFamily: 'Lineseed',
       ),

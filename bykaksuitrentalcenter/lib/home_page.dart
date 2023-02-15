@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
@@ -36,9 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
         loginState = true;
       });
       print('yes login');
-      
-      for(int i = 0; i<=resultAccount.docs.length-1; i++) {
-        if(resultAccount.docs[i]['id'] == style.auth.currentUser?.email && resultAccount.docs[i]['grade'] == 'admin') {
+
+      for (int i = 0; i <= resultAccount.docs.length - 1; i++) {
+        if (resultAccount.docs[i]['id'] == style.auth.currentUser?.email &&
+            resultAccount.docs[i]['grade'] == 'admin') {
           setState(() {
             adminGrade = true;
           });
@@ -54,7 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
     productCheck();
     packageCheck();
   }
-
 
   bool _isLoading = true;
 
@@ -146,21 +147,11 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
   clickLogInBtn() async {
     if (style.auth.currentUser?.uid.isNotEmpty == true) {
       await style.auth.signOut();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ),
-      );
+      Get.to(HomeScreen());
     } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LogInScreen(),
-        ),
-      );
+      Get.to(LogInScreen());
     }
-  } 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +172,9 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
                   children: [
                     Container(
                       child: IconButton(
-                        icon: Icon(Icons.arrow_back_outlined,),
+                        icon: Icon(
+                          Icons.arrow_back_outlined,
+                        ),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -193,62 +186,98 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
                         height: 56,
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          border: Border(bottom: BorderSide(width: 2, color: style.lightGreyColor))
-                        ),
+                            border: Border(
+                                bottom: BorderSide(
+                                    width: 2, color: style.lightGreyColor))),
                         child: Row(
                           children: [
-                            Icon(Icons.search, color: style.mainColor,),
-                            Padding(padding: EdgeInsets.all(4),),
-                            Text('검색', style: TextStyle(fontWeight: style.boldText, color: style.blackColor),),
-                            Padding(padding: EdgeInsets.all(4),),
+                            Icon(
+                              Icons.search,
+                              color: style.mainColor,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                            Text(
+                              '검색',
+                              style: TextStyle(
+                                  fontWeight: style.boldText,
+                                  color: style.blackColor),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
                           ],
                         ),
                       ),
                       onTap: () {
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(
-                            builder: (context) => SearchScreen(),
-                          ),
-                        );
+                        Get.to(SearchScreen());
                       },
                     ),
-                    loginState ?
+                    loginState
+                        ? InkWell(
+                            child: Container(
+                              width: double.infinity,
+                              height: 56,
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          width: 2,
+                                          color: style.lightGreyColor))),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.bookmark_border_outlined,
+                                    color: style.mainColor,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(4),
+                                  ),
+                                  Text(
+                                    '예약내역',
+                                    style: TextStyle(
+                                        fontWeight: style.boldText,
+                                        color: style.blackColor),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(4),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            onTap: () {
+                              Get.to(BookHistoryScreen());
+                            },
+                          )
+                        : Container(),
                     InkWell(
                       child: Container(
                         width: double.infinity,
                         height: 56,
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          border: Border(bottom: BorderSide(width: 2, color: style.lightGreyColor))
-                        ),
+                            border: Border(
+                                bottom: BorderSide(
+                                    width: 2, color: style.lightGreyColor))),
                         child: Row(
                           children: [
-                            Icon(Icons.bookmark_border_outlined, color: style.mainColor,),
-                            Padding(padding: EdgeInsets.all(4),),
-                            Text('예약내역', style: TextStyle(fontWeight: style.boldText, color: style.blackColor),),
-                            Padding(padding: EdgeInsets.all(4),),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => BookHistoryScreen(),),);
-                      },
-                    ) : Container(),
-                    InkWell(
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border(bottom: BorderSide(width: 2, color: style.lightGreyColor))
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.login, color: style.mainColor,),
-                            Padding(padding: EdgeInsets.all(4),),
-                            Text('${logInText}', style: TextStyle(fontWeight: style.boldText, color: style.blackColor),),
-                            Padding(padding: EdgeInsets.all(4),),
+                            Icon(
+                              Icons.login,
+                              color: style.mainColor,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                            Text(
+                              '${logInText}',
+                              style: TextStyle(
+                                  fontWeight: style.boldText,
+                                  color: style.blackColor),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
                           ],
                         ),
                       ),
@@ -271,12 +300,7 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => loginState ? MyPageScreen() : LogInScreen(),
-                ),
-              );
+              loginState ? Get.to(MyPageScreen()) : Get.to(LogInScreen());
             },
           ),
         ],
@@ -295,27 +319,17 @@ class WideAppBar extends StatefulWidget {
 
 class _WideAppBarState extends State<WideAppBar> {
   bool loginState = false;
-  
+
   var logInText = '로그인';
 
   clickLogInBtn() async {
     if (style.auth.currentUser?.uid.isNotEmpty == true) {
       await style.auth.signOut();
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(),
-        ),
-      );
+      Get.to(HomeScreen());
     } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LogInScreen(),
-        ),
-      );
+      Get.to(LogInScreen());
     }
-  } 
+  }
 
   getData() async {
     var resultAccount = await style.firestore.collection('account').get();
@@ -358,50 +372,37 @@ class _WideAppBarState extends State<WideAppBar> {
                 IconButton(
                   icon: Icon(Icons.search),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SearchScreen(),
-                      ),
-                    );
+                    Get.to(SearchScreen());
                   },
                 ),
-                loginState ?
-                TextButton(
-                  child: Text(
-                    '예약내역',
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: style.whiteColor,
-                        fontWeight: style.boldText),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookHistoryScreen(),
-                      ),
-                    );
-                  },
-                ) : Container(),
-                loginState ?
-                TextButton(
-                  child: Text(
-                    '마이페이지',
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: style.whiteColor,
-                        fontWeight: style.boldText),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MyPageScreen(),
-                      ),
-                    );
-                  },
-                ) : Container(),
+                loginState
+                    ? TextButton(
+                        child: Text(
+                          '예약내역',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: style.whiteColor,
+                              fontWeight: style.boldText),
+                        ),
+                        onPressed: () {
+                          Get.to(BookHistoryScreen());
+                        },
+                      )
+                    : Container(),
+                loginState
+                    ? TextButton(
+                        child: Text(
+                          '마이페이지',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: style.whiteColor,
+                              fontWeight: style.boldText),
+                        ),
+                        onPressed: () {
+                          Get.to(MyPageScreen());
+                        },
+                      )
+                    : Container(),
                 TextButton(
                   child: Text(
                     '${logInText}', //혹은 로그아웃
@@ -582,7 +583,6 @@ class FirstContents extends StatelessWidget {
   }
 }
 
-
 // Contents-2
 var productShop;
 var productValue;
@@ -594,7 +594,7 @@ productCheck() async {
   var checkProduct = await style.firestore.collection('product').get();
 
   // 반복문처리 해야 합니다.
-  productShop = checkProduct.docs[0]['shop']; 
+  productShop = checkProduct.docs[0]['shop'];
   productValue = checkProduct.docs[0]['productValue'];
   productName = checkProduct.docs[0]['name'];
   productPrice = checkProduct.docs[0]['price'];
@@ -753,12 +753,7 @@ class _SecondContentsState extends State<SecondContents> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductDetailScreen(),
-                        ),
-                      );
+                      Get.to(ProductDetailScreen());
                     },
                   ),
                 ],
@@ -923,12 +918,7 @@ class _ThirdContentsState extends State<ThirdContents> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductDetailScreen(),
-                        ),
-                      );
+                      Get.to(ProductDetailScreen());
                     },
                   );
                 },
@@ -1077,8 +1067,6 @@ class Footer extends StatefulWidget {
 }
 
 class _FooterState extends State<Footer> {
-   
-
   footerSize(c) {
     if (MediaQuery.of(c).size.width < 640) {
       return 200;
