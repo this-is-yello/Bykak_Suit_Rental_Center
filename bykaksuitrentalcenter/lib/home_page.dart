@@ -216,7 +216,7 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
                         );
                       },
                     ),
-                    loginState ?
+                    loginState ?  
                     InkWell(
                       child: Container(
                         width: double.infinity,
