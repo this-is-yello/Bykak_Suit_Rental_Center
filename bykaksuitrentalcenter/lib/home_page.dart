@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/link.dart';
 
@@ -11,6 +12,8 @@ import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
 import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
 import 'package:side_sheet/side_sheet.dart';
+
+var numFormat = NumberFormat('###,###,###,###');
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -47,8 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    productCheck();
     getData();
+    productCheck();
+    packageCheck();
   }
 
 
@@ -120,8 +124,24 @@ class PhoneAppBar extends StatefulWidget {
 
 class _PhoneAppBarState extends State<PhoneAppBar> {
   bool loginState = false;
-  
   var logInText = '로그인';
+
+  loginCheck() async {
+    var resultAccount = await style.firestore.collection('account').get();
+
+    if (style.auth.currentUser?.uid == null) {
+      print('no login');
+      setState(() {
+        logInText = '로그인';
+      });
+    } else if (style.auth.currentUser?.uid.isNotEmpty == true) {
+      setState(() {
+        loginState = true;
+        logInText = '로그아웃';
+      });
+      print('yes login');
+    }
+  }
 
   clickLogInBtn() async {
     if (style.auth.currentUser?.uid.isNotEmpty == true) {
@@ -141,29 +161,6 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
       );
     }
   } 
-
-  getData() async {
-    var resultAccount = await style.firestore.collection('account').get();
-
-    if (style.auth.currentUser?.uid == null) {
-      print('no login');
-      setState(() {
-        logInText = '로그인';
-      });
-    } else if (style.auth.currentUser?.uid.isNotEmpty == true) {
-      setState(() {
-        loginState = true;
-        logInText = '로그아웃';
-      });
-      print('yes login');
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +213,7 @@ class _PhoneAppBarState extends State<PhoneAppBar> {
                         );
                       },
                     ),
-                    loginState ?  
+                    loginState ?
                     InkWell(
                       child: Container(
                         width: double.infinity,
@@ -584,23 +581,26 @@ class FirstContents extends StatelessWidget {
     });
   }
 }
-  var shop;
-  var productValue;
-  var productName;
-  var price;
-  var productImage;
 
-    productCheck() async {
-    var checkProduct = await style.firestore.collection('product').get();
 
-    // 반복문처리 해야 합니다.
-    shop = checkProduct.docs[0]['shop']; 
-    productValue = checkProduct.docs[0]['value'];
-    productName = checkProduct.docs[0]['name'];
-    price = checkProduct.docs[0]['price'];
-    productImage = checkProduct.docs[0]['prooduct_image'];
-  }
 // Contents-2
+var productShop;
+var productValue;
+var productName;
+var productPrice;
+var productImage;
+
+productCheck() async {
+  var checkProduct = await style.firestore.collection('product').get();
+
+  // 반복문처리 해야 합니다.
+  productShop = checkProduct.docs[0]['shop']; 
+  productValue = checkProduct.docs[0]['productValue'];
+  productName = checkProduct.docs[0]['name'];
+  productPrice = checkProduct.docs[0]['price'];
+  productImage = checkProduct.docs[0]['productImage'];
+}
+
 class SecondContents extends StatefulWidget {
   const SecondContents({super.key});
 
@@ -636,17 +636,6 @@ class _SecondContentsState extends State<SecondContents> {
       return 0.35;
     }
   }
-
-
-
-
-
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   //productCheck();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -701,17 +690,16 @@ class _SecondContentsState extends State<SecondContents> {
                                 topLeft: Radius.circular(8),
                                 topRight: Radius.circular(8),
                               ),
-                              // image: DecorationImage(
-                              //   image: NetworkImage(
-                              //     '$productImage',
-                              //   ),
-                              //   fit: BoxFit.cover
-                              // ),
                             ),
-                            child: Image.network(
-                              '$productImage',
-                              fit: BoxFit.cover,
-                              
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                topRight: Radius.circular(8),
+                              ),
+                              child: Image.network(
+                                '$productImage',
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           Container(
@@ -742,14 +730,14 @@ class _SecondContentsState extends State<SecondContents> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '$shop',
+                                      '$productShop',
                                       style: TextStyle(
-                                        fontSize: style.h4FontSize(context),
+                                        fontSize: style.h5FontSize(context),
                                         color: style.greyColor,
                                       ),
                                     ),
                                     Text(
-                                      '$price' + ' 원',
+                                      '$productPrice' + ' 원',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
                                         fontWeight: style.boldText,
@@ -784,6 +772,21 @@ class _SecondContentsState extends State<SecondContents> {
 }
 
 // Contents-3
+var packageShop;
+var packageName;
+var packagePrice;
+var packageImage;
+
+packageCheck() async {
+  var checkProduct = await style.firestore.collection('package').get();
+
+  // 반복문처리 해야 합니다.
+  packageShop = checkProduct.docs[0]['shop'];
+  packageName = checkProduct.docs[0]['name'];
+  packagePrice = checkProduct.docs[0]['price'];
+  packageImage = checkProduct.docs[0]['packageImage'];
+}
+
 class ThirdContents extends StatefulWidget {
   const ThirdContents({super.key});
 
@@ -850,11 +853,22 @@ class _ThirdContentsState extends State<ThirdContents> {
                           Expanded(
                             flex: 2,
                             child: Container(
+                              width: double.infinity,
                               decoration: BoxDecoration(
                                 color: style.mainColor,
                                 borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(8),
                                   topRight: Radius.circular(8),
+                                ),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(8),
+                                ),
+                                child: Image.network(
+                                  '$packageImage',
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -872,7 +886,8 @@ class _ThirdContentsState extends State<ThirdContents> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('패키지 명',
+                                Text(
+                                  '$packageName',
                                   style: TextStyle(
                                     fontSize: style.h4FontSize(context),
                                     fontWeight: style.boldText,
@@ -885,14 +900,14 @@ class _ThirdContentsState extends State<ThirdContents> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '대여샵',
+                                      '$packageShop',
                                       style: TextStyle(
-                                        fontSize: style.h4FontSize(context),
+                                        fontSize: style.h5FontSize(context),
                                         color: style.greyColor,
                                       ),
                                     ),
                                     Text(
-                                      '500000원',
+                                      '$packagePrice' + '원',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
                                         color: style.mainColor,
