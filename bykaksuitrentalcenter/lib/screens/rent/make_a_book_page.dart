@@ -4,14 +4,14 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'package:bykaksuitrentalcenter/screens/rent/booked_detail_page.dart';
 
-class MakeABookScreen extends StatefulWidget {
-  const MakeABookScreen({super.key});
+class MakeBookScreen extends StatefulWidget {
+  const MakeBookScreen({super.key});
 
   @override
-  State<MakeABookScreen> createState() => _MakeABookScreenState();
+  State<MakeBookScreen> createState() => _MakeBookScreenState();
 }
 
-class _MakeABookScreenState extends State<MakeABookScreen> {
+class _MakeBookScreenState extends State<MakeBookScreen> {
   bool _columnState = false;
 
   @override

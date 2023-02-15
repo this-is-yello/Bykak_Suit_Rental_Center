@@ -565,7 +565,7 @@ class _ProductBookBottomSheetState extends State<ProductBookBottomSheet> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MakeABookScreen(),
+                                  builder: (context) => MakeBookScreen(),
                                 ),
                               );
                             },
