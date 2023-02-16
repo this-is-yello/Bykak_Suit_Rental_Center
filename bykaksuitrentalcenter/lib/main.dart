@@ -1,3 +1,4 @@
+import 'package:bykaksuitrentalcenter/main_page.dart';
 import 'package:bykaksuitrentalcenter/screens/rent/search_page.dart';
 import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
       // home: HomeScreen(),
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => HomeScreen()),
+        GetPage(name: '/', page: () => MainPage()),
         GetPage(name: '/login', page: () => LogInScreen()),
         GetPage(name: '/search', page: () => SearchScreen()),
         GetPage(name: '/bookHistory', page: () => BookHistoryScreen()),

@@ -363,8 +363,11 @@ class _WideAppBarState extends State<WideAppBar> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('순양 렌탈센터',
-              style: TextStyle(
-                  color: style.whiteColor, fontWeight: style.boldText)),
+            style: TextStyle(
+              color: style.whiteColor,
+              fontWeight: style.boldText,
+            ),
+          ),
           Container(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -738,7 +741,7 @@ class _SecondContentsState extends State<SecondContents> {
                                       ),
                                     ),
                                     Text(
-                                      '$productPrice' + ' 원',
+                                      numFormat.format(productPrice) + ' 원',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
                                         fontWeight: style.boldText,
@@ -770,6 +773,7 @@ class _SecondContentsState extends State<SecondContents> {
 // Contents-3
 var packageShop;
 var packageName;
+var packageValue;
 var packagePrice;
 var packageImage;
 
@@ -779,6 +783,7 @@ packageCheck() async {
   // 반복문처리 해야 합니다.
   packageShop = checkProduct.docs[0]['shop'];
   packageName = checkProduct.docs[0]['name'];
+  packageValue = checkProduct.docs[0]['packageValue'];
   packagePrice = checkProduct.docs[0]['price'];
   packageImage = checkProduct.docs[0]['packageImage'];
 }
@@ -871,7 +876,7 @@ class _ThirdContentsState extends State<ThirdContents> {
                           ),
                           Container(
                             width: double.infinity,
-                            padding: EdgeInsets.all(style.paddingSize(context)),
+                            padding: EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               color: style.whiteColor,
                               borderRadius: BorderRadius.only(
@@ -883,27 +888,27 @@ class _ThirdContentsState extends State<ThirdContents> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '$packageName',
+                                  '[${packageValue}]' + ' ' + '$packageName',
                                   style: TextStyle(
                                     fontSize: style.h4FontSize(context),
                                     fontWeight: style.boldText,
                                     color: style.blackColor,
                                   ),
                                 ),
+                                // Padding(padding: EdgeInsets.all(2)),
+                                // Text(
+                                //   '$packageShop',
+                                //   style: TextStyle(
+                                //     fontSize: style.h5FontSize(context),
+                                //     color: style.greyColor,
+                                //   ),
+                                // ),
                                 Padding(padding: EdgeInsets.all(2)),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(
-                                      '$packageShop',
-                                      style: TextStyle(
-                                        fontSize: style.h5FontSize(context),
-                                        color: style.greyColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      '$packagePrice' + '원',
+                                      numFormat.format(packagePrice) + ' 원',
                                       style: TextStyle(
                                         fontSize: style.h4FontSize(context),
                                         color: style.mainColor,
@@ -967,9 +972,10 @@ class FourthContents extends StatelessWidget {
                           width: style.c4BoxSize(context),
                           height: style.c4BoxSize(context),
                           decoration: BoxDecoration(
-                            color: style.blackColor,
+                            // color: style.blackColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          child: Image.asset('assets/images/icon_calender.png', fit: BoxFit.contain,),
                         ),
                         Padding(
                             padding: EdgeInsets.only(
@@ -989,13 +995,16 @@ class FourthContents extends StatelessWidget {
                           width: style.c4BoxSize(context),
                           height: style.c4BoxSize(context),
                           decoration: BoxDecoration(
-                            color: style.blackColor,
+                            // color: style.blackColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          child: Image.asset('assets/images/icon_suit.png', fit: BoxFit.contain,),
                         ),
                         Padding(
-                            padding: EdgeInsets.only(
-                                top: style.paddingSize(context))),
+                          padding: EdgeInsets.only(
+                            top: style.paddingSize(context),
+                          ),
+                        ),
                         Text(
                           '대여/반납',
                           style: TextStyle(fontSize: style.h4FontSize(context)),
@@ -1011,9 +1020,10 @@ class FourthContents extends StatelessWidget {
                           width: style.c4BoxSize(context),
                           height: style.c4BoxSize(context),
                           decoration: BoxDecoration(
-                            color: style.blackColor,
+                            // color: style.blackColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          child: Image.asset('assets/images/icon_information.png', fit: BoxFit.contain,),
                         ),
                         Padding(
                             padding: EdgeInsets.only(
@@ -1033,9 +1043,10 @@ class FourthContents extends StatelessWidget {
                           width: style.c4BoxSize(context),
                           height: style.c4BoxSize(context),
                           decoration: BoxDecoration(
-                            color: style.blackColor,
+                            // color: style.blackColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
+                          child: Image.asset('assets/images/icon_warning.png', fit: BoxFit.contain,),
                         ),
                         Padding(
                             padding: EdgeInsets.only(
@@ -1088,11 +1099,11 @@ class _FooterState extends State<Footer> {
 
   footerBoxSize(c) {
     if (MediaQuery.of(c).size.width < 640) {
-      return 40;
+      return 36;
     } else if (MediaQuery.of(c).size.width < 1080) {
-      return 50;
+      return 48;
     } else {
-      return 60;
+      return 56;
     }
   }
 
@@ -1102,7 +1113,7 @@ class _FooterState extends State<Footer> {
       return Container(
         width: 100.w,
         height: footerSize(context),
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(16),
         color: style.mainColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1131,13 +1142,14 @@ class _FooterState extends State<Footer> {
                           height: footerBoxSize(context),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.yellow,
+                            // color: Colors.yellow,
                           ),
+                          child: Image.asset('assets/images/logo_kakao_talk.png', fit: BoxFit.contain,),
                         ),
                         onTap: () async {},
                       ),
                       Padding(
-                        padding: EdgeInsets.all(style.paddingSize(context)),
+                        padding: EdgeInsets.all(4),
                       ),
                       InkWell(
                         child: Container(
@@ -1145,13 +1157,14 @@ class _FooterState extends State<Footer> {
                           height: footerBoxSize(context),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.purple,
+                            // color: Colors.purple,
                           ),
+                          child: Image.asset('assets/images/logo_instagram.png', fit: BoxFit.contain,),
                         ),
                         onTap: () {},
                       ),
                       Padding(
-                        padding: EdgeInsets.all(style.paddingSize(context)),
+                        padding: EdgeInsets.all(4),
                       ),
                       InkWell(
                         child: Container(
@@ -1159,13 +1172,14 @@ class _FooterState extends State<Footer> {
                           height: footerBoxSize(context),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.green,
+                            // color: Colors.green,
                           ),
+                          child: Image.asset('assets/images/logo_naver.png', fit: BoxFit.contain,),
                         ),
                         onTap: () {},
                       ),
                       Padding(
-                        padding: EdgeInsets.all(style.paddingSize(context)),
+                        padding: EdgeInsets.all(4),
                       ),
                       InkWell(
                         child: Container(
@@ -1173,8 +1187,9 @@ class _FooterState extends State<Footer> {
                           height: footerBoxSize(context),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.red,
+                            // color: Colors.red,
                           ),
+                          child: Image.asset('assets/images/logo_youtube.png', fit: BoxFit.contain,),
                         ),
                         onTap: () {},
                       ),
