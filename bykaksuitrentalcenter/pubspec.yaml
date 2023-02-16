@@ -34,6 +34,7 @@ dependencies:
   responsive_sizer: ^3.1.1
   carousel_slider: ^4.2.1
   side_sheet: ^1.0.4
+  opscroll_web: ^0.3.2
   url_launcher: ^6.1.9
 
   firebase_core: ^2.4.1

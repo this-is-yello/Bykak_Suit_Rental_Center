@@ -24,7 +24,7 @@ var boxShadows = BoxShadow(
 
 widgetSize(c) {
   if (MediaQuery.of(c).size.width < 640) {
-    return 380;
+    return 360;
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 560;
   } else {
@@ -102,7 +102,6 @@ h5FontSize(c) {
     return 16;
   }
 }
-
 
 // -------------------- BoxSize --------------------
 c1BoxSize(c) {

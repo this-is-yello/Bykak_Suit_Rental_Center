@@ -3,14 +3,18 @@ import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:side_sheet/side_sheet.dart';
+import 'package:opscroll_web/opscroll_web.dart';
 import 'package:get/get.dart';
-
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    PageController controller = PageController(
+      initialPage: 0,
+    );
+
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return Scaffold(
@@ -21,12 +25,41 @@ class MainPage extends StatelessWidget {
               child: MainAppBar(),
             ),
           ),
+          body: PageView(
+            controller: controller,
+            scrollDirection: Axis.vertical,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: Colors.blue,
+                child: Center(
+                  child: Text('page 1'),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: Colors.red,
+                child: Center(
+                  child: Text('page 2'),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: Colors.yellow,
+                child: Center(
+                  child: Text('page 3'),
+                ),
+              ),
+            ],
+          ),
         );
       },
     );
   }
 }
-
 
 class MainAppBar extends StatefulWidget {
   const MainAppBar({super.key});
@@ -39,143 +72,143 @@ class _MainAppBarState extends State<MainAppBar> {
   // ----------------------------------------------- MenuState ------------------------------------------------------------------
   menuState(context) {
     if (MediaQuery.of(context).size.width < 640) {
-      return IconButton(
-        icon: Icon(
+      return InkWell(
+        child: Icon(
           Icons.menu,
           color: style.mainColor,
         ),
-        hoverColor: Color.fromARGB(0, 0, 0, 0),
-        onPressed: () => SideSheet.right(
-          context: context,
-          width: MediaQuery.of(context).size.width * 0.7,
-          body: Container(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_outlined,
-                    ),
-                    hoverColor: Color.fromARGB(0, 0, 0, 0),
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                ),
-                InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    height: 56,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 2,
-                          color: style.lightGreyColor,
-                        ),
+        // hoverColor: Color.fromARGB(0, 0, 0, 0),
+        onTap: () => SideSheet.right(
+            context: context,
+            width: MediaQuery.of(context).size.width * 0.7,
+            body: Container(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.arrow_forward,
+                        color: style.mainColor,
                       ),
+                      // hoverColor: Color.fromARGB(0, 0, 0, 0),
+                      onPressed: () {
+                        Get.back();
+                      },
                     ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.home_outlined,
-                          color: style.mainColor,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Text(
-                          'ByKak',
-                          style: TextStyle(
-                            color: style.blackColor,
+                  ),
+                  InkWell(
+                    child: Container(
+                      width: double.infinity,
+                      height: 56,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            width: 2,
+                            color: style.lightGreyColor,
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-                InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    height: 56,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 2,
-                          color: style.lightGreyColor,
-                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.home_outlined,
+                            color: style.mainColor,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4),
+                          ),
+                          Text(
+                            'ByKak',
+                            style: TextStyle(
+                              color: style.blackColor,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4),
+                          ),
+                        ],
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.shopping_cart_outlined,
-                          color: style.mainColor,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Text(
-                          'PRODUCTS',
-                          style: TextStyle(
-                            color: style.blackColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                      ],
-                    ),
+                    onTap: () {},
                   ),
-                  onTap: () {},
-                ),
-                InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    height: 56,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 2,
-                          color: style.lightGreyColor,
+                  InkWell(
+                    child: Container(
+                      width: double.infinity,
+                      height: 56,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            width: 2,
+                            color: style.lightGreyColor,
+                          ),
                         ),
                       ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.shopping_cart_outlined,
+                            color: style.mainColor,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4),
+                          ),
+                          Text(
+                            'PRODUCTS',
+                            style: TextStyle(
+                              color: style.blackColor,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4),
+                          ),
+                        ],
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.phone,
-                          color: style.mainColor,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Text(
-                          'CONTACTS',
-                          style: TextStyle(
-                            color: style.blackColor,
+                    onTap: () {},
+                  ),
+                  InkWell(
+                    child: Container(
+                      width: double.infinity,
+                      height: 56,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            width: 2,
+                            color: style.lightGreyColor,
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                      ],
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.phone,
+                            color: style.mainColor,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4),
+                          ),
+                          Text(
+                            'CONTACTS',
+                            style: TextStyle(
+                              color: style.blackColor,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(4),
+                          ),
+                        ],
+                      ),
                     ),
+                    onTap: () {},
                   ),
-                  onTap: () {},
-                ),
-              ],
-            ),
-          )
-        ),
+                ],
+              ),
+            )),
       );
     } else {
       return Container(
@@ -194,7 +227,7 @@ class _MainAppBarState extends State<MainAppBar> {
             ),
             TextButton(
               child: Text(
-                'PRODUCTS',
+                'Products',
                 style: TextStyle(
                   fontSize: 16,
                   color: style.mainColor,
@@ -205,7 +238,7 @@ class _MainAppBarState extends State<MainAppBar> {
             ),
             TextButton(
               child: Text(
-                'CONTACTS',
+                'Contacts',
                 style: TextStyle(
                   fontSize: 16,
                   color: style.mainColor,
@@ -220,13 +253,16 @@ class _MainAppBarState extends State<MainAppBar> {
     }
   }
 
-  // ----------------------------------------------- MainAppBar ------------------------------------------------------------------
+  // ----------------------------------------------- AppBar ------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
     return Container(
       width: style.widgetSize(context),
       height: 80,
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.only(
+        left: 16,
+        right: 16,
+      ),
       color: style.whiteColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
