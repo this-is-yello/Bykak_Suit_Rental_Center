@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/link.dart';
 
 import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
 import 'package:bykaksuitrentalcenter/screens/rent/search_page.dart';
@@ -1205,24 +1203,27 @@ class _FooterState extends State<Footer> {
                   Text(
                     '(주)데시그너 대표이사 : 김주현' + ' | ' + '사업자등록번호 : 000-00-00000',
                     style: TextStyle(
-                        color: style.whiteColor,
-                        fontSize: style.h5FontSize(context)),
+                      color: style.whiteColor,
+                      fontSize: style.h5FontSize(context),
+                    ),
                   ),
                   Text(
                     '인천광역시 미추홀구 석정로 200' + ' | ' + '우편번호 : 000000',
                     style: TextStyle(
-                        color: style.whiteColor,
-                        fontSize: style.h5FontSize(context)),
+                      color: style.whiteColor,
+                      fontSize: style.h5FontSize(context),
+                    ),
                   ),
                   Text(
                     'Copyright ⓒ 2023 by Designer',
                     style: TextStyle(
-                        color: style.whiteColor,
-                        fontSize: style.h5FontSize(context)),
+                      color: style.whiteColor,
+                      fontSize: style.h5FontSize(context),
+                    ),
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       );
