@@ -53,6 +53,16 @@ productPicHeight(c) {
 }
 
 // -------------------- FontSize --------------------
+h0FontSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 24;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 28;
+  } else {
+    return 32;
+  }
+}
+
 h1FontSize(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 20;

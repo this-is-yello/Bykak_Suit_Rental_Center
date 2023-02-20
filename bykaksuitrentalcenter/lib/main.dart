@@ -15,6 +15,7 @@ import 'package:bykaksuitrentalcenter/screens/rent/search_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
 import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
