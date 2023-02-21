@@ -7,6 +7,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'package:bykaksuitrentalcenter/main_page.dart';
+import 'package:bykaksuitrentalcenter/products_page.dart';
 
 import 'package:bykaksuitrentalcenter/home_page.dart';
 import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
@@ -46,6 +47,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => MainPage()),
+        GetPage(name: '/products', page: () => ProductsPage()),
+
+        GetPage(name: '/home', page: () => HomeScreen()),
         GetPage(name: '/login', page: () => LogInScreen()),
         GetPage(name: '/search', page: () => SearchScreen()),
         GetPage(name: '/bookHistory', page: () => BookHistoryScreen()),
