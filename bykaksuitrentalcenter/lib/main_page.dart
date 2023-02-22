@@ -9,6 +9,8 @@ import 'package:side_sheet/side_sheet.dart';
 import 'package:opscroll_web/opscroll_web.dart';
 import 'package:get/get.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/rendering.dart';
 
 
 class MainPage extends StatefulWidget {
@@ -18,15 +20,18 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
+
 class _MainPageState extends State<MainPage> {
+
   @override
   void initState() {
     super.initState();
     productCheck();
   }
-
+  
   @override
   Widget build(BuildContext context) {
+  var heheight = MediaQuery.of(context).size.height;
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return Scaffold(
@@ -55,7 +60,6 @@ class _MainPageState extends State<MainPage> {
             floatingButtonBackgroundColor: style.mainColor,
             scrollCurve: Curves.easeInOut,
             floatingButtonSplashColor: style.mainColor,
-
             pageController: PageController(
               initialPage: 0,
             ),
@@ -380,7 +384,7 @@ class _MainAppBarState extends State<MainAppBar> {
         children: [
           InkWell(
             child: Text(
-              '순양 렌탈센터',
+              'by覺 렌탈센터',
               style: TextStyle(
                 color: style.mainColor,
                 fontWeight: style.boldText,
@@ -591,6 +595,7 @@ class _ProductState extends State<Product> {
                         return InkWell(
                           child: Container(
                             decoration: BoxDecoration(
+                              boxShadow: [style.boxShadows],
                               // color: style.mainColor,
                               // border: Border.all(
                               //   color: style.greyColor,
@@ -632,9 +637,12 @@ class _ProductState extends State<Product> {
                                   ),
                                   content: Container(
                                     child: InteractiveViewer(
-                                      child: Image.asset(
-                                        'assets/images/products/product_${index}.jpg',
-                                        fit: BoxFit.contain,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Image.asset(
+                                          'assets/images/products/product_${index}.jpg',
+                                          fit: BoxFit.contain,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -710,6 +718,7 @@ class Location extends StatelessWidget {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
+                // 지도누르면 네이버 지도 연결하기 https://map.naver.com/v5/entry/place/1943136667?placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh
                 Container(
                   width: style.widgetSize(context),
                   child: ClipRRect(
@@ -808,7 +817,12 @@ class Contacts extends StatelessWidget {
                               ),
                             ],
                           ),
-                          onTap: () {},
+                          onTap: () async {
+                            final url = Uri.parse('http://pf.kakao.com/_UxoHxbT/chat');
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url, mode: LaunchMode.externalApplication);
+                            }
+                          },
                         ),
                         InkWell(
                           child: Column(
@@ -826,7 +840,12 @@ class Contacts extends StatelessWidget {
                               ),
                             ],
                           ),
-                          onTap: () {},
+                          onTap: () async {
+                            final url = Uri.parse('http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen');
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url, mode: LaunchMode.externalApplication);
+                            }
+                          },
                         ),
                         InkWell(
                           child: Column(
@@ -844,7 +863,12 @@ class Contacts extends StatelessWidget {
                               ),
                             ],
                           ),
-                          onTap: () {},
+                          onTap: () async {
+                            final url = Uri.parse('https://booking.naver.com/booking/6/bizes/151182?area=pll');
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url, mode: LaunchMode.externalApplication);
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -867,7 +891,12 @@ class Contacts extends StatelessWidget {
                           ),
                         ],
                       ),
-                      onTap: () {},
+                      onTap: () async {
+                        final url = Uri.parse('tel:+82 070 7893 3059');
+                        if (await canLaunchUrl(url)) {
+                          launchUrl(url, mode: LaunchMode.externalApplication);
+                        }
+                      }
                     ),
                   ),
                   Padding(padding: EdgeInsets.all(20),),
@@ -919,7 +948,7 @@ class Footer extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(16),
                     child: Text(
-                      '순양렌탈센터',
+                      'by覺 렌탈센터',
                       style: TextStyle(
                         fontSize: style.h1FontSize(context),
                         fontWeight: style.boldText,
@@ -934,19 +963,39 @@ class Footer extends StatelessWidget {
                       children: [
                         InkWell(
                           child: Image.asset('assets/images/logo_kakao_talk.png', fit: BoxFit.contain, scale: 1.5),
-                          onTap: () {},
+                          onTap: () async {
+                            final url = Uri.parse('http://pf.kakao.com/_UxoHxbT');
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url, mode: LaunchMode.externalApplication);
+                            }
+                          },
                         ),
                         InkWell(
                           child: Image.asset('assets/images/logo_naver_blog.png', fit: BoxFit.contain, scale: 1.5),
-                          onTap: () {},
+                          onTap: () async {
+                            final url = Uri.parse('https://blog.naver.com/kimjuhyeon_');
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url, mode: LaunchMode.externalApplication);
+                            }
+                          },
                         ),
                         InkWell(
                           child: Image.asset('assets/images/logo_instagram.png', fit: BoxFit.contain, scale: 1.5),
-                          onTap: () {},
+                          onTap: () async {
+                            final url = Uri.parse('https://www.instagram.com/kimjuhyeon_by_kak/');
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url, mode: LaunchMode.externalApplication);
+                            }
+                          },
                         ),
                         InkWell(
                           child: Image.asset('assets/images/logo_youtube.png', fit: BoxFit.contain, scale: 1.5),
-                          onTap: () {},
+                          onTap: () async {
+                            final url = Uri.parse('https://www.youtube.com/@user-sk6bq7pt7p/featured');
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url, mode: LaunchMode.externalApplication);
+                            }
+                          },
                         ),
                       ],
                     ),

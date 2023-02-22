@@ -7,8 +7,16 @@ import 'package:url_strategy/url_strategy.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:bykaksuitrentalcenter/main_page.dart';
 
+scrollCheck() {
+  final _controller = scroll;
+  
+  scroll.addListener(() {
+    print('스크롤했다');
+  });
+}
 
 
+var scroll = ScrollController();
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -26,11 +34,11 @@ class _ProductsPageState extends State<ProductsPage> {
   //   }
   // }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   productPics();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    scrollCheck();
+  }
   
   bool _isLoading = true;
 
@@ -92,12 +100,13 @@ class _ProductsPageState extends State<ProductsPage> {
                       return InkWell(
                         child: Container(
                           decoration: BoxDecoration(
-                            // color: style.mainColor,
+                            boxShadow: [style.boxShadows],
+                            color: style.whiteColor,
+                            borderRadius: BorderRadius.circular(8),
                             // border: Border.all(
                             //   color: style.greyColor,
                             //   width: 2,
                             // ),
-                            // borderRadius: BorderRadius.circular(8),
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
@@ -133,9 +142,12 @@ class _ProductsPageState extends State<ProductsPage> {
                                 ),
                                 content: Container(
                                   child: InteractiveViewer(
-                                    child: Image.asset(
-                                      'assets/images/products/product_${index}.jpg',
-                                      fit: BoxFit.contain,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.asset(
+                                        'assets/images/products/product_${index}.jpg',
+                                        fit: BoxFit.contain,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -169,7 +181,7 @@ class ProductsAppBar extends StatelessWidget {
         children: [
           InkWell(
             child: Text(
-              '순양 렌탈센터',
+              'by覺 렌탈센터',
               style: TextStyle(
                 color: style.mainColor,
                 fontWeight: style.boldText,

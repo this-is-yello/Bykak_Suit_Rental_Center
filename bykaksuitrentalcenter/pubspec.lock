@@ -121,14 +121,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
-  csslib:
-    dependency: transitive
-    description:
-      name: csslib
-      sha256: b36c7f7e24c0bdf1bf9a3da461c837d1de64b9f8beb190c9011d8c72a3dfd745
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.17.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -262,14 +254,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.2"
-  flutter_google_places:
-    dependency: "direct main"
-    description:
-      name: flutter_google_places
-      sha256: e9fb23ceacdc7359aa759627550146f7fd3ae6c067d16f39f3c50d8feebf4809
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -296,30 +280,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.6.5"
-  google_api_headers:
-    dependency: transitive
-    description:
-      name: google_api_headers
-      sha256: ac6f4e27e35c9eb4fbe8ce4ce7380e651d3a7bee3ad4c2ff30e67aaa73f005d3
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.5.0+1"
-  google_maps_webservice:
-    dependency: transitive
-    description:
-      name: google_maps_webservice
-      sha256: d0ae4e4508afd74a3f051565261a3cdbae59db29448f9b6e6beb5674545e1eb7
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.20-nullsafety.5"
-  html:
-    dependency: transitive
-    description:
-      name: html
-      sha256: d9793e10dbe0e6c364f4c59bf3e01fb33a9b2a674bc7a1081693dba0614b6269
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.15.1"
   http:
     dependency: transitive
     description:
@@ -480,22 +440,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.2"
-  package_info_plus:
-    dependency: transitive
-    description:
-      name: package_info_plus
-      sha256: "8df5ab0a481d7dc20c0e63809e90a588e496d276ba53358afc4c4443d0a00697"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.3"
-  package_info_plus_platform_interface:
-    dependency: transitive
-    description:
-      name: package_info_plus_platform_interface
-      sha256: "9bc8ba46813a4cc42c66ab781470711781940780fd8beddd0c3da62506d3a6c6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.1"
   path:
     dependency: transitive
     description:
@@ -568,14 +512,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
-  rxdart:
-    dependency: transitive
-    description:
-      name: rxdart
-      sha256: "2ef8b4e91cb3b55d155e0e34eeae0ac7107974e451495c955ac04ddee8cc21fd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.26.0"
   scrolls_to_top:
     dependency: "direct main"
     description:
@@ -789,46 +725,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  video_player:
-    dependency: "direct main"
-    description:
-      name: video_player
-      sha256: "59f7f31c919c59cbedd37c617317045f5f650dc0eeb568b0b0de9a36472bdb28"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.5.1"
-  video_player_android:
-    dependency: transitive
-    description:
-      name: video_player_android
-      sha256: "984388511230bac63feb53b2911a70e829fe0976b6b2213f5c579c4e0a882db3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.10"
-  video_player_avfoundation:
-    dependency: transitive
-    description:
-      name: video_player_avfoundation
-      sha256: d9f7a46d6a77680adb03ec05a381025d6e890ebe636637c6c3014cc3926b97e9
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.8"
-  video_player_platform_interface:
-    dependency: transitive
-    description:
-      name: video_player_platform_interface
-      sha256: "42bb75de5e9b79e1f20f1d95f688fac0f95beac4d89c6eb2cd421724d4432dae"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.1"
-  video_player_web:
-    dependency: transitive
-    description:
-      name: video_player_web
-      sha256: b649b07b8f8f553bee4a97a0a53d0fe78a70b115eafaf0105b612b32b05ddb99
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.13"
   webview_flutter:
     dependency: transitive
     description:
