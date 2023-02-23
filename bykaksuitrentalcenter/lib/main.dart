@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -6,7 +7,9 @@ import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:url_strategy/url_strategy.dart';
 
+import 'package:bykaksuitrentalcenter/splash_screen.dart';
 import 'package:bykaksuitrentalcenter/main_page.dart';
+import 'package:bykaksuitrentalcenter/loading_screen.dart';
 import 'package:bykaksuitrentalcenter/products_page.dart';
 
 import 'package:bykaksuitrentalcenter/home_page.dart';
@@ -21,8 +24,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //API 키 값은 외부로 노출되면 안된다. 파일로 키값을 저장하고 gitignore 추가
-  await dotenv.load(fileName: ".env");
-  KakaoSdk.init(nativeAppKey: dotenv.env['kakaoApiKey']);
+  // await dotenv.load(fileName: ".env");
+  // KakaoSdk.init(nativeAppKey: dotenv.env['kakaoApiKey']);
 
   setPathUrlStrategy();
   await Firebase.initializeApp(
@@ -38,16 +41,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+
       theme: ThemeData(
+        primaryColor: style.mainColor,
         fontFamily: 'Lineseed',
       ),
       debugShowCheckedModeBanner: false,
-      title: '순양렌탈센터',
+      title: '바이각 수트렌탈센터',
       // home: HomeScreen(),
-      initialRoute: '/',
+      initialRoute: '/loading',
       getPages: [
         GetPage(name: '/', page: () => MainPage()),
         GetPage(name: '/products', page: () => ProductsPage()),
+        GetPage(name: '/loading', page: () => SplashScreen()),
+        GetPage(name: '/splash', page: () => LoadingScreen()),
 
         GetPage(name: '/home', page: () => HomeScreen()),
         GetPage(name: '/login', page: () => LogInScreen()),

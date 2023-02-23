@@ -17,7 +17,7 @@ var whiteColor = Color(0xFFFFFFFF);
 var boldText = FontWeight.w700;
 
 var boxShadows = BoxShadow(
-  color: Colors.grey.withOpacity(0.5),
+  color: blackColor.withOpacity(0.5),
   blurRadius: 4,
   offset: Offset(0, 4),
 );
