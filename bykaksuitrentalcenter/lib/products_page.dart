@@ -40,13 +40,28 @@ class _ProductsPageState extends State<ProductsPage> {
       });
     });
 
-    return ResponsiveSizer(
+    return _isLoading
+      ? Center(
+          child: SizedBox(
+            width: 40,
+            height: 40,
+            child: CircularProgressIndicator(
+              color: style.mainColor,
+            ),
+          ),
+        )
+      : ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return Scaffold(
           backgroundColor: style.whiteColor,
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: style.whiteColor,
+            toolbarHeight: MediaQuery.of(context).size.width < 640
+              ? 56
+              : MediaQuery.of(context).size.width < 1080
+              ? 64
+              : 72,
             title: Center(
               child: ProductsAppBar(),
             ),
@@ -195,17 +210,12 @@ class ProductsAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          InkWell(
-            child: Text(
-              'by覺 렌탈센터',
-              style: TextStyle(
-                color: style.mainColor,
-                fontWeight: style.boldText,
-              ),
+          Text(
+            'by覺 렌탈센터',
+            style: TextStyle(
+              color: style.mainColor,
+              fontWeight: style.boldText,
             ),
-            onTap: () {
-              Get.toNamed('/splash');
-            },
           ),
         ],
       ),

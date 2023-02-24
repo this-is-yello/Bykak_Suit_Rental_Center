@@ -394,18 +394,13 @@ class _MainPageState extends State<MainPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                      child: Text(
-                        'by覺 렌탈센터',
-                        style: TextStyle(
-                          fontSize: style.h1FontSize(context),
-                          fontWeight: style.boldText,
-                          color: style.mainColor,
-                        ),
+                    Text(
+                      'by覺 렌탈센터',
+                      style: TextStyle(
+                        fontSize: style.h1FontSize(context),
+                        fontWeight: style.boldText,
+                        color: style.mainColor,
                       ),
-                      onTap: () {
-                        Get.toNamed('/splash');
-                      },
                     ),
                     Container(
                       child: menuState(context),
@@ -801,7 +796,7 @@ class _ProductState extends State<Product> {
                         ],
                       ),
                       onTap: () {
-                        Get.toNamed('/loading');
+                        Get.toNamed('/products');
                       },
                     ),
                   ],
