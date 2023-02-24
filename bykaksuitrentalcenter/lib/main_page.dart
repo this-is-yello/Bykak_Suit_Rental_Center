@@ -1,18 +1,21 @@
-import 'dart:ui';
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:side_sheet/side_sheet.dart';
-import 'package:opscroll_web/opscroll_web.dart';
-import 'package:get/get.dart';
-import 'package:url_strategy/url_strategy.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/rendering.dart';
+import 'package:image_fade/image_fade.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:url_strategy/url_strategy.dart';
+import 'package:get/get.dart';
+import 'dart:ui';
+import 'dart:async';
 
 import 'package:bykaksuitrentalcenter/loading_screen.dart';
+
+// import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:opscroll_web/opscroll_web.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -21,10 +24,20 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-var _scroll = ScrollController();
-var nowHeight = _scroll.position.pixels;
+int currentPage = 0;
+
+movePage() {
+  _controller.animateToPage(
+    currentPage,
+    duration: Duration(milliseconds: 1000),
+    curve: Curves.linearToEaseOut,
+  );
+}
+
+PageController _controller = PageController();
 
 class _MainPageState extends State<MainPage> {
+  // -------------------- menuState() -------------------- //
   menuState(context) {
     if (MediaQuery.of(context).size.width < 1080) {
       return InkWell(
@@ -34,7 +47,7 @@ class _MainPageState extends State<MainPage> {
         ),
         onTap: () => SideSheet.right(
           context: context,
-          width: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width * 0.6,
           body: Container(
             padding: EdgeInsets.all(16),
             child: Column(
@@ -86,9 +99,9 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                   onTap: () {
-                    setState(() {
-                      _scroll.position.pixels == 0;
-                    });
+                    currentPage = 0;
+                    movePage();
+                    Get.back();
                   },
                 ),
                 InkWell(
@@ -126,13 +139,49 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                   onTap: () {
-                    var allHeight = MediaQuery.of(context).size.height * 6;
-
-                    setState(() {
-                      nowHeight == allHeight / 3;
-                      print(allHeight);
-                      print(nowHeight);
-                    });
+                    currentPage = 2;
+                    movePage();
+                    Get.back();
+                  },
+                ),
+                InkWell(
+                  child: Container(
+                    width: double.infinity,
+                    height: 56,
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          width: 2,
+                          color: style.lightGreyColor,
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.phone_outlined,
+                          color: style.mainColor,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(4),
+                        ),
+                        Text(
+                          'Contacts',
+                          style: TextStyle(
+                            color: style.blackColor,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(4),
+                        ),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    currentPage = 3;
+                    movePage();
+                    Get.back();
                   },
                 ),
                 InkWell(
@@ -169,43 +218,11 @@ class _MainPageState extends State<MainPage> {
                       ],
                     ),
                   ),
-                  onTap: () {},
-                ),
-                InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    height: 56,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 2,
-                          color: style.lightGreyColor,
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.phone_outlined,
-                          color: style.mainColor,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Text(
-                          'Contacts',
-                          style: TextStyle(
-                            color: style.blackColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {},
+                  onTap: () {
+                    currentPage = 4;
+                    movePage();
+                    Get.back();
+                  },
                 ),
                 InkWell(
                   child: Container(
@@ -241,7 +258,11 @@ class _MainPageState extends State<MainPage> {
                       ],
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    currentPage = 5;
+                    movePage();
+                    Get.back();
+                  },
                 ),
               ],
             ),
@@ -256,60 +277,75 @@ class _MainPageState extends State<MainPage> {
               child: Text(
                 'ByKak',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   color: style.mainColor,
                   // fontWeight: style.boldText,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                currentPage = 0;
+                movePage();
+              },
             ),
             Padding(padding: EdgeInsets.all(8)),
             InkWell(
               child: Text(
                 'Products',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   color: style.mainColor,
                   // fontWeight: style.boldText,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                currentPage = 2;
+                movePage();
+              },
+            ),
+            Padding(padding: EdgeInsets.all(8)),
+            InkWell(
+              child: Text(
+                'Contacts',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: style.mainColor,
+                  // fontWeight: style.boldText,
+                ),
+              ),
+              onTap: () {
+                currentPage = 3;
+                movePage();
+              },
             ),
             Padding(padding: EdgeInsets.all(8)),
             InkWell(
               child: Text(
                 'Location',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   color: style.mainColor,
                   // fontWeight: style.boldText,
                 ),
               ),
-              onTap: () {},
-            ),
-            Padding(padding: EdgeInsets.all(8)),
-            InkWell(
-              child: Text(
-                'Contents',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: style.mainColor,
-                  // fontWeight: style.boldText,
-                ),
-              ),
-              onTap: () {},
+              onTap: () {
+                currentPage = 4;
+                movePage();
+              },
             ),
             Padding(padding: EdgeInsets.all(8)),
             InkWell(
               child: Text(
                 'Information',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   color: style.mainColor,
                   // fontWeight: style.boldText,
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                currentPage = 5;
+                movePage();
+              },
             ),
           ],
         ),
@@ -317,22 +353,25 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
+  // -------------------- Scaffold -------------------- //
   @override
   void initState() {
     super.initState();
-    _scroll.addListener(() {
-      print(_scroll.position.pixels);
-      if (_scroll.position.pixels == 0) {
-        _scroll.addListener(() {
-          setState(() {
-            _scroll.position.pixels == 2000;
-          });
-        });
-      }
-      // if (_scroll.position.pixels == _scroll.position.maxScrollExtent &&
-      //     yes == true) {
-      // }
-    });
+    // Timer.periodic(
+    //   Duration(seconds: 3),
+    //   (Timer timer) {
+    //     if (currentPage < 6) {
+    //       currentPage++;
+    //     } else {
+    //       currentPage = 0;
+    //     }
+    //     _controller.animateToPage(
+    //       currentPage,
+    //       duration: Duration(milliseconds: 350),
+    //       curve: Curves.easeIn,
+    //     );
+    //   },
+    // );
   }
 
   @override
@@ -343,6 +382,11 @@ class _MainPageState extends State<MainPage> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: style.whiteColor,
+            toolbarHeight: MediaQuery.of(context).size.width < 640
+              ? 56
+              : MediaQuery.of(context).size.width < 1080
+              ? 64
+              : 72,
             title: Center(
               child: Container(
                 width: style.widgetSize(context),
@@ -354,12 +398,13 @@ class _MainPageState extends State<MainPage> {
                       child: Text(
                         'by覺 렌탈센터',
                         style: TextStyle(
-                          color: style.mainColor,
+                          fontSize: style.h1FontSize(context),
                           fontWeight: style.boldText,
+                          color: style.mainColor,
                         ),
                       ),
                       onTap: () {
-                        Get.toNamed('/');
+                        Get.toNamed('/splash');
                       },
                     ),
                     Container(
@@ -371,11 +416,8 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           body: PageView(
-            // controller: controller,
+            controller: _controller,
             scrollDirection: Axis.vertical,
-            physics: ScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics(),
-            ),
             onPageChanged: (value) {},
             children: [
               Home(),
@@ -386,37 +428,6 @@ class _MainPageState extends State<MainPage> {
               Footer(),
             ],
           ),
-          // body: OpscrollWeb(
-          //   scrollDirection: Axis.vertical,
-          //   scrollSpeed: Duration(milliseconds: 500,),
-          //   isTouchScrollingActive: true,
-          //   isFloatingButtonActive: true,
-          //   floatingButtonBackgroundColor: style.mainColor,
-          //   scrollCurve: Curves.easeInOut,
-          //   floatingButtonSplashColor: style.mainColor,
-          //   pageController: PageController(
-          //     initialPage: 0,
-          //   ),
-          //   onePageChildren: [
-          //     Home(),
-          //     ByKak(),
-          //     Product(),
-          //     Contacts(),
-          //     Location(),
-          //     Footer(),
-          //   ],
-          // ),
-          // body: ListView(
-          //   controller: _scroll,
-          //   children: [
-          //     Home(),
-          //     ByKak(),
-          //     Product(),
-          //     Contacts(),
-          //     Location(),
-          //     Footer(),
-          //   ],
-          // ),
         );
       },
     );
@@ -437,7 +448,7 @@ class Home extends StatelessWidget {
           color: style.blackColor,
           image: DecorationImage(
             image: AssetImage(
-              'assets/images/home_video_3.gif',
+              'assets/images/home_video_2.gif',
             ),
             fit: BoxFit.cover,
           ),
@@ -447,8 +458,7 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              // '자신감의 시작, 바이각',
-              '',
+              '자신감의 시작, 바이각',
               style: TextStyle(
                 fontSize: style.h0FontSize(context),
                 fontWeight: style.boldText,
@@ -590,148 +600,185 @@ class _ProductState extends State<Product> {
                 Container(
                   width: style.widgetSize(context),
                   height: MediaQuery.of(context).size.width < 640
-                      ? 240
+                      ? 224
                       : MediaQuery.of(context).size.width < 1080
-                          ? 240
-                          : 320,
+                      ? 224
+                      : 300,
                   child: GridView.builder(
-                      physics: ScrollPhysics(),
-                      itemCount: MediaQuery.of(context).size.width < 640
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: MediaQuery.of(context).size.width < 640
+                        ? 2
+                        : MediaQuery.of(context).size.width < 1080
+                        ? 3
+                        : 4,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: MediaQuery.of(context).size.width < 640
                           ? 2
                           : MediaQuery.of(context).size.width < 1080
-                              ? 3
-                              : 4,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: MediaQuery.of(context).size.width < 640
-                            ? 2
-                            : MediaQuery.of(context).size.width < 1080
-                                ? 3
-                                : 4,
-                        childAspectRatio: 1 / 1.2,
-                        mainAxisSpacing: style.paddingSize(context),
-                        crossAxisSpacing: style.paddingSize(context),
-                      ),
-                      itemBuilder: (context, index) {
-                        List productBox = [
-                          Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [hoverShadow[index]],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: FadeInImage(
-                                placeholder:
-                                    AssetImage('assets/images/white.png'),
-                                image: AssetImage(
-                                    'assets/images/products/product_${index}.jpg'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                          ? 3
+                          : 4,
+                      childAspectRatio: 1 / 1.2,
+                      mainAxisSpacing: style.paddingSize(context),
+                      crossAxisSpacing: style.paddingSize(context),
+                    ),
+                    itemBuilder: (context, index) {
+                      List productBox = [
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [hoverShadow[index]],
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [hoverShadow[index]],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: FadeInImage(
-                                placeholder:
-                                    AssetImage('assets/images/white.png'),
-                                image: AssetImage(
-                                    'assets/images/products/product_${index}.jpg'),
-                                fit: BoxFit.cover,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: ImageFade(
+                              image: AssetImage(
+                                'assets/images/products/product_${index}.jpg'
                               ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [hoverShadow[index]],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: FadeInImage(
-                                placeholder:
-                                    AssetImage('assets/images/white.png'),
-                                image: AssetImage(
-                                    'assets/images/products/product_${index}.jpg'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              boxShadow: [hoverShadow[index]],
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: FadeInImage(
-                                placeholder:
-                                    AssetImage('assets/images/white.png'),
-                                image: AssetImage(
-                                    'assets/images/products/product_${index}.jpg'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ];
-                        return InkWell(
-                          child: productBox[index],
-                          onHover: (value) {
-                            // bool _isHover = false;
-                            setState(() {
-                              _nHover[index] = value;
-                            });
-                            //print("Hover? ---> ${_nHover[index]}");
-                            if (_nHover[index] == true) {
-                              hoverShadow[index] = style.boxShadows;
-                            } else {
-                              hoverShadow[index] = BoxShadow(
-                                color: Colors.grey.withOpacity(0),
-                                blurRadius: 4,
-                                offset: Offset(0, 0),
-                              );
-                            }
-                          },
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  backgroundColor: Color.fromARGB(0, 0, 0, 0),
-                                  title: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      IconButton(
-                                        iconSize: 30,
-                                        alignment: Alignment.center,
-                                        icon: Icon(
-                                          Icons.close,
-                                          size: 30,
-                                          color: style.whiteColor,
-                                        ),
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                      ),
-                                    ],
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              placeholder: Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(
+                                    color: style.mainColor,
                                   ),
-                                  content: Container(
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: InteractiveViewer(
-                                        child: Image.asset(
-                                          'assets/images/products/product_${index}.jpg',
-                                          fit: BoxFit.contain,
-                                        ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [hoverShadow[index]],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: ImageFade(
+                              image: AssetImage(
+                                'assets/images/products/product_${index}.jpg'
+                              ),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              placeholder: Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(
+                                    color: style.mainColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [hoverShadow[index]],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: ImageFade(
+                              image: AssetImage(
+                                'assets/images/products/product_${index}.jpg'
+                              ),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              placeholder: Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(
+                                    color: style.mainColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [hoverShadow[index]],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: ImageFade(
+                              image: AssetImage(
+                                'assets/images/products/product_${index}.jpg'
+                              ),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              placeholder: Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(
+                                    color: style.mainColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ];
+                      return InkWell(
+                        child: productBox[index],
+                        onHover: (value) {
+                          // bool _isHover = false;
+                          setState(() {
+                            _nHover[index] = value;
+                          });
+                          //print("Hover? ---> ${_nHover[index]}");
+                          if (_nHover[index] == true) {
+                            hoverShadow[index] = style.boxShadows;
+                          } else {
+                            hoverShadow[index] = BoxShadow(
+                              color: Colors.grey.withOpacity(0),
+                              blurRadius: 4,
+                              offset: Offset(0, 0),
+                            );
+                          }
+                        },
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: Color.fromARGB(0, 0, 0, 0),
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    IconButton(
+                                      iconSize: 30,
+                                      alignment: Alignment.center,
+                                      icon: Icon(
+                                        Icons.close,
+                                        size: 30,
+                                        color: style.whiteColor,
+                                      ),
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                content: Container(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: InteractiveViewer(
+                                      child: Image.asset(
+                                        'assets/images/products/product_${index}.jpg',
+                                        fit: BoxFit.contain,
                                       ),
                                     ),
                                   ),
-                                );
-                              },
-                            );
-                          },
-                        );
-                      }),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -754,7 +801,7 @@ class _ProductState extends State<Product> {
                         ],
                       ),
                       onTap: () {
-                        Get.toNamed('/splash');
+                        Get.toNamed('/loading');
                       },
                     ),
                   ],
@@ -887,7 +934,7 @@ class Contacts extends StatelessWidget {
                         child: Column(
                           children: [
                             Image.asset(
-                              'assets/images/logo_Kakao_talk.png',
+                              'assets/images/logo_kakao.png',
                               fit: BoxFit.contain,
                             ),
                             Padding(
@@ -960,7 +1007,7 @@ class Contacts extends StatelessWidget {
                         ),
                         onTap: () async {
                           final url = Uri.parse(
-                              'https://booking.naver.com/booking/6/bizes/151182?area=pll');
+                              'https://booking.naver.com/booking/13/bizes/839741');
                           if (await canLaunchUrl(url)) {
                             launchUrl(url,
                                 mode: LaunchMode.externalApplication);
@@ -1062,7 +1109,7 @@ class Footer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        child: Image.asset('assets/images/logo_kakao_talk.png',
+                        child: Image.asset('assets/images/logo_kakao.png',
                             fit: BoxFit.contain, scale: 1.5),
                         onTap: () async {
                           final url = Uri.parse('http://pf.kakao.com/_UxoHxbT');

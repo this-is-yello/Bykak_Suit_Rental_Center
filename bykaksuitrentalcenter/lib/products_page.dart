@@ -1,11 +1,14 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
-import 'package:get/get.dart';
-import 'package:url_strategy/url_strategy.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:image_fade/image_fade.dart';
+import 'package:url_strategy/url_strategy.dart';
+import 'package:get/get.dart';
+import 'dart:ui';
+
 import 'package:bykaksuitrentalcenter/main_page.dart';
+
+// import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
@@ -16,6 +19,18 @@ class ProductsPage extends StatefulWidget {
 
 class _ProductsPageState extends State<ProductsPage> {  
   bool _isLoading = true;
+  List productList = [];
+
+  imgCheck() async {
+    var productImg = await style.firestore.collection('productImg').doc('imgList').get();
+    productList = productImg['img'];
+    // print(productList);
+  }
+  @override
+  void initState() {
+    super.initState();
+    imgCheck();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +80,7 @@ class _ProductsPageState extends State<ProductsPage> {
                       return InkWell(
                         child: Container(
                           decoration: BoxDecoration(
-                            boxShadow: [style.boxShadows],
+                            // boxShadow: [style.boxShadows],
                             color: style.whiteColor,
                             borderRadius: BorderRadius.circular(8),
                             // border: Border.all(
@@ -75,11 +90,43 @@ class _ProductsPageState extends State<ProductsPage> {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: FadeInImage(
-                              placeholder: AssetImage('assets/images/white.png'),
-                              image: AssetImage('assets/images/products/product_${index}.jpg'),
+                            child: ImageFade(
+                              image: AssetImage(
+                                'assets/images/products/product_${index}.jpg'
+                              ),
                               fit: BoxFit.cover,
+                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              placeholder: Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(
+                                    color: style.mainColor,
+                                  ),
+                                ),
+                              ),
                             ),
+                            // child: CachedNetworkImage(
+                            //   imageUrl: '${productList[index]}',
+                            //   fit: BoxFit.cover,
+                            //   placeholder: (context, url) => Center(
+                            //     child: SizedBox(
+                            //       width: 40,
+                            //       height: 40,
+                            //       child: CircularProgressIndicator(
+                            //         color: style.mainColor,
+                            //       ),
+                            //     ),
+                            //   ),
+                            //   errorWidget: (context, url, error) => Icon(Icons.error),
+                            // ),
+                            // child: FadeInImage(
+                            //   fadeInDuration: Duration(seconds: 2),
+                            //   placeholderFit: BoxFit.cover,
+                            //   placeholder: AssetImage('assets/images/white.png'),
+                            //   image: AssetImage('assets/images/products/product_$index.jpg'),
+                            //   fit: BoxFit.cover,
+                            // ),
                             // child: Image.asset(
                             //   'assets/images/products/product_${index}.jpg',
                             //   fit: BoxFit.cover,
@@ -157,7 +204,7 @@ class ProductsAppBar extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Get.toNamed('/');
+              Get.toNamed('/splash');
             },
           ),
         ],

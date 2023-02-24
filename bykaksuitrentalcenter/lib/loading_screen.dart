@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
-import 'package:get/get.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:get/get.dart';
 import 'dart:async';
 
 import 'package:bykaksuitrentalcenter/Products_page.dart';
-
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -22,9 +21,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void __init() async {
-    //오래걸리는 작업 수행
     Timer(
-      const Duration(seconds: 2),
+      const Duration(seconds: 1),
       () => Get.toNamed('/products'),
     );
     // Future.delayed(Duration(seconds: 1), () {

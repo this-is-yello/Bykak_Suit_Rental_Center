@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
-import 'package:get/get.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:get/get.dart';
+import 'dart:async';
 
 import 'package:bykaksuitrentalcenter/main_page.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,15 +21,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _init() async {
-    //오래걸리는 작업 수행
-    // Navigator.push(
-    //   context, MaterialPageRoute(
-    //     builder: (context) => MainPage(),
-    //   ),
-    // );
-    Future.delayed(Duration(seconds: 1), () {
-      Get.toNamed('/');
-    });
+    Timer(
+      const Duration(seconds: 1),
+      () => Get.toNamed('/'),
+    );
   }
 
   @override
@@ -40,9 +35,21 @@ class _SplashScreenState extends State<SplashScreen> {
         height: MediaQuery.of(context).size.height,
         color: style.mainColor,
         child: Center(
-          child: Text(
-            '로딩중이라네..',
-            style: TextStyle(fontSize: 40, fontWeight: style.boldText, color: style.whiteColor),
+          child: Container(
+            width: MediaQuery.of(context).size.width < 640
+             ? 100
+             : MediaQuery.of(context).size.width < 1080
+             ? 200
+             : 300,
+            height: MediaQuery.of(context).size.width < 640
+             ? 100
+             : MediaQuery.of(context).size.width < 1080
+             ? 200
+             : 300,
+            child: Image.asset(
+              'assets/images/bykak_logo_white.png',
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),

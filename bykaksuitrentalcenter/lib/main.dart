@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:url_strategy/url_strategy.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'package:bykaksuitrentalcenter/splash_screen.dart';
 import 'package:bykaksuitrentalcenter/main_page.dart';
 import 'package:bykaksuitrentalcenter/loading_screen.dart';
 import 'package:bykaksuitrentalcenter/products_page.dart';
 
-import 'package:bykaksuitrentalcenter/home_page.dart';
-import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
-import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
-import 'package:bykaksuitrentalcenter/screens/rent/search_page.dart';
-import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
-import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
+// import 'package:bykaksuitrentalcenter/home_page.dart';
+// import 'package:bykaksuitrentalcenter/screens/user/book_history_page.dart';
+// import 'package:bykaksuitrentalcenter/screens/rent/product_detail_page.dart';
+// import 'package:bykaksuitrentalcenter/screens/rent/search_page.dart';
+// import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
+// import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
+
 
 
 void main() async {
@@ -41,7 +42,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-
       theme: ThemeData(
         primaryColor: style.mainColor,
         fontFamily: 'Lineseed',
@@ -49,19 +49,19 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: '바이각 수트렌탈센터',
       // home: HomeScreen(),
-      initialRoute: '/loading',
+      initialRoute: '/splash',
       getPages: [
         GetPage(name: '/', page: () => MainPage()),
         GetPage(name: '/products', page: () => ProductsPage()),
-        GetPage(name: '/loading', page: () => SplashScreen()),
-        GetPage(name: '/splash', page: () => LoadingScreen()),
+        GetPage(name: '/splash', page: () => SplashScreen()),
+        GetPage(name: '/loading', page: () => LoadingScreen()),
 
-        GetPage(name: '/home', page: () => HomeScreen()),
-        GetPage(name: '/login', page: () => LogInScreen()),
-        GetPage(name: '/search', page: () => SearchScreen()),
-        GetPage(name: '/bookHistory', page: () => BookHistoryScreen()),
-        GetPage(name: '/myPage', page: () => MyPageScreen()),
-        GetPage(name: '/productDetail', page: () => ProductDetailScreen()),
+        // GetPage(name: '/home', page: () => HomeScreen()),
+        // GetPage(name: '/login', page: () => LogInScreen()),
+        // GetPage(name: '/search', page: () => SearchScreen()),
+        // GetPage(name: '/bookHistory', page: () => BookHistoryScreen()),
+        // GetPage(name: '/myPage', page: () => MyPageScreen()),
+        // GetPage(name: '/productDetail', page: () => ProductDetailScreen()),
       ],
     );
   }
