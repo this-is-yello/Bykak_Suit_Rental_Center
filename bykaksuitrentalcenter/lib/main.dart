@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: '바이각 수트렌탈센터',
       // home: HomeScreen(),
-      initialRoute: '/splash',
+      initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => MainPage()),
         GetPage(name: '/products', page: () => ProductsPage()),
