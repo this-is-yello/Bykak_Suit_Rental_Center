@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,9 +9,10 @@ import 'package:image_fade/image_fade.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:get/get.dart';
-import 'dart:ui';
 import 'dart:async';
+import 'dart:ui';
 
+import 'package:bykaksuitrentalcenter/splash_screen.dart';
 import 'package:bykaksuitrentalcenter/loading_screen.dart';
 
 // import 'package:cached_network_image/cached_network_image.dart';
@@ -25,6 +27,8 @@ class MainPage extends StatefulWidget {
 }
 
 int currentPage = 0;
+bool _isLoading = true;
+
 
 movePage() {
   _controller.animateToPage(
@@ -40,246 +44,300 @@ class _MainPageState extends State<MainPage> {
   // -------------------- menuState() -------------------- //
   menuState(context) {
     if (MediaQuery.of(context).size.width < 1080) {
-      return InkWell(
-        child: Icon(
-          Icons.menu,
-          color: style.mainColor,
-        ),
-        onTap: () => SideSheet.right(
-          context: context,
-          width: MediaQuery.of(context).size.width * 0.6,
-          body: Container(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.arrow_forward,
-                      color: style.mainColor,
-                    ),
-                    onPressed: () {
-                      Get.back();
-                    },
-                  ),
-                ),
-                InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    height: 56,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 2,
-                          color: style.lightGreyColor,
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.home_outlined,
-                          color: style.mainColor,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Text(
-                          'ByKak',
-                          style: TextStyle(
-                            color: style.blackColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    currentPage = 0;
-                    movePage();
-                    Get.back();
-                  },
-                ),
-                InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    height: 56,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 2,
-                          color: style.lightGreyColor,
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.shopping_cart_outlined,
-                          color: style.mainColor,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Text(
-                          'Products',
-                          style: TextStyle(
-                            color: style.blackColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    currentPage = 2;
-                    movePage();
-                    Get.back();
-                  },
-                ),
-                InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    height: 56,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 2,
-                          color: style.lightGreyColor,
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.phone_outlined,
-                          color: style.mainColor,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Text(
-                          'Contacts',
-                          style: TextStyle(
-                            color: style.blackColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    currentPage = 3;
-                    movePage();
-                    Get.back();
-                  },
-                ),
-                InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    height: 56,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 2,
-                          color: style.lightGreyColor,
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.location_on_outlined,
-                          color: style.mainColor,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Text(
-                          'Location',
-                          style: TextStyle(
-                            color: style.blackColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    currentPage = 4;
-                    movePage();
-                    Get.back();
-                  },
-                ),
-                InkWell(
-                  child: Container(
-                    width: double.infinity,
-                    height: 56,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 2,
-                          color: style.lightGreyColor,
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.info_outline,
-                          color: style.mainColor,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                        Text(
-                          'Information',
-                          style: TextStyle(
-                            color: style.blackColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(4),
-                        ),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    currentPage = 5;
-                    movePage();
-                    Get.back();
-                  },
-                ),
-              ],
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'by覺 렌탈센터',
+            style: TextStyle(
+              fontSize: style.h1FontSize(context),
+              fontWeight: style.boldText,
+              color: style.mainColor,
             ),
           ),
-        ),
+          InkWell(
+            child: Icon(
+              Icons.menu,
+              color: style.mainColor,
+            ),
+            onTap: () => SideSheet.right(
+              context: context,
+              width: MediaQuery.of(context).size.width * 0.6,
+              body: Container(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.arrow_forward,
+                          color: style.mainColor,
+                        ),
+                        onPressed: () {
+                          Get.back();
+                        },
+                      ),
+                    ),
+                    InkWell(
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 2,
+                              color: style.lightGreyColor,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home_outlined,
+                              color: style.mainColor,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                            Text(
+                              'ByKak',
+                              style: TextStyle(
+                                color: style.blackColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        currentPage = 0;
+                        movePage();
+                        Get.back();
+                      },
+                    ),
+                    InkWell(
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 2,
+                              color: style.lightGreyColor,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.shopping_cart_outlined,
+                              color: style.mainColor,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                            Text(
+                              'Products',
+                              style: TextStyle(
+                                color: style.blackColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        currentPage = 2;
+                        movePage();
+                        Get.back();
+                      },
+                    ),
+                    InkWell(
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 2,
+                              color: style.lightGreyColor,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.handshake_outlined,
+                              color: style.mainColor,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                            Text(
+                              'With',
+                              style: TextStyle(
+                                color: style.blackColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        currentPage = 3;
+                        movePage();
+                        Get.back();
+                      },
+                    ),
+                    InkWell(
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 2,
+                              color: style.lightGreyColor,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.phone_outlined,
+                              color: style.mainColor,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                            Text(
+                              'Contacts',
+                              style: TextStyle(
+                                color: style.blackColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        currentPage = 4;
+                        movePage();
+                        Get.back();
+                      },
+                    ),
+                    InkWell(
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 2,
+                              color: style.lightGreyColor,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.location_on_outlined,
+                              color: style.mainColor,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                            Text(
+                              'Location',
+                              style: TextStyle(
+                                color: style.blackColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        currentPage = 5;
+                        movePage();
+                        Get.back();
+                      },
+                    ),
+                    InkWell(
+                      child: Container(
+                        width: double.infinity,
+                        height: 56,
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              width: 2,
+                              color: style.lightGreyColor,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.info_outline,
+                              color: style.mainColor,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                            Text(
+                              'Information',
+                              style: TextStyle(
+                                color: style.blackColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        currentPage = 6;
+                        movePage();
+                        Get.back();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       );
     } else {
       return Container(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
               child: Text(
                 'ByKak',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: style.mainColor,
-                  // fontWeight: style.boldText,
+                  fontWeight: style.boldText,
                 ),
               ),
               onTap: () {
@@ -287,14 +345,14 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            Padding(padding: EdgeInsets.all(8)),
+            // Padding(padding: EdgeInsets.all(8)),
             InkWell(
               child: Text(
                 'Products',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: style.mainColor,
-                  // fontWeight: style.boldText,
+                  fontWeight: style.boldText,
                 ),
               ),
               onTap: () {
@@ -302,14 +360,14 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            Padding(padding: EdgeInsets.all(8)),
+            // Padding(padding: EdgeInsets.all(8)),
             InkWell(
               child: Text(
-                'Contacts',
+                'With',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: style.mainColor,
-                  // fontWeight: style.boldText,
+                  fontWeight: style.boldText,
                 ),
               ),
               onTap: () {
@@ -317,14 +375,22 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            Padding(padding: EdgeInsets.all(8)),
+            Text(
+              'by覺 렌탈센터',
+              style: TextStyle(
+                fontSize: style.h1FontSize(context),
+                fontWeight: style.boldText,
+                color: style.mainColor,
+              ),
+            ),
+            // Padding(padding: EdgeInsets.all(8)),
             InkWell(
               child: Text(
-                'Location',
+                'Contacts',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: style.mainColor,
-                  // fontWeight: style.boldText,
+                  fontWeight: style.boldText,
                 ),
               ),
               onTap: () {
@@ -332,18 +398,33 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            Padding(padding: EdgeInsets.all(8)),
+            // Padding(padding: EdgeInsets.all(8)),
             InkWell(
               child: Text(
-                'Information',
+                'Location',
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 16,
                   color: style.mainColor,
-                  // fontWeight: style.boldText,
+                  fontWeight: style.boldText,
                 ),
               ),
               onTap: () {
                 currentPage = 5;
+                movePage();
+              },
+            ),
+            // Padding(padding: EdgeInsets.all(8)),
+            InkWell(
+              child: Text(
+                'Information',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: style.mainColor,
+                  fontWeight: style.boldText,
+                ),
+              ),
+              onTap: () {
+                currentPage = 6;
                 movePage();
               },
             ),
@@ -376,56 +457,70 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: style.whiteColor,
-            toolbarHeight: MediaQuery.of(context).size.width < 640
-              ? 56
-              : MediaQuery.of(context).size.width < 1080
-              ? 64
-              : 72,
-            title: Center(
-              child: Container(
-                width: style.widgetSize(context),
-                color: style.whiteColor,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'by覺 렌탈센터',
-                      style: TextStyle(
-                        fontSize: style.h1FontSize(context),
-                        fontWeight: style.boldText,
-                        color: style.mainColor,
-                      ),
-                    ),
-                    Container(
-                      child: menuState(context),
-                    ),
-                  ],
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+
+    return _isLoading
+      ? SplashScreen()
+      : Stack(
+        children: [
+          ResponsiveSizer(
+          builder: (context, orientation, screenType) {
+            return Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                backgroundColor: style.whiteColor,
+                toolbarHeight: MediaQuery.of(context).size.width < 640
+                  ? 56
+                  : MediaQuery.of(context).size.width < 1080
+                  ? 64
+                  : 72,
+                title: Center(
+                  child: Container(
+                    width: style.widgetSize(context),
+                    color: style.whiteColor,
+                    child: menuState(context),
+                    // child: Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Text(
+                    //       'by覺 렌탈센터',
+                    //       style: TextStyle(
+                    //         fontSize: style.h1FontSize(context),
+                    //         fontWeight: style.boldText,
+                    //         color: style.mainColor,
+                    //       ),
+                    //     ),
+                    //     Container(
+                    //       child: menuState(context),
+                    //     ),
+                    //   ],
+                    // ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          body: PageView(
-            controller: _controller,
-            scrollDirection: Axis.vertical,
-            onPageChanged: (value) {},
-            children: [
-              Home(),
-              ByKak(),
-              Product(),
-              Contacts(),
-              Location(),
-              Footer(),
-            ],
-          ),
-        );
-      },
-    );
+              body: PageView(
+                controller: _controller,
+                scrollDirection: Axis.vertical,
+                onPageChanged: (value) {},
+                children: [
+                  Home(),
+                  ByKak(),
+                  Product(),
+                  WithCelebrity(),
+                  Contacts(),
+                  Location(),
+                  Footer(),
+                ],
+              ),
+            );
+          },
+    ),
+        ],
+      );
   }
 }
 
@@ -453,7 +548,7 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              '자신감의 시작, 바이각',
+              '그 날을 위한 자신감, 바이각',
               style: TextStyle(
                 fontSize: style.h0FontSize(context),
                 fontWeight: style.boldText,
@@ -542,23 +637,6 @@ class ByKak extends StatelessWidget {
 }
 
 // ----------------------------------------------- Product ------------------------------------------------------------------
-List hoverShadow = [
-  BoxShadow(
-    color: Colors.grey.withOpacity(0),
-  ),
-  BoxShadow(
-    color: Colors.grey.withOpacity(0),
-  ),
-  BoxShadow(
-    color: Colors.grey.withOpacity(0),
-  ),
-  BoxShadow(
-    color: Colors.grey.withOpacity(0),
-  ),
-];
-
-List _nHover = [false, false, false, false];
-
 class Product extends StatefulWidget {
   const Product({super.key});
 
@@ -567,6 +645,7 @@ class Product extends StatefulWidget {
 }
 
 class _ProductState extends State<Product> {
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
@@ -617,127 +696,37 @@ class _ProductState extends State<Product> {
                       crossAxisSpacing: style.paddingSize(context),
                     ),
                     itemBuilder: (context, index) {
-                      List productBox = [
-                        Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [hoverShadow[index]],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: ImageFade(
-                              image: AssetImage(
-                                'assets/images/products/product_${index}.jpg'
-                              ),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, exception) => Icon(Icons.error),
-                              placeholder: Center(
-                                child: SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: CircularProgressIndicator(
-                                    color: style.mainColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [hoverShadow[index]],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: ImageFade(
-                              image: AssetImage(
-                                'assets/images/products/product_${index}.jpg'
-                              ),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, exception) => Icon(Icons.error),
-                              placeholder: Center(
-                                child: SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: CircularProgressIndicator(
-                                    color: style.mainColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [hoverShadow[index]],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: ImageFade(
-                              image: AssetImage(
-                                'assets/images/products/product_${index}.jpg'
-                              ),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, exception) => Icon(Icons.error),
-                              placeholder: Center(
-                                child: SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: CircularProgressIndicator(
-                                    color: style.mainColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [hoverShadow[index]],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: ImageFade(
-                              image: AssetImage(
-                                'assets/images/products/product_${index}.jpg'
-                              ),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, exception) => Icon(Icons.error),
-                              placeholder: Center(
-                                child: SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: CircularProgressIndicator(
-                                    color: style.mainColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ];
                       return InkWell(
-                        child: productBox[index],
-                        onHover: (value) {
-                          // bool _isHover = false;
-                          setState(() {
-                            _nHover[index] = value;
-                          });
-                          //print("Hover? ---> ${_nHover[index]}");
-                          if (_nHover[index] == true) {
-                            hoverShadow[index] = style.boxShadows;
-                          } else {
-                            hoverShadow[index] = BoxShadow(
-                              color: Colors.grey.withOpacity(0),
-                              blurRadius: 4,
-                              offset: Offset(0, 0),
-                            );
-                          }
-                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            boxShadow: [style.boxShadows],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: ImageFade(
+                              image: AssetImage(
+                                'assets/images/products/product_(${index}).jpg'
+                              ),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              placeholder: Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(
+                                    color: style.mainColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                         onTap: () {
                           showDialog(
                             context: context,
                             builder: (context) {
                               return AlertDialog(
+
                                 backgroundColor: Color.fromARGB(0, 0, 0, 0),
                                 title: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -756,16 +745,26 @@ class _ProductState extends State<Product> {
                                     ),
                                   ],
                                 ),
-                                content: Container(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: InteractiveViewer(
-                                      child: Image.asset(
-                                        'assets/images/products/product_${index}.jpg',
-                                        fit: BoxFit.contain,
+                                content: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: InteractiveViewer(
+                                          child: Image.asset(
+                                            'assets/images/products/product_(${index}).jpg',
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    Container(
+                                      width: style.c1BoxSize(context),
+                                      height: style.c1BoxSize(context),
+                                      child: PinchUp(),
+                                    )
+                                  ],
                                 ),
                               );
                             },
@@ -810,6 +809,92 @@ class _ProductState extends State<Product> {
   }
 }
 
+class PinchUp extends StatefulWidget {
+  const PinchUp({super.key});
+
+  @override
+  State<PinchUp> createState() => _PinchUpState();
+}
+
+class _PinchUpState extends State<PinchUp> {
+  bool _showPinchUp = true;
+
+  showPinchUp() {
+    if(_showPinchUp == true) {
+      return style.c1BoxSize(context);
+    } else {
+      return 0;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Future.delayed(Duration(milliseconds: 1000), () {
+      setState(() {
+        _showPinchUp = false;
+      });
+    });
+
+    return _showPinchUp ? Container(
+      width: style.c1BoxSize(context),
+      height: style.c1BoxSize(context),
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: style.greyColor.withOpacity(0.7),
+        borderRadius: BorderRadius.circular(8)
+      ),
+      child: Image.asset(
+        'assets/images/icon_pinchUp.png',
+        fit: BoxFit.contain,
+      ),
+    ) : Container();
+  }
+}
+
+// ----------------------------------------------- With.. ------------------------------------------------------------------
+class WithCelebrity extends StatelessWidget {
+  const WithCelebrity({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        padding: EdgeInsets.all(16),
+        color: style.whiteColor,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'With by覺',
+                style: TextStyle(
+                  fontSize: style.h1FontSize(context),
+                  fontWeight: style.boldText,
+                  color: style.mainColor,
+                ),
+              ),
+              Padding(padding: EdgeInsets.all(8)),
+              Container(
+                width: style.widgetSize(context),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    'assets/images/with_celebrity.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    });
+  }
+}
+
 // ----------------------------------------------- Location ------------------------------------------------------------------
 class Location extends StatelessWidget {
   const Location({super.key});
@@ -836,7 +921,6 @@ class Location extends StatelessWidget {
                 ),
               ),
               Padding(padding: EdgeInsets.all(8)),
-              // 지도누르면 네이버 지도 연결하기 https://map.naver.com/v5/entry/place/1943136667?placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh
               Container(
                 width: style.widgetSize(context),
                 child: InkWell(
@@ -849,11 +933,21 @@ class Location extends StatelessWidget {
                   ),
                   onTap: () async {
                     final url = Uri.parse(
-                        'https://map.naver.com/v5/entry/place/1943136667?placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh');
+                      'https://map.naver.com/v5/entry/place/1943136667?placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh',
+                    );
                     if (await canLaunchUrl(url)) {
                       launchUrl(url, mode: LaunchMode.externalApplication);
                     }
                   },
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(top: 4)),
+              Text(
+                '※ 지도를 클릭하면 네이버 지도로 연결합니다.',
+                style: TextStyle(
+                  fontSize: style.h5FontSize(context),
+                  fontWeight: style.boldText,
+                  color: style.mainColor,
                 ),
               ),
               Padding(
@@ -861,8 +955,9 @@ class Location extends StatelessWidget {
                 child: Text(
                   '바이각 수트렌탈센터',
                   style: TextStyle(
-                      fontSize: style.h3FontSize(context),
-                      color: style.blackColor),
+                    fontSize: style.h3FontSize(context),
+                    color: style.blackColor,
+                  ),
                 ),
               ),
               Padding(
@@ -873,15 +968,10 @@ class Location extends StatelessWidget {
                 child: Text(
                   '(22102) 인천 미추홀구 숙골로 43번길 158-19 3층',
                   style: TextStyle(
-                      fontSize: style.h4FontSize(context),
-                      color: style.blackColor),
-                ),
-              ),
-              Text(
-                '제물포역 2번출구에서 도보 3분',
-                style: TextStyle(
                     fontSize: style.h4FontSize(context),
-                    color: style.blackColor),
+                    color: style.blackColor,
+                  ),
+                ),
               ),
             ],
           ),
@@ -1048,7 +1138,7 @@ class Contacts extends StatelessWidget {
                 Center(
                   child: Container(
                     child: Text(
-                      '바이각 렌탈센터는 월요일부터 토요일, 오전 10시부터 오후 7시까지 운영합니다. 문의해 주시면 정성을 다해 안내해 드리도록 하겠습니다.',
+                      '바이각 렌탈센터는 월요일부터 토요일, 오전 10시부터 오후 7시까지 운영합니다. 문의 주시면 정성을 다해 안내해 드리도록 하겠습니다.',
                       style: TextStyle(
                         fontSize: style.h4FontSize(context),
                         color: style.blackColor,
@@ -1172,7 +1262,7 @@ class Footer extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8),
                           child: Text(
-                            '사업자등록번호 : 000-00-00000',
+                            '사업자등록번호 : 720-86-02241',
                             style: TextStyle(
                               color: style.whiteColor,
                               fontSize: style.h4FontSize(context),

@@ -28,7 +28,7 @@ widgetSize(c) {
   } else if (MediaQuery.of(c).size.width < 1080) {
     return 560;
   } else {
-    return 1000;
+    return 980;
   }
 }
 
@@ -110,6 +110,16 @@ h5FontSize(c) {
     return 14;
   } else {
     return 16;
+  }
+}
+
+h6FontSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 10;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 12;
+  } else {
+    return 14;
   }
 }
 

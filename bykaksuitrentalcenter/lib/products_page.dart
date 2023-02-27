@@ -80,7 +80,7 @@ class _ProductsPageState extends State<ProductsPage> {
                   width: style.widgetSize(context),
                   height: double.infinity,
                   child: GridView.builder(
-                    itemCount: 27,
+                    itemCount: 15,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width < 640
                         ? 2
@@ -95,7 +95,7 @@ class _ProductsPageState extends State<ProductsPage> {
                       return InkWell(
                         child: Container(
                           decoration: BoxDecoration(
-                            // boxShadow: [style.boxShadows],
+                            boxShadow: [style.boxShadows],
                             color: style.whiteColor,
                             borderRadius: BorderRadius.circular(8),
                             // border: Border.all(
@@ -107,7 +107,7 @@ class _ProductsPageState extends State<ProductsPage> {
                             borderRadius: BorderRadius.circular(8),
                             child: ImageFade(
                               image: AssetImage(
-                                'assets/images/products/product_${index}.jpg'
+                                'assets/images/products/product_(${index}).jpg'
                               ),
                               fit: BoxFit.cover,
                               errorBuilder: (context, exception) => Icon(Icons.error),
@@ -135,17 +135,6 @@ class _ProductsPageState extends State<ProductsPage> {
                             //   ),
                             //   errorWidget: (context, url, error) => Icon(Icons.error),
                             // ),
-                            // child: FadeInImage(
-                            //   fadeInDuration: Duration(seconds: 2),
-                            //   placeholderFit: BoxFit.cover,
-                            //   placeholder: AssetImage('assets/images/white.png'),
-                            //   image: AssetImage('assets/images/products/product_$index.jpg'),
-                            //   fit: BoxFit.cover,
-                            // ),
-                            // child: Image.asset(
-                            //   'assets/images/products/product_${index}.jpg',
-                            //   fit: BoxFit.cover,
-                            // ),
                           ),
                         ),
                         onTap: () {
@@ -171,16 +160,26 @@ class _ProductsPageState extends State<ProductsPage> {
                                     ),
                                   ],
                                 ),
-                                content: Container(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: InteractiveViewer(
-                                      child: Image.asset(
-                                        'assets/images/products/product_${index}.jpg',
-                                        fit: BoxFit.contain,
+                                content: Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: InteractiveViewer(
+                                          child: Image.asset(
+                                            'assets/images/products/product_(${index}).jpg',
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    Container(
+                                      width: style.c1BoxSize(context),
+                                      height: style.c1BoxSize(context),
+                                      child: PinchUp(),
+                                    )
+                                  ],
                                 ),
                               );
                             },
