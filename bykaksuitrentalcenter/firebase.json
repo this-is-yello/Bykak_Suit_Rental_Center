@@ -1,11 +1,14 @@
 {
   "hosting": {
+    "site": "bykakrentalcenter",
     "public": "build/web",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
+    "port": 4500,
+    "host": "127.0.0.1",
     "rewrites": [
       {
         "source": "**",
