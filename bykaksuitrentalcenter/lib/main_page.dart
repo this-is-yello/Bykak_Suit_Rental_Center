@@ -28,7 +28,10 @@ class MainPage extends StatefulWidget {
 
 int currentPage = 0;
 bool _isLoading = true;
-
+PageController _controller = PageController(
+  initialPage: 0,
+  keepPage: true,
+);
 
 movePage() {
   _controller.animateToPage(
@@ -38,8 +41,6 @@ movePage() {
   );
 }
 
-PageController _controller = PageController();
-
 class _MainPageState extends State<MainPage> {
   // -------------------- menuState() -------------------- //
   menuState(context) {
@@ -47,14 +48,6 @@ class _MainPageState extends State<MainPage> {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            'by覺 렌탈센터',
-            style: TextStyle(
-              fontSize: style.h1FontSize(context),
-              fontWeight: style.boldText,
-              color: style.mainColor,
-            ),
-          ),
           InkWell(
             child: Icon(
               Icons.menu,
@@ -95,14 +88,14 @@ class _MainPageState extends State<MainPage> {
                         child: Row(
                           children: [
                             Icon(
-                              Icons.home_outlined,
+                              Icons.question_mark_outlined,
                               color: style.mainColor,
                             ),
                             Padding(
                               padding: EdgeInsets.all(4),
                             ),
                             Text(
-                              'ByKak',
+                              'About',
                               style: TextStyle(
                                 color: style.blackColor,
                               ),
@@ -114,7 +107,7 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                       onTap: () {
-                        currentPage = 0;
+                        currentPage = 1;
                         movePage();
                         Get.back();
                       },
@@ -142,7 +135,7 @@ class _MainPageState extends State<MainPage> {
                               padding: EdgeInsets.all(4),
                             ),
                             Text(
-                              'Products',
+                              'Product',
                               style: TextStyle(
                                 color: style.blackColor,
                               ),
@@ -222,7 +215,7 @@ class _MainPageState extends State<MainPage> {
                               padding: EdgeInsets.all(4),
                             ),
                             Text(
-                              'Contacts',
+                              'Contact',
                               style: TextStyle(
                                 color: style.blackColor,
                               ),
@@ -331,9 +324,10 @@ class _MainPageState extends State<MainPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Padding(padding: EdgeInsets.all(8)),
             InkWell(
               child: Text(
-                'ByKak',
+                'About',
                 style: TextStyle(
                   fontSize: 16,
                   color: style.mainColor,
@@ -341,11 +335,11 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               onTap: () {
-                currentPage = 0;
+                currentPage = 1;
                 movePage();
               },
             ),
-            // Padding(padding: EdgeInsets.all(8)),
+            Padding(padding: EdgeInsets.all(12)),
             InkWell(
               child: Text(
                 'Products',
@@ -360,7 +354,7 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            // Padding(padding: EdgeInsets.all(8)),
+            Padding(padding: EdgeInsets.all(12)),
             InkWell(
               child: Text(
                 'With',
@@ -375,15 +369,7 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            Text(
-              'by覺 렌탈센터',
-              style: TextStyle(
-                fontSize: style.h1FontSize(context),
-                fontWeight: style.boldText,
-                color: style.mainColor,
-              ),
-            ),
-            // Padding(padding: EdgeInsets.all(8)),
+            Padding(padding: EdgeInsets.all(12)),
             InkWell(
               child: Text(
                 'Contacts',
@@ -398,7 +384,7 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            // Padding(padding: EdgeInsets.all(8)),
+            Padding(padding: EdgeInsets.all(12)),
             InkWell(
               child: Text(
                 'Location',
@@ -413,7 +399,7 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            // Padding(padding: EdgeInsets.all(8)),
+            Padding(padding: EdgeInsets.all(12)),
             InkWell(
               child: Text(
                 'Information',
@@ -435,26 +421,6 @@ class _MainPageState extends State<MainPage> {
   }
 
   // -------------------- Scaffold -------------------- //
-  @override
-  void initState() {
-    super.initState();
-    // Timer.periodic(
-    //   Duration(seconds: 3),
-    //   (Timer timer) {
-    //     if (currentPage < 6) {
-    //       currentPage++;
-    //     } else {
-    //       currentPage = 0;
-    //     }
-    //     _controller.animateToPage(
-    //       currentPage,
-    //       duration: Duration(milliseconds: 350),
-    //       curve: Curves.easeIn,
-    //     );
-    //   },
-    // );
-  }
-
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 1), () {
@@ -482,23 +448,30 @@ class _MainPageState extends State<MainPage> {
                   child: Container(
                     width: style.widgetSize(context),
                     color: style.whiteColor,
-                    child: menuState(context),
-                    // child: Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     Text(
-                    //       'by覺 렌탈센터',
-                    //       style: TextStyle(
-                    //         fontSize: style.h1FontSize(context),
-                    //         fontWeight: style.boldText,
-                    //         color: style.mainColor,
-                    //       ),
-                    //     ),
-                    //     Container(
-                    //       child: menuState(context),
-                    //     ),
-                    //   ],
-                    // ),
+                    // child: menuState(context),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          child: Text(
+                            'by覺 렌탈센터',
+                            style: TextStyle(
+                              fontSize: style.h1FontSize(context),
+                              fontWeight: style.boldText,
+                              color: style.mainColor,
+                            ),
+                          ),
+                          onTap: () {
+                            currentPage = 0;
+                              movePage();
+                              Get.back();
+                          },
+                        ),
+                        Container(
+                          child: menuState(context),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -507,8 +480,8 @@ class _MainPageState extends State<MainPage> {
                 scrollDirection: Axis.vertical,
                 onPageChanged: (value) {},
                 children: [
-                  Home(),
                   ByKak(),
+                  About(),
                   Product(),
                   WithCelebrity(),
                   Contacts(),
@@ -524,9 +497,10 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-// ----------------------------------------------- Home ------------------------------------------------------------------
-class Home extends StatelessWidget {
-  const Home({super.key});
+
+// ----------------------------------------------- ByKak ------------------------------------------------------------------
+class ByKak extends StatelessWidget {
+  const ByKak({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -555,6 +529,21 @@ class Home extends StatelessWidget {
                 color: style.whiteColor,
               ),
             ),
+            Padding(padding: EdgeInsets.only(top: 8)),
+            Text(
+              '바이각 수트렌탈센터는 인천 최초의 정장렌탈 전문샵입니다.',
+              style: TextStyle(
+                fontSize: style.h5FontSize(context),
+                color: style.whiteColor,
+              ),
+            ),
+            Text(
+              '웨딩, 면접, 데일리 등 그 날에 걸맞는 다양한 수트를 경험하세요.',
+              style: TextStyle(
+                fontSize: style.h5FontSize(context),
+                color: style.whiteColor,
+              ),
+            ),
           ],
         ),
       );
@@ -562,9 +551,115 @@ class Home extends StatelessWidget {
   }
 }
 
-// ----------------------------------------------- ByKak ------------------------------------------------------------------
-class ByKak extends StatelessWidget {
-  const ByKak({super.key});
+
+// ----------------------------------------------- About ------------------------------------------------------------------
+aboutRowState(context) {
+  if (MediaQuery.of(context).size.width > 1080) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          width: 560,
+          // height: 300,
+          decoration: BoxDecoration(
+            color: style.blackColor,
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/home_video_3.gif',
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              'By 覺 D-Day Rental Suit',
+              style: TextStyle(
+                fontSize: style.h0FontSize(context),
+                fontWeight: style.boldText,
+                color: style.blackColor,
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(top: 8)),
+            Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
+              style: TextStyle(
+                fontSize: style.h5FontSize(context),
+                color: style.blackColor,
+              ),
+            ),
+            Text(
+              'sed do eiusmod tempor incididunt ut labore et dolore',
+              style: TextStyle(
+                fontSize: style.h5FontSize(context),
+                color: style.blackColor,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  } else {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: double.infinity,
+          height: 300,
+          decoration: BoxDecoration(
+            color: style.blackColor,
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/home_video_3.gif',
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+            top: style.paddingSize(context),
+          ),
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              'By 覺 D-Day Rental Suit',
+              style: TextStyle(
+                fontSize: style.h1FontSize(context),
+                fontWeight: style.boldText,
+                color: style.blackColor,
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(top: 8)),
+            Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
+              style: TextStyle(
+                fontSize: style.h6FontSize(context),
+                color: style.blackColor,
+              ),
+            ),
+            Text(
+              'sed do eiusmod tempor incididunt ut labore et dolore',
+              style: TextStyle(
+                fontSize: style.h6FontSize(context),
+                color: style.blackColor,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class About extends StatelessWidget {
+  const About({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -572,69 +667,20 @@ class ByKak extends StatelessWidget {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: style.blackColor,
-          image: DecorationImage(
-            image: AssetImage(
-              'assets/images/home_video_2.gif',
-            ),
-            fit: BoxFit.cover,
-            // colorFilter: ColorFilter.mode(
-            //   style.blackColor.withOpacity(0.8),
-            //   BlendMode.modulate,
-            // ),
-          ),
+          color: style.whiteColor,
         ),
-        child: Container(
-          width: style.widgetSize(context),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  'By 覺 D-Day Rental Suit ',
-                  style: TextStyle(
-                    fontSize: style.h0FontSize(context),
-                    fontWeight: style.boldText,
-                    color: style.whiteColor,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  right: 16,
-                ),
-                child: Container(
-                  width: style.widgetSize(context),
-                  child: Column(
-                    children: [
-                      Text(
-                        '바이각 수트렌탈센터는 인천 최초의 정장렌탈 전문샵입니다.',
-                        style: TextStyle(
-                            fontSize: style.h5FontSize(context),
-                            color: style.whiteColor),
-                      ),
-                      Text(
-                        '웨딩, 면접, 데일리 등 그 날에 걸맞는 다양한 수트를 경험하세요.',
-                        style: TextStyle(
-                            fontSize: style.h5FontSize(context),
-                            color: style.whiteColor),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+        child: Center(
+          child: Container(
+            width: style.widgetSize(context),
+            child: aboutRowState(context)
           ),
         ),
       );
     });
   }
 }
+
 
 // ----------------------------------------------- Product ------------------------------------------------------------------
 class Product extends StatefulWidget {
@@ -674,23 +720,24 @@ class _ProductState extends State<Product> {
                 Container(
                   width: style.widgetSize(context),
                   height: MediaQuery.of(context).size.width < 640
-                      ? 224
+                      ? 450
                       : MediaQuery.of(context).size.width < 1080
-                      ? 224
-                      : 300,
+                      ? 460
+                      : 480,
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: false,
                     itemCount: MediaQuery.of(context).size.width < 640
-                        ? 2
+                        ? 4
                         : MediaQuery.of(context).size.width < 1080
-                        ? 3
-                        : 4,
+                        ? 6
+                        : 10,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width < 640
                           ? 2
                           : MediaQuery.of(context).size.width < 1080
                           ? 3
-                          : 4,
+                          : 5,
                       childAspectRatio: 1 / 1.2,
                       mainAxisSpacing: style.paddingSize(context),
                       crossAxisSpacing: style.paddingSize(context),
@@ -699,6 +746,8 @@ class _ProductState extends State<Product> {
                       return InkWell(
                         child: Container(
                           decoration: BoxDecoration(
+                            color: style.whiteColor,
+                            borderRadius: BorderRadius.circular(8),
                             boxShadow: [style.boxShadows],
                           ),
                           child: ClipRRect(
@@ -726,7 +775,6 @@ class _ProductState extends State<Product> {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-
                                 backgroundColor: Color.fromARGB(0, 0, 0, 0),
                                 title: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -829,7 +877,7 @@ class _PinchUpState extends State<PinchUp> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 1000), () {
+    Future.delayed(Duration(milliseconds: 800), () {
       setState(() {
         _showPinchUp = false;
       });
@@ -850,6 +898,7 @@ class _PinchUpState extends State<PinchUp> {
     ) : Container();
   }
 }
+
 
 // ----------------------------------------------- With.. ------------------------------------------------------------------
 class WithCelebrity extends StatelessWidget {
@@ -894,6 +943,7 @@ class WithCelebrity extends StatelessWidget {
     });
   }
 }
+
 
 // ----------------------------------------------- Location ------------------------------------------------------------------
 class Location extends StatelessWidget {
@@ -981,6 +1031,7 @@ class Location extends StatelessWidget {
   }
 }
 
+
 // ----------------------------------------------- Contacts ------------------------------------------------------------------
 class Contacts extends StatelessWidget {
   const Contacts({super.key});
@@ -1012,8 +1063,21 @@ class Contacts extends StatelessWidget {
                   padding: EdgeInsets.all(20),
                 ),
                 Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  width: style.widgetSize(context),
+                  height: MediaQuery.of(context).size.width < 640
+                      ? 360
+                      : 180,
+                  child: GridView(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: false,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: MediaQuery.of(context).size.width < 640
+                            ? 2
+                            : 4,
+                        childAspectRatio: 1 / 1,
+                        mainAxisSpacing: style.paddingSize(context),
+                        crossAxisSpacing: style.paddingSize(context),
+                    ),
                     children: [
                       InkWell(
                         child: Column(
@@ -1099,46 +1163,42 @@ class Contacts extends StatelessWidget {
                           }
                         },
                       ),
+                      InkWell(
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/images/logo_phone.png',
+                              fit: BoxFit.contain,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8),
+                              child: Text(
+                                '070-7893-3059',
+                                style: TextStyle(
+                                  fontSize: style.h5FontSize(context),
+                                  color: style.greyColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () async {
+                          final url = Uri.parse('tel:+82 070 7893 3059');
+                          if (await canLaunchUrl(url)) {
+                            launchUrl(url, mode: LaunchMode.externalApplication);
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(12),
-                ),
-                Center(
-                  child: InkWell(
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            'assets/images/logo_phone.png',
-                            fit: BoxFit.contain,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Text(
-                              '070-7893-3059',
-                              style: TextStyle(
-                                fontSize: style.h3FontSize(context),
-                                color: style.greyColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      onTap: () async {
-                        final url = Uri.parse('tel:+82 070 7893 3059');
-                        if (await canLaunchUrl(url)) {
-                          launchUrl(url, mode: LaunchMode.externalApplication);
-                        }
-                      }),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.all(8),
+                // ),
                 Center(
                   child: Container(
                     child: Text(
-                      '바이각 렌탈센터는 월요일부터 토요일, 오전 10시부터 오후 7시까지 운영합니다. 문의 주시면 정성을 다해 안내해 드리도록 하겠습니다.',
+                      '저희 매장은 월요일부터 토요일, 오전10시부터 오후7시까지 운영합니다. 자세한 사항은 문의해 주시면 안내해 드리도록 하겠습니다.',
                       style: TextStyle(
                         fontSize: style.h4FontSize(context),
                         color: style.blackColor,
@@ -1154,6 +1214,7 @@ class Contacts extends StatelessWidget {
     });
   }
 }
+
 
 // ----------------------------------------------- Footer ------------------------------------------------------------------
 class Footer extends StatelessWidget {

@@ -80,7 +80,7 @@ class _ProductsPageState extends State<ProductsPage> {
                   width: style.widgetSize(context),
                   height: double.infinity,
                   child: GridView.builder(
-                    itemCount: 15,
+                    itemCount: 22,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width < 640
                         ? 2

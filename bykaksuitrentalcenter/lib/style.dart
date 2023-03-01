@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:get/get.dart';
 
 final auth = FirebaseAuth.instance;
 final firestore = FirebaseFirestore.instance;
@@ -49,6 +50,16 @@ productPicHeight(c) {
     return 560;
   } else {
     return 640;
+  }
+}
+
+shopPicWidth(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 200;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 380;
+  } else {
+    return 600;
   }
 }
 

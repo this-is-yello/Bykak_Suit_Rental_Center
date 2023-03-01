@@ -34,11 +34,11 @@ dependencies:
   responsive_sizer: ^3.1.1
   side_sheet: ^1.0.4
   url_launcher: ^6.1.9
-  cached_network_image: ^3.2.3
   image_fade: ^0.6.2
-
   carousel_slider: ^4.2.1
-  opscroll_web: ^0.3.2
+
+  # cached_network_image: ^3.2.3
+  # opscroll_web: ^0.3.2
 
   firebase_core: ^2.4.1
   firebase_auth: ^4.2.4
@@ -83,6 +83,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/products/
     # ---------- thumbnail ----------
     - assets/images/home_video_2.gif
     - assets/images/home_video_3.gif
@@ -117,6 +118,13 @@ flutter:
     - assets/images/products/product_(12).jpg
     - assets/images/products/product_(13).jpg
     - assets/images/products/product_(14).jpg
+    - assets/images/products/product_(15).jpg
+    - assets/images/products/product_(16).jpg
+    - assets/images/products/product_(17).jpg
+    - assets/images/products/product_(18).jpg
+    - assets/images/products/product_(19).jpg
+    - assets/images/products/product_(20).jpg
+    - assets/images/products/product_(21).jpg
     # ---------- etc ----------
     - .env # path to your .env file
   #   - images/a_dot_burr.jpeg
