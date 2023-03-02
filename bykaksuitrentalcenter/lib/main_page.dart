@@ -1282,7 +1282,7 @@ class Footer extends StatelessWidget {
                             fit: BoxFit.contain, scale: 1.5),
                         onTap: () async {
                           final url = Uri.parse(
-                              'https://www.instagram.com/kimjuhyeon_by_kak/');
+                              'https://instagram.com/bykak_rental?igshid=YmMyMTA2M2Y=');
                           if (await canLaunchUrl(url)) {
                             launchUrl(url,
                                 mode: LaunchMode.externalApplication);
