@@ -4,6 +4,8 @@ import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_sheet/side_sheet.dart';
+import 'package:flutter_arc_speed_dial/flutter_speed_dial_menu_button.dart';
+import 'package:flutter_arc_speed_dial/main_menu_floating_action_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
@@ -42,6 +44,8 @@ movePage() {
 }
 
 class _MainPageState extends State<MainPage> {
+
+
   // -------------------- menuState() -------------------- //
   menuState(context) {
     if (MediaQuery.of(context).size.width < 1080) {
@@ -420,6 +424,126 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
+  bool _isShowDial = false;
+
+  Widget _getFloatingActionButton() {
+    return SpeedDialMenuButton(
+      //if needed to close the menu after clicking sub-FAB
+      isShowSpeedDial: _isShowDial,
+      //manually open or close menu
+      updateSpeedDialStatus: (isShow) {
+        //return any open or close change within the widget
+        this._isShowDial = isShow;
+      },
+      //general init
+      isMainFABMini: false,
+      mainMenuFloatingActionButton: MainMenuFloatingActionButton(
+        mini: false,
+        child: Icon(Icons.headset_mic_outlined),
+        backgroundColor: style.mainColor,
+        closeMenuChild: Icon(Icons.close),
+        closeMenuBackgroundColor: style.mainColor,
+        onPressed: () {},
+      ),
+      floatingActionButtonWidgetChildren: <FloatingActionButton>[
+        FloatingActionButton(
+          // mini: true,
+          child: Container(
+            padding: EdgeInsets.all(8),
+            child: Image.asset(
+              'assets/images/logo_phone.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+          onPressed: () async {
+            _isShowDial = false;
+            final url = Uri.parse(
+              'tel:070 7893 3059',
+            );
+            if (await canLaunchUrl(url)) {
+              launchUrl(
+                url,
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          backgroundColor: Colors.white,
+        ),
+        FloatingActionButton(
+          // mini: true,
+          child: Container(
+            padding: EdgeInsets.all(8),
+            child: Image.asset(
+              'assets/images/logo_kakao.png',
+              fit: BoxFit.scaleDown,
+            ),
+          ),
+          onPressed: () async {
+            //if need to close menu after click
+            _isShowDial = false;
+            final url = Uri.parse(
+              'http://pf.kakao.com/_UxoHxbT/chat',
+            );
+            if (await canLaunchUrl(url)) {
+              launchUrl(
+                url,
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          backgroundColor: Color(0xFFFAE100),
+        ),
+        FloatingActionButton(
+          // mini: true,
+          child: Container(
+            padding: EdgeInsets.all(8),
+            child: Image.asset(
+              'assets/images/logo_talktalk.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+          onPressed: () async {
+            //if need to toggle menu after click
+            _isShowDial = false;
+            final url = Uri.parse(
+              'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
+            );
+            if (
+              await canLaunchUrl(url)) {
+              launchUrl(
+                url,
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          backgroundColor: Color(0xFF19CE60),
+        ),
+        // FloatingActionButton(
+        //   // mini: true,
+        //   child: Image.asset(
+        //     'assets/images/logo_naver.png',
+        //     fit: BoxFit.contain,
+        //   ),
+        //   onPressed: () async {
+        //     _isShowDial = false;
+        //     final url = Uri.parse(
+        //       'https://booking.naver.com/booking/13/bizes/839741',
+        //     );
+        //     if (await canLaunchUrl(url)) {
+        //       launchUrl(
+        //         url,
+        //         mode: LaunchMode.externalApplication,
+        //       );
+        //     }
+        //   },
+        //   backgroundColor: Color(0xFF19CE60),
+        // ),
+      ],
+      isSpeedDialFABsMini: true,
+      paddingBtwSpeedDialButton: 30.0,
+    );
+  }
+
   // -------------------- Scaffold -------------------- //
   @override
   Widget build(BuildContext context) {
@@ -434,64 +558,65 @@ class _MainPageState extends State<MainPage> {
       : Stack(
         children: [
           ResponsiveSizer(
-          builder: (context, orientation, screenType) {
-            return Scaffold(
-              appBar: AppBar(
-                automaticallyImplyLeading: false,
-                backgroundColor: style.whiteColor,
-                toolbarHeight: MediaQuery.of(context).size.width < 640
-                  ? 56
-                  : MediaQuery.of(context).size.width < 1080
-                  ? 64
-                  : 72,
-                title: Center(
-                  child: Container(
-                    width: style.widgetSize(context),
-                    color: style.whiteColor,
-                    // child: menuState(context),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          child: Text(
-                            'by覺 렌탈센터',
-                            style: TextStyle(
-                              fontSize: style.h1FontSize(context),
-                              fontWeight: style.boldText,
-                              color: style.mainColor,
+            builder: (context, orientation, screenType) {
+              return Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  backgroundColor: style.whiteColor,
+                  toolbarHeight: MediaQuery.of(context).size.width < 640
+                    ? 56
+                    : MediaQuery.of(context).size.width < 1080
+                    ? 64
+                    : 72,
+                  title: Center(
+                    child: Container(
+                      width: style.widgetSize(context),
+                      color: style.whiteColor,
+                      // child: menuState(context),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            child: Text(
+                              'by覺 렌탈센터',
+                              style: TextStyle(
+                                fontSize: style.h1FontSize(context),
+                                fontWeight: style.boldText,
+                                color: style.mainColor,
+                              ),
                             ),
+                            onTap: () {
+                              currentPage = 0;
+                                movePage();
+                                Get.back();
+                            },
                           ),
-                          onTap: () {
-                            currentPage = 0;
-                              movePage();
-                              Get.back();
-                          },
-                        ),
-                        Container(
-                          child: menuState(context),
-                        ),
-                      ],
+                          Container(
+                            child: menuState(context),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              body: PageView(
-                controller: _controller,
-                scrollDirection: Axis.vertical,
-                onPageChanged: (value) {},
-                children: [
-                  ByKak(),
-                  About(),
-                  Product(),
-                  WithCelebrity(),
-                  Contacts(),
-                  Location(),
-                  Footer(),
-                ],
-              ),
-            );
-          },
-    ),
+                body: PageView(
+                  controller: _controller,
+                  scrollDirection: Axis.vertical,
+                  onPageChanged: (value) {},
+                  children: [
+                    ByKak(),
+                    About(),
+                    Product(),
+                    WithCelebrity(),
+                    Contacts(),
+                    Location(),
+                    Footer(),
+                  ],
+                ),
+                floatingActionButton: _getFloatingActionButton(),
+              );
+            },
+          ),
         ],
       );
   }
@@ -529,21 +654,6 @@ class ByKak extends StatelessWidget {
                 color: style.whiteColor,
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 8)),
-            Text(
-              '바이각 수트렌탈센터는 인천 최초의 정장렌탈 전문샵입니다.',
-              style: TextStyle(
-                fontSize: style.h5FontSize(context),
-                color: style.whiteColor,
-              ),
-            ),
-            Text(
-              '웨딩, 면접, 데일리 등 그 날에 걸맞는 다양한 수트를 경험하세요.',
-              style: TextStyle(
-                fontSize: style.h5FontSize(context),
-                color: style.whiteColor,
-              ),
-            ),
           ],
         ),
       );
@@ -558,47 +668,54 @@ aboutRowState(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-          width: 560,
-          // height: 300,
-          decoration: BoxDecoration(
-            color: style.blackColor,
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/home_video_3.gif',
+        Flexible(
+          fit: FlexFit.tight,
+          child: Container(
+            decoration: BoxDecoration(
+              // color: style.blackColor,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                'assets/images/inner_shop_1.gif',
+                fit: BoxFit.fitWidth,
               ),
-              fit: BoxFit.cover,
             ),
           ),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              'By 覺 D-Day Rental Suit',
-              style: TextStyle(
-                fontSize: style.h0FontSize(context),
-                fontWeight: style.boldText,
-                color: style.blackColor,
-              ),
+        Flexible(
+          fit: FlexFit.tight,
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'By 覺 D-Day Rental Suit',
+                  style: TextStyle(
+                    fontSize: style.h0FontSize(context),
+                    fontWeight: style.boldText,
+                    color: style.blackColor,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.only(top: 8)),
+                Text(
+                  '바이각 수트렌탈센터는 인천 최초의 정장렌탈 전문샵입니다.',
+                  style: TextStyle(
+                    fontSize: style.h5FontSize(context),
+                    color: style.blackColor,
+                  ),
+                ),
+                Text(
+                  '웨딩, 면접, 데일리 등 그 날에 걸맞는 다양한 수트를 경험하세요.',
+                  style: TextStyle(
+                    fontSize: style.h5FontSize(context),
+                    color: style.blackColor,
+                  ),
+                ),
+              ],
             ),
-            Padding(padding: EdgeInsets.only(top: 8)),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
-              style: TextStyle(
-                fontSize: style.h5FontSize(context),
-                color: style.blackColor,
-              ),
-            ),
-            Text(
-              'sed do eiusmod tempor incididunt ut labore et dolore',
-              style: TextStyle(
-                fontSize: style.h5FontSize(context),
-                color: style.blackColor,
-              ),
-            ),
-          ],
+          ),
         ),
       ],
     );
@@ -608,14 +725,14 @@ aboutRowState(context) {
       children: [
         Container(
           width: double.infinity,
-          height: 300,
           decoration: BoxDecoration(
-            color: style.blackColor,
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/home_video_3.gif',
-              ),
-              fit: BoxFit.cover,
+            // color: style.blackColor,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              'assets/images/inner_shop_1.gif',
+              fit: BoxFit.fitWidth,
             ),
           ),
         ),
@@ -626,7 +743,7 @@ aboutRowState(context) {
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               'By 覺 D-Day Rental Suit',
@@ -636,16 +753,20 @@ aboutRowState(context) {
                 color: style.blackColor,
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 8)),
+            Padding(
+              padding: EdgeInsets.only(
+                top: style.paddingSize(context)
+              ),
+            ),
             Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit,',
+              '바이각 수트렌탈센터는 인천 최초의 정장렌탈 전문샵입니다.',
               style: TextStyle(
                 fontSize: style.h6FontSize(context),
                 color: style.blackColor,
               ),
             ),
             Text(
-              'sed do eiusmod tempor incididunt ut labore et dolore',
+              '웨딩, 면접, 데일리 등 그 날에 걸맞는 다양한 수트를 경험하세요.',
               style: TextStyle(
                 fontSize: style.h6FontSize(context),
                 color: style.blackColor,
@@ -673,9 +794,10 @@ class About extends StatelessWidget {
         child: Center(
           child: Container(
             width: style.widgetSize(context),
-            child: aboutRowState(context)
+            padding: EdgeInsets.all(16),
+            child: aboutRowState(context),
           ),
-        ),
+        )
       );
     });
   }
@@ -698,12 +820,12 @@ class _ProductState extends State<Product> {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.all(16),
         color: style.whiteColor,
         child: Center(
           child: Container(
             width: style.widgetSize(context),
             height: double.infinity,
+            padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -720,10 +842,10 @@ class _ProductState extends State<Product> {
                 Container(
                   width: style.widgetSize(context),
                   height: MediaQuery.of(context).size.width < 640
-                      ? 450
+                      ? 400
                       : MediaQuery.of(context).size.width < 1080
-                      ? 460
-                      : 480,
+                      ? 420
+                      : 570,
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: false,
@@ -731,13 +853,13 @@ class _ProductState extends State<Product> {
                         ? 4
                         : MediaQuery.of(context).size.width < 1080
                         ? 6
-                        : 10,
+                        : 8,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width < 640
                           ? 2
                           : MediaQuery.of(context).size.width < 1080
                           ? 3
-                          : 5,
+                          : 4,
                       childAspectRatio: 1 / 1.2,
                       mainAxisSpacing: style.paddingSize(context),
                       crossAxisSpacing: style.paddingSize(context),
@@ -748,7 +870,7 @@ class _ProductState extends State<Product> {
                           decoration: BoxDecoration(
                             color: style.whiteColor,
                             borderRadius: BorderRadius.circular(8),
-                            boxShadow: [style.boxShadows],
+                            // boxShadow: [style.boxShadows],
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
@@ -910,120 +1032,33 @@ class WithCelebrity extends StatelessWidget {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.all(16),
         color: style.whiteColor,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'With by覺',
-                style: TextStyle(
-                  fontSize: style.h1FontSize(context),
-                  fontWeight: style.boldText,
-                  color: style.mainColor,
+          child: Container(
+            width: style.widgetSize(context),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'With by覺',
+                  style: TextStyle(
+                    fontSize: style.h1FontSize(context),
+                    fontWeight: style.boldText,
+                    color: style.mainColor,
+                  ),
                 ),
-              ),
-              Padding(padding: EdgeInsets.all(8)),
-              Container(
-                width: style.widgetSize(context),
-                child: ClipRRect(
+                Padding(padding: EdgeInsets.all(8)),
+                ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
                     'assets/images/with_celebrity.png',
                     fit: BoxFit.cover,
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      );
-    });
-  }
-}
-
-
-// ----------------------------------------------- Location ------------------------------------------------------------------
-class Location extends StatelessWidget {
-  const Location({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveSizer(builder: (context, orientation, screenType) {
-      return Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.all(16),
-        color: style.whiteColor,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Location',
-                style: TextStyle(
-                  fontSize: style.h1FontSize(context),
-                  fontWeight: style.boldText,
-                  color: style.mainColor,
-                ),
-              ),
-              Padding(padding: EdgeInsets.all(8)),
-              Container(
-                width: style.widgetSize(context),
-                child: InkWell(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      'assets/images/rental_center_location.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  onTap: () async {
-                    final url = Uri.parse(
-                      'https://map.naver.com/v5/entry/place/1943136667?placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh',
-                    );
-                    if (await canLaunchUrl(url)) {
-                      launchUrl(url, mode: LaunchMode.externalApplication);
-                    }
-                  },
-                ),
-              ),
-              Padding(padding: EdgeInsets.only(top: 4)),
-              Text(
-                '※ 지도를 클릭하면 네이버 지도로 연결합니다.',
-                style: TextStyle(
-                  fontSize: style.h5FontSize(context),
-                  fontWeight: style.boldText,
-                  color: style.mainColor,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(
-                  '바이각 수트렌탈센터',
-                  style: TextStyle(
-                    fontSize: style.h3FontSize(context),
-                    color: style.blackColor,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 8,
-                  bottom: 8,
-                ),
-                child: Text(
-                  '(22102) 인천 미추홀구 숙골로 43번길 158-19 3층',
-                  style: TextStyle(
-                    fontSize: style.h4FontSize(context),
-                    color: style.blackColor,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );
@@ -1042,11 +1077,11 @@ class Contacts extends StatelessWidget {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.all(16),
         color: style.whiteColor,
         child: Center(
           child: Container(
             width: style.widgetSize(context),
+            padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1077,6 +1112,7 @@ class Contacts extends StatelessWidget {
                         childAspectRatio: 1 / 1,
                         mainAxisSpacing: style.paddingSize(context),
                         crossAxisSpacing: style.paddingSize(context),
+                        // mainAxisExtent: style.widgetSize(context)
                     ),
                     children: [
                       InkWell(
@@ -1173,7 +1209,7 @@ class Contacts extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8),
                               child: Text(
-                                '070-7893-3059',
+                                '070 7893 3059',
                                 style: TextStyle(
                                   fontSize: style.h5FontSize(context),
                                   color: style.greyColor,
@@ -1183,7 +1219,7 @@ class Contacts extends StatelessWidget {
                           ],
                         ),
                         onTap: () async {
-                          final url = Uri.parse('tel:+82 070 7893 3059');
+                          final url = Uri.parse('tel:070 7893 3059');
                           if (await canLaunchUrl(url)) {
                             launchUrl(url, mode: LaunchMode.externalApplication);
                           }
@@ -1203,6 +1239,93 @@ class Contacts extends StatelessWidget {
                         fontSize: style.h4FontSize(context),
                         color: style.blackColor,
                       ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    });
+  }
+}
+
+
+// ----------------------------------------------- Location ------------------------------------------------------------------
+class Location extends StatelessWidget {
+  const Location({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: style.whiteColor,
+        child: Center(
+          child: Container(
+            width: style.widgetSize(context),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Location',
+                  style: TextStyle(
+                    fontSize: style.h1FontSize(context),
+                    fontWeight: style.boldText,
+                    color: style.mainColor,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                InkWell(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      'assets/images/rental_center_location.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  onTap: () async {
+                    final url = Uri.parse(
+                      'https://map.naver.com/v5/entry/place/1943136667?placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(url, mode: LaunchMode.externalApplication);
+                    }
+                  },
+                ),
+                Padding(padding: EdgeInsets.only(top: 4)),
+                Text(
+                  '※ 지도를 클릭하면 네이버 지도로 연결합니다.',
+                  style: TextStyle(
+                    fontSize: style.h5FontSize(context),
+                    fontWeight: style.boldText,
+                    color: style.mainColor,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Text(
+                    '바이각 수트렌탈센터',
+                    style: TextStyle(
+                      fontSize: style.h3FontSize(context),
+                      color: style.blackColor,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 8,
+                    bottom: 8,
+                  ),
+                  child: Text(
+                    '(22102) 인천 미추홀구 숙골로 43번길 158-19 3층',
+                    style: TextStyle(
+                      fontSize: style.h4FontSize(context),
+                      color: style.blackColor,
                     ),
                   ),
                 ),

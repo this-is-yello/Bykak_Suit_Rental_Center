@@ -36,6 +36,7 @@ dependencies:
   url_launcher: ^6.1.9
   image_fade: ^0.6.2
   carousel_slider: ^4.2.1
+  flutter_arc_speed_dial: ^2.0.1
 
   # cached_network_image: ^3.2.3
   # opscroll_web: ^0.3.2
@@ -126,6 +127,7 @@ flutter:
     - assets/images/products/product_(20).jpg
     - assets/images/products/product_(21).jpg
     # ---------- etc ----------
+    - assets/images/inner_shop_1.gif
     - .env # path to your .env file
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

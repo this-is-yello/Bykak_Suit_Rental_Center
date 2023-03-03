@@ -32,6 +32,10 @@ class _ProductsPageState extends State<ProductsPage> {
     imgCheck();
   }
 
+ @override
+ void dispose(){
+  super.dispose();
+ }
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 1), () {
@@ -77,7 +81,7 @@ class _ProductsPageState extends State<ProductsPage> {
               ),
               child: Center(
                 child: Container(
-                  width: style.widgetSize(context),
+                  // width: style.widgetSize(context),
                   height: double.infinity,
                   child: GridView.builder(
                     itemCount: 22,
@@ -95,7 +99,7 @@ class _ProductsPageState extends State<ProductsPage> {
                       return InkWell(
                         child: Container(
                           decoration: BoxDecoration(
-                            boxShadow: [style.boxShadows],
+                            // boxShadow: [style.boxShadows],
                             color: style.whiteColor,
                             borderRadius: BorderRadius.circular(8),
                             // border: Border.all(
@@ -209,12 +213,18 @@ class ProductsAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            'by覺 렌탈센터',
-            style: TextStyle(
-              color: style.mainColor,
-              fontWeight: style.boldText,
+          InkWell(
+            child: Text(
+              'by覺 렌탈센터',
+              style: TextStyle(
+                fontSize: style.h1FontSize(context),
+                fontWeight: style.boldText,
+                color: style.mainColor,
+              ),
             ),
+            onTap: () {
+              Get.offAllNamed('/');
+            },
           ),
         ],
       ),
