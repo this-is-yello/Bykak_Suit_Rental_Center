@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'firebase_options.dart';
 import 'package:get/get.dart';
 
 final auth = FirebaseAuth.instance;
@@ -15,7 +15,11 @@ var greyColor = Color(0xFF9E9E9E);
 var lightGreyColor = Color(0xFFEEEEEE);
 var whiteColor = Color(0xFFFFFFFF);
 
-var boldText = FontWeight.w700;
+var kakaoColor = Color(0xFFFAE100);
+var naverColor = Color(0xFF19CE60);
+
+var boldText = FontWeight.w500;
+var thinText = FontWeight.w100;
 
 var boxShadows = BoxShadow(
   color: blackColor.withOpacity(0.5),

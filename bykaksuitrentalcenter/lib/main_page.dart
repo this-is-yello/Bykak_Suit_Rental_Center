@@ -4,8 +4,7 @@ import 'package:bykaksuitrentalcenter/style.dart' as style;
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_sheet/side_sheet.dart';
-import 'package:flutter_arc_speed_dial/flutter_speed_dial_menu_button.dart';
-import 'package:flutter_arc_speed_dial/main_menu_floating_action_button.dart';
+import 'package:simple_speed_dial/simple_speed_dial.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
@@ -34,7 +33,6 @@ PageController _controller = PageController(
   initialPage: 0,
   keepPage: true,
 );
-
 movePage() {
   _controller.animateToPage(
     currentPage,
@@ -44,8 +42,6 @@ movePage() {
 }
 
 class _MainPageState extends State<MainPage> {
-
-
   // -------------------- menuState() -------------------- //
   menuState(context) {
     if (MediaQuery.of(context).size.width < 1080) {
@@ -196,46 +192,46 @@ class _MainPageState extends State<MainPage> {
                         Get.back();
                       },
                     ),
-                    InkWell(
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 2,
-                              color: style.lightGreyColor,
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.phone_outlined,
-                              color: style.mainColor,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                            Text(
-                              'Contact',
-                              style: TextStyle(
-                                color: style.blackColor,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        currentPage = 4;
-                        movePage();
-                        Get.back();
-                      },
-                    ),
+                    // InkWell(
+                    //   child: Container(
+                    //     width: double.infinity,
+                    //     height: 56,
+                    //     padding: EdgeInsets.all(8),
+                    //     decoration: BoxDecoration(
+                    //       border: Border(
+                    //         bottom: BorderSide(
+                    //           width: 2,
+                    //           color: style.lightGreyColor,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     child: Row(
+                    //       children: [
+                    //         Icon(
+                    //           Icons.phone_outlined,
+                    //           color: style.mainColor,
+                    //         ),
+                    //         Padding(
+                    //           padding: EdgeInsets.all(4),
+                    //         ),
+                    //         Text(
+                    //           'Contact',
+                    //           style: TextStyle(
+                    //             color: style.blackColor,
+                    //           ),
+                    //         ),
+                    //         Padding(
+                    //           padding: EdgeInsets.all(4),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    //   onTap: () {
+                    //     currentPage = 4;
+                    //     movePage();
+                    //     Get.back();
+                    //   },
+                    // ),
                     InkWell(
                       child: Container(
                         width: double.infinity,
@@ -271,7 +267,7 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                       onTap: () {
-                        currentPage = 5;
+                        currentPage = 4;
                         movePage();
                         Get.back();
                       },
@@ -311,7 +307,7 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                       onTap: () {
-                        currentPage = 6;
+                        currentPage = 5;
                         movePage();
                         Get.back();
                       },
@@ -373,10 +369,25 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
+            // Padding(padding: EdgeInsets.all(12)),
+            // InkWell(
+            //   child: Text(
+            //     'Contacts',
+            //     style: TextStyle(
+            //       fontSize: 16,
+            //       color: style.mainColor,
+            //       fontWeight: style.boldText,
+            //     ),
+            //   ),
+            //   onTap: () {
+            //     currentPage = 4;
+            //     movePage();
+            //   },
+            // ),
             Padding(padding: EdgeInsets.all(12)),
             InkWell(
               child: Text(
-                'Contacts',
+                'Location',
                 style: TextStyle(
                   fontSize: 16,
                   color: style.mainColor,
@@ -391,7 +402,7 @@ class _MainPageState extends State<MainPage> {
             Padding(padding: EdgeInsets.all(12)),
             InkWell(
               child: Text(
-                'Location',
+                'Information',
                 style: TextStyle(
                   fontSize: 16,
                   color: style.mainColor,
@@ -403,145 +414,10 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            Padding(padding: EdgeInsets.all(12)),
-            InkWell(
-              child: Text(
-                'Information',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: style.mainColor,
-                  fontWeight: style.boldText,
-                ),
-              ),
-              onTap: () {
-                currentPage = 6;
-                movePage();
-              },
-            ),
           ],
         ),
       );
     }
-  }
-
-  bool _isShowDial = false;
-
-  Widget _getFloatingActionButton() {
-    return SpeedDialMenuButton(
-      //if needed to close the menu after clicking sub-FAB
-      isShowSpeedDial: _isShowDial,
-      //manually open or close menu
-      updateSpeedDialStatus: (isShow) {
-        //return any open or close change within the widget
-        this._isShowDial = isShow;
-      },
-      //general init
-      isMainFABMini: false,
-      mainMenuFloatingActionButton: MainMenuFloatingActionButton(
-        mini: false,
-        child: Icon(Icons.headset_mic_outlined),
-        backgroundColor: style.mainColor,
-        closeMenuChild: Icon(Icons.close),
-        closeMenuBackgroundColor: style.mainColor,
-        onPressed: () {},
-      ),
-      floatingActionButtonWidgetChildren: <FloatingActionButton>[
-        FloatingActionButton(
-          // mini: true,
-          child: Container(
-            padding: EdgeInsets.all(8),
-            child: Image.asset(
-              'assets/images/logo_phone.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-          onPressed: () async {
-            _isShowDial = false;
-            final url = Uri.parse(
-              'tel:070 7893 3059',
-            );
-            if (await canLaunchUrl(url)) {
-              launchUrl(
-                url,
-                mode: LaunchMode.externalApplication,
-              );
-            }
-          },
-          backgroundColor: Colors.white,
-        ),
-        FloatingActionButton(
-          // mini: true,
-          child: Container(
-            padding: EdgeInsets.all(8),
-            child: Image.asset(
-              'assets/images/logo_kakao.png',
-              fit: BoxFit.scaleDown,
-            ),
-          ),
-          onPressed: () async {
-            //if need to close menu after click
-            _isShowDial = false;
-            final url = Uri.parse(
-              'http://pf.kakao.com/_UxoHxbT/chat',
-            );
-            if (await canLaunchUrl(url)) {
-              launchUrl(
-                url,
-                mode: LaunchMode.externalApplication,
-              );
-            }
-          },
-          backgroundColor: Color(0xFFFAE100),
-        ),
-        FloatingActionButton(
-          // mini: true,
-          child: Container(
-            padding: EdgeInsets.all(8),
-            child: Image.asset(
-              'assets/images/logo_talktalk.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-          onPressed: () async {
-            //if need to toggle menu after click
-            _isShowDial = false;
-            final url = Uri.parse(
-              'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
-            );
-            if (
-              await canLaunchUrl(url)) {
-              launchUrl(
-                url,
-                mode: LaunchMode.externalApplication,
-              );
-            }
-          },
-          backgroundColor: Color(0xFF19CE60),
-        ),
-        // FloatingActionButton(
-        //   // mini: true,
-        //   child: Image.asset(
-        //     'assets/images/logo_naver.png',
-        //     fit: BoxFit.contain,
-        //   ),
-        //   onPressed: () async {
-        //     _isShowDial = false;
-        //     final url = Uri.parse(
-        //       'https://booking.naver.com/booking/13/bizes/839741',
-        //     );
-        //     if (await canLaunchUrl(url)) {
-        //       launchUrl(
-        //         url,
-        //         mode: LaunchMode.externalApplication,
-        //       );
-        //     }
-        //   },
-        //   backgroundColor: Color(0xFF19CE60),
-        // ),
-      ],
-      isSpeedDialFABsMini: true,
-      paddingBtwSpeedDialButton: 30.0,
-    );
   }
 
   // -------------------- Scaffold -------------------- //
@@ -555,69 +431,180 @@ class _MainPageState extends State<MainPage> {
 
     return _isLoading
       ? SplashScreen()
-      : Stack(
-        children: [
-          ResponsiveSizer(
-            builder: (context, orientation, screenType) {
-              return Scaffold(
-                appBar: AppBar(
-                  automaticallyImplyLeading: false,
-                  backgroundColor: style.whiteColor,
-                  toolbarHeight: MediaQuery.of(context).size.width < 640
-                    ? 56
-                    : MediaQuery.of(context).size.width < 1080
-                    ? 64
-                    : 72,
-                  title: Center(
-                    child: Container(
-                      width: style.widgetSize(context),
-                      color: style.whiteColor,
-                      // child: menuState(context),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          InkWell(
-                            child: Text(
-                              'by覺 렌탈센터',
-                              style: TextStyle(
-                                fontSize: style.h1FontSize(context),
-                                fontWeight: style.boldText,
-                                color: style.mainColor,
-                              ),
-                            ),
-                            onTap: () {
-                              currentPage = 0;
-                                movePage();
-                                Get.back();
-                            },
+      : ResponsiveSizer(
+        builder: (context, orientation, screenType) {
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: style.whiteColor,
+              toolbarHeight: MediaQuery.of(context).size.width < 640
+                ? 56
+                : MediaQuery.of(context).size.width < 1080
+                ? 64
+                : 72,
+              title: Center(
+                child: Container(
+                  width: style.widgetSize(context),
+                  color: style.whiteColor,
+                  // child: menuState(context),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        child: Text(
+                          'by覺 렌탈센터',
+                          style: TextStyle(
+                            fontSize: style.h1FontSize(context),
+                            fontWeight: style.boldText,
+                            color: style.mainColor,
                           ),
-                          Container(
-                            child: menuState(context),
-                          ),
-                        ],
+                        ),
+                        // child: Container(
+                        //   width: MediaQuery.of(context).size.width < 640
+                        //   ? 120
+                        //   : 160,
+                        //   child: Image.asset(
+                        //     'assets/images/header_logo.png',
+                        //     fit: BoxFit.fitWidth,
+                        //   ),
+                        // ),
+                        onTap: () {
+                          currentPage = 0;
+                            movePage();
+                            Get.back();
+                        },
                       ),
-                    ),
+                      Container(
+                        child: menuState(context),
+                      ),
+                    ],
                   ),
                 ),
-                body: PageView(
-                  controller: _controller,
-                  scrollDirection: Axis.vertical,
-                  onPageChanged: (value) {},
-                  children: [
-                    ByKak(),
-                    About(),
-                    Product(),
-                    WithCelebrity(),
-                    Contacts(),
-                    Location(),
-                    Footer(),
-                  ],
+              ),
+            ),
+            body: PageView(
+              controller: _controller,
+              scrollDirection: Axis.vertical,
+              onPageChanged: (value) {},
+              children: [
+                ByKak(),
+                About(),
+                Product(),
+                WithCelebrity(),
+                // Contacts(),
+                Location(),
+                Footer(),
+              ],
+            ),
+            floatingActionButton: SpeedDial(
+              child: Icon(Icons.headset_mic_outlined),
+              openBackgroundColor: style.whiteColor,
+              openForegroundColor: style.mainColor,
+              closedBackgroundColor: style.mainColor,
+              closedForegroundColor: style.whiteColor,
+              labelsStyle: TextStyle(
+                color: style.mainColor
+              ),
+              speedDialChildren: [
+                SpeedDialChild(
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    child: Image.asset(
+                      'assets/images/logo_naver_white.png',
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                  foregroundColor: style.whiteColor,
+                  backgroundColor: style.naverColor,
+                  label: '네이버 예약',
+                  onPressed: () async {
+                    final url = Uri.parse(
+                      'https://booking.naver.com/booking/13/bizes/839741',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                  closeSpeedDialOnPressed: false,
                 ),
-                floatingActionButton: _getFloatingActionButton(),
-              );
-            },
-          ),
-        ],
+                SpeedDialChild(
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    child: Image.asset(
+                      'assets/images/logo_kakao_talk_white.png',
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                  foregroundColor: style.whiteColor,
+                  backgroundColor: style.kakaoColor,
+                  label: '카카오톡 플러스친구 문의',
+                  onPressed: () async {
+                    final url = Uri.parse(
+                      'http://pf.kakao.com/_UxoHxbT/chat',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                  closeSpeedDialOnPressed: false,
+                ),
+                SpeedDialChild(
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    child: Image.asset(
+                      'assets/images/logo_talktalk_white.png',
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  foregroundColor: style.whiteColor,
+                  backgroundColor: style.naverColor,
+                  label: '네이버 톡톡 문의',
+                  onPressed: () async {
+                    final url = Uri.parse(
+                      'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                  closeSpeedDialOnPressed: false,
+                ),
+                SpeedDialChild(
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    child: Image.asset(
+                      'assets/images/logo_phone_white.png',
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                  foregroundColor: style.whiteColor,
+                  backgroundColor: style.mainColor,
+                  label: '070-7893-3059',
+                  onPressed: () async {
+                    final url = Uri.parse(
+                      'tel:070 7893 3059',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                  closeSpeedDialOnPressed: false,
+                ),
+              ],
+            ),
+          );
+        },
       );
   }
 }
@@ -671,24 +658,9 @@ aboutRowState(context) {
         Flexible(
           fit: FlexFit.tight,
           child: Container(
-            decoration: BoxDecoration(
-              // color: style.blackColor,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                'assets/images/inner_shop_1.gif',
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),
-        ),
-        Flexible(
-          fit: FlexFit.tight,
-          child: Container(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'By 覺 D-Day Rental Suit',
@@ -714,6 +686,22 @@ aboutRowState(context) {
                   ),
                 ),
               ],
+            ),
+          ),
+        ),
+        Padding(padding: EdgeInsets.all(8)),
+        Flexible(
+          fit: FlexFit.tight,
+          child: Container(
+            decoration: BoxDecoration(
+              // color: style.blackColor,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                'assets/images/inner_shop_1.gif',
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
         ),
@@ -795,7 +783,37 @@ class About extends StatelessWidget {
           child: Container(
             width: style.widgetSize(context),
             padding: EdgeInsets.all(16),
-            child: aboutRowState(context),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'About',
+                  style: TextStyle(
+                    fontSize: style.h1FontSize(context),
+                    fontWeight: style.boldText,
+                    color: style.mainColor,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    'assets/images/about_bykak.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: style.paddingSize(context),
+                  ),
+                ),
+                Container(
+                  width: style.widgetSize(context),
+                  child: aboutRowState(context),
+                ),
+              ],
+            ),
           ),
         )
       );
@@ -999,7 +1017,7 @@ class _PinchUpState extends State<PinchUp> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 800), () {
+    Future.delayed(Duration(milliseconds: 700), () {
       setState(() {
         _showPinchUp = false;
       });
@@ -1022,7 +1040,7 @@ class _PinchUpState extends State<PinchUp> {
 }
 
 
-// ----------------------------------------------- With.. ------------------------------------------------------------------
+// ----------------------------------------------- With ------------------------------------------------------------------
 class WithCelebrity extends StatelessWidget {
   const WithCelebrity({super.key});
 
@@ -1054,9 +1072,52 @@ class WithCelebrity extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
                     'assets/images/with_celebrity.png',
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
+                // MediaQuery.of(context).size.width < 640
+                // ? Column(
+                //   children: [
+                //     ClipRRect(
+                //       borderRadius: BorderRadius.circular(8),
+                //       child: Image.asset(
+                //         'assets/images/with_celebrity.png',
+                //         fit: BoxFit.contain,
+                //       ),
+                //     ),
+                //     ClipRRect(
+                //       borderRadius: BorderRadius.circular(8),
+                //       child: Image.asset(
+                //         'assets/images/with_media.png',
+                //         fit: BoxFit.contain,
+                //       ),
+                //     ),
+                //   ],
+                // )
+                // : Row(
+                //   children: [
+                //     Flexible(
+                //       fit: FlexFit.tight,
+                //       child: ClipRRect(
+                //         borderRadius: BorderRadius.circular(8),
+                //         child: Image.asset(
+                //           'assets/images/with_celebrity.png',
+                //           fit: BoxFit.contain,
+                //         ),
+                //       ),
+                //     ),
+                //     Flexible(
+                //       fit: FlexFit.tight,
+                //       child: ClipRRect(
+                //         borderRadius: BorderRadius.circular(8),
+                //         child: Image.asset(
+                //           'assets/images/with_media.png',
+                //           fit: BoxFit.contain,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),
@@ -1068,188 +1129,188 @@ class WithCelebrity extends StatelessWidget {
 
 
 // ----------------------------------------------- Contacts ------------------------------------------------------------------
-class Contacts extends StatelessWidget {
-  const Contacts({super.key});
+// class Contacts extends StatelessWidget {
+//   const Contacts({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveSizer(builder: (context, orientation, screenType) {
-      return Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        color: style.whiteColor,
-        child: Center(
-          child: Container(
-            width: style.widgetSize(context),
-            padding: EdgeInsets.all(16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Contact',
-                  style: TextStyle(
-                    fontSize: style.h1FontSize(context),
-                    fontWeight: style.boldText,
-                    color: style.mainColor,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(20),
-                ),
-                Container(
-                  width: style.widgetSize(context),
-                  height: MediaQuery.of(context).size.width < 640
-                      ? 360
-                      : 180,
-                  child: GridView(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: false,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: MediaQuery.of(context).size.width < 640
-                            ? 2
-                            : 4,
-                        childAspectRatio: 1 / 1,
-                        mainAxisSpacing: style.paddingSize(context),
-                        crossAxisSpacing: style.paddingSize(context),
-                        // mainAxisExtent: style.widgetSize(context)
-                    ),
-                    children: [
-                      InkWell(
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/logo_kakao.png',
-                              fit: BoxFit.contain,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Text(
-                                '플러스 친구',
-                                style: TextStyle(
-                                  fontSize: style.h4FontSize(context),
-                                  color: style.greyColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        onTap: () async {
-                          final url =
-                              Uri.parse('http://pf.kakao.com/_UxoHxbT/chat');
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(url,
-                                mode: LaunchMode.externalApplication);
-                          }
-                        },
-                      ),
-                      InkWell(
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/logo_talktalk.png',
-                              fit: BoxFit.contain,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Text(
-                                '네이버 문의',
-                                style: TextStyle(
-                                  fontSize: style.h4FontSize(context),
-                                  color: style.greyColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        onTap: () async {
-                          final url = Uri.parse(
-                              'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen');
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(url,
-                                mode: LaunchMode.externalApplication);
-                          }
-                        },
-                      ),
-                      InkWell(
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/logo_naver.png',
-                              fit: BoxFit.contain,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Text(
-                                '네이버 예약',
-                                style: TextStyle(
-                                  fontSize: style.h4FontSize(context),
-                                  color: style.greyColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        onTap: () async {
-                          final url = Uri.parse(
-                              'https://booking.naver.com/booking/13/bizes/839741');
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(url,
-                                mode: LaunchMode.externalApplication);
-                          }
-                        },
-                      ),
-                      InkWell(
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/logo_phone.png',
-                              fit: BoxFit.contain,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Text(
-                                '070 7893 3059',
-                                style: TextStyle(
-                                  fontSize: style.h5FontSize(context),
-                                  color: style.greyColor,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        onTap: () async {
-                          final url = Uri.parse('tel:070 7893 3059');
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(url, mode: LaunchMode.externalApplication);
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                // Padding(
-                //   padding: EdgeInsets.all(8),
-                // ),
-                Center(
-                  child: Container(
-                    child: Text(
-                      '저희 매장은 월요일부터 토요일, 오전10시부터 오후7시까지 운영합니다. 자세한 사항은 문의해 주시면 안내해 드리도록 하겠습니다.',
-                      style: TextStyle(
-                        fontSize: style.h4FontSize(context),
-                        color: style.blackColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    });
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ResponsiveSizer(builder: (context, orientation, screenType) {
+//       return Container(
+//         width: MediaQuery.of(context).size.width,
+//         height: MediaQuery.of(context).size.height,
+//         color: style.whiteColor,
+//         child: Center(
+//           child: Container(
+//             width: style.widgetSize(context),
+//             padding: EdgeInsets.all(16),
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text(
+//                   'Contact',
+//                   style: TextStyle(
+//                     fontSize: style.h1FontSize(context),
+//                     fontWeight: style.boldText,
+//                     color: style.mainColor,
+//                   ),
+//                 ),
+//                 Padding(
+//                   padding: EdgeInsets.all(20),
+//                 ),
+//                 Container(
+//                   width: style.widgetSize(context),
+//                   height: MediaQuery.of(context).size.width < 640
+//                       ? 360
+//                       : 180,
+//                   child: GridView(
+//                     physics: NeverScrollableScrollPhysics(),
+//                     shrinkWrap: false,
+//                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                       crossAxisCount: MediaQuery.of(context).size.width < 640
+//                             ? 2
+//                             : 4,
+//                         childAspectRatio: 1 / 1,
+//                         mainAxisSpacing: style.paddingSize(context),
+//                         crossAxisSpacing: style.paddingSize(context),
+//                         // mainAxisExtent: style.widgetSize(context)
+//                     ),
+//                     children: [
+//                       InkWell(
+//                         child: Column(
+//                           children: [
+//                             Image.asset(
+//                               'assets/images/logo_kakao.png',
+//                               fit: BoxFit.contain,
+//                             ),
+//                             Padding(
+//                               padding: const EdgeInsets.all(8),
+//                               child: Text(
+//                                 '플러스 친구',
+//                                 style: TextStyle(
+//                                   fontSize: style.h4FontSize(context),
+//                                   color: style.greyColor,
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                         onTap: () async {
+//                           final url =
+//                               Uri.parse('http://pf.kakao.com/_UxoHxbT/chat');
+//                           if (await canLaunchUrl(url)) {
+//                             launchUrl(url,
+//                                 mode: LaunchMode.externalApplication);
+//                           }
+//                         },
+//                       ),
+//                       InkWell(
+//                         child: Column(
+//                           children: [
+//                             Image.asset(
+//                               'assets/images/logo_talktalk.png',
+//                               fit: BoxFit.contain,
+//                             ),
+//                             Padding(
+//                               padding: const EdgeInsets.all(8),
+//                               child: Text(
+//                                 '네이버 문의',
+//                                 style: TextStyle(
+//                                   fontSize: style.h4FontSize(context),
+//                                   color: style.greyColor,
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                         onTap: () async {
+//                           final url = Uri.parse(
+//                               'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen');
+//                           if (await canLaunchUrl(url)) {
+//                             launchUrl(url,
+//                                 mode: LaunchMode.externalApplication);
+//                           }
+//                         },
+//                       ),
+//                       InkWell(
+//                         child: Column(
+//                           children: [
+//                             Image.asset(
+//                               'assets/images/logo_naver.png',
+//                               fit: BoxFit.contain,
+//                             ),
+//                             Padding(
+//                               padding: const EdgeInsets.all(8),
+//                               child: Text(
+//                                 '네이버 예약',
+//                                 style: TextStyle(
+//                                   fontSize: style.h4FontSize(context),
+//                                   color: style.greyColor,
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                         onTap: () async {
+//                           final url = Uri.parse(
+//                               'https://booking.naver.com/booking/13/bizes/839741');
+//                           if (await canLaunchUrl(url)) {
+//                             launchUrl(url,
+//                                 mode: LaunchMode.externalApplication);
+//                           }
+//                         },
+//                       ),
+//                       InkWell(
+//                         child: Column(
+//                           children: [
+//                             Image.asset(
+//                               'assets/images/logo_phone.png',
+//                               fit: BoxFit.contain,
+//                             ),
+//                             Padding(
+//                               padding: const EdgeInsets.all(8),
+//                               child: Text(
+//                                 '070 7893 3059',
+//                                 style: TextStyle(
+//                                   fontSize: style.h5FontSize(context),
+//                                   color: style.greyColor,
+//                                 ),
+//                               ),
+//                             ),
+//                           ],
+//                         ),
+//                         onTap: () async {
+//                           final url = Uri.parse('tel:070 7893 3059');
+//                           if (await canLaunchUrl(url)) {
+//                             launchUrl(url, mode: LaunchMode.externalApplication);
+//                           }
+//                         },
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//                 // Padding(
+//                 //   padding: EdgeInsets.all(8),
+//                 // ),
+//                 Center(
+//                   child: Container(
+//                     child: Text(
+//                       '저희 매장은 월요일부터 토요일, 오전10시부터 오후7시까지 운영합니다. 자세한 사항은 문의해 주시면 안내해 드리도록 하겠습니다.',
+//                       style: TextStyle(
+//                         fontSize: style.h4FontSize(context),
+//                         color: style.blackColor,
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       );
+//     });
+//   }
+// }
 
 
 // ----------------------------------------------- Location ------------------------------------------------------------------
@@ -1313,6 +1374,7 @@ class Location extends StatelessWidget {
                     style: TextStyle(
                       fontSize: style.h3FontSize(context),
                       color: style.blackColor,
+                      fontWeight: style.boldText,
                     ),
                   ),
                 ),
@@ -1363,12 +1425,28 @@ class Footer extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.all(16),
-                  child: Text(
-                    'by覺 렌탈센터',
-                    style: TextStyle(
-                      fontSize: style.h1FontSize(context),
-                      fontWeight: style.boldText,
-                      color: style.whiteColor,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width < 640
+                    ? 160
+                    : 200,
+                    child: InkWell(
+                      child: Text(
+                        'by覺 렌탈센터',
+                        style: TextStyle(
+                          fontSize: style.h0FontSize(context),
+                          fontWeight: style.boldText,
+                          color: style.whiteColor,
+                        ),
+                      ),
+                      // child: Image.asset(
+                      //   'assets/images/footer_logo.png',
+                      //   fit: BoxFit.fitWidth,
+                      // ),
+                      onTap: () {
+                        currentPage = 0;
+                          movePage();
+                          Get.back();
+                      },
                     ),
                   ),
                 ),
@@ -1378,49 +1456,74 @@ class Footer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        child: Image.asset('assets/images/logo_kakao.png',
-                            fit: BoxFit.contain, scale: 1.5),
-                        onTap: () async {
-                          final url = Uri.parse('http://pf.kakao.com/_UxoHxbT');
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(url,
-                                mode: LaunchMode.externalApplication);
-                          }
-                        },
-                      ),
-                      InkWell(
-                        child: Image.asset('assets/images/logo_naver_blog.png',
-                            fit: BoxFit.contain, scale: 1.5),
-                        onTap: () async {
-                          final url =
-                              Uri.parse('https://blog.naver.com/kimjuhyeon_');
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(url,
-                                mode: LaunchMode.externalApplication);
-                          }
-                        },
-                      ),
-                      InkWell(
-                        child: Image.asset('assets/images/logo_instagram.png',
-                            fit: BoxFit.contain, scale: 1.5),
+                        child: Image.asset(
+                          'assets/images/logo_kakao_talk.png',
+                          fit: BoxFit.contain,
+                          scale: 1.5,
+                        ),
                         onTap: () async {
                           final url = Uri.parse(
-                              'https://instagram.com/bykak_rental?igshid=YmMyMTA2M2Y=');
+                            'http://pf.kakao.com/_UxoHxbT',
+                          );
                           if (await canLaunchUrl(url)) {
-                            launchUrl(url,
-                                mode: LaunchMode.externalApplication);
+                            launchUrl(
+                              url,
+                              mode: LaunchMode.externalApplication,
+                            );
                           }
                         },
                       ),
                       InkWell(
-                        child: Image.asset('assets/images/logo_youtube.png',
-                            fit: BoxFit.contain, scale: 1.5),
+                        child: Image.asset(
+                          'assets/images/logo_naver_blog.png',
+                          fit: BoxFit.contain,
+                          scale: 1.5,
+                        ),
                         onTap: () async {
                           final url = Uri.parse(
-                              'https://www.youtube.com/@user-sk6bq7pt7p/featured');
+                            'https://blog.naver.com/kimjuhyeon_',
+                          );
                           if (await canLaunchUrl(url)) {
-                            launchUrl(url,
-                                mode: LaunchMode.externalApplication);
+                            launchUrl(
+                              url,
+                              mode: LaunchMode.externalApplication,
+                            );
+                          }
+                        },
+                      ),
+                      InkWell(
+                        child: Image.asset(
+                          'assets/images/logo_instagram.png',
+                          fit: BoxFit.contain,
+                          scale: 1.5,
+                        ),
+                        onTap: () async {
+                          final url = Uri.parse(
+                            'https://instagram.com/bykak_rental?igshid=YmMyMTA2M2Y=',
+                          );
+                          if (await canLaunchUrl(url)) {
+                            launchUrl(
+                              url,
+                              mode: LaunchMode.externalApplication,
+                            );
+                          }
+                        },
+                      ),
+                      InkWell(
+                        child: Image.asset(
+                          'assets/images/logo_youtube.png',
+                          fit: BoxFit.contain,
+                          scale: 1.5,
+                        ),
+                        onTap: () async {
+                          final url = Uri.parse(
+                            'https://www.youtube.com/@user-sk6bq7pt7p/featured',
+                          );
+                          if (await canLaunchUrl(url)) {
+                            launchUrl(
+                              url,
+                              mode: LaunchMode.externalApplication,
+                            );
                           }
                         },
                       ),
@@ -1440,6 +1543,7 @@ class Footer extends StatelessWidget {
                             style: TextStyle(
                               color: style.whiteColor,
                               fontSize: style.h4FontSize(context),
+                              fontWeight: style.thinText,
                             ),
                           ),
                         ),
@@ -1450,6 +1554,7 @@ class Footer extends StatelessWidget {
                             style: TextStyle(
                               color: style.whiteColor,
                               fontSize: style.h4FontSize(context),
+                              fontWeight: style.thinText,
                             ),
                           ),
                         ),
@@ -1460,6 +1565,7 @@ class Footer extends StatelessWidget {
                             style: TextStyle(
                               color: style.whiteColor,
                               fontSize: style.h4FontSize(context),
+                              fontWeight: style.thinText,
                             ),
                           ),
                         ),
@@ -1470,6 +1576,7 @@ class Footer extends StatelessWidget {
                             style: TextStyle(
                               color: style.whiteColor,
                               fontSize: style.h4FontSize(context),
+                              fontWeight: style.thinText,
                             ),
                           ),
                         ),
@@ -1480,6 +1587,7 @@ class Footer extends StatelessWidget {
                             style: TextStyle(
                               color: style.whiteColor,
                               fontSize: style.h4FontSize(context),
+                              fontWeight: style.thinText,
                             ),
                           ),
                         ),
