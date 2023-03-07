@@ -18,8 +18,9 @@ var whiteColor = Color(0xFFFFFFFF);
 var kakaoColor = Color(0xFFFAE100);
 var naverColor = Color(0xFF19CE60);
 
-var boldText = FontWeight.w500;
-var thinText = FontWeight.w100;
+var boldText = FontWeight.w700;
+var regularText = FontWeight.w300;
+var lightText = FontWeight.w100;
 
 var boxShadows = BoxShadow(
   color: blackColor.withOpacity(0.5),

@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(
         primaryColor: style.mainColor,
-        fontFamily: 'TheJamsil',
+        fontFamily: 'ONE_Mobile',
       ),
       debugShowCheckedModeBanner: false,
       title: '바이각 수트렌탈센터',

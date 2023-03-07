@@ -37,6 +37,7 @@ dependencies:
   image_fade: ^0.6.2
   carousel_slider: ^4.2.1
   simple_speed_dial: ^0.1.7
+  flutter_native_splash: ^2.2.19
 
   # cached_network_image: ^3.2.3
   # opscroll_web: ^0.3.2
@@ -89,6 +90,7 @@ flutter:
     - assets/images/home_video_2.gif
     - assets/images/home_video_3.gif
     # ---------- logo ----------
+    - assets/images/bykak_logo_white.png
     - assets/images/logo_instagram.png
     - assets/images/logo_instagram_white.png
     - assets/images/logo_kakao_talk.png
@@ -151,26 +153,15 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Lineseed
+    - family: ONE_Mobile
       fonts:
-        - asset: assets/fonts/LINESeedKR-Rg.otf
-        - asset: assets/fonts/LINESeedKR-Bd.otf
-          weight: 700
-        - asset: assets/fonts/LINESeedKR-Th.otf
-          weight: 300
-    - family: TheJamsil
-      fonts:
-        - asset: assets/fonts/The_Jamsil-Light.ttf
-        - asset: assets/fonts/The_Jamsil-Thin.ttf
+        - asset: assets/fonts/ONE_Mobile-Bold.ttf
+        - asset: assets/fonts/ONE_Mobile-Light.ttf
           weight: 100
-        - asset: assets/fonts/The_Jamsil-Regular.ttf
+        - asset: assets/fonts/ONE_Mobile-Regular.ttf
           weight: 300
-        - asset: assets/fonts/The_Jamsil-Medium.ttf
-          weight: 400
-        - asset: assets/fonts/The_Jamsil-Bold.ttf
-          weight: 500
-        - asset: assets/fonts/The_Jamsil-ExtraBold.ttf
-          weight: 600
+        - asset: assets/fonts/ONE_Mobile-Title.ttf
+          weight: 700
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
