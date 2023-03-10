@@ -453,7 +453,7 @@ class _MainPageState extends State<MainPage> {
                         'by覺 렌탈센터',
                         style: TextStyle(
                           fontSize: style.h1FontSize(context),
-                          fontWeight: style.boldText,
+                          // fontWeight: style.boldText,
                           color: style.mainColor,
                         ),
                       ),
@@ -663,7 +663,7 @@ aboutRowState(context) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'By 覺 D-Day Rental Suit',
+                  'By覺 D-Day Rental Suit',
                   style: TextStyle(
                     fontSize: style.h0FontSize(context),
                     fontWeight: style.boldText,
@@ -1434,7 +1434,7 @@ class Footer extends StatelessWidget {
                       'by覺 렌탈센터',
                       style: TextStyle(
                         fontSize: style.h1FontSize(context),
-                        fontWeight: style.boldText,
+                        // fontWeight: style.boldText,
                         color: style.whiteColor,
                       ),
                     ),
