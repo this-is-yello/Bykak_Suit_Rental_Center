@@ -20,7 +20,6 @@ import 'package:bykaksuitrentalcenter/products_page.dart';
 // import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
 
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
