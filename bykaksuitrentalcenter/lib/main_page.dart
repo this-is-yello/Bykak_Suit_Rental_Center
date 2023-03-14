@@ -192,46 +192,6 @@ class _MainPageState extends State<MainPage> {
                         Get.back();
                       },
                     ),
-                    // InkWell(
-                    //   child: Container(
-                    //     width: double.infinity,
-                    //     height: 56,
-                    //     padding: EdgeInsets.all(8),
-                    //     decoration: BoxDecoration(
-                    //       border: Border(
-                    //         bottom: BorderSide(
-                    //           width: 2,
-                    //           color: style.lightGreyColor,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     child: Row(
-                    //       children: [
-                    //         Icon(
-                    //           Icons.phone_outlined,
-                    //           color: style.mainColor,
-                    //         ),
-                    //         Padding(
-                    //           padding: EdgeInsets.all(4),
-                    //         ),
-                    //         Text(
-                    //           'Contact',
-                    //           style: TextStyle(
-                    //             color: style.blackColor,
-                    //           ),
-                    //         ),
-                    //         Padding(
-                    //           padding: EdgeInsets.all(4),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    //   onTap: () {
-                    //     currentPage = 4;
-                    //     movePage();
-                    //     Get.back();
-                    //   },
-                    // ),
                     InkWell(
                       child: Container(
                         width: double.infinity,
@@ -369,21 +329,6 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
-            // Padding(padding: EdgeInsets.all(12)),
-            // InkWell(
-            //   child: Text(
-            //     'Contacts',
-            //     style: TextStyle(
-            //       fontSize: 16,
-            //       color: style.mainColor,
-            //       fontWeight: style.boldText,
-            //     ),
-            //   ),
-            //   onTap: () {
-            //     currentPage = 4;
-            //     movePage();
-            //   },
-            // ),
             Padding(padding: EdgeInsets.all(12)),
             InkWell(
               child: Text(
@@ -444,7 +389,6 @@ class _MainPageState extends State<MainPage> {
               child: Container(
                 width: style.widgetSize(context),
                 color: style.whiteColor,
-                // child: menuState(context),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -453,18 +397,9 @@ class _MainPageState extends State<MainPage> {
                         'by覺 렌탈센터',
                         style: TextStyle(
                           fontSize: style.h1FontSize(context),
-                          // fontWeight: style.boldText,
                           color: style.mainColor,
                         ),
                       ),
-                      // child: Container(
-                      //   width: MediaQuery.of(context).size.width < 640
-                      //   ? 120
-                      //   : 160,
-                      //   child: Image.asset(
-                      //     'assets/images/header_logo.png',
-                      //     fit: BoxFit.fitWidth,
-                      //   ),
                       // ),
                       onTap: () {
                         currentPage = 0;
@@ -489,7 +424,6 @@ class _MainPageState extends State<MainPage> {
               About(),
               Product(),
               WithCelebrity(),
-              // Contacts(),
               Location(),
               Footer(),
             ],
@@ -650,126 +584,6 @@ class ByKak extends StatelessWidget {
 
 
 // ----------------------------------------------- About ------------------------------------------------------------------
-aboutRowState(context) {
-  if (MediaQuery.of(context).size.width > 1080) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          fit: FlexFit.tight,
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'By覺 D-Day Rental Suit',
-                  style: TextStyle(
-                    fontSize: style.h0FontSize(context),
-                    fontWeight: style.boldText,
-                    color: style.blackColor,
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(top: 16)),
-                Text(
-                  '바이각 수트렌탈센터는 인천 최초의 정장렌탈 전문샵입니다.',
-                  style: TextStyle(
-                    fontSize: style.h5FontSize(context) + 1,
-                    fontWeight: style.boldText,
-                    color: style.blackColor,
-                  ),
-                ),
-                Text(
-                  '웨딩, 면접, 데일리 등 그 날에 걸맞는 다양한 수트를 경험하세요.',
-                  style: TextStyle(
-                    fontSize: style.h5FontSize(context) + 1,
-                    fontWeight: style.boldText,
-                    color: style.blackColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Padding(padding: EdgeInsets.all(8)),
-        Flexible(
-          fit: FlexFit.tight,
-          child: Container(
-            decoration: BoxDecoration(
-              // color: style.blackColor,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                'assets/images/inner_shop_1.gif',
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  } else {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.asset(
-              'assets/images/inner_shop_1.gif',
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            top: style.paddingSize(context),
-          ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'By 覺 D-Day Rental Suit',
-              style: TextStyle(
-                fontSize: style.h1FontSize(context),
-                fontWeight: style.boldText,
-                color: style.blackColor,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: style.paddingSize(context)
-              ),
-            ),
-            Text(
-              '바이각 수트렌탈센터는 인천 최초의 정장렌탈 전문샵입니다.',
-              style: TextStyle(
-                fontSize: style.h6FontSize(context) + 1,
-                fontWeight: style.boldText,
-                color: style.blackColor,
-              ),
-            ),
-            Text(
-              '웨딩, 면접, 데일리 등 그 날에 걸맞는 다양한 수트를 경험하세요.',
-              style: TextStyle(
-                fontSize: style.h6FontSize(context) + 1,
-                fontWeight: style.boldText,
-                color: style.blackColor,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
 class About extends StatelessWidget {
   const About({super.key});
 
@@ -788,32 +602,87 @@ class About extends StatelessWidget {
             padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'About',
-                  style: TextStyle(
-                    fontSize: style.h1FontSize(context),
-                    fontWeight: style.boldText,
-                    color: style.mainColor,
-                  ),
-                ),
-                Padding(padding: EdgeInsets.all(8)),
+                // Text(
+                //   'About By覺',
+                //   style: TextStyle(
+                //     fontSize: style.h1FontSize(context),
+                //     fontWeight: style.boldText,
+                //     color: style.mainColor,
+                //   ),
+                // ),
+                // Column(
+                //   children: [
+                //     Padding(
+                //       padding: EdgeInsets.only(top: 20, bottom: 16),
+                //       child: Text(
+                //         '개항을 통해 들어온 정통 수제 양복\n최초의 양복인 인천의 양복이 최고가 될 수 있도록..',
+                //         textAlign: TextAlign.center,
+                //         style: TextStyle(
+                //           fontSize: style.h3FontSize(context),
+                //           fontWeight: style.boldText,
+                //           color: style.blackColor,
+                //         ),
+                //       ),
+                //     ),
+                //     Padding(
+                //       padding: EdgeInsets.only(bottom: 40),
+                //       child: Text(
+                //         'by覺은 정성스럽게 바느질 된 고급 수제 양복을 알리고,\n남성들의 문화공간과 놀이터가 되고자 설립되었습니다.',
+                //         textAlign: TextAlign.center,
+                //         style: TextStyle(
+                //           fontSize: style.h3FontSize(context),
+                //           fontWeight: style.boldText,
+                //           color: style.blackColor,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // Text(
+                //   'By覺 D-Day Rental Suit',
+                //   style: TextStyle(
+                //     fontSize: style.h1FontSize(context),
+                //     fontWeight: style.boldText,
+                //     color: style.mainColor,
+                //   ),
+                // ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.start,
+                //   children: [
+                //     Padding(
+                //       padding: EdgeInsets.only(top: 20, bottom: 16),
+                //       child: Text(
+                //         '바이각 수트렌탈센터는 인천 최초의 정장렌탈 전문샵입니다.',
+                //         textAlign: TextAlign.center,
+                //         style: TextStyle(
+                //           fontSize: style.h3FontSize(context),
+                //           fontWeight: style.boldText,
+                //           color: style.blackColor,
+                //         ),
+                //       ),
+                //     ),
+                //     Padding(
+                //       padding: EdgeInsets.only(bottom: 40),
+                //       child: Text(
+                //         '웨딩, 혼주복, 면접, 데일리 등으로\n그 날에 걸맞은 다양한 수트를 경험하실 수 있습니다.',
+                //         textAlign: TextAlign.center,
+                //         style: TextStyle(
+                //           fontSize: style.h3FontSize(context),
+                //           fontWeight: style.boldText,
+                //           color: style.blackColor,
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
                     'assets/images/about_bykak.png',
-                    fit: BoxFit.contain,
+                    fit: BoxFit.fitWidth,
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: style.paddingSize(context),
-                  ),
-                ),
-                Container(
-                  width: style.widgetSize(context),
-                  child: aboutRowState(context),
                 ),
               ],
             ),
@@ -891,7 +760,6 @@ class _ProductState extends State<Product> {
                           decoration: BoxDecoration(
                             color: style.whiteColor,
                             borderRadius: BorderRadius.circular(8),
-                            // boxShadow: [style.boxShadows],
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
@@ -1079,49 +947,6 @@ class WithCelebrity extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                 ),
-                // MediaQuery.of(context).size.width < 640
-                // ? Column(
-                //   children: [
-                //     ClipRRect(
-                //       borderRadius: BorderRadius.circular(8),
-                //       child: Image.asset(
-                //         'assets/images/with_celebrity.png',
-                //         fit: BoxFit.contain,
-                //       ),
-                //     ),
-                //     ClipRRect(
-                //       borderRadius: BorderRadius.circular(8),
-                //       child: Image.asset(
-                //         'assets/images/with_media.png',
-                //         fit: BoxFit.contain,
-                //       ),
-                //     ),
-                //   ],
-                // )
-                // : Row(
-                //   children: [
-                //     Flexible(
-                //       fit: FlexFit.tight,
-                //       child: ClipRRect(
-                //         borderRadius: BorderRadius.circular(8),
-                //         child: Image.asset(
-                //           'assets/images/with_celebrity.png',
-                //           fit: BoxFit.contain,
-                //         ),
-                //       ),
-                //     ),
-                //     Flexible(
-                //       fit: FlexFit.tight,
-                //       child: ClipRRect(
-                //         borderRadius: BorderRadius.circular(8),
-                //         child: Image.asset(
-                //           'assets/images/with_media.png',
-                //           fit: BoxFit.contain,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),
@@ -1131,190 +956,6 @@ class WithCelebrity extends StatelessWidget {
   }
 }
 
-
-// ----------------------------------------------- Contacts ------------------------------------------------------------------
-// class Contacts extends StatelessWidget {
-//   const Contacts({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ResponsiveSizer(builder: (context, orientation, screenType) {
-//       return Container(
-//         width: MediaQuery.of(context).size.width,
-//         height: MediaQuery.of(context).size.height,
-//         color: style.whiteColor,
-//         child: Center(
-//           child: Container(
-//             width: style.widgetSize(context),
-//             padding: EdgeInsets.all(16),
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text(
-//                   'Contact',
-//                   style: TextStyle(
-//                     fontSize: style.h1FontSize(context),
-//                     fontWeight: style.boldText,
-//                     color: style.mainColor,
-//                   ),
-//                 ),
-//                 Padding(
-//                   padding: EdgeInsets.all(20),
-//                 ),
-//                 Container(
-//                   width: style.widgetSize(context),
-//                   height: MediaQuery.of(context).size.width < 640
-//                       ? 360
-//                       : 180,
-//                   child: GridView(
-//                     physics: NeverScrollableScrollPhysics(),
-//                     shrinkWrap: false,
-//                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                       crossAxisCount: MediaQuery.of(context).size.width < 640
-//                             ? 2
-//                             : 4,
-//                         childAspectRatio: 1 / 1,
-//                         mainAxisSpacing: style.paddingSize(context),
-//                         crossAxisSpacing: style.paddingSize(context),
-//                         // mainAxisExtent: style.widgetSize(context)
-//                     ),
-//                     children: [
-//                       InkWell(
-//                         child: Column(
-//                           children: [
-//                             Image.asset(
-//                               'assets/images/logo_kakao.png',
-//                               fit: BoxFit.contain,
-//                             ),
-//                             Padding(
-//                               padding: const EdgeInsets.all(8),
-//                               child: Text(
-//                                 '플러스 친구',
-//                                 style: TextStyle(
-//                                   fontSize: style.h4FontSize(context),
-//                                   color: style.greyColor,
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                         onTap: () async {
-//                           final url =
-//                               Uri.parse('http://pf.kakao.com/_UxoHxbT/chat');
-//                           if (await canLaunchUrl(url)) {
-//                             launchUrl(url,
-//                                 mode: LaunchMode.externalApplication);
-//                           }
-//                         },
-//                       ),
-//                       InkWell(
-//                         child: Column(
-//                           children: [
-//                             Image.asset(
-//                               'assets/images/logo_talktalk.png',
-//                               fit: BoxFit.contain,
-//                             ),
-//                             Padding(
-//                               padding: const EdgeInsets.all(8),
-//                               child: Text(
-//                                 '네이버 문의',
-//                                 style: TextStyle(
-//                                   fontSize: style.h4FontSize(context),
-//                                   color: style.greyColor,
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                         onTap: () async {
-//                           final url = Uri.parse(
-//                               'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen');
-//                           if (await canLaunchUrl(url)) {
-//                             launchUrl(url,
-//                                 mode: LaunchMode.externalApplication);
-//                           }
-//                         },
-//                       ),
-//                       InkWell(
-//                         child: Column(
-//                           children: [
-//                             Image.asset(
-//                               'assets/images/logo_naver.png',
-//                               fit: BoxFit.contain,
-//                             ),
-//                             Padding(
-//                               padding: const EdgeInsets.all(8),
-//                               child: Text(
-//                                 '네이버 예약',
-//                                 style: TextStyle(
-//                                   fontSize: style.h4FontSize(context),
-//                                   color: style.greyColor,
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                         onTap: () async {
-//                           final url = Uri.parse(
-//                               'https://booking.naver.com/booking/13/bizes/839741');
-//                           if (await canLaunchUrl(url)) {
-//                             launchUrl(url,
-//                                 mode: LaunchMode.externalApplication);
-//                           }
-//                         },
-//                       ),
-//                       InkWell(
-//                         child: Column(
-//                           children: [
-//                             Image.asset(
-//                               'assets/images/logo_phone.png',
-//                               fit: BoxFit.contain,
-//                             ),
-//                             Padding(
-//                               padding: const EdgeInsets.all(8),
-//                               child: Text(
-//                                 '070 7893 3059',
-//                                 style: TextStyle(
-//                                   fontSize: style.h5FontSize(context),
-//                                   color: style.greyColor,
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                         onTap: () async {
-//                           final url = Uri.parse('tel:070 7893 3059');
-//                           if (await canLaunchUrl(url)) {
-//                             launchUrl(url, mode: LaunchMode.externalApplication);
-//                           }
-//                         },
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//                 // Padding(
-//                 //   padding: EdgeInsets.all(8),
-//                 // ),
-//                 Center(
-//                   child: Container(
-//                     child: Text(
-//                       '저희 매장은 월요일부터 토요일, 오전10시부터 오후7시까지 운영합니다. 자세한 사항은 문의해 주시면 안내해 드리도록 하겠습니다.',
-//                       style: TextStyle(
-//                         fontSize: style.h4FontSize(context),
-//                         color: style.blackColor,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       );
-//     });
-//   }
-// }
 
 
 // ----------------------------------------------- Location ------------------------------------------------------------------
@@ -1370,7 +1011,7 @@ class Location extends StatelessWidget {
                       child: Text(
                         '바이각 수트렌탈센터',
                         style: TextStyle(
-                          fontSize: style.h3FontSize(context),
+                          fontSize: style.h2FontSize(context),
                           color: style.blackColor,
                           fontWeight: style.boldText,
                         ),
@@ -1416,7 +1057,7 @@ class Location extends StatelessWidget {
                         child: Text(
                           '오시는 길',
                           style: TextStyle(
-                            fontSize: style.h3FontSize(context),
+                            fontSize: style.h2FontSize(context),
                             color: style.blackColor,
                             fontWeight: style.boldText,
                           ),
@@ -1432,7 +1073,47 @@ class Location extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 4,),
                         child: Text(
-                          '37502 제물포역(스마트타운 방면) 정류장 도보 1분',
+                          '37502 제물포역(스마트타운 방면) 버스정류장 도보 3분',
+                          style: TextStyle(
+                            fontSize: style.h4FontSize(context),
+                            color: style.blackColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 2,
+                  color: style.greyColor,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 8, bottom: 8,),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4,),
+                        child: Text(
+                          '주차안내',
+                          style: TextStyle(
+                            fontSize: style.h2FontSize(context),
+                            color: style.blackColor,
+                            fontWeight: style.boldText,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '제물포북부역 공영주차장 2시간 무료',
+                        style: TextStyle(
+                          fontSize: style.h4FontSize(context),
+                          color: style.blackColor,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4,),
+                        child: Text(
+                          '김주현바이각 제물포 본점',
                           style: TextStyle(
                             fontSize: style.h4FontSize(context),
                             color: style.blackColor,
@@ -1464,7 +1145,6 @@ class Footer extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          // image: ,
           color: style.mainColor,
         ),
         child: Center(
@@ -1481,14 +1161,9 @@ class Footer extends StatelessWidget {
                       'by覺 렌탈센터',
                       style: TextStyle(
                         fontSize: style.h1FontSize(context),
-                        // fontWeight: style.boldText,
                         color: style.whiteColor,
                       ),
                     ),
-                    // child: Image.asset(
-                    //   'assets/images/footer_logo.png',
-                    //   fit: BoxFit.fitWidth,
-                    // ),
                     onTap: () {
                       currentPage = 0;
                         movePage();
