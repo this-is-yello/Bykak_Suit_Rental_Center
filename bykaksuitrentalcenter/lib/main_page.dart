@@ -1362,29 +1362,36 @@ class Location extends StatelessWidget {
                     }
                   },
                 ),
-                Padding(padding: EdgeInsets.only(top: 4)),
-                Text(
-                  '※ 지도를 클릭하면 네이버 지도로 연결합니다.',
-                  style: TextStyle(
-                    fontSize: style.h5FontSize(context),
-                    fontWeight: style.boldText,
-                    color: style.mainColor,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    '바이각 수트렌탈센터',
-                    style: TextStyle(
-                      fontSize: style.h3FontSize(context),
-                      color: style.blackColor,
-                      fontWeight: style.boldText,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Text(
+                        '바이각 수트렌탈센터',
+                        style: TextStyle(
+                          fontSize: style.h3FontSize(context),
+                          color: style.blackColor,
+                          fontWeight: style.boldText,
+                        ),
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text(
+                        '※지도 클릭 시 네이버 지도로 연결합니다.',
+                        style: TextStyle(
+                          fontSize: style.h6FontSize(context),
+                          fontWeight: style.boldText,
+                          color: style.mainColor,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 8,
+                    top: 4,
                     bottom: 8,
                   ),
                   child: Text(
@@ -1393,6 +1400,46 @@ class Location extends StatelessWidget {
                       fontSize: style.h4FontSize(context),
                       color: style.blackColor,
                     ),
+                  ),
+                ),
+                Divider(
+                  height: 2,
+                  color: style.greyColor,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 8, bottom: 8,),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 4,),
+                        child: Text(
+                          '오시는 길',
+                          style: TextStyle(
+                            fontSize: style.h3FontSize(context),
+                            color: style.blackColor,
+                            fontWeight: style.boldText,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '제물포역 2번출구 도보 1분',
+                        style: TextStyle(
+                          fontSize: style.h4FontSize(context),
+                          color: style.blackColor,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4,),
+                        child: Text(
+                          '37502 제물포역(스마트타운 방면) 정류장 도보 1분',
+                          style: TextStyle(
+                            fontSize: style.h4FontSize(context),
+                            color: style.blackColor,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

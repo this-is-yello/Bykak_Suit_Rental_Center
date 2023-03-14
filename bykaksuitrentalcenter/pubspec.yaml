@@ -132,6 +132,7 @@ flutter:
     - assets/images/products/product_(20).jpg
     - assets/images/products/product_(21).jpg
     # ---------- etc ----------
+    # - assets/images/about_shop.png
     - assets/images/about_bykak.png
     - assets/images/inner_shop_1.gif
     - assets/images/with_celebrity.png
