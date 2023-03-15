@@ -1104,7 +1104,7 @@ class Location extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '제물포북부역 공영주차장 2시간 무료',
+                        '김주현바이각 제물포 본점',
                         style: TextStyle(
                           fontSize: style.h4FontSize(context),
                           color: style.blackColor,
@@ -1113,7 +1113,7 @@ class Location extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 4,),
                         child: Text(
-                          '김주현바이각 제물포 본점',
+                          '제물포북부역 공영주차장 2시간 무료',
                           style: TextStyle(
                             fontSize: style.h4FontSize(context),
                             color: style.blackColor,

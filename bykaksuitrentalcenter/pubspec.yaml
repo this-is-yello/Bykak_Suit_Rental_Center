@@ -90,6 +90,7 @@ flutter:
     - assets/images/home_video_3.gif
     # ---------- logo ----------
     - assets/images/bykak_logo_white.png
+    - assets/images/bykak_logo_gold.png
     - assets/images/logo_instagram.png
     - assets/images/logo_instagram_white.png
     - assets/images/logo_kakao_talk.png

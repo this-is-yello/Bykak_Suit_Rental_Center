@@ -44,17 +44,7 @@ class _ProductsPageState extends State<ProductsPage> {
       });
     });
 
-    return _isLoading
-      ? Center(
-          child: SizedBox(
-            width: 40,
-            height: 40,
-            child: CircularProgressIndicator(
-              color: style.mainColor,
-            ),
-          ),
-        )
-      : ResponsiveSizer(
+    return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return Scaffold(
           backgroundColor: style.whiteColor,
@@ -99,13 +89,8 @@ class _ProductsPageState extends State<ProductsPage> {
                       return InkWell(
                         child: Container(
                           decoration: BoxDecoration(
-                            // boxShadow: [style.boxShadows],
                             color: style.whiteColor,
                             borderRadius: BorderRadius.circular(8),
-                            // border: Border.all(
-                            //   color: style.greyColor,
-                            //   width: 2,
-                            // ),
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
