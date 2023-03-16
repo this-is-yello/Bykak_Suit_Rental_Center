@@ -68,6 +68,16 @@ shopPicWidth(c) {
   }
 }
 
+floatingBtnSize(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 44;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 46;
+  } else {
+    return 48;
+  }
+}
+
 // -------------------- FontSize --------------------
 h0FontSize(c) {
   if (MediaQuery.of(c).size.width < 640) {

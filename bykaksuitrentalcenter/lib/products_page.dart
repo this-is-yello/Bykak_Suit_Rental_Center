@@ -77,10 +77,10 @@ class _ProductsPageState extends State<ProductsPage> {
                     itemCount: 22,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width < 640
-                        ? 2
+                        ? 1
                         : MediaQuery.of(context).size.width < 1080
-                        ? 3
-                        : 4,
+                        ? 2
+                        : 3,
                       childAspectRatio: 1 / 1.2,
                       mainAxisSpacing: style.paddingSize(context),
                       crossAxisSpacing: style.paddingSize(context),
@@ -88,6 +88,7 @@ class _ProductsPageState extends State<ProductsPage> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         child: Container(
+                          width: style.widgetSize(context),
                           decoration: BoxDecoration(
                             color: style.whiteColor,
                             borderRadius: BorderRadius.circular(8),
@@ -203,7 +204,7 @@ class ProductsAppBar extends StatelessWidget {
               'by覺 렌탈센터',
               style: TextStyle(
                 fontSize: style.h1FontSize(context),
-                fontWeight: style.boldText,
+                // fontWeight: style.boldText,
                 color: style.mainColor,
               ),
             ),

@@ -57,219 +57,260 @@ class _MainPageState extends State<MainPage> {
               context: context,
               width: MediaQuery.of(context).size.width * 0.6,
               body: Container(
+                height: double.infinity,
                 padding: EdgeInsets.all(16),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_forward,
-                          color: style.mainColor,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.arrow_forward,
+                              color: style.mainColor,
+                            ),
+                            onPressed: () {
+                              Get.back();
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          Get.back();
-                        },
-                      ),
+                        InkWell(
+                          child: Container(
+                            width: double.infinity,
+                            height: 56,
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  width: 2,
+                                  color: style.lightGreyColor,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.question_mark_outlined,
+                                  color: style.mainColor,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                                Text(
+                                  'About',
+                                  style: TextStyle(
+                                    color: style.blackColor,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            currentPage = 1;
+                            movePage();
+                            Get.back();
+                          },
+                        ),
+                        InkWell(
+                          child: Container(
+                            width: double.infinity,
+                            height: 56,
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  width: 2,
+                                  color: style.lightGreyColor,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.shopping_cart_outlined,
+                                  color: style.mainColor,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                                Text(
+                                  'Product',
+                                  style: TextStyle(
+                                    color: style.blackColor,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            currentPage = 2;
+                            movePage();
+                            Get.back();
+                          },
+                        ),
+                        InkWell(
+                          child: Container(
+                            width: double.infinity,
+                            height: 56,
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  width: 2,
+                                  color: style.lightGreyColor,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.handshake_outlined,
+                                  color: style.mainColor,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                                Text(
+                                  'With',
+                                  style: TextStyle(
+                                    color: style.blackColor,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            currentPage = 3;
+                            movePage();
+                            Get.back();
+                          },
+                        ),
+                        InkWell(
+                          child: Container(
+                            width: double.infinity,
+                            height: 56,
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  width: 2,
+                                  color: style.lightGreyColor,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on_outlined,
+                                  color: style.mainColor,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                                Text(
+                                  'Location',
+                                  style: TextStyle(
+                                    color: style.blackColor,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            currentPage = 4;
+                            movePage();
+                            Get.back();
+                          },
+                        ),
+                        InkWell(
+                          child: Container(
+                            width: double.infinity,
+                            height: 56,
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  width: 2,
+                                  color: style.lightGreyColor,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.info_outline,
+                                  color: style.mainColor,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                                Text(
+                                  'Information',
+                                  style: TextStyle(
+                                    color: style.blackColor,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            currentPage = 5;
+                            movePage();
+                            Get.back();
+                          },
+                        ),
+                      ],
                     ),
                     InkWell(
                       child: Container(
                         width: double.infinity,
-                        height: 56,
-                        padding: EdgeInsets.all(8),
+                        height: 48,
                         decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 2,
-                              color: style.lightGreyColor,
+                          border: Border.all(
+                            color: style.mainColor,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(500),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '예약하기',
+                            style: TextStyle(
+                              fontSize: style.h4FontSize(context),
+                              fontWeight: style.boldText,
+                              color:style.mainColor
                             ),
                           ),
                         ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.question_mark_outlined,
-                              color: style.mainColor,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                            Text(
-                              'About',
-                              style: TextStyle(
-                                color: style.blackColor,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                          ],
-                        ),
                       ),
-                      onTap: () {
-                        currentPage = 1;
-                        movePage();
+                      onTap: () async {
                         Get.back();
-                      },
-                    ),
-                    InkWell(
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 2,
-                              color: style.lightGreyColor,
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.shopping_cart_outlined,
-                              color: style.mainColor,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                            Text(
-                              'Product',
-                              style: TextStyle(
-                                color: style.blackColor,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        currentPage = 2;
-                        movePage();
-                        Get.back();
-                      },
-                    ),
-                    InkWell(
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 2,
-                              color: style.lightGreyColor,
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.handshake_outlined,
-                              color: style.mainColor,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                            Text(
-                              'With',
-                              style: TextStyle(
-                                color: style.blackColor,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        currentPage = 3;
-                        movePage();
-                        Get.back();
-                      },
-                    ),
-                    InkWell(
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 2,
-                              color: style.lightGreyColor,
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.location_on_outlined,
-                              color: style.mainColor,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                            Text(
-                              'Location',
-                              style: TextStyle(
-                                color: style.blackColor,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        currentPage = 4;
-                        movePage();
-                        Get.back();
-                      },
-                    ),
-                    InkWell(
-                      child: Container(
-                        width: double.infinity,
-                        height: 56,
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              width: 2,
-                              color: style.lightGreyColor,
-                            ),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.info_outline,
-                              color: style.mainColor,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                            Text(
-                              'Information',
-                              style: TextStyle(
-                                color: style.blackColor,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        currentPage = 5;
-                        movePage();
-                        Get.back();
+                        final url = Uri.parse(
+                          'https://booking.naver.com/booking/13/bizes/839741',
+                        );
+                        if (await canLaunchUrl(url)) {
+                          launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        }
                       },
                     ),
                   ],
@@ -359,6 +400,44 @@ class _MainPageState extends State<MainPage> {
                 movePage();
               },
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 40),
+              child: InkWell(
+                child: Container(
+                  width: 120,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: style.mainColor,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: Text(
+                      '예약하기',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: style.boldText,
+                        color:style.mainColor
+                      ),
+                    ),
+                  ),
+                ),
+                onTap: () async {
+                  final url = Uri.parse(
+                    'https://booking.naver.com/booking/13/bizes/839741',
+                  );
+                  if (await canLaunchUrl(url)) {
+                    launchUrl(
+                      url,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  }
+                },
+              ),
+            ),
           ],
         ),
       );
@@ -415,128 +494,292 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
-          body: PageView(
-            controller: _controller,
-            scrollDirection: Axis.vertical,
-            onPageChanged: (value) {},
-            children: [
-              ByKak(),
-              About(),
-              Product(),
-              WithCelebrity(),
-              Location(),
-              Footer(),
-            ],
-          ),
-          floatingActionButton: SpeedDial(
-            child: Icon(Icons.headset_mic_outlined),
-            openBackgroundColor: style.whiteColor,
-            openForegroundColor: style.mainColor,
-            closedBackgroundColor: style.mainColor,
-            closedForegroundColor: style.whiteColor,
-            labelsStyle: TextStyle(
-              color: style.mainColor,
-              fontWeight: style.boldText,
+          body: Container(
+            child: Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                PageView(
+                  controller: _controller,
+                  scrollDirection: Axis.vertical,
+                  onPageChanged: (value) {},
+                  children: [
+                    ByKak(),
+                    About(),
+                    Product(),
+                    WithCelebrity(),
+                    Location(),
+                    Footer(),
+                  ],
+                ),
+                Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          // Container(
+                          //   padding: EdgeInsets.all(6),
+                          //   margin: EdgeInsets.only(right: 8, bottom: 8),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(4),
+                          //     boxShadow: [style.boxShadows],
+                          //     color: style.whiteColor
+                          //   ),
+                          //   child: Text(
+                          //     '카카오톡 플러스친구 문의',
+                          //     style: TextStyle(
+                          //       color: style.mainColor,
+                          //       fontWeight: style.boldText,
+                          //       fontSize: style.h6FontSize(context),
+                          //     ),
+                          //   ),
+                          // ),
+                          InkWell(
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              margin: EdgeInsets.only(right: 16, bottom: 12),
+                              width: style.floatingBtnSize(context),
+                              height: style.floatingBtnSize(context),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [style.boxShadows],
+                                color: style.kakaoColor,
+                              ),
+                              child: Image.asset(
+                                'assets/images/logo_kakao_talk_white.png',
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ),
+                            onTap: () async {
+                              final url = Uri.parse(
+                                'http://pf.kakao.com/_WExlxixj/chat',
+                              );
+                              if (await canLaunchUrl(url)) {
+                                launchUrl(
+                                  url,
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          // Container(
+                          //   padding: EdgeInsets.all(6),
+                          //   margin: EdgeInsets.only(right: 8, bottom: 8),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(4),
+                          //     boxShadow: [style.boxShadows],
+                          //     color: style.whiteColor
+                          //   ),
+                          //   child: Text(
+                          //     '네이버 톡톡 문의',
+                          //     style: TextStyle(
+                          //       color: style.mainColor,
+                          //       fontWeight: style.boldText,
+                          //       fontSize: style.h6FontSize(context),
+                          //     ),
+                          //   ),
+                          // ),
+                          InkWell(
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              margin: EdgeInsets.only(right: 16, bottom: 12),
+                              width: style.floatingBtnSize(context),
+                              height: style.floatingBtnSize(context),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [style.boxShadows],
+                                color: style.naverColor,
+                              ),
+                              child: Image.asset(
+                                'assets/images/logo_talktalk_white.png',
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ),
+                            onTap: () async {
+                              final url = Uri.parse(
+                                'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
+                              );
+                              if (await canLaunchUrl(url)) {
+                                launchUrl(
+                                  url,
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          // Container(
+                          //   padding: EdgeInsets.all(6),
+                          //   margin: EdgeInsets.only(right: 8, bottom: 16),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(4),
+                          //     boxShadow: [style.boxShadows],
+                          //     color: style.whiteColor
+                          //   ),
+                          //   child: Text(
+                          //     '070-4897-3059',
+                          //     style: TextStyle(
+                          //       color: style.mainColor,
+                          //       fontWeight: style.boldText,
+                          //       fontSize: style.h6FontSize(context),
+                          //     ),
+                          //   ),
+                          // ),
+                          InkWell(
+                            child: Container(
+                              padding: EdgeInsets.all(8),
+                              margin: EdgeInsets.only(right: 16, bottom: 16),
+                              width: style.floatingBtnSize(context),
+                              height: style.floatingBtnSize(context),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [style.boxShadows],
+                                color: style.mainColor,
+                              ),
+                              child: Image.asset(
+                                'assets/images/logo_phone_white.png',
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ),
+                            onTap: () async {
+                              final url = Uri.parse(
+                              'tel:070 7893 3059',
+                              );
+                              if (await canLaunchUrl(url)) {
+                                launchUrl(
+                                  url,
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-            speedDialChildren: [
-              SpeedDialChild(
-                child: Container(
-                  padding: EdgeInsets.all(4),
-                  child: Image.asset(
-                    'assets/images/logo_naver_white.png',
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
-                foregroundColor: style.whiteColor,
-                backgroundColor: style.naverColor,
-                label: '네이버 예약',
-                onPressed: () async {
-                  final url = Uri.parse(
-                    'https://booking.naver.com/booking/13/bizes/839741',
-                  );
-                  if (await canLaunchUrl(url)) {
-                    launchUrl(
-                      url,
-                      mode: LaunchMode.externalApplication,
-                    );
-                  }
-                },
-                closeSpeedDialOnPressed: false,
-              ),
-              SpeedDialChild(
-                child: Container(
-                  padding: EdgeInsets.all(4),
-                  child: Image.asset(
-                    'assets/images/logo_kakao_talk_white.png',
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
-                foregroundColor: style.whiteColor,
-                backgroundColor: style.kakaoColor,
-                label: '카카오톡 플러스친구 문의',
-                onPressed: () async {
-                  final url = Uri.parse(
-                    'http://pf.kakao.com/_UxoHxbT/chat',
-                  );
-                  if (await canLaunchUrl(url)) {
-                    launchUrl(
-                      url,
-                      mode: LaunchMode.externalApplication,
-                    );
-                  }
-                },
-                closeSpeedDialOnPressed: false,
-              ),
-              SpeedDialChild(
-                child: Container(
-                  padding: EdgeInsets.all(4),
-                  child: Image.asset(
-                    'assets/images/logo_talktalk_white.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                foregroundColor: style.whiteColor,
-                backgroundColor: style.naverColor,
-                label: '네이버 톡톡 문의',
-                onPressed: () async {
-                  final url = Uri.parse(
-                    'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
-                  );
-                  if (await canLaunchUrl(url)) {
-                    launchUrl(
-                      url,
-                      mode: LaunchMode.externalApplication,
-                    );
-                  }
-                },
-                closeSpeedDialOnPressed: false,
-              ),
-              SpeedDialChild(
-                child: Container(
-                  padding: EdgeInsets.all(4),
-                  child: Image.asset(
-                    'assets/images/logo_phone_white.png',
-                    fit: BoxFit.scaleDown,
-                  ),
-                ),
-                foregroundColor: style.whiteColor,
-                backgroundColor: style.mainColor,
-                label: '070-7893-3059',
-                onPressed: () async {
-                  final url = Uri.parse(
-                    'tel:070 7893 3059',
-                  );
-                  if (await canLaunchUrl(url)) {
-                    launchUrl(
-                      url,
-                      mode: LaunchMode.externalApplication,
-                    );
-                  }
-                },
-                closeSpeedDialOnPressed: false,
-              ),
-            ],
           ),
+          // floatingActionButton: SpeedDial(
+          //   child: Icon(Icons.headset_mic_outlined),
+          //   openBackgroundColor: style.whiteColor,
+          //   openForegroundColor: style.mainColor,
+          //   closedBackgroundColor: style.mainColor,
+          //   closedForegroundColor: style.whiteColor,
+          //   labelsStyle: TextStyle(
+          //     color: style.mainColor,
+          //     fontWeight: style.boldText,
+          //   ),
+          //   speedDialChildren: [
+          //     SpeedDialChild(
+          //       child: Container(
+          //         padding: EdgeInsets.all(4),
+          //         child: Image.asset(
+          //           'assets/images/logo_naver_white.png',
+          //           fit: BoxFit.scaleDown,
+          //         ),
+          //       ),
+          //       foregroundColor: style.whiteColor,
+          //       backgroundColor: style.naverColor,
+          //       label: '네이버 예약',
+          //       onPressed: () async {
+          //         final url = Uri.parse(
+          //           'https://booking.naver.com/booking/13/bizes/839741',
+          //         );
+          //         if (await canLaunchUrl(url)) {
+          //           launchUrl(
+          //             url,
+          //             mode: LaunchMode.externalApplication,
+          //           );
+          //         }
+          //       },
+          //       closeSpeedDialOnPressed: false,
+          //     ),
+          //     SpeedDialChild(
+          //       child: Container(
+          //         padding: EdgeInsets.all(4),
+          //         child: Image.asset(
+          //           'assets/images/logo_kakao_talk_white.png',
+          //           fit: BoxFit.scaleDown,
+          //         ),
+          //       ),
+          //       foregroundColor: style.whiteColor,
+          //       backgroundColor: style.kakaoColor,
+          //       label: '카카오톡 플러스친구 문의',
+          //       onPressed: () async {
+          //         final url = Uri.parse(
+          //           'http://pf.kakao.com/_WExlxixj/chat',
+          //         );
+          //         if (await canLaunchUrl(url)) {
+          //           launchUrl(
+          //             url,
+          //             mode: LaunchMode.externalApplication,
+          //           );
+          //         }
+          //       },
+          //       closeSpeedDialOnPressed: false,
+          //     ),
+          //     SpeedDialChild(
+          //       child: Container(
+          //         padding: EdgeInsets.all(4),
+          //         child: Image.asset(
+          //           'assets/images/logo_talktalk_white.png',
+          //           fit: BoxFit.contain,
+          //         ),
+          //       ),
+          //       foregroundColor: style.whiteColor,
+          //       backgroundColor: style.naverColor,
+          //       label: '네이버 톡톡 문의',
+          //       onPressed: () async {
+          //         final url = Uri.parse(
+          //           'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
+          //         );
+          //         if (await canLaunchUrl(url)) {
+          //           launchUrl(
+          //             url,
+          //             mode: LaunchMode.externalApplication,
+          //           );
+          //         }
+          //       },
+          //       closeSpeedDialOnPressed: false,
+          //     ),
+          //     SpeedDialChild(
+          //       child: Container(
+          //         padding: EdgeInsets.all(4),
+          //         child: Image.asset(
+          //           'assets/images/logo_phone_white.png',
+          //           fit: BoxFit.scaleDown,
+          //         ),
+          //       ),
+          //       foregroundColor: style.whiteColor,
+          //       backgroundColor: style.mainColor,
+          //       label: '070-7893-3059',
+          //       onPressed: () async {
+          //         final url = Uri.parse(
+          //           'tel:070 7893 3059',
+          //         );
+          //         if (await canLaunchUrl(url)) {
+          //           launchUrl(
+          //             url,
+          //             mode: LaunchMode.externalApplication,
+          //           );
+          //         }
+          //       },
+          //       closeSpeedDialOnPressed: false,
+          //     ),
+          //   ],
+          // ),
         );
       },
     );
@@ -560,6 +803,7 @@ class ByKak extends StatelessWidget {
             image: AssetImage(
               'assets/images/home_video_2.gif',
             ),
+            opacity: 0.7,
             fit: BoxFit.cover,
           ),
         ),
@@ -604,79 +848,6 @@ class About extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Text(
-                //   'About By覺',
-                //   style: TextStyle(
-                //     fontSize: style.h1FontSize(context),
-                //     fontWeight: style.boldText,
-                //     color: style.mainColor,
-                //   ),
-                // ),
-                // Column(
-                //   children: [
-                //     Padding(
-                //       padding: EdgeInsets.only(top: 20, bottom: 16),
-                //       child: Text(
-                //         '개항을 통해 들어온 정통 수제 양복\n최초의 양복인 인천의 양복이 최고가 될 수 있도록..',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(
-                //           fontSize: style.h3FontSize(context),
-                //           fontWeight: style.boldText,
-                //           color: style.blackColor,
-                //         ),
-                //       ),
-                //     ),
-                //     Padding(
-                //       padding: EdgeInsets.only(bottom: 40),
-                //       child: Text(
-                //         'by覺은 정성스럽게 바느질 된 고급 수제 양복을 알리고,\n남성들의 문화공간과 놀이터가 되고자 설립되었습니다.',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(
-                //           fontSize: style.h3FontSize(context),
-                //           fontWeight: style.boldText,
-                //           color: style.blackColor,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // Text(
-                //   'By覺 D-Day Rental Suit',
-                //   style: TextStyle(
-                //     fontSize: style.h1FontSize(context),
-                //     fontWeight: style.boldText,
-                //     color: style.mainColor,
-                //   ),
-                // ),
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     Padding(
-                //       padding: EdgeInsets.only(top: 20, bottom: 16),
-                //       child: Text(
-                //         '바이각 수트렌탈센터는 인천 최초의 정장렌탈 전문샵입니다.',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(
-                //           fontSize: style.h3FontSize(context),
-                //           fontWeight: style.boldText,
-                //           color: style.blackColor,
-                //         ),
-                //       ),
-                //     ),
-                //     Padding(
-                //       padding: EdgeInsets.only(bottom: 40),
-                //       child: Text(
-                //         '웨딩, 혼주복, 면접, 데일리 등으로\n그 날에 걸맞은 다양한 수트를 경험하실 수 있습니다.',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(
-                //           fontSize: style.h3FontSize(context),
-                //           fontWeight: style.boldText,
-                //           color: style.blackColor,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
@@ -757,6 +928,7 @@ class _ProductState extends State<Product> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         child: Container(
+                          width: style.widgetSize(context),
                           decoration: BoxDecoration(
                             color: style.whiteColor,
                             borderRadius: BorderRadius.circular(8),
@@ -889,7 +1061,7 @@ class _PinchUpState extends State<PinchUp> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(milliseconds: 700), () {
+    Future.delayed(Duration(milliseconds: 650), () {
       setState(() {
         _showPinchUp = false;
       });
@@ -1003,45 +1175,51 @@ class Location extends StatelessWidget {
                     }
                   },
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Text(
-                        '바이각 수트렌탈센터',
-                        style: TextStyle(
-                          fontSize: style.h2FontSize(context),
-                          color: style.blackColor,
-                          fontWeight: style.boldText,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            '바이각 수트렌탈센터',
+                            style: TextStyle(
+                              fontSize: style.h2FontSize(context),
+                              color: style.blackColor,
+                              fontWeight: style.boldText,
+                            ),
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Text(
+                            '※지도 클릭 시 네이버 지도로 연결합니다.',
+                            style: TextStyle(
+                              fontSize: style.h6FontSize(context),
+                              fontWeight: style.boldText,
+                              color: style.mainColor,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 4),
+                      padding: const EdgeInsets.only(
+                        top: 4,
+                        bottom: 8,
+                      ),
                       child: Text(
-                        '※지도 클릭 시 네이버 지도로 연결합니다.',
+                        '(22102) 인천 미추홀구 숙골로 43번길 158-19 3층',
                         style: TextStyle(
-                          fontSize: style.h6FontSize(context),
-                          fontWeight: style.boldText,
-                          color: style.mainColor,
+                          fontSize: style.h5FontSize(context),
+                          color: style.blackColor,
                         ),
                       ),
                     ),
                   ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 4,
-                    bottom: 8,
-                  ),
-                  child: Text(
-                    '(22102) 인천 미추홀구 숙골로 43번길 158-19 3층',
-                    style: TextStyle(
-                      fontSize: style.h4FontSize(context),
-                      color: style.blackColor,
-                    ),
-                  ),
                 ),
                 Divider(
                   height: 2,
@@ -1066,7 +1244,7 @@ class Location extends StatelessWidget {
                       Text(
                         '제물포역 2번출구 도보 1분',
                         style: TextStyle(
-                          fontSize: style.h4FontSize(context),
+                          fontSize: style.h5FontSize(context),
                           color: style.blackColor,
                         ),
                       ),
@@ -1075,7 +1253,7 @@ class Location extends StatelessWidget {
                         child: Text(
                           '37502 제물포역(스마트타운 방면) 버스정류장 도보 3분',
                           style: TextStyle(
-                            fontSize: style.h4FontSize(context),
+                            fontSize: style.h5FontSize(context),
                             color: style.blackColor,
                           ),
                         ),
@@ -1089,36 +1267,41 @@ class Location extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8, bottom: 8,),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 4,),
-                        child: Text(
-                          '주차안내',
-                          style: TextStyle(
-                            fontSize: style.h2FontSize(context),
-                            color: style.blackColor,
-                            fontWeight: style.boldText,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 4,),
+                            child: Text(
+                              '주차안내',
+                              style: TextStyle(
+                                fontSize: style.h2FontSize(context),
+                                color: style.blackColor,
+                                fontWeight: style.boldText,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Text(
-                        '김주현바이각 제물포 본점',
-                        style: TextStyle(
-                          fontSize: style.h4FontSize(context),
-                          color: style.blackColor,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4,),
-                        child: Text(
-                          '제물포북부역 공영주차장 2시간 무료',
-                          style: TextStyle(
-                            fontSize: style.h4FontSize(context),
-                            color: style.blackColor,
+                          Text(
+                            '김주현바이각 제물포 본점',
+                            style: TextStyle(
+                              fontSize: style.h5FontSize(context),
+                              color: style.blackColor,
+                            ),
                           ),
-                        ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4,),
+                            child: Text(
+                              '제물포북부역 공영주차장 2시간 무료',
+                              style: TextStyle(
+                                fontSize: style.h5FontSize(context),
+                                color: style.blackColor,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -1184,7 +1367,7 @@ class Footer extends StatelessWidget {
                         ),
                         onTap: () async {
                           final url = Uri.parse(
-                            'http://pf.kakao.com/_UxoHxbT',
+                            'http://pf.kakao.com/_WExlxixj',
                           );
                           if (await canLaunchUrl(url)) {
                             launchUrl(
@@ -1196,7 +1379,7 @@ class Footer extends StatelessWidget {
                       ),
                       InkWell(
                         child: Image.asset(
-                          'assets/images/logo_naver_blog.png',
+                          'assets/images/logo_blog.png',
                           fit: BoxFit.contain,
                           scale: 1.5,
                         ),
@@ -1238,7 +1421,7 @@ class Footer extends StatelessWidget {
                         ),
                         onTap: () async {
                           final url = Uri.parse(
-                            'https://www.youtube.com/@user-sk6bq7pt7p/featured',
+                            'https://www.youtube.com/channel/UChLYML6MnztkeOYdtdAQqaw',
                           );
                           if (await canLaunchUrl(url)) {
                             launchUrl(

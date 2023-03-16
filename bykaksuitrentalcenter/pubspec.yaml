@@ -86,6 +86,7 @@ flutter:
     - assets/images/
     - assets/images/products/
     # ---------- thumbnail ----------
+    - assets/images/home_video_1.gif
     - assets/images/home_video_2.gif
     - assets/images/home_video_3.gif
     # ---------- logo ----------
@@ -95,9 +96,10 @@ flutter:
     - assets/images/logo_instagram_white.png
     - assets/images/logo_kakao_talk.png
     - assets/images/logo_kakao_talk_white.png
-    - assets/images/logo_naver_blog.png
-    - assets/images/logo_naver_blog_white.png
+    - assets/images/logo_blog.png
+    - assets/images/logo_blog_white.png
     - assets/images/logo_naver.png
+    - assets/images/logo_naver_color.png
     - assets/images/logo_naver_white.png
     - assets/images/logo_phone.png
     - assets/images/logo_phone_white.png
