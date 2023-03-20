@@ -761,28 +761,26 @@ class _AboutState extends State<About> {
                   flex: 1,
                   child: Container(
                     alignment: Alignment.center,
-                    child: Center(
-                      child: GridView.builder(
-                        itemCount: 10, //item 개수
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
-                          childAspectRatio: 16 / 9, //item 의 가로 1, 세로 2 의 비율
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
-                          
-                        ),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            child: Image.asset(
-                              aboutShopPics[index],
-                              fit: BoxFit.fitHeight,
-                            ),
-                            onTap: () {
-                              indexChange(index);
-                            },
-                          );
-                        },
+                    child: GridView.builder(
+                      itemCount: 10, //item 개수
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
+                        childAspectRatio: 16 / 9, //item 의 가로 1, 세로 2 의 비율
+                        mainAxisSpacing: 8,
+                        crossAxisSpacing: 8,
+                        
                       ),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          child: Image.asset(
+                            aboutShopPics[index],
+                            fit: BoxFit.fitHeight,
+                          ),
+                          onTap: () {
+                            indexChange(index);
+                          },
+                        );
+                      },
                     ),
                   ),
                 ),
