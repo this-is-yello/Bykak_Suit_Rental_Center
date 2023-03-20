@@ -1,5 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:bykaksuitrentalcenter/style.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_sheet/side_sheet.dart';
@@ -22,7 +23,6 @@ import 'package:bykaksuitrentalcenter/loading_screen.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
-
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -40,6 +40,22 @@ movePage() {
     curve: Curves.linearToEaseOut,
   );
 }
+List aboutShopPics = [
+  'assets/images/shops/shop_1.png',
+  'assets/images/shops/shop_2.png',
+  'assets/images/shops/shop_3.png',
+  'assets/images/shops/shop_4.png',
+  'assets/images/shops/shop_5.png',
+  'assets/images/shops/shop_6.png',
+  'assets/images/shops/shop_7.png',
+  'assets/images/shops/shop_8.png',
+  'assets/images/shops/shop_9.png',
+  'assets/images/shops/shop_10.png',
+  'assets/images/shops/shop_1.png',
+];
+var shopPic;
+int i = 0;
+
 
 class _MainPageState extends State<MainPage> {
   // -------------------- menuState() -------------------- //
@@ -51,7 +67,7 @@ class _MainPageState extends State<MainPage> {
           InkWell(
             child: Icon(
               Icons.menu,
-              color: style.mainColor,
+              color: mainColor,
             ),
             onTap: () => SideSheet.right(
               context: context,
@@ -69,7 +85,7 @@ class _MainPageState extends State<MainPage> {
                           child: IconButton(
                             icon: Icon(
                               Icons.arrow_forward,
-                              color: style.mainColor,
+                              color: mainColor,
                             ),
                             onPressed: () {
                               Get.back();
@@ -85,7 +101,7 @@ class _MainPageState extends State<MainPage> {
                               border: Border(
                                 bottom: BorderSide(
                                   width: 2,
-                                  color: style.lightGreyColor,
+                                  color: lightGreyColor,
                                 ),
                               ),
                             ),
@@ -93,7 +109,7 @@ class _MainPageState extends State<MainPage> {
                               children: [
                                 Icon(
                                   Icons.question_mark_outlined,
-                                  color: style.mainColor,
+                                  color: mainColor,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(4),
@@ -101,7 +117,8 @@ class _MainPageState extends State<MainPage> {
                                 Text(
                                   'About',
                                   style: TextStyle(
-                                    color: style.blackColor,
+                                    fontWeight: boldText,
+                                    color: blackColor,
                                   ),
                                 ),
                                 Padding(
@@ -125,7 +142,7 @@ class _MainPageState extends State<MainPage> {
                               border: Border(
                                 bottom: BorderSide(
                                   width: 2,
-                                  color: style.lightGreyColor,
+                                  color: lightGreyColor,
                                 ),
                               ),
                             ),
@@ -133,7 +150,7 @@ class _MainPageState extends State<MainPage> {
                               children: [
                                 Icon(
                                   Icons.shopping_cart_outlined,
-                                  color: style.mainColor,
+                                  color: mainColor,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(4),
@@ -141,7 +158,8 @@ class _MainPageState extends State<MainPage> {
                                 Text(
                                   'Product',
                                   style: TextStyle(
-                                    color: style.blackColor,
+                                    fontWeight: boldText,
+                                    color: blackColor,
                                   ),
                                 ),
                                 Padding(
@@ -165,7 +183,7 @@ class _MainPageState extends State<MainPage> {
                               border: Border(
                                 bottom: BorderSide(
                                   width: 2,
-                                  color: style.lightGreyColor,
+                                  color: lightGreyColor,
                                 ),
                               ),
                             ),
@@ -173,7 +191,7 @@ class _MainPageState extends State<MainPage> {
                               children: [
                                 Icon(
                                   Icons.handshake_outlined,
-                                  color: style.mainColor,
+                                  color: mainColor,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(4),
@@ -181,7 +199,8 @@ class _MainPageState extends State<MainPage> {
                                 Text(
                                   'With',
                                   style: TextStyle(
-                                    color: style.blackColor,
+                                    fontWeight: boldText,
+                                    color: blackColor,
                                   ),
                                 ),
                                 Padding(
@@ -205,7 +224,7 @@ class _MainPageState extends State<MainPage> {
                               border: Border(
                                 bottom: BorderSide(
                                   width: 2,
-                                  color: style.lightGreyColor,
+                                  color: lightGreyColor,
                                 ),
                               ),
                             ),
@@ -213,7 +232,7 @@ class _MainPageState extends State<MainPage> {
                               children: [
                                 Icon(
                                   Icons.location_on_outlined,
-                                  color: style.mainColor,
+                                  color: mainColor,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(4),
@@ -221,7 +240,8 @@ class _MainPageState extends State<MainPage> {
                                 Text(
                                   'Location',
                                   style: TextStyle(
-                                    color: style.blackColor,
+                                    fontWeight: boldText,
+                                    color: blackColor,
                                   ),
                                 ),
                                 Padding(
@@ -245,7 +265,7 @@ class _MainPageState extends State<MainPage> {
                               border: Border(
                                 bottom: BorderSide(
                                   width: 2,
-                                  color: style.lightGreyColor,
+                                  color: lightGreyColor,
                                 ),
                               ),
                             ),
@@ -253,7 +273,7 @@ class _MainPageState extends State<MainPage> {
                               children: [
                                 Icon(
                                   Icons.info_outline,
-                                  color: style.mainColor,
+                                  color: mainColor,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(4),
@@ -261,7 +281,8 @@ class _MainPageState extends State<MainPage> {
                                 Text(
                                   'Information',
                                   style: TextStyle(
-                                    color: style.blackColor,
+                                    fontWeight: boldText,
+                                    color: blackColor,
                                   ),
                                 ),
                                 Padding(
@@ -284,7 +305,7 @@ class _MainPageState extends State<MainPage> {
                         height: 48,
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: style.mainColor,
+                            color: mainColor,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(500),
@@ -293,9 +314,9 @@ class _MainPageState extends State<MainPage> {
                           child: Text(
                             '예약하기',
                             style: TextStyle(
-                              fontSize: style.h4FontSize(context),
-                              fontWeight: style.boldText,
-                              color:style.mainColor
+                              fontSize: h4FontSize(context),
+                              fontWeight: boldText,
+                              color:mainColor
                             ),
                           ),
                         ),
@@ -331,8 +352,8 @@ class _MainPageState extends State<MainPage> {
                 'About',
                 style: TextStyle(
                   fontSize: 16,
-                  color: style.mainColor,
-                  fontWeight: style.boldText,
+                  color: mainColor,
+                  fontWeight: boldText,
                 ),
               ),
               onTap: () {
@@ -346,8 +367,8 @@ class _MainPageState extends State<MainPage> {
                 'Products',
                 style: TextStyle(
                   fontSize: 16,
-                  color: style.mainColor,
-                  fontWeight: style.boldText,
+                  color: mainColor,
+                  fontWeight: boldText,
                 ),
               ),
               onTap: () {
@@ -361,8 +382,8 @@ class _MainPageState extends State<MainPage> {
                 'With',
                 style: TextStyle(
                   fontSize: 16,
-                  color: style.mainColor,
-                  fontWeight: style.boldText,
+                  color: mainColor,
+                  fontWeight: boldText,
                 ),
               ),
               onTap: () {
@@ -376,8 +397,8 @@ class _MainPageState extends State<MainPage> {
                 'Location',
                 style: TextStyle(
                   fontSize: 16,
-                  color: style.mainColor,
-                  fontWeight: style.boldText,
+                  color: mainColor,
+                  fontWeight: boldText,
                 ),
               ),
               onTap: () {
@@ -391,8 +412,8 @@ class _MainPageState extends State<MainPage> {
                 'Information',
                 style: TextStyle(
                   fontSize: 16,
-                  color: style.mainColor,
-                  fontWeight: style.boldText,
+                  color: mainColor,
+                  fontWeight: boldText,
                 ),
               ),
               onTap: () {
@@ -408,7 +429,7 @@ class _MainPageState extends State<MainPage> {
                   height: 36,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: style.mainColor,
+                      color: mainColor,
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(20),
@@ -419,8 +440,8 @@ class _MainPageState extends State<MainPage> {
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: style.boldText,
-                        color:style.mainColor
+                        fontWeight: boldText,
+                        color:mainColor
                       ),
                     ),
                   ),
@@ -447,18 +468,39 @@ class _MainPageState extends State<MainPage> {
   // -------------------- Scaffold -------------------- //
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 1), () {
+    if (i == 9) {
+      Future.delayed(
+        Duration(seconds: 4), () {
+          setState(() {
+            i = 0;
+          });
+        }
+      );
+      shopPic = aboutShopPics[i];
+      print('$i, $shopPic');
+    } else {
+      Future.delayed(
+        Duration(seconds: 4), () {
+          setState(() {
+            i++;
+          });
+        }
+      );
+      shopPic = aboutShopPics[i];
+      print('$i, $shopPic');
+    }
+    if (i >= 10) {
       setState(() {
-        _isLoading = false;
+        i = 0;
       });
-    });
-
+      print('$i, $shopPic');
+    }
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: style.whiteColor,
+            backgroundColor: whiteColor,
             toolbarHeight: MediaQuery.of(context).size.width < 640
               ? 56
               : MediaQuery.of(context).size.width < 1080
@@ -466,8 +508,8 @@ class _MainPageState extends State<MainPage> {
               : 72,
             title: Center(
               child: Container(
-                width: style.widgetSize(context),
-                color: style.whiteColor,
+                width: widgetSize(context),
+                color: whiteColor,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -475,8 +517,8 @@ class _MainPageState extends State<MainPage> {
                       child: Text(
                         'by覺 렌탈센터',
                         style: TextStyle(
-                          fontSize: style.h1FontSize(context),
-                          color: style.mainColor,
+                          fontSize: h1FontSize(context),
+                          color: mainColor,
                         ),
                       ),
                       // ),
@@ -518,36 +560,19 @@ class _MainPageState extends State<MainPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          // Container(
-                          //   padding: EdgeInsets.all(6),
-                          //   margin: EdgeInsets.only(right: 8, bottom: 8),
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(4),
-                          //     boxShadow: [style.boxShadows],
-                          //     color: style.whiteColor
-                          //   ),
-                          //   child: Text(
-                          //     '카카오톡 플러스친구 문의',
-                          //     style: TextStyle(
-                          //       color: style.mainColor,
-                          //       fontWeight: style.boldText,
-                          //       fontSize: style.h6FontSize(context),
-                          //     ),
-                          //   ),
-                          // ),
                           InkWell(
                             child: Container(
                               padding: EdgeInsets.all(8),
                               margin: EdgeInsets.only(right: 16, bottom: 12),
-                              width: style.floatingBtnSize(context),
-                              height: style.floatingBtnSize(context),
+                              width: floatingBtnSize(context),
+                              height: floatingBtnSize(context),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                boxShadow: [style.boxShadows],
-                                color: style.kakaoColor,
+                                boxShadow: [boxShadows],
+                                color: kakaoColor,
                               ),
                               child: Image.asset(
-                                'assets/images/logo_kakao_talk_white.png',
+                                'assets/images/logos/logo_kakao_talk_white.png',
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
@@ -568,36 +593,19 @@ class _MainPageState extends State<MainPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          // Container(
-                          //   padding: EdgeInsets.all(6),
-                          //   margin: EdgeInsets.only(right: 8, bottom: 8),
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(4),
-                          //     boxShadow: [style.boxShadows],
-                          //     color: style.whiteColor
-                          //   ),
-                          //   child: Text(
-                          //     '네이버 톡톡 문의',
-                          //     style: TextStyle(
-                          //       color: style.mainColor,
-                          //       fontWeight: style.boldText,
-                          //       fontSize: style.h6FontSize(context),
-                          //     ),
-                          //   ),
-                          // ),
                           InkWell(
                             child: Container(
                               padding: EdgeInsets.all(8),
                               margin: EdgeInsets.only(right: 16, bottom: 12),
-                              width: style.floatingBtnSize(context),
-                              height: style.floatingBtnSize(context),
+                              width: floatingBtnSize(context),
+                              height: floatingBtnSize(context),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                boxShadow: [style.boxShadows],
-                                color: style.naverColor,
+                                boxShadow: [boxShadows],
+                                color: naverColor,
                               ),
                               child: Image.asset(
-                                'assets/images/logo_talktalk_white.png',
+                                'assets/images/logos/logo_talktalk_white.png',
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
@@ -618,36 +626,19 @@ class _MainPageState extends State<MainPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          // Container(
-                          //   padding: EdgeInsets.all(6),
-                          //   margin: EdgeInsets.only(right: 8, bottom: 16),
-                          //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.circular(4),
-                          //     boxShadow: [style.boxShadows],
-                          //     color: style.whiteColor
-                          //   ),
-                          //   child: Text(
-                          //     '070-4897-3059',
-                          //     style: TextStyle(
-                          //       color: style.mainColor,
-                          //       fontWeight: style.boldText,
-                          //       fontSize: style.h6FontSize(context),
-                          //     ),
-                          //   ),
-                          // ),
                           InkWell(
                             child: Container(
                               padding: EdgeInsets.all(8),
                               margin: EdgeInsets.only(right: 16, bottom: 16),
-                              width: style.floatingBtnSize(context),
-                              height: style.floatingBtnSize(context),
+                              width: floatingBtnSize(context),
+                              height: floatingBtnSize(context),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                boxShadow: [style.boxShadows],
-                                color: style.mainColor,
+                                boxShadow: [boxShadows],
+                                color: mainColor,
                               ),
                               child: Image.asset(
-                                'assets/images/logo_phone_white.png',
+                                'assets/images/logos/logo_phone_white.png',
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
@@ -671,115 +662,6 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ),
-          // floatingActionButton: SpeedDial(
-          //   child: Icon(Icons.headset_mic_outlined),
-          //   openBackgroundColor: style.whiteColor,
-          //   openForegroundColor: style.mainColor,
-          //   closedBackgroundColor: style.mainColor,
-          //   closedForegroundColor: style.whiteColor,
-          //   labelsStyle: TextStyle(
-          //     color: style.mainColor,
-          //     fontWeight: style.boldText,
-          //   ),
-          //   speedDialChildren: [
-          //     SpeedDialChild(
-          //       child: Container(
-          //         padding: EdgeInsets.all(4),
-          //         child: Image.asset(
-          //           'assets/images/logo_naver_white.png',
-          //           fit: BoxFit.scaleDown,
-          //         ),
-          //       ),
-          //       foregroundColor: style.whiteColor,
-          //       backgroundColor: style.naverColor,
-          //       label: '네이버 예약',
-          //       onPressed: () async {
-          //         final url = Uri.parse(
-          //           'https://booking.naver.com/booking/13/bizes/839741',
-          //         );
-          //         if (await canLaunchUrl(url)) {
-          //           launchUrl(
-          //             url,
-          //             mode: LaunchMode.externalApplication,
-          //           );
-          //         }
-          //       },
-          //       closeSpeedDialOnPressed: false,
-          //     ),
-          //     SpeedDialChild(
-          //       child: Container(
-          //         padding: EdgeInsets.all(4),
-          //         child: Image.asset(
-          //           'assets/images/logo_kakao_talk_white.png',
-          //           fit: BoxFit.scaleDown,
-          //         ),
-          //       ),
-          //       foregroundColor: style.whiteColor,
-          //       backgroundColor: style.kakaoColor,
-          //       label: '카카오톡 플러스친구 문의',
-          //       onPressed: () async {
-          //         final url = Uri.parse(
-          //           'http://pf.kakao.com/_WExlxixj/chat',
-          //         );
-          //         if (await canLaunchUrl(url)) {
-          //           launchUrl(
-          //             url,
-          //             mode: LaunchMode.externalApplication,
-          //           );
-          //         }
-          //       },
-          //       closeSpeedDialOnPressed: false,
-          //     ),
-          //     SpeedDialChild(
-          //       child: Container(
-          //         padding: EdgeInsets.all(4),
-          //         child: Image.asset(
-          //           'assets/images/logo_talktalk_white.png',
-          //           fit: BoxFit.contain,
-          //         ),
-          //       ),
-          //       foregroundColor: style.whiteColor,
-          //       backgroundColor: style.naverColor,
-          //       label: '네이버 톡톡 문의',
-          //       onPressed: () async {
-          //         final url = Uri.parse(
-          //           'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
-          //         );
-          //         if (await canLaunchUrl(url)) {
-          //           launchUrl(
-          //             url,
-          //             mode: LaunchMode.externalApplication,
-          //           );
-          //         }
-          //       },
-          //       closeSpeedDialOnPressed: false,
-          //     ),
-          //     SpeedDialChild(
-          //       child: Container(
-          //         padding: EdgeInsets.all(4),
-          //         child: Image.asset(
-          //           'assets/images/logo_phone_white.png',
-          //           fit: BoxFit.scaleDown,
-          //         ),
-          //       ),
-          //       foregroundColor: style.whiteColor,
-          //       backgroundColor: style.mainColor,
-          //       label: '070-7893-3059',
-          //       onPressed: () async {
-          //         final url = Uri.parse(
-          //           'tel:070 7893 3059',
-          //         );
-          //         if (await canLaunchUrl(url)) {
-          //           launchUrl(
-          //             url,
-          //             mode: LaunchMode.externalApplication,
-          //           );
-          //         }
-          //       },
-          //       closeSpeedDialOnPressed: false,
-          //     ),
-          //   ],
-          // ),
         );
       },
     );
@@ -798,7 +680,7 @@ class ByKak extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          color: style.blackColor,
+          color: blackColor,
           image: DecorationImage(
             image: AssetImage(
               'assets/images/home_video_2.gif',
@@ -811,14 +693,14 @@ class ByKak extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              '그 날을 위한 자신감, 바이각',
-              style: TextStyle(
-                fontSize: style.h0FontSize(context),
-                fontWeight: style.boldText,
-                color: style.whiteColor,
-              ),
-            ),
+            // Text(
+            //   '그 날을 위한 자신감, 바이각',
+            //   style: TextStyle(
+            //     fontSize: h0FontSize(context),
+            //     fontWeight: boldText,
+            //     color: whiteColor,
+            //   ),
+            // ),
           ],
         ),
       );
@@ -828,9 +710,21 @@ class ByKak extends StatelessWidget {
 
 
 // ----------------------------------------------- About ------------------------------------------------------------------
-class About extends StatelessWidget {
+class About extends StatefulWidget {
   const About({super.key});
 
+  @override
+  State<About> createState() => _AboutState();
+}
+
+class _AboutState extends State<About> {
+  indexChange(index) {
+    setState(() {
+      i = index;
+      shopPic = aboutShopPics[i];
+    });
+    print(i);
+  }
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
@@ -838,27 +732,213 @@ class About extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          color: style.whiteColor,
+          color: whiteColor,
         ),
         child: Center(
           child: Container(
-            width: style.widgetSize(context),
+            width: widgetSize(context),
             padding: EdgeInsets.all(16),
-            child: Column(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    'assets/images/about_bykak.png',
-                    fit: BoxFit.fitWidth,
+                Flexible(
+                  flex: 3,
+                  child: Container(
+                    // width: widgetSize(context),
+                    child: ImageFade(
+                      image: AssetImage(
+                        '$shopPic'
+                      ),
+                      duration: Duration(milliseconds: 500),
+                      syncDuration: Duration(milliseconds: 500),
+                    ),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: paddingSize(context)),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Center(
+                      child: GridView.builder(
+                        itemCount: 10, //item 개수
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
+                          childAspectRatio: 16 / 9, //item 의 가로 1, 세로 2 의 비율
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                          
+                        ),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            child: Image.asset(
+                              aboutShopPics[index],
+                              fit: BoxFit.fitHeight,
+                            ),
+                            onTap: () {
+                              indexChange(index);
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                // Padding(
+                //   padding: EdgeInsets.only(top: paddingSize(context))
+                // ),
+                // Container(
+                //   // width: widgetSize(context),
+                //   child: Column(
+                //     children: [
+                //       Text(
+                //         '그 날을 위한 자신감, 바이각',
+                //         style: TextStyle(
+                //           fontSize: h1FontSize(context),
+                //           fontWeight: boldText,
+                //           color: blackColor,
+                //         ),
+                //       ),
+                //       Padding(
+                //         padding: EdgeInsets.only(
+                //           top: paddingSize(context),
+                //           bottom: paddingSize(context)
+                //         ),
+                //         child: Text(
+                //           '바이각 수트렌탈센터는 100 평대의\n인천 최초/최대의 정장렌탈 전문샵입니다.',
+                //           textAlign: TextAlign.center,
+                //           style: TextStyle(
+                //             fontSize: h4FontSize(context),
+                //             // fontWeight: boldText,
+                //             color: blackColor,
+                //           ),
+                //         ),
+                //       ),
+                //       Text(
+                //         '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험하실 수 있습니다.',
+                //         textAlign: TextAlign.center,
+                //         style: TextStyle(
+                //           fontSize: h4FontSize(context),
+                //           // fontWeight: boldText,
+                //           color: blackColor,
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // Container(
+                //   width: MediaQuery.of(context).size.width,
+                //   height: MediaQuery.of(context).size.height,
+                //   child: Opacity(
+                //     opacity: 0.4,
+                //     child: ImageFade(
+                //       image: AssetImage(
+                //         i % 2 == 0 ? aboutBackFade[0]
+                //         : aboutBackFade[1],
+                //       ),
+                //       duration: const Duration(milliseconds: 500),
+                //       syncDuration: const Duration(milliseconds: 500),
+                //       alignment: Alignment.center,
+                //       fit: BoxFit.cover,
+                //     ),
+                //   ),
+                // ),
+                // Container(
+                //   width: 
+                //   widgetSize(context),
+                //   child: ImageFade(
+                //     image: AssetImage(
+                //       i == 0 ? aboutContantsFade[0]
+                //       : aboutContantsFade[1]
+                //     ),
+                //     duration: const Duration(milliseconds: 500),
+                //     syncDuration: const Duration(milliseconds: 500),
+                //     alignment: Alignment.center,
+                //     fit: BoxFit.contain,
+                //   ),
+                // ),
               ],
             ),
           ),
-        )
+        ),
+        // child: CarouselSlider(
+        //   options: CarouselOptions(
+        //     aspectRatio: 16 / 9,
+        //     height: MediaQuery.of(context).size.height,
+        //     autoPlay: true,
+        //     viewportFraction: 1,
+        //   ),
+        //   items: [
+        //     Stack(
+        //       alignment: Alignment.center,
+        //       children: [
+        //         Container(
+        //           height: MediaQuery.of(context).size.height,
+        //           child: Opacity(
+        //             opacity: 0.3,
+        //             child: Image.asset(
+        //               'assets/images/bykak_shop.png',
+        //               fit: BoxFit.cover,
+        //             ),
+        //           ),
+        //         ),
+        //         Container(
+        //           width: widgetSize(context),
+        //           padding: EdgeInsets.all(16),
+        //           child: Image.asset(
+        //             'assets/images/about_rental_1.png',
+        //             fit: BoxFit.contain,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //     Stack(
+        //       alignment: Alignment.center,
+        //       children: [
+        //         Container(
+        //           height: MediaQuery.of(context).size.height,
+        //           child: Opacity(
+        //             opacity: 0.2,
+        //             child: Image.asset(
+        //               'assets/images/rental_shop.png',
+        //               fit: BoxFit.cover,
+        //             ),
+        //           ),
+        //         ),
+        //         Container(
+        //           width: widgetSize(context),
+        //           padding: EdgeInsets.all(16),
+        //           child: Image.asset(
+        //             'assets/images/about_rental_2.png',
+        //             fit: BoxFit.contain,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ],
+        // ),
+        // ----------------------------------------------------------------
+        // child: Center(
+        //   child: Container(
+        //     width: widgetSize(context),
+        //     padding: EdgeInsets.all(16),
+        //     child: Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       children: [
+        //         ClipRRect(
+        //           borderRadius: BorderRadius.circular(8),
+        //           child: Image.asset(
+        //             'assets/images/about_bykak.png',
+        //             fit: BoxFit.fitWidth,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // )
       );
     });
   }
@@ -881,10 +961,10 @@ class _ProductState extends State<Product> {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: style.whiteColor,
+        color: whiteColor,
         child: Center(
           child: Container(
-            width: style.widgetSize(context),
+            width: widgetSize(context),
             height: double.infinity,
             padding: EdgeInsets.all(16),
             child: Column(
@@ -894,14 +974,14 @@ class _ProductState extends State<Product> {
                 Text(
                   'Product',
                   style: TextStyle(
-                    fontSize: style.h1FontSize(context),
-                    fontWeight: style.boldText,
-                    color: style.mainColor,
+                    fontSize: h1FontSize(context),
+                    fontWeight: boldText,
+                    color: mainColor,
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
                 Container(
-                  width: style.widgetSize(context),
+                  width: widgetSize(context),
                   height: MediaQuery.of(context).size.width < 640
                       ? 400
                       : MediaQuery.of(context).size.width < 1080
@@ -922,15 +1002,15 @@ class _ProductState extends State<Product> {
                           ? 3
                           : 4,
                       childAspectRatio: 1 / 1.2,
-                      mainAxisSpacing: style.paddingSize(context),
-                      crossAxisSpacing: style.paddingSize(context),
+                      mainAxisSpacing: paddingSize(context),
+                      crossAxisSpacing: paddingSize(context),
                     ),
                     itemBuilder: (context, index) {
                       return InkWell(
                         child: Container(
-                          width: style.widgetSize(context),
+                          width: widgetSize(context),
                           decoration: BoxDecoration(
-                            color: style.whiteColor,
+                            color: whiteColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: ClipRRect(
@@ -946,7 +1026,7 @@ class _ProductState extends State<Product> {
                                   width: 40,
                                   height: 40,
                                   child: CircularProgressIndicator(
-                                    color: style.mainColor,
+                                    color: mainColor,
                                   ),
                                 ),
                               ),
@@ -968,7 +1048,7 @@ class _ProductState extends State<Product> {
                                       icon: Icon(
                                         Icons.close,
                                         size: 30,
-                                        color: style.whiteColor,
+                                        color: whiteColor,
                                       ),
                                       onPressed: () {
                                         Get.back();
@@ -991,8 +1071,8 @@ class _ProductState extends State<Product> {
                                       ),
                                     ),
                                     Container(
-                                      width: style.c1BoxSize(context),
-                                      height: style.c1BoxSize(context),
+                                      width: c1BoxSize(context),
+                                      height: c1BoxSize(context),
                                       child: PinchUp(),
                                     )
                                   ],
@@ -1013,15 +1093,15 @@ class _ProductState extends State<Product> {
                         children: [
                           Icon(
                             Icons.keyboard_arrow_up,
-                            size: style.h1FontSize(context),
-                            color: style.mainColor,
+                            size: h1FontSize(context),
+                            color: mainColor,
                           ),
                           Text(
                             '전체보기',
                             style: TextStyle(
-                              fontSize: style.h3FontSize(context),
-                              fontWeight: style.boldText,
-                              color: style.mainColor,
+                              fontSize: h3FontSize(context),
+                              fontWeight: boldText,
+                              color: mainColor,
                             ),
                           ),
                         ],
@@ -1053,7 +1133,7 @@ class _PinchUpState extends State<PinchUp> {
 
   showPinchUp() {
     if(_showPinchUp == true) {
-      return style.c1BoxSize(context);
+      return c1BoxSize(context);
     } else {
       return 0;
     }
@@ -1068,11 +1148,11 @@ class _PinchUpState extends State<PinchUp> {
     });
 
     return _showPinchUp ? Container(
-      width: style.c1BoxSize(context),
-      height: style.c1BoxSize(context),
+      width: c1BoxSize(context),
+      height: c1BoxSize(context),
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: style.greyColor.withOpacity(0.7),
+        color: greyColor.withOpacity(0.7),
         borderRadius: BorderRadius.circular(8)
       ),
       child: Image.asset(
@@ -1094,10 +1174,10 @@ class WithCelebrity extends StatelessWidget {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: style.whiteColor,
+        color: whiteColor,
         child: Center(
           child: Container(
-            width: style.widgetSize(context),
+            width: widgetSize(context),
             padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -1106,9 +1186,9 @@ class WithCelebrity extends StatelessWidget {
                 Text(
                   'With by覺',
                   style: TextStyle(
-                    fontSize: style.h1FontSize(context),
-                    fontWeight: style.boldText,
-                    color: style.mainColor,
+                    fontSize: h1FontSize(context),
+                    fontWeight: boldText,
+                    color: mainColor,
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
@@ -1140,10 +1220,10 @@ class Location extends StatelessWidget {
       return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: style.whiteColor,
+        color: whiteColor,
         child: Center(
           child: Container(
-            width: style.widgetSize(context),
+            width: widgetSize(context),
             padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -1152,9 +1232,9 @@ class Location extends StatelessWidget {
                 Text(
                   'Location',
                   style: TextStyle(
-                    fontSize: style.h1FontSize(context),
-                    fontWeight: style.boldText,
-                    color: style.mainColor,
+                    fontSize: h1FontSize(context),
+                    fontWeight: boldText,
+                    color: mainColor,
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
@@ -1187,9 +1267,9 @@ class Location extends StatelessWidget {
                           child: Text(
                             '바이각 수트렌탈센터',
                             style: TextStyle(
-                              fontSize: style.h2FontSize(context),
-                              color: style.blackColor,
-                              fontWeight: style.boldText,
+                              fontSize: h2FontSize(context),
+                              color: blackColor,
+                              fontWeight: boldText,
                             ),
                           ),
                         ),
@@ -1198,9 +1278,9 @@ class Location extends StatelessWidget {
                           child: Text(
                             '※지도 클릭 시 네이버 지도로 연결합니다.',
                             style: TextStyle(
-                              fontSize: style.h6FontSize(context),
-                              fontWeight: style.boldText,
-                              color: style.mainColor,
+                              fontSize: h6FontSize(context),
+                              fontWeight: boldText,
+                              color: mainColor,
                             ),
                           ),
                         ),
@@ -1214,8 +1294,8 @@ class Location extends StatelessWidget {
                       child: Text(
                         '(22102) 인천 미추홀구 숙골로 43번길 158-19 3층',
                         style: TextStyle(
-                          fontSize: style.h5FontSize(context),
-                          color: style.blackColor,
+                          fontSize: h5FontSize(context),
+                          color: blackColor,
                         ),
                       ),
                     ),
@@ -1223,7 +1303,7 @@ class Location extends StatelessWidget {
                 ),
                 Divider(
                   height: 2,
-                  color: style.greyColor,
+                  color: greyColor,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8, bottom: 8,),
@@ -1235,26 +1315,26 @@ class Location extends StatelessWidget {
                         child: Text(
                           '오시는 길',
                           style: TextStyle(
-                            fontSize: style.h2FontSize(context),
-                            color: style.blackColor,
-                            fontWeight: style.boldText,
+                            fontSize: h2FontSize(context),
+                            color: blackColor,
+                            fontWeight: boldText,
                           ),
                         ),
                       ),
                       Text(
                         '제물포역 2번출구 도보 1분',
                         style: TextStyle(
-                          fontSize: style.h5FontSize(context),
-                          color: style.blackColor,
+                          fontSize: h5FontSize(context),
+                          color: blackColor,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 4,),
                         child: Text(
-                          '37502 제물포역(스마트타운 방면) 버스정류장 도보 3분',
+                          '[37502] 제물포역(스마트타운 방면) 버스정류장 도보 3분',
                           style: TextStyle(
-                            fontSize: style.h5FontSize(context),
-                            color: style.blackColor,
+                            fontSize: h5FontSize(context),
+                            color: blackColor,
                           ),
                         ),
                       ),
@@ -1263,7 +1343,7 @@ class Location extends StatelessWidget {
                 ),
                 Divider(
                   height: 2,
-                  color: style.greyColor,
+                  color: greyColor,
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 8, bottom: 8,),
@@ -1278,29 +1358,29 @@ class Location extends StatelessWidget {
                             child: Text(
                               '주차안내',
                               style: TextStyle(
-                                fontSize: style.h2FontSize(context),
-                                color: style.blackColor,
-                                fontWeight: style.boldText,
+                                fontSize: h2FontSize(context),
+                                color: blackColor,
+                                fontWeight: boldText,
                               ),
                             ),
                           ),
                           Text(
-                            '김주현바이각 제물포 본점',
+                            '김주현바이각 제물포 본점 / 제물포북부역 공영주차장 2시간 무료',
                             style: TextStyle(
-                              fontSize: style.h5FontSize(context),
-                              color: style.blackColor,
+                              fontSize: h5FontSize(context),
+                              color: blackColor,
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 4,),
-                            child: Text(
-                              '제물포북부역 공영주차장 2시간 무료',
-                              style: TextStyle(
-                                fontSize: style.h5FontSize(context),
-                                color: style.blackColor,
-                              ),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(top: 4,),
+                          //   child: Text(
+                          //     '제물포북부역 공영주차장 2시간 무료',
+                          //     style: TextStyle(
+                          //       fontSize: h5FontSize(context),
+                          //       color: blackColor,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ],
@@ -1328,11 +1408,11 @@ class Footer extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: style.mainColor,
+          color: mainColor,
         ),
         child: Center(
           child: Container(
-            width: style.widgetSize(context),
+            width: widgetSize(context),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1343,8 +1423,8 @@ class Footer extends StatelessWidget {
                     child: Text(
                       'by覺 렌탈센터',
                       style: TextStyle(
-                        fontSize: style.h1FontSize(context),
-                        color: style.whiteColor,
+                        fontSize: h1FontSize(context),
+                        color: whiteColor,
                       ),
                     ),
                     onTap: () {
@@ -1361,7 +1441,7 @@ class Footer extends StatelessWidget {
                     children: [
                       InkWell(
                         child: Image.asset(
-                          'assets/images/logo_kakao_talk.png',
+                          'assets/images/logos/logo_kakao_talk.png',
                           fit: BoxFit.contain,
                           scale: 1.5,
                         ),
@@ -1379,7 +1459,7 @@ class Footer extends StatelessWidget {
                       ),
                       InkWell(
                         child: Image.asset(
-                          'assets/images/logo_blog.png',
+                          'assets/images/logos/logo_blog.png',
                           fit: BoxFit.contain,
                           scale: 1.5,
                         ),
@@ -1397,7 +1477,7 @@ class Footer extends StatelessWidget {
                       ),
                       InkWell(
                         child: Image.asset(
-                          'assets/images/logo_instagram.png',
+                          'assets/images/logos/logo_instagram.png',
                           fit: BoxFit.contain,
                           scale: 1.5,
                         ),
@@ -1415,7 +1495,7 @@ class Footer extends StatelessWidget {
                       ),
                       InkWell(
                         child: Image.asset(
-                          'assets/images/logo_youtube.png',
+                          'assets/images/logos/logo_youtube.png',
                           fit: BoxFit.contain,
                           scale: 1.5,
                         ),
@@ -1445,9 +1525,9 @@ class Footer extends StatelessWidget {
                           child: Text(
                             '(주) 데시그너 대표이사 : 김주현',
                             style: TextStyle(
-                              color: style.whiteColor,
-                              fontSize: style.h4FontSize(context),
-                              fontWeight: style.lightText,
+                              color: whiteColor,
+                              fontSize: h4FontSize(context),
+                              fontWeight: lightText,
                             ),
                           ),
                         ),
@@ -1456,9 +1536,9 @@ class Footer extends StatelessWidget {
                           child: Text(
                             '사업자등록번호 : 720-86-02241',
                             style: TextStyle(
-                              color: style.whiteColor,
-                              fontSize: style.h4FontSize(context),
-                              fontWeight: style.lightText,
+                              color: whiteColor,
+                              fontSize: h4FontSize(context),
+                              fontWeight: lightText,
                             ),
                           ),
                         ),
@@ -1467,9 +1547,9 @@ class Footer extends StatelessWidget {
                           child: Text(
                             '인천광역시 미추홀구 숙골로 43번길 158-19 3층',
                             style: TextStyle(
-                              color: style.whiteColor,
-                              fontSize: style.h4FontSize(context),
-                              fontWeight: style.lightText,
+                              color: whiteColor,
+                              fontSize: h4FontSize(context),
+                              fontWeight: lightText,
                             ),
                           ),
                         ),
@@ -1478,9 +1558,9 @@ class Footer extends StatelessWidget {
                           child: Text(
                             '우편번호 : 22102',
                             style: TextStyle(
-                              color: style.whiteColor,
-                              fontSize: style.h4FontSize(context),
-                              fontWeight: style.lightText,
+                              color: whiteColor,
+                              fontSize: h4FontSize(context),
+                              fontWeight: lightText,
                             ),
                           ),
                         ),
@@ -1489,9 +1569,9 @@ class Footer extends StatelessWidget {
                           child: Text(
                             '전화번호 : 070-7893-3059',
                             style: TextStyle(
-                              color: style.whiteColor,
-                              fontSize: style.h4FontSize(context),
-                              fontWeight: style.lightText,
+                              color: whiteColor,
+                              fontSize: h4FontSize(context),
+                              fontWeight: lightText,
                             ),
                           ),
                         ),
@@ -1500,9 +1580,9 @@ class Footer extends StatelessWidget {
                           child: Text(
                             'Copyright ⓒ 2023 by Designer',
                             style: TextStyle(
-                              color: style.whiteColor,
-                              fontSize: style.h4FontSize(context),
-                              fontWeight: style.lightText,
+                              color: whiteColor,
+                              fontSize: h4FontSize(context),
+                              fontWeight: lightText,
                             ),
                           ),
                         ),

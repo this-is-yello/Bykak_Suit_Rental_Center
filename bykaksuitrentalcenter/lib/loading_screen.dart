@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:bykaksuitrentalcenter/style.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -37,7 +37,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         width: 40,
         height: 40,
         child: CircularProgressIndicator(
-          color: style.mainColor,
+          color: mainColor,
         ),
       ),
     );

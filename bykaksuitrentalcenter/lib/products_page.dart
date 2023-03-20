@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:bykaksuitrentalcenter/style.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -22,7 +22,7 @@ class _ProductsPageState extends State<ProductsPage> {
   List productList = [];
 
   imgCheck() async {
-    var productImg = await style.firestore.collection('productImg').doc('imgList').get();
+    var productImg = await firestore.collection('productImg').doc('imgList').get();
     productList = productImg['img'];
     // print(productList);
   }
@@ -47,10 +47,10 @@ class _ProductsPageState extends State<ProductsPage> {
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return Scaffold(
-          backgroundColor: style.whiteColor,
+          backgroundColor: whiteColor,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: style.whiteColor,
+            backgroundColor: whiteColor,
             toolbarHeight: MediaQuery.of(context).size.width < 640
               ? 56
               : MediaQuery.of(context).size.width < 1080
@@ -82,15 +82,15 @@ class _ProductsPageState extends State<ProductsPage> {
                         ? 2
                         : 3,
                       childAspectRatio: 1 / 1.2,
-                      mainAxisSpacing: style.paddingSize(context),
-                      crossAxisSpacing: style.paddingSize(context),
+                      mainAxisSpacing: paddingSize(context),
+                      crossAxisSpacing: paddingSize(context),
                     ),
                     itemBuilder: (context, index) {
                       return InkWell(
                         child: Container(
-                          width: style.widgetSize(context),
+                          width: widgetSize(context),
                           decoration: BoxDecoration(
-                            color: style.whiteColor,
+                            color: whiteColor,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: ClipRRect(
@@ -106,7 +106,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                   width: 40,
                                   height: 40,
                                   child: CircularProgressIndicator(
-                                    color: style.mainColor,
+                                    color: mainColor,
                                   ),
                                 ),
                               ),
@@ -142,7 +142,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                       icon: Icon(
                                         Icons.close,
                                         size: 30,
-                                        color: style.whiteColor,
+                                        color: whiteColor,
                                       ),
                                       onPressed: () {
                                         Get.back();
@@ -165,8 +165,8 @@ class _ProductsPageState extends State<ProductsPage> {
                                       ),
                                     ),
                                     Container(
-                                      width: style.c1BoxSize(context),
-                                      height: style.c1BoxSize(context),
+                                      width: c1BoxSize(context),
+                                      height: c1BoxSize(context),
                                       child: PinchUp(),
                                     )
                                   ],
@@ -194,8 +194,8 @@ class ProductsAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: style.widgetSize(context),
-      color: style.whiteColor,
+      width: widgetSize(context),
+      color: whiteColor,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -203,9 +203,9 @@ class ProductsAppBar extends StatelessWidget {
             child: Text(
               'by覺 렌탈센터',
               style: TextStyle(
-                fontSize: style.h1FontSize(context),
+                fontSize: h1FontSize(context),
                 // fontWeight: style.boldText,
-                color: style.mainColor,
+                color: mainColor,
               ),
             ),
             onTap: () {

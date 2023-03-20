@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:bykaksuitrentalcenter/style.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        primaryColor: style.mainColor,
+        primaryColor: mainColor,
         fontFamily: 'KimjungchulMyungjo',
       ),
       debugShowCheckedModeBanner: false,

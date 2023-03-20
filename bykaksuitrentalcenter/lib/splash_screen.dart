@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bykaksuitrentalcenter/style.dart' as style;
+import 'package:bykaksuitrentalcenter/style.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:get/get.dart';
 import 'dart:async';
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        color: style.mainColor,
+        color: mainColor,
         child: Center(
           child: Container(
             width: MediaQuery.of(context).size.width < 640
