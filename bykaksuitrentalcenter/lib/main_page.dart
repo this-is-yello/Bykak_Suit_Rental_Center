@@ -169,7 +169,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                           onTap: () {
-                            currentPage = 2;
+                            currentPage = 3;
                             movePage();
                             Get.back();
                           },
@@ -210,7 +210,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                           onTap: () {
-                            currentPage = 3;
+                            currentPage = 4;
                             movePage();
                             Get.back();
                           },
@@ -251,7 +251,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                           onTap: () {
-                            currentPage = 4;
+                            currentPage = 5;
                             movePage();
                             Get.back();
                           },
@@ -292,7 +292,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                           onTap: () {
-                            currentPage = 5;
+                            currentPage = 6;
                             movePage();
                             Get.back();
                           },
@@ -372,7 +372,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               onTap: () {
-                currentPage = 2;
+                currentPage = 3;
                 movePage();
               },
             ),
@@ -387,7 +387,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               onTap: () {
-                currentPage = 3;
+                currentPage = 4;
                 movePage();
               },
             ),
@@ -402,7 +402,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               onTap: () {
-                currentPage = 4;
+                currentPage = 5;
                 movePage();
               },
             ),
@@ -417,7 +417,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               onTap: () {
-                currentPage = 5;
+                currentPage = 6;
                 movePage();
               },
             ),
@@ -547,6 +547,7 @@ class _MainPageState extends State<MainPage> {
                   children: [
                     ByKak(),
                     About(),
+                    // LookBook(),
                     Product(),
                     WithCelebrity(),
                     Location(),
@@ -689,20 +690,6 @@ class ByKak extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Text(
-            //   '그 날을 위한 자신감, 바이각',
-            //   style: TextStyle(
-            //     fontSize: h0FontSize(context),
-            //     fontWeight: boldText,
-            //     color: whiteColor,
-            //   ),
-            // ),
-          ],
-        ),
       );
     });
   }
@@ -738,57 +725,296 @@ class _AboutState extends State<About> {
           child: Container(
             width: widgetSize(context),
             padding: EdgeInsets.all(16),
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Flexible(
-                  flex: 3,
-                  child: Container(
-                    // width: widgetSize(context),
-                    child: ImageFade(
-                      image: AssetImage(
-                        '$shopPic'
-                      ),
-                      duration: Duration(milliseconds: 500),
-                      syncDuration: Duration(milliseconds: 500),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: paddingSize(context)),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: GridView.builder(
-                      itemCount: 10, //item 개수
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, //1 개의 행에 보여줄 item 개수
-                        childAspectRatio: 16 / 9, //item 의 가로 1, 세로 2 의 비율
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 8,
-                        
-                      ),
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          child: Image.asset(
-                            aboutShopPics[index],
-                            fit: BoxFit.fitHeight,
+                MediaQuery.of(context).size.width < 1080 ?
+                Column (
+                  children: [
+                    Container(
+                      width: widgetSize(context),
+                      child: ImageFade(
+                        image: AssetImage(
+                          '$shopPic',
+                        ),
+                        fit: BoxFit.fitHeight,
+                        errorBuilder: (context, exception) => Icon(Icons.error),
+                        placeholder: Center(
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              color: mainColor,
+                              strokeWidth: 2,
+                            ),
                           ),
-                          onTap: () {
-                            indexChange(index);
-                          },
-                        );
-                      },
+                        ),
+                        duration: Duration(milliseconds: 500),
+                        syncDuration: Duration(milliseconds: 500),
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.only(top: paddingSize(context)),
+                    ),
+                    Container(
+                      width: widgetSize(context),
+                      height: MediaQuery.of(context).size.width < 640
+                      ? 80
+                      : 120,
+                      child: GridView.builder(
+                        itemCount: 10, //item 개수
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 5,
+                          childAspectRatio: 16 / 9,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                        ),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            child: ImageFade(
+                              image: AssetImage(
+                                aboutShopPics[index]
+                              ),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              placeholder: Center(
+                                child: SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: mainColor,
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              indexChange(index);
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          Text(
+                            '그 날을 위한 자신감, 바이각',
+                            style: TextStyle(
+                              fontSize: h1FontSize(context),
+                              fontWeight: boldText,
+                              color: blackColor,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: paddingSize(context),
+                              bottom: paddingSize(context)
+                            ),
+                            child: Text(
+                              '바이각 수트렌탈센터는 100 평대의\n인천 최초/최대의 정장렌탈 전문샵입니다.',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: h4FontSize(context),
+                                // fontWeight: boldText,
+                                color: blackColor,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험할 수 있습니다.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: h4FontSize(context),
+                              // fontWeight: boldText,
+                              color: blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                )
+                : Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 350,
+                          child: ImageFade(
+                            image: AssetImage(
+                              '$shopPic',
+                            ),
+                            fit: BoxFit.fitHeight,
+                            errorBuilder: (context, exception) => Icon(Icons.error),
+                            placeholder: Center(
+                              child: SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  color: mainColor,
+                                  strokeWidth: 2,
+                                ),
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 500),
+                            syncDuration: Duration(milliseconds: 500),
+                          ),
+                        ),
+                        // Expanded(
+                        //   flex: 3,
+                        //   child: Container(
+                        //     height: 350,
+                        //     child: ImageFade(
+                        //       image: AssetImage(
+                        //         '$shopPic',
+                        //       ),
+                        //       fit: BoxFit.fitHeight,
+                        //       errorBuilder: (context, exception) => Icon(Icons.error),
+                        //       placeholder: Center(
+                        //         child: SizedBox(
+                        //           width: 20,
+                        //           height: 20,
+                        //           child: CircularProgressIndicator(
+                        //             color: mainColor,
+                        //             strokeWidth: 2,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       duration: Duration(milliseconds: 500),
+                        //       syncDuration: Duration(milliseconds: 500),
+                        //     ),
+                        //   ),
+                        // ),
+                        // Padding(
+                        //   padding: EdgeInsets.only(left: paddingSize(context)),
+                        // ),
+                        Container(
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                '그 날을 위한 자신감, 바이각',
+                                style: TextStyle(
+                                  fontSize: h1FontSize(context),
+                                  fontWeight: boldText,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: paddingSize(context),
+                                  bottom: paddingSize(context)
+                                ),
+                                child: Text(
+                                  '바이각 수트렌탈센터는 100 평대의\n인천 최초/최대의 정장렌탈 전문샵입니다.',
+                                  textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontSize: h4FontSize(context),
+                                    // fontWeight: boldText,
+                                    color: blackColor,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험할 수 있습니다.',
+                                textAlign: TextAlign.end,
+                                style: TextStyle(
+                                  fontSize: h4FontSize(context),
+                                  // fontWeight: boldText,
+                                  color: blackColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Expanded(
+                        //   flex: 1,
+                        //   child: Container(
+                        //     height: 350,
+                        //     child: GridView.builder(
+                        //       itemCount: 10, //item 개수
+                        //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        //         crossAxisCount: 2,
+                        //         childAspectRatio: 16 / 9,
+                        //         mainAxisSpacing: 8,
+                        //         crossAxisSpacing: 8,
+                        //       ),
+                        //       itemBuilder: (context, index) {
+                        //         return InkWell(
+                        //           child: ImageFade(
+                        //             image: AssetImage(
+                        //               aboutShopPics[index]
+                        //             ),
+                        //             fit: BoxFit.cover,
+                        //             errorBuilder: (context, exception) => Icon(Icons.error),
+                        //             placeholder: Center(
+                        //               child: SizedBox(
+                        //                 width: 20,
+                        //                 height: 20,
+                        //                 child: CircularProgressIndicator(
+                        //                   color: mainColor,
+                        //                   strokeWidth: 2,
+                        //                 ),
+                        //               ),
+                        //             ),
+                        //           ),
+                        //           onTap: () {
+                        //             indexChange(index);
+                        //           },
+                        //         );
+                        //       },
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                    Container(
+                      height: 80,
+                      padding: EdgeInsets.only(top: 16),
+                      child: GridView.builder(
+                        itemCount: 10, //item 개수
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 10,
+                          childAspectRatio: 16 / 9,
+                          mainAxisSpacing: 8,
+                          crossAxisSpacing: 8,
+                        ),
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            child: ImageFade(
+                              image: AssetImage(
+                                aboutShopPics[index]
+                              ),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              placeholder: Center(
+                                child: SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: CircularProgressIndicator(
+                                    color: mainColor,
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              indexChange(index);
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                // Padding(
-                //   padding: EdgeInsets.only(top: paddingSize(context))
-                // ),
                 // Container(
-                //   // width: widgetSize(context),
+                //   width: widgetSize(context),
+                //   padding: EdgeInsets.all(16),
                 //   child: Column(
                 //     children: [
                 //       Text(
@@ -815,7 +1041,7 @@ class _AboutState extends State<About> {
                 //         ),
                 //       ),
                 //       Text(
-                //         '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험하실 수 있습니다.',
+                //         '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험할 수 있습니다.',
                 //         textAlign: TextAlign.center,
                 //         style: TextStyle(
                 //           fontSize: h4FontSize(context),
@@ -826,117 +1052,32 @@ class _AboutState extends State<About> {
                 //     ],
                 //   ),
                 // ),
-                // Container(
-                //   width: MediaQuery.of(context).size.width,
-                //   height: MediaQuery.of(context).size.height,
-                //   child: Opacity(
-                //     opacity: 0.4,
-                //     child: ImageFade(
-                //       image: AssetImage(
-                //         i % 2 == 0 ? aboutBackFade[0]
-                //         : aboutBackFade[1],
-                //       ),
-                //       duration: const Duration(milliseconds: 500),
-                //       syncDuration: const Duration(milliseconds: 500),
-                //       alignment: Alignment.center,
-                //       fit: BoxFit.cover,
-                //     ),
-                //   ),
-                // ),
-                // Container(
-                //   width: 
-                //   widgetSize(context),
-                //   child: ImageFade(
-                //     image: AssetImage(
-                //       i == 0 ? aboutContantsFade[0]
-                //       : aboutContantsFade[1]
-                //     ),
-                //     duration: const Duration(milliseconds: 500),
-                //     syncDuration: const Duration(milliseconds: 500),
-                //     alignment: Alignment.center,
-                //     fit: BoxFit.contain,
-                //   ),
-                // ),
               ],
             ),
           ),
         ),
-        // child: CarouselSlider(
-        //   options: CarouselOptions(
-        //     aspectRatio: 16 / 9,
-        //     height: MediaQuery.of(context).size.height,
-        //     autoPlay: true,
-        //     viewportFraction: 1,
-        //   ),
-        //   items: [
-        //     Stack(
-        //       alignment: Alignment.center,
-        //       children: [
-        //         Container(
-        //           height: MediaQuery.of(context).size.height,
-        //           child: Opacity(
-        //             opacity: 0.3,
-        //             child: Image.asset(
-        //               'assets/images/bykak_shop.png',
-        //               fit: BoxFit.cover,
-        //             ),
-        //           ),
-        //         ),
-        //         Container(
-        //           width: widgetSize(context),
-        //           padding: EdgeInsets.all(16),
-        //           child: Image.asset(
-        //             'assets/images/about_rental_1.png',
-        //             fit: BoxFit.contain,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //     Stack(
-        //       alignment: Alignment.center,
-        //       children: [
-        //         Container(
-        //           height: MediaQuery.of(context).size.height,
-        //           child: Opacity(
-        //             opacity: 0.2,
-        //             child: Image.asset(
-        //               'assets/images/rental_shop.png',
-        //               fit: BoxFit.cover,
-        //             ),
-        //           ),
-        //         ),
-        //         Container(
-        //           width: widgetSize(context),
-        //           padding: EdgeInsets.all(16),
-        //           child: Image.asset(
-        //             'assets/images/about_rental_2.png',
-        //             fit: BoxFit.contain,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ],
-        // ),
-        // ----------------------------------------------------------------
-        // child: Center(
-        //   child: Container(
-        //     width: widgetSize(context),
-        //     padding: EdgeInsets.all(16),
-        //     child: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       crossAxisAlignment: CrossAxisAlignment.center,
-        //       children: [
-        //         ClipRRect(
-        //           borderRadius: BorderRadius.circular(8),
-        //           child: Image.asset(
-        //             'assets/images/about_bykak.png',
-        //             fit: BoxFit.fitWidth,
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // )
+      );
+    });
+  }
+}
+
+
+// ----------------------------------------------- LookBook ------------------------------------------------------------------
+class LookBook extends StatelessWidget {
+  const LookBook({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          color: whiteColor,
+        ),
+        child: Container(
+          width: widgetSize(context),
+        ),
       );
     });
   }
@@ -1521,7 +1662,7 @@ class Footer extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8),
                           child: Text(
-                            '(주) 데시그너 대표이사 : 김주현',
+                            '(주) 데시그너',
                             style: TextStyle(
                               color: whiteColor,
                               fontSize: h4FontSize(context),

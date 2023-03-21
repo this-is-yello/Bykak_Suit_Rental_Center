@@ -58,13 +58,13 @@ productPicHeight(c) {
   }
 }
 
-shopPicWidth(c) {
+shopPicHeight(c) {
   if (MediaQuery.of(c).size.width < 640) {
-    return 200;
+    return 240;
   } else if (MediaQuery.of(c).size.width < 1080) {
-    return 380;
+    return 320;
   } else {
-    return 600;
+    return 400;
   }
 }
 
