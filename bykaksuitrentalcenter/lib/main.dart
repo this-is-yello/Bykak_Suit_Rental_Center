@@ -44,6 +44,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: mainColor,
         fontFamily: 'KimjungchulMyungjo',
+        scrollbarTheme: ScrollbarThemeData().copyWith(
+          thumbColor: MaterialStatePropertyAll(blackColor.withOpacity(0.9)),
+          trackColor: MaterialStatePropertyAll(greyColor.withOpacity(0.4)),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       title: '바이각 수트렌탈센터',

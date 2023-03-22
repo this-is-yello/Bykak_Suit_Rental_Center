@@ -27,12 +27,25 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
+int i = 0;
 int currentPage = 0;
 bool _isLoading = true;
+var shopPic;
+List hoverState = [false, false, false];
+
+hoverOpacity(n) {
+  if (hoverState[n] == false) {
+    return 0;
+  } else if (hoverState[n] == true) {
+    return 1;
+  }
+}
+
 PageController _controller = PageController(
   initialPage: 0,
   keepPage: true,
 );
+
 movePage() {
   _controller.animateToPage(
     currentPage,
@@ -40,6 +53,7 @@ movePage() {
     curve: Curves.linearToEaseOut,
   );
 }
+
 List aboutShopPics = [
   'assets/images/shops/shop_1.png',
   'assets/images/shops/shop_2.png',
@@ -53,8 +67,18 @@ List aboutShopPics = [
   'assets/images/shops/shop_10.png',
   'assets/images/shops/shop_1.png',
 ];
-var shopPic;
-int i = 0;
+List lookPics = [
+  'assets/images/lookbooks/lookbook_1.png',
+  'assets/images/lookbooks/lookbook_2.png',
+  'assets/images/lookbooks/lookbook_3.png',
+  'assets/images/lookbooks/lookbook_4.png',
+  'assets/images/lookbooks/lookbook_5.png',
+  'assets/images/lookbooks/lookbook_6.png',
+  'assets/images/lookbooks/lookbook_7.png',
+  'assets/images/lookbooks/lookbook_8.png',
+  'assets/images/lookbooks/lookbook_9.png',
+  // 'assets/images/lookbooks/lookbook_10.png',
+];
 
 
 class _MainPageState extends State<MainPage> {
@@ -129,6 +153,47 @@ class _MainPageState extends State<MainPage> {
                           ),
                           onTap: () {
                             currentPage = 1;
+                            movePage();
+                            Get.back();
+                          },
+                        ),
+                        InkWell(
+                          child: Container(
+                            width: double.infinity,
+                            height: 56,
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  width: 2,
+                                  color: lightGreyColor,
+                                ),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.collections_outlined,
+                                  color: mainColor,
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                                Text(
+                                  'LookBook',
+                                  style: TextStyle(
+                                    fontWeight: boldText,
+                                    color: blackColor,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(4),
+                                ),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            currentPage = 2;
                             movePage();
                             Get.back();
                           },
@@ -364,6 +429,21 @@ class _MainPageState extends State<MainPage> {
             Padding(padding: EdgeInsets.all(12)),
             InkWell(
               child: Text(
+                'LookBook',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: mainColor,
+                  fontWeight: boldText,
+                ),
+              ),
+              onTap: () {
+                currentPage = 2;
+                movePage();
+              },
+            ),
+            Padding(padding: EdgeInsets.all(12)),
+            InkWell(
+              child: Text(
                 'Products',
                 style: TextStyle(
                   fontSize: 16,
@@ -422,7 +502,7 @@ class _MainPageState extends State<MainPage> {
               },
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 40),
+              padding: const EdgeInsets.only(left: 24),
               child: InkWell(
                 child: Container(
                   width: 120,
@@ -468,9 +548,9 @@ class _MainPageState extends State<MainPage> {
   // -------------------- Scaffold -------------------- //
   @override
   Widget build(BuildContext context) {
-    if (i == 9) {
+    if (i >= 9) {
       Future.delayed(
-        Duration(seconds: 4), () {
+        Duration(seconds: i >= 10 ? 0 : 4), () {
           setState(() {
             i = 0;
           });
@@ -489,12 +569,7 @@ class _MainPageState extends State<MainPage> {
       shopPic = aboutShopPics[i];
       print('$i, $shopPic');
     }
-    if (i >= 10) {
-      setState(() {
-        i = 0;
-      });
-      print('$i, $shopPic');
-    }
+
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return Scaffold(
@@ -547,7 +622,7 @@ class _MainPageState extends State<MainPage> {
                   children: [
                     ByKak(),
                     About(),
-                    // LookBook(),
+                    LookBook(),
                     Product(),
                     WithCelebrity(),
                     Location(),
@@ -561,6 +636,26 @@ class _MainPageState extends State<MainPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8, bottom: 16),
+                            child: Opacity(
+                              opacity: hoverOpacity(0),
+                              child: Container(
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: whiteColor,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  '카카오톡 문의',
+                                  style: TextStyle(
+                                    fontWeight: boldText,
+                                    color: mainColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                           InkWell(
                             child: Container(
                               padding: EdgeInsets.all(8),
@@ -577,6 +672,17 @@ class _MainPageState extends State<MainPage> {
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
+                            onHover: (value) {
+                              if (value == true) {
+                                setState(() {
+                                  hoverState[0] = true;
+                                });
+                              } else {
+                                setState(() {
+                                  hoverState[0] = false;
+                                });
+                              }
+                            },
                             onTap: () async {
                               final url = Uri.parse(
                                 'http://pf.kakao.com/_WExlxixj/chat',
@@ -594,6 +700,26 @@ class _MainPageState extends State<MainPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8, bottom: 16),
+                            child: Opacity(
+                              opacity: hoverOpacity(1),
+                              child: Container(
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: whiteColor,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  '네이버 톡톡 문의',
+                                  style: TextStyle(
+                                    fontWeight: boldText,
+                                    color: mainColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                           InkWell(
                             child: Container(
                               padding: EdgeInsets.all(8),
@@ -610,6 +736,17 @@ class _MainPageState extends State<MainPage> {
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
+                            onHover: (value) {
+                              if (value == true) {
+                                setState(() {
+                                  hoverState[1] = true;
+                                });
+                              } else {
+                                setState(() {
+                                  hoverState[1] = false;
+                                });
+                              }
+                            },
                             onTap: () async {
                               final url = Uri.parse(
                                 'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
@@ -627,6 +764,26 @@ class _MainPageState extends State<MainPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8, bottom: 16),
+                            child: Opacity(
+                              opacity: hoverOpacity(2),
+                              child: Container(
+                                padding: EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: whiteColor,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  '070-7893-3059',
+                                  style: TextStyle(
+                                    fontWeight: boldText,
+                                    color: mainColor,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                           InkWell(
                             child: Container(
                               padding: EdgeInsets.all(8),
@@ -636,13 +793,24 @@ class _MainPageState extends State<MainPage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: [boxShadows],
-                                color: mainColor,
+                                color: blackColor,
                               ),
                               child: Image.asset(
                                 'assets/images/logos/logo_phone_white.png',
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
+                            onHover: (value) {
+                              if (value == true) {
+                                setState(() {
+                                  hoverState[2] = true;
+                                });
+                              } else {
+                                setState(() {
+                                  hoverState[2] = false;
+                                });
+                              }
+                            },
                             onTap: () async {
                               final url = Uri.parse(
                               'tel:070 7893 3059',
@@ -727,7 +895,19 @@ class _AboutState extends State<About> {
             padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text(
+                    'About',
+                    style: TextStyle(
+                      fontSize: h1FontSize(context),
+                      fontWeight: boldText,
+                      color: mainColor,
+                    ),
+                  ),
+                ),
                 MediaQuery.of(context).size.width < 1080 ?
                 Column (
                   children: [
@@ -843,6 +1023,7 @@ class _AboutState extends State<About> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
+                          width: 550,
                           height: 350,
                           child: ImageFade(
                             image: AssetImage(
@@ -864,34 +1045,6 @@ class _AboutState extends State<About> {
                             syncDuration: Duration(milliseconds: 500),
                           ),
                         ),
-                        // Expanded(
-                        //   flex: 3,
-                        //   child: Container(
-                        //     height: 350,
-                        //     child: ImageFade(
-                        //       image: AssetImage(
-                        //         '$shopPic',
-                        //       ),
-                        //       fit: BoxFit.fitHeight,
-                        //       errorBuilder: (context, exception) => Icon(Icons.error),
-                        //       placeholder: Center(
-                        //         child: SizedBox(
-                        //           width: 20,
-                        //           height: 20,
-                        //           child: CircularProgressIndicator(
-                        //             color: mainColor,
-                        //             strokeWidth: 2,
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       duration: Duration(milliseconds: 500),
-                        //       syncDuration: Duration(milliseconds: 500),
-                        //     ),
-                        //   ),
-                        // ),
-                        // Padding(
-                        //   padding: EdgeInsets.only(left: paddingSize(context)),
-                        // ),
                         Container(
                           padding: EdgeInsets.all(16),
                           child: Column(
@@ -932,45 +1085,6 @@ class _AboutState extends State<About> {
                             ],
                           ),
                         ),
-                        // Expanded(
-                        //   flex: 1,
-                        //   child: Container(
-                        //     height: 350,
-                        //     child: GridView.builder(
-                        //       itemCount: 10, //item 개수
-                        //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        //         crossAxisCount: 2,
-                        //         childAspectRatio: 16 / 9,
-                        //         mainAxisSpacing: 8,
-                        //         crossAxisSpacing: 8,
-                        //       ),
-                        //       itemBuilder: (context, index) {
-                        //         return InkWell(
-                        //           child: ImageFade(
-                        //             image: AssetImage(
-                        //               aboutShopPics[index]
-                        //             ),
-                        //             fit: BoxFit.cover,
-                        //             errorBuilder: (context, exception) => Icon(Icons.error),
-                        //             placeholder: Center(
-                        //               child: SizedBox(
-                        //                 width: 20,
-                        //                 height: 20,
-                        //                 child: CircularProgressIndicator(
-                        //                   color: mainColor,
-                        //                   strokeWidth: 2,
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           ),
-                        //           onTap: () {
-                        //             indexChange(index);
-                        //           },
-                        //         );
-                        //       },
-                        //     ),
-                        //   ),
-                        // ),
                       ],
                     ),
                     Container(
@@ -1012,46 +1126,6 @@ class _AboutState extends State<About> {
                     ),
                   ],
                 ),
-                // Container(
-                //   width: widgetSize(context),
-                //   padding: EdgeInsets.all(16),
-                //   child: Column(
-                //     children: [
-                //       Text(
-                //         '그 날을 위한 자신감, 바이각',
-                //         style: TextStyle(
-                //           fontSize: h1FontSize(context),
-                //           fontWeight: boldText,
-                //           color: blackColor,
-                //         ),
-                //       ),
-                //       Padding(
-                //         padding: EdgeInsets.only(
-                //           top: paddingSize(context),
-                //           bottom: paddingSize(context)
-                //         ),
-                //         child: Text(
-                //           '바이각 수트렌탈센터는 100 평대의\n인천 최초/최대의 정장렌탈 전문샵입니다.',
-                //           textAlign: TextAlign.center,
-                //           style: TextStyle(
-                //             fontSize: h4FontSize(context),
-                //             // fontWeight: boldText,
-                //             color: blackColor,
-                //           ),
-                //         ),
-                //       ),
-                //       Text(
-                //         '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험할 수 있습니다.',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(
-                //           fontSize: h4FontSize(context),
-                //           // fontWeight: boldText,
-                //           color: blackColor,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
               ],
             ),
           ),
@@ -1063,8 +1137,15 @@ class _AboutState extends State<About> {
 
 
 // ----------------------------------------------- LookBook ------------------------------------------------------------------
-class LookBook extends StatelessWidget {
+class LookBook extends StatefulWidget {
   const LookBook({super.key});
+
+  @override
+  State<LookBook> createState() => _LookBookState();
+}
+
+class _LookBookState extends State<LookBook> {
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -1075,8 +1156,91 @@ class LookBook extends StatelessWidget {
         decoration: BoxDecoration(
           color: whiteColor,
         ),
-        child: Container(
-          width: widgetSize(context),
+        child: Center(
+          child: Container(
+            width: widgetSize(context),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'LookBook',
+                  style: TextStyle(
+                    fontSize: h1FontSize(context),
+                    fontWeight: boldText,
+                    color: mainColor,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                Container(
+                  width: widgetSize(context),
+                  height: lookPicHeight(context),
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context).copyWith(
+                      dragDevices: {
+                        PointerDeviceKind.mouse,
+                        PointerDeviceKind.touch,
+                        PointerDeviceKind.trackpad,
+                      }
+                    ),
+                    child: Scrollbar(
+                      scrollbarOrientation: ScrollbarOrientation.bottom,
+                      controller: _scrollController,
+                      radius: Radius.circular(4),
+                      thumbVisibility: true,
+                      trackVisibility: true,
+                      thickness: 12,
+                      hoverThickness: 16,
+                      child: Stack(
+                        alignment: Alignment.centerRight,
+                        children: [
+                          ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            controller: _scrollController,
+                            itemCount: 10,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: lookPicHeight(context),
+                                margin: EdgeInsets.only(right: 20),
+                                child: ImageFade(
+                                  image: AssetImage(
+                                    lookPics[index],
+                                  ),
+                                  fit: BoxFit.fitHeight,
+                                  errorBuilder: (context, exception) => Icon(Icons.error),
+                                  placeholder: Padding(
+                                    padding: const EdgeInsets.all(56),
+                                    child: Center(
+                                      child: SizedBox(
+                                        width: 40,
+                                        height: 40,
+                                        child: CircularProgressIndicator(
+                                          color: mainColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 500),
+                                  syncDuration: Duration(milliseconds: 500),
+                                ),
+                              );
+                            },
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: whiteColor,
+                            size: 40,
+                            shadows: [boxShadows],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       );
     });
