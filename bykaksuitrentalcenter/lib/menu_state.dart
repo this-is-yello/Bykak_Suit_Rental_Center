@@ -1,0 +1,468 @@
+import 'package:flutter/material.dart';
+import 'package:bykaksuitrentalcenter/style.dart';
+import 'package:bykaksuitrentalcenter/main_page.dart';
+import 'package:side_sheet/side_sheet.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:get/get.dart';
+
+menuState(context) {
+  if (MediaQuery.of(context).size.width < 1080) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        InkWell(
+          child: Icon(
+            Icons.menu,
+            color: mainColor,
+          ),
+          onTap: () => SideSheet.right(
+            context: context,
+            width: MediaQuery.of(context).size.width * 0.6,
+            body: Container(
+              height: double.infinity,
+              padding: EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.arrow_forward,
+                            color: mainColor,
+                          ),
+                          onPressed: () {
+                            Get.back();
+                          },
+                        ),
+                      ),
+                      InkWell(
+                        child: Container(
+                          width: double.infinity,
+                          height: 56,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 2,
+                                color: lightGreyColor,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.question_mark_outlined,
+                                color: mainColor,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                              Text(
+                                'About',
+                                style: TextStyle(
+                                  fontWeight: boldText,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          currentPage = 1;
+                          movePage();
+                          Get.back();
+                        },
+                      ),
+                      InkWell(
+                        child: Container(
+                          width: double.infinity,
+                          height: 56,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 2,
+                                color: lightGreyColor,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.collections_outlined,
+                                color: mainColor,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                              Text(
+                                'LookBook',
+                                style: TextStyle(
+                                  fontWeight: boldText,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          currentPage = 2;
+                          movePage();
+                          Get.back();
+                        },
+                      ),
+                      InkWell(
+                        child: Container(
+                          width: double.infinity,
+                          height: 56,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 2,
+                                color: lightGreyColor,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.shopping_cart_outlined,
+                                color: mainColor,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                              Text(
+                                'Product',
+                                style: TextStyle(
+                                  fontWeight: boldText,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          currentPage = 3;
+                          movePage();
+                          Get.back();
+                        },
+                      ),
+                      InkWell(
+                        child: Container(
+                          width: double.infinity,
+                          height: 56,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 2,
+                                color: lightGreyColor,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.handshake_outlined,
+                                color: mainColor,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                              Text(
+                                'With',
+                                style: TextStyle(
+                                  fontWeight: boldText,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          currentPage = 4;
+                          movePage();
+                          Get.back();
+                        },
+                      ),
+                      InkWell(
+                        child: Container(
+                          width: double.infinity,
+                          height: 56,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 2,
+                                color: lightGreyColor,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.location_on_outlined,
+                                color: mainColor,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                              Text(
+                                'Location',
+                                style: TextStyle(
+                                  fontWeight: boldText,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          currentPage = 5;
+                          movePage();
+                          Get.back();
+                        },
+                      ),
+                      InkWell(
+                        child: Container(
+                          width: double.infinity,
+                          height: 56,
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 2,
+                                color: lightGreyColor,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.info_outline,
+                                color: mainColor,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                              Text(
+                                'Information',
+                                style: TextStyle(
+                                  fontWeight: boldText,
+                                  color: blackColor,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          currentPage = 6;
+                          movePage();
+                          Get.back();
+                        },
+                      ),
+                    ],
+                  ),
+                  InkWell(
+                    child: Container(
+                      width: double.infinity,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: mainColor,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(500),
+                      ),
+                      child: Center(
+                        child: Text(
+                          '예약하기',
+                          style: TextStyle(
+                            fontSize: h4FontSize(context),
+                            fontWeight: boldText,
+                            color:mainColor
+                          ),
+                        ),
+                      ),
+                    ),
+                    onTap: () async {
+                      Get.back();
+                      final url = Uri.parse(
+                        'https://booking.naver.com/booking/13/bizes/839741',
+                      );
+                      if (await canLaunchUrl(url)) {
+                        launchUrl(
+                          url,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  } else {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(padding: EdgeInsets.all(8)),
+          InkWell(
+            child: Text(
+              'About',
+              style: TextStyle(
+                fontSize: 16,
+                color: mainColor,
+                fontWeight: boldText,
+              ),
+            ),
+            onTap: () {
+              currentPage = 1;
+              movePage();
+            },
+          ),
+          Padding(padding: EdgeInsets.all(12)),
+          InkWell(
+            child: Text(
+              'LookBook',
+              style: TextStyle(
+                fontSize: 16,
+                color: mainColor,
+                fontWeight: boldText,
+              ),
+            ),
+            onTap: () {
+              currentPage = 2;
+              movePage();
+            },
+          ),
+          Padding(padding: EdgeInsets.all(12)),
+          InkWell(
+            child: Text(
+              'Products',
+              style: TextStyle(
+                fontSize: 16,
+                color: mainColor,
+                fontWeight: boldText,
+              ),
+            ),
+            onTap: () {
+              currentPage = 3;
+              movePage();
+            },
+          ),
+          Padding(padding: EdgeInsets.all(12)),
+          InkWell(
+            child: Text(
+              'With',
+              style: TextStyle(
+                fontSize: 16,
+                color: mainColor,
+                fontWeight: boldText,
+              ),
+            ),
+            onTap: () {
+              currentPage = 4;
+              movePage();
+            },
+          ),
+          Padding(padding: EdgeInsets.all(12)),
+          InkWell(
+            child: Text(
+              'Location',
+              style: TextStyle(
+                fontSize: 16,
+                color: mainColor,
+                fontWeight: boldText,
+              ),
+            ),
+            onTap: () {
+              currentPage = 5;
+              movePage();
+            },
+          ),
+          Padding(padding: EdgeInsets.all(12)),
+          InkWell(
+            child: Text(
+              'Information',
+              style: TextStyle(
+                fontSize: 16,
+                color: mainColor,
+                fontWeight: boldText,
+              ),
+            ),
+            onTap: () {
+              currentPage = 6;
+              movePage();
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 24),
+            child: InkWell(
+              child: Container(
+                width: 120,
+                height: 36,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: mainColor,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(
+                  child: Text(
+                    '예약하기',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: boldText,
+                      color:mainColor
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () async {
+                final url = Uri.parse(
+                  'https://booking.naver.com/booking/13/bizes/839741',
+                );
+                if (await canLaunchUrl(url)) {
+                  launchUrl(
+                    url,
+                    mode: LaunchMode.externalApplication,
+                  );
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

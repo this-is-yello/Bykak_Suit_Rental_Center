@@ -1,11 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:side_sheet/side_sheet.dart';
-import 'package:simple_speed_dial/simple_speed_dial.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:image_fade/image_fade.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -14,12 +13,9 @@ import 'package:get/get.dart';
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:bykaksuitrentalcenter/menu_state.dart';
 import 'package:bykaksuitrentalcenter/splash_screen.dart';
 import 'package:bykaksuitrentalcenter/loading_screen.dart';
-
-// import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
-// import 'package:opscroll_web/opscroll_web.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -31,15 +27,19 @@ int i = 0;
 int currentPage = 0;
 bool _isLoading = true;
 var shopPic;
-List hoverState = [false, false, false];
-
-hoverOpacity(n) {
-  if (hoverState[n] == false) {
-    return 0;
-  } else if (hoverState[n] == true) {
-    return 1;
-  }
-}
+List hoverState = [0, 0, 0];
+List aboutShopPics = [
+  'assets/images/shops/shop_1.png',
+  'assets/images/shops/shop_2.png',
+  'assets/images/shops/shop_3.png',
+  'assets/images/shops/shop_4.png',
+  'assets/images/shops/shop_5.png',
+  'assets/images/shops/shop_6.png',
+  'assets/images/shops/shop_7.png',
+  'assets/images/shops/shop_8.png',
+  'assets/images/shops/shop_9.png',
+  'assets/images/shops/shop_10.png',
+];
 
 PageController _controller = PageController(
   initialPage: 0,
@@ -54,522 +54,51 @@ movePage() {
   );
 }
 
-List aboutShopPics = [
-  'assets/images/shops/shop_1.png',
-  'assets/images/shops/shop_2.png',
-  'assets/images/shops/shop_3.png',
-  'assets/images/shops/shop_4.png',
-  'assets/images/shops/shop_5.png',
-  'assets/images/shops/shop_6.png',
-  'assets/images/shops/shop_7.png',
-  'assets/images/shops/shop_8.png',
-  'assets/images/shops/shop_9.png',
-  'assets/images/shops/shop_10.png',
-  'assets/images/shops/shop_1.png',
-];
-List lookPics = [
-  'assets/images/lookbooks/lookbook_1.png',
-  'assets/images/lookbooks/lookbook_2.png',
-  'assets/images/lookbooks/lookbook_3.png',
-  'assets/images/lookbooks/lookbook_4.png',
-  'assets/images/lookbooks/lookbook_5.png',
-  'assets/images/lookbooks/lookbook_6.png',
-  'assets/images/lookbooks/lookbook_7.png',
-  'assets/images/lookbooks/lookbook_8.png',
-  'assets/images/lookbooks/lookbook_9.png',
-  // 'assets/images/lookbooks/lookbook_10.png',
-];
-
+late Timer _timer;
+bool _isChanging = false;
 
 class _MainPageState extends State<MainPage> {
-  // -------------------- menuState() -------------------- //
-  menuState(context) {
-    if (MediaQuery.of(context).size.width < 1080) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          InkWell(
-            child: Icon(
-              Icons.menu,
-              color: mainColor,
-            ),
-            onTap: () => SideSheet.right(
-              context: context,
-              width: MediaQuery.of(context).size.width * 0.6,
-              body: Container(
-                height: double.infinity,
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.arrow_forward,
-                              color: mainColor,
-                            ),
-                            onPressed: () {
-                              Get.back();
-                            },
-                          ),
-                        ),
-                        InkWell(
-                          child: Container(
-                            width: double.infinity,
-                            height: 56,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  width: 2,
-                                  color: lightGreyColor,
-                                ),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.question_mark_outlined,
-                                  color: mainColor,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                                Text(
-                                  'About',
-                                  style: TextStyle(
-                                    fontWeight: boldText,
-                                    color: blackColor,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            currentPage = 1;
-                            movePage();
-                            Get.back();
-                          },
-                        ),
-                        InkWell(
-                          child: Container(
-                            width: double.infinity,
-                            height: 56,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  width: 2,
-                                  color: lightGreyColor,
-                                ),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.collections_outlined,
-                                  color: mainColor,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                                Text(
-                                  'LookBook',
-                                  style: TextStyle(
-                                    fontWeight: boldText,
-                                    color: blackColor,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            currentPage = 2;
-                            movePage();
-                            Get.back();
-                          },
-                        ),
-                        InkWell(
-                          child: Container(
-                            width: double.infinity,
-                            height: 56,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  width: 2,
-                                  color: lightGreyColor,
-                                ),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.shopping_cart_outlined,
-                                  color: mainColor,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                                Text(
-                                  'Product',
-                                  style: TextStyle(
-                                    fontWeight: boldText,
-                                    color: blackColor,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            currentPage = 3;
-                            movePage();
-                            Get.back();
-                          },
-                        ),
-                        InkWell(
-                          child: Container(
-                            width: double.infinity,
-                            height: 56,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  width: 2,
-                                  color: lightGreyColor,
-                                ),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.handshake_outlined,
-                                  color: mainColor,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                                Text(
-                                  'With',
-                                  style: TextStyle(
-                                    fontWeight: boldText,
-                                    color: blackColor,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            currentPage = 4;
-                            movePage();
-                            Get.back();
-                          },
-                        ),
-                        InkWell(
-                          child: Container(
-                            width: double.infinity,
-                            height: 56,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  width: 2,
-                                  color: lightGreyColor,
-                                ),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.location_on_outlined,
-                                  color: mainColor,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                                Text(
-                                  'Location',
-                                  style: TextStyle(
-                                    fontWeight: boldText,
-                                    color: blackColor,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            currentPage = 5;
-                            movePage();
-                            Get.back();
-                          },
-                        ),
-                        InkWell(
-                          child: Container(
-                            width: double.infinity,
-                            height: 56,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  width: 2,
-                                  color: lightGreyColor,
-                                ),
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.info_outline,
-                                  color: mainColor,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                                Text(
-                                  'Information',
-                                  style: TextStyle(
-                                    fontWeight: boldText,
-                                    color: blackColor,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(4),
-                                ),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            currentPage = 6;
-                            movePage();
-                            Get.back();
-                          },
-                        ),
-                      ],
-                    ),
-                    InkWell(
-                      child: Container(
-                        width: double.infinity,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: mainColor,
-                            width: 2,
-                          ),
-                          borderRadius: BorderRadius.circular(500),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '예약하기',
-                            style: TextStyle(
-                              fontSize: h4FontSize(context),
-                              fontWeight: boldText,
-                              color:mainColor
-                            ),
-                          ),
-                        ),
-                      ),
-                      onTap: () async {
-                        Get.back();
-                        final url = Uri.parse(
-                          'https://booking.naver.com/booking/13/bizes/839741',
-                        );
-                        if (await canLaunchUrl(url)) {
-                          launchUrl(
-                            url,
-                            mode: LaunchMode.externalApplication,
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
+  void _changeAboutPic() {
+    _isChanging = true;
+    _timer = Timer.periodic(Duration(seconds: 4), (timer) {
+      changeState();
+    });
+  }
+
+  changeState() {
+    if (i >= 9) {
+      setState(() {
+        i = 0;
+      });
+      shopPic = aboutShopPics[i];
+      // print('$i, $shopPic');
     } else {
-      return Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(padding: EdgeInsets.all(8)),
-            InkWell(
-              child: Text(
-                'About',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: mainColor,
-                  fontWeight: boldText,
-                ),
-              ),
-              onTap: () {
-                currentPage = 1;
-                movePage();
-              },
-            ),
-            Padding(padding: EdgeInsets.all(12)),
-            InkWell(
-              child: Text(
-                'LookBook',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: mainColor,
-                  fontWeight: boldText,
-                ),
-              ),
-              onTap: () {
-                currentPage = 2;
-                movePage();
-              },
-            ),
-            Padding(padding: EdgeInsets.all(12)),
-            InkWell(
-              child: Text(
-                'Products',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: mainColor,
-                  fontWeight: boldText,
-                ),
-              ),
-              onTap: () {
-                currentPage = 3;
-                movePage();
-              },
-            ),
-            Padding(padding: EdgeInsets.all(12)),
-            InkWell(
-              child: Text(
-                'With',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: mainColor,
-                  fontWeight: boldText,
-                ),
-              ),
-              onTap: () {
-                currentPage = 4;
-                movePage();
-              },
-            ),
-            Padding(padding: EdgeInsets.all(12)),
-            InkWell(
-              child: Text(
-                'Location',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: mainColor,
-                  fontWeight: boldText,
-                ),
-              ),
-              onTap: () {
-                currentPage = 5;
-                movePage();
-              },
-            ),
-            Padding(padding: EdgeInsets.all(12)),
-            InkWell(
-              child: Text(
-                'Information',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: mainColor,
-                  fontWeight: boldText,
-                ),
-              ),
-              onTap: () {
-                currentPage = 6;
-                movePage();
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 24),
-              child: InkWell(
-                child: Container(
-                  width: 120,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: mainColor,
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: Text(
-                      '예약하기',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: boldText,
-                        color:mainColor
-                      ),
-                    ),
-                  ),
-                ),
-                onTap: () async {
-                  final url = Uri.parse(
-                    'https://booking.naver.com/booking/13/bizes/839741',
-                  );
-                  if (await canLaunchUrl(url)) {
-                    launchUrl(
-                      url,
-                      mode: LaunchMode.externalApplication,
-                    );
-                  }
-                },
-              ),
-            ),
-          ],
-        ),
-      );
+      setState(() {
+        i++;
+      });
+      shopPic = aboutShopPics[i];
+      // print('$i, $shopPic');
     }
   }
 
-  // -------------------- Scaffold -------------------- //
+  @override
+  void initState() {
+    setState(() {
+      i = 0;
+      shopPic = aboutShopPics[i];
+    });
+    _changeAboutPic();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (i >= 9) {
-      Future.delayed(
-        Duration(seconds: i >= 10 ? 0 : 4), () {
-          setState(() {
-            i = 0;
-          });
-        }
-      );
-      shopPic = aboutShopPics[i];
-      print('$i, $shopPic');
-    } else {
-      Future.delayed(
-        Duration(seconds: 4), () {
-          setState(() {
-            i++;
-          });
-        }
-      );
-      shopPic = aboutShopPics[i];
-      print('$i, $shopPic');
-    }
-
     return ResponsiveSizer(
       builder: (context, orientation, screenType) {
         return Scaffold(
@@ -577,10 +106,10 @@ class _MainPageState extends State<MainPage> {
             automaticallyImplyLeading: false,
             backgroundColor: whiteColor,
             toolbarHeight: MediaQuery.of(context).size.width < 640
-              ? 56
-              : MediaQuery.of(context).size.width < 1080
-              ? 64
-              : 72,
+                ? 56
+                : MediaQuery.of(context).size.width < 1080
+                    ? 64
+                    : 72,
             title: Center(
               child: Container(
                 width: widgetSize(context),
@@ -596,11 +125,10 @@ class _MainPageState extends State<MainPage> {
                           color: mainColor,
                         ),
                       ),
-                      // ),
                       onTap: () {
                         currentPage = 0;
-                          movePage();
-                          Get.back();
+                        movePage();
+                        Get.back();
                       },
                     ),
                     Container(
@@ -637,15 +165,16 @@ class _MainPageState extends State<MainPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 8, bottom: 16),
+                            padding:
+                                const EdgeInsets.only(right: 8, bottom: 16),
                             child: Opacity(
-                              opacity: hoverOpacity(0),
+                              opacity: hoverState[0],
                               child: Container(
                                 padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: whiteColor,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
+                                    color: whiteColor,
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [boxShadows]),
                                 child: Text(
                                   '카카오톡 문의',
                                   style: TextStyle(
@@ -672,14 +201,14 @@ class _MainPageState extends State<MainPage> {
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
-                            onHover: (value) {
-                              if (value == true) {
+                            onHover: (hoverVal) {
+                              if (hoverVal == true) {
                                 setState(() {
-                                  hoverState[0] = true;
+                                  hoverState[0] = 1;
                                 });
                               } else {
                                 setState(() {
-                                  hoverState[0] = false;
+                                  hoverState[0] = 0;
                                 });
                               }
                             },
@@ -701,15 +230,16 @@ class _MainPageState extends State<MainPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 8, bottom: 16),
+                            padding:
+                                const EdgeInsets.only(right: 8, bottom: 16),
                             child: Opacity(
-                              opacity: hoverOpacity(1),
+                              opacity: hoverState[1],
                               child: Container(
                                 padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: whiteColor,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
+                                    color: whiteColor,
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [boxShadows]),
                                 child: Text(
                                   '네이버 톡톡 문의',
                                   style: TextStyle(
@@ -736,14 +266,14 @@ class _MainPageState extends State<MainPage> {
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
-                            onHover: (value) {
-                              if (value == true) {
+                            onHover: (hoverVal) {
+                              if (hoverVal == true) {
                                 setState(() {
-                                  hoverState[1] = true;
+                                  hoverState[1] = 1;
                                 });
                               } else {
                                 setState(() {
-                                  hoverState[1] = false;
+                                  hoverState[1] = 0;
                                 });
                               }
                             },
@@ -765,15 +295,16 @@ class _MainPageState extends State<MainPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 8, bottom: 16),
+                            padding:
+                                const EdgeInsets.only(right: 8, bottom: 16),
                             child: Opacity(
-                              opacity: hoverOpacity(2),
+                              opacity: hoverState[2],
                               child: Container(
                                 padding: EdgeInsets.all(8),
                                 decoration: BoxDecoration(
-                                  color: whiteColor,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
+                                    color: whiteColor,
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: [boxShadows]),
                                 child: Text(
                                   '070-7893-3059',
                                   style: TextStyle(
@@ -800,20 +331,20 @@ class _MainPageState extends State<MainPage> {
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
-                            onHover: (value) {
-                              if (value == true) {
+                            onHover: (hoverVal) {
+                              if (hoverVal == true) {
                                 setState(() {
-                                  hoverState[2] = true;
+                                  hoverState[2] = 1;
                                 });
                               } else {
                                 setState(() {
-                                  hoverState[2] = false;
+                                  hoverState[2] = 0;
                                 });
                               }
                             },
                             onTap: () async {
                               final url = Uri.parse(
-                              'tel:070 7893 3059',
+                                'tel:070 7893 3059',
                               );
                               if (await canLaunchUrl(url)) {
                                 launchUrl(
@@ -836,7 +367,6 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
-
 
 // ----------------------------------------------- ByKak ------------------------------------------------------------------
 class ByKak extends StatelessWidget {
@@ -863,7 +393,6 @@ class ByKak extends StatelessWidget {
   }
 }
 
-
 // ----------------------------------------------- About ------------------------------------------------------------------
 class About extends StatefulWidget {
   const About({super.key});
@@ -873,13 +402,14 @@ class About extends StatefulWidget {
 }
 
 class _AboutState extends State<About> {
-  indexChange(index) {
+  indexChange(a) {
     setState(() {
-      i = index;
+      i = a;
       shopPic = aboutShopPics[i];
     });
-    print(i);
+    print('$i');
   }
+
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
@@ -908,55 +438,18 @@ class _AboutState extends State<About> {
                     ),
                   ),
                 ),
-                MediaQuery.of(context).size.width < 1080 ?
-                Column (
-                  children: [
-                    Container(
-                      width: widgetSize(context),
-                      child: ImageFade(
-                        image: AssetImage(
-                          '$shopPic',
-                        ),
-                        fit: BoxFit.fitHeight,
-                        errorBuilder: (context, exception) => Icon(Icons.error),
-                        placeholder: Center(
-                          child: SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              color: mainColor,
-                              strokeWidth: 2,
-                            ),
-                          ),
-                        ),
-                        duration: Duration(milliseconds: 500),
-                        syncDuration: Duration(milliseconds: 500),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: paddingSize(context)),
-                    ),
-                    Container(
-                      width: widgetSize(context),
-                      height: MediaQuery.of(context).size.width < 640
-                      ? 80
-                      : 120,
-                      child: GridView.builder(
-                        itemCount: 10, //item 개수
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 5,
-                          childAspectRatio: 16 / 9,
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
-                        ),
-                        itemBuilder: (context, index) {
-                          return InkWell(
+                MediaQuery.of(context).size.width < 1080
+                    ? Column(
+                        children: [
+                          Container(
+                            width: widgetSize(context),
                             child: ImageFade(
                               image: AssetImage(
-                                aboutShopPics[index]
+                                '$shopPic',
                               ),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              fit: BoxFit.fitHeight,
+                              errorBuilder: (context, exception) =>
+                                  Icon(Icons.error),
                               placeholder: Center(
                                 child: SizedBox(
                                   width: 20,
@@ -967,165 +460,203 @@ class _AboutState extends State<About> {
                                   ),
                                 ),
                               ),
-                            ),
-                            onTap: () {
-                              indexChange(index);
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          Text(
-                            '그 날을 위한 자신감, 바이각',
-                            style: TextStyle(
-                              fontSize: h1FontSize(context),
-                              fontWeight: boldText,
-                              color: blackColor,
+                              duration: Duration(milliseconds: 500),
+                              syncDuration: Duration(milliseconds: 500),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                              top: paddingSize(context),
-                              bottom: paddingSize(context)
-                            ),
-                            child: Text(
-                              '바이각 수트렌탈센터는 100 평대의\n인천 최초/최대의 정장렌탈 전문샵입니다.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: h4FontSize(context),
-                                // fontWeight: boldText,
-                                color: blackColor,
+                            padding: EdgeInsets.only(top: paddingSize(context)),
+                          ),
+                          Container(
+                            width: widgetSize(context),
+                            height: MediaQuery.of(context).size.width < 640
+                                ? 80
+                                : 120,
+                            child: GridView.builder(
+                              itemCount: 10,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 5,
+                                childAspectRatio: 16 / 9,
+                                mainAxisSpacing: 8,
+                                crossAxisSpacing: 8,
                               ),
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  child: ImageFade(
+                                    image: AssetImage(
+                                      'assets/images/shops/shop_${index + 1}.png',
+                                    ),
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, exception) =>
+                                        Icon(Icons.error),
+                                    placeholder: Center(
+                                      child: SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          color: mainColor,
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    indexChange(index);
+                                  },
+                                );
+                              },
                             ),
                           ),
-                          Text(
-                            '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험할 수 있습니다.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: h4FontSize(context),
-                              // fontWeight: boldText,
-                              color: blackColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                )
-                : Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 550,
-                          height: 350,
-                          child: ImageFade(
-                            image: AssetImage(
-                              '$shopPic',
-                            ),
-                            fit: BoxFit.fitHeight,
-                            errorBuilder: (context, exception) => Icon(Icons.error),
-                            placeholder: Center(
-                              child: SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  color: mainColor,
-                                  strokeWidth: 2,
-                                ),
-                              ),
-                            ),
-                            duration: Duration(milliseconds: 500),
-                            syncDuration: Duration(milliseconds: 500),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                '그 날을 위한 자신감, 바이각',
-                                style: TextStyle(
-                                  fontSize: h1FontSize(context),
-                                  fontWeight: boldText,
-                                  color: blackColor,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  top: paddingSize(context),
-                                  bottom: paddingSize(context)
-                                ),
-                                child: Text(
-                                  '바이각 수트렌탈센터는 100 평대의\n인천 최초/최대의 정장렌탈 전문샵입니다.',
-                                  textAlign: TextAlign.end,
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            child: Column(
+                              children: [
+                                Text(
+                                  '그 날을 위한 자신감, 바이각',
                                   style: TextStyle(
-                                    fontSize: h4FontSize(context),
-                                    // fontWeight: boldText,
+                                    fontSize: h1FontSize(context),
+                                    fontWeight: boldText,
                                     color: blackColor,
                                   ),
                                 ),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: paddingSize(context),
+                                      bottom: paddingSize(context)),
+                                  child: Text(
+                                    '바이각 수트렌탈센터는 100 평대의\n인천 최초/최대의 정장렌탈 전문샵입니다.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: h4FontSize(context),
+                                      color: blackColor,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험할 수 있습니다.',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: h4FontSize(context),
+                                    color: blackColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 550,
+                                height: 350,
+                                child: ImageFade(
+                                  image: AssetImage(
+                                    '$shopPic',
+                                  ),
+                                  fit: BoxFit.fitHeight,
+                                  errorBuilder: (context, exception) =>
+                                      Icon(Icons.error),
+                                  placeholder: Center(
+                                    child: SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        color: mainColor,
+                                        strokeWidth: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 500),
+                                  syncDuration: Duration(milliseconds: 500),
+                                ),
                               ),
-                              Text(
-                                '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험할 수 있습니다.',
-                                textAlign: TextAlign.end,
-                                style: TextStyle(
-                                  fontSize: h4FontSize(context),
-                                  // fontWeight: boldText,
-                                  color: blackColor,
+                              Container(
+                                padding: EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      '그 날을 위한 자신감, 바이각',
+                                      style: TextStyle(
+                                        fontSize: h1FontSize(context),
+                                        fontWeight: boldText,
+                                        color: blackColor,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: paddingSize(context),
+                                          bottom: paddingSize(context)),
+                                      child: Text(
+                                        '바이각 수트렌탈센터는 100 평대의\n인천 최초/최대의 정장렌탈 전문샵입니다.',
+                                        textAlign: TextAlign.end,
+                                        style: TextStyle(
+                                          fontSize: h4FontSize(context),
+                                          color: blackColor,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      '웨딩, 혼주복, 면접, 데일리등으로\n그 날에 걸맞은 다양한 수트를 경험할 수 있습니다.',
+                                      textAlign: TextAlign.end,
+                                      style: TextStyle(
+                                        fontSize: h4FontSize(context),
+                                        color: blackColor,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      height: 80,
-                      padding: EdgeInsets.only(top: 16),
-                      child: GridView.builder(
-                        itemCount: 10, //item 개수
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 10,
-                          childAspectRatio: 16 / 9,
-                          mainAxisSpacing: 8,
-                          crossAxisSpacing: 8,
-                        ),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            child: ImageFade(
-                              image: AssetImage(
-                                aboutShopPics[index]
+                          Container(
+                            height: 80,
+                            padding: EdgeInsets.only(top: 16),
+                            child: GridView.builder(
+                              itemCount: 10,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 10,
+                                childAspectRatio: 16 / 9,
+                                mainAxisSpacing: 8,
+                                crossAxisSpacing: 8,
                               ),
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, exception) => Icon(Icons.error),
-                              placeholder: Center(
-                                child: SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(
-                                    color: mainColor,
-                                    strokeWidth: 2,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  child: ImageFade(
+                                    image: AssetImage(
+                                      'assets/images/shops/shop_${index + 1}.png',
+                                    ),
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, exception) =>
+                                        Icon(Icons.error),
+                                    placeholder: Center(
+                                      child: SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          color: mainColor,
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
+                                  onTap: () {
+                                    indexChange(index);
+                                  },
+                                );
+                              },
                             ),
-                            onTap: () {
-                              indexChange(index);
-                            },
-                          );
-                        },
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),
@@ -1134,7 +665,6 @@ class _AboutState extends State<About> {
     });
   }
 }
-
 
 // ----------------------------------------------- LookBook ------------------------------------------------------------------
 class LookBook extends StatefulWidget {
@@ -1175,14 +705,14 @@ class _LookBookState extends State<LookBook> {
                 Padding(padding: EdgeInsets.all(8)),
                 Container(
                   width: widgetSize(context),
-                  height: lookPicHeight(context),
+                  height: lookPicHeight(context) + 20,
                   child: ScrollConfiguration(
                     behavior: ScrollConfiguration.of(context).copyWith(
                       dragDevices: {
                         PointerDeviceKind.mouse,
                         PointerDeviceKind.touch,
                         PointerDeviceKind.trackpad,
-                      }
+                      },
                     ),
                     child: Scrollbar(
                       scrollbarOrientation: ScrollbarOrientation.bottom,
@@ -1202,13 +732,14 @@ class _LookBookState extends State<LookBook> {
                             itemBuilder: (context, index) {
                               return Container(
                                 height: lookPicHeight(context),
-                                margin: EdgeInsets.only(right: 20),
+                                margin: EdgeInsets.only(right: 20, bottom: 16),
                                 child: ImageFade(
                                   image: AssetImage(
-                                    lookPics[index],
+                                    'assets/images/lookbooks/lookbook_${index + 1}.png',
                                   ),
                                   fit: BoxFit.fitHeight,
-                                  errorBuilder: (context, exception) => Icon(Icons.error),
+                                  errorBuilder: (context, exception) =>
+                                      Icon(Icons.error),
                                   placeholder: Padding(
                                     padding: const EdgeInsets.all(56),
                                     child: Center(
@@ -1227,12 +758,12 @@ class _LookBookState extends State<LookBook> {
                               );
                             },
                           ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: whiteColor,
-                            size: 40,
-                            shadows: [boxShadows],
-                          )
+                          // Icon(
+                          //   Icons.arrow_forward_ios,
+                          //   color: whiteColor,
+                          //   size: 40,
+                          //   shadows: [boxShadows],
+                          // ),
                         ],
                       ),
                     ),
@@ -1247,7 +778,6 @@ class _LookBookState extends State<LookBook> {
   }
 }
 
-
 // ----------------------------------------------- Product ------------------------------------------------------------------
 class Product extends StatefulWidget {
   const Product({super.key});
@@ -1257,7 +787,6 @@ class Product extends StatefulWidget {
 }
 
 class _ProductState extends State<Product> {
-
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
@@ -1288,22 +817,22 @@ class _ProductState extends State<Product> {
                   height: MediaQuery.of(context).size.width < 640
                       ? 400
                       : MediaQuery.of(context).size.width < 1080
-                      ? 420
-                      : 570,
+                          ? 420
+                          : 570,
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: false,
                     itemCount: MediaQuery.of(context).size.width < 640
                         ? 4
                         : MediaQuery.of(context).size.width < 1080
-                        ? 6
-                        : 8,
+                            ? 6
+                            : 8,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width < 640
                           ? 2
                           : MediaQuery.of(context).size.width < 1080
-                          ? 3
-                          : 4,
+                              ? 3
+                              : 4,
                       childAspectRatio: 1 / 1.2,
                       mainAxisSpacing: paddingSize(context),
                       crossAxisSpacing: paddingSize(context),
@@ -1320,10 +849,11 @@ class _ProductState extends State<Product> {
                             borderRadius: BorderRadius.circular(8),
                             child: ImageFade(
                               image: AssetImage(
-                                'assets/images/products/product_(${index}).jpg'
+                                'assets/images/products/product_(${index}).jpg',
                               ),
                               fit: BoxFit.cover,
-                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              errorBuilder: (context, exception) =>
+                                  Icon(Icons.error),
                               placeholder: Center(
                                 child: SizedBox(
                                   width: 40,
@@ -1435,7 +965,7 @@ class _PinchUpState extends State<PinchUp> {
   bool _showPinchUp = true;
 
   showPinchUp() {
-    if(_showPinchUp == true) {
+    if (_showPinchUp == true) {
       return c1BoxSize(context);
     } else {
       return 0;
@@ -1450,22 +980,22 @@ class _PinchUpState extends State<PinchUp> {
       });
     });
 
-    return _showPinchUp ? Container(
-      width: c1BoxSize(context),
-      height: c1BoxSize(context),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: greyColor.withOpacity(0.7),
-        borderRadius: BorderRadius.circular(8)
-      ),
-      child: Image.asset(
-        'assets/images/icon_pinchUp.png',
-        fit: BoxFit.contain,
-      ),
-    ) : Container();
+    return _showPinchUp
+        ? Container(
+            width: c1BoxSize(context),
+            height: c1BoxSize(context),
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                color: greyColor.withOpacity(0.7),
+                borderRadius: BorderRadius.circular(8)),
+            child: Image.asset(
+              'assets/images/icon_pinchUp.png',
+              fit: BoxFit.contain,
+            ),
+          )
+        : Container();
   }
 }
-
 
 // ----------------------------------------------- With ------------------------------------------------------------------
 class WithCelebrity extends StatelessWidget {
@@ -1481,6 +1011,7 @@ class WithCelebrity extends StatelessWidget {
         child: Center(
           child: Container(
             width: widgetSize(context),
+            height: withPicHeight(context),
             padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -1495,13 +1026,49 @@ class WithCelebrity extends StatelessWidget {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    'assets/images/with_celebrity.png',
-                    fit: BoxFit.contain,
+                Expanded(
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context).copyWith(
+                      dragDevices: {
+                        PointerDeviceKind.mouse,
+                        PointerDeviceKind.touch,
+                        PointerDeviceKind.trackpad,
+                      },
+                    ),
+                    child: GridView.custom(
+                      physics: MediaQuery.of(context).size.width < 1080
+                          ? NeverScrollableScrollPhysics()
+                          : null,
+                      gridDelegate: SliverWovenGridDelegate.count(
+                        crossAxisCount: 4,
+                        mainAxisSpacing: 8,
+                        crossAxisSpacing: 8,
+                        pattern: [
+                          WovenGridTile(1),
+                          WovenGridTile(
+                            5 / 7,
+                            crossAxisRatio: 0.9,
+                            alignment: AlignmentDirectional.centerEnd,
+                          ),
+                        ],
+                      ),
+                      childrenDelegate: SliverChildBuilderDelegate(
+                        childCount: 12,
+                        (context, index) => Image.asset(
+                          'assets/images/with/with_${index + 1}.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
+                // ClipRRect(
+                //   borderRadius: BorderRadius.circular(8),
+                //   child: Image.asset(
+                //     'assets/images/with_celebrity.png',
+                //     fit: BoxFit.contain,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -1510,8 +1077,6 @@ class WithCelebrity extends StatelessWidget {
     });
   }
 }
-
-
 
 // ----------------------------------------------- Location ------------------------------------------------------------------
 class Location extends StatelessWidget {
@@ -1609,12 +1174,17 @@ class Location extends StatelessWidget {
                   color: greyColor,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8, bottom: 8,),
+                  padding: EdgeInsets.only(
+                    top: 8,
+                    bottom: 8,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 4,),
+                        padding: const EdgeInsets.only(
+                          bottom: 4,
+                        ),
                         child: Text(
                           '오시는 길',
                           style: TextStyle(
@@ -1632,7 +1202,9 @@ class Location extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 4,),
+                        padding: const EdgeInsets.only(
+                          top: 4,
+                        ),
                         child: Text(
                           '[37502] 제물포역(스마트타운 방면) 버스정류장 도보 3분',
                           style: TextStyle(
@@ -1649,7 +1221,10 @@ class Location extends StatelessWidget {
                   color: greyColor,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 8, bottom: 8,),
+                  padding: EdgeInsets.only(
+                    top: 8,
+                    bottom: 8,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -1657,7 +1232,9 @@ class Location extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 4,),
+                            padding: const EdgeInsets.only(
+                              bottom: 4,
+                            ),
                             child: Text(
                               '주차안내',
                               style: TextStyle(
@@ -1674,16 +1251,6 @@ class Location extends StatelessWidget {
                               color: blackColor,
                             ),
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(top: 4,),
-                          //   child: Text(
-                          //     '제물포북부역 공영주차장 2시간 무료',
-                          //     style: TextStyle(
-                          //       fontSize: h5FontSize(context),
-                          //       color: blackColor,
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ],
@@ -1697,7 +1264,6 @@ class Location extends StatelessWidget {
     });
   }
 }
-
 
 // ----------------------------------------------- Footer ------------------------------------------------------------------
 class Footer extends StatelessWidget {
@@ -1732,8 +1298,8 @@ class Footer extends StatelessWidget {
                     ),
                     onTap: () {
                       currentPage = 0;
-                        movePage();
-                        Get.back();
+                      movePage();
+                      Get.back();
                     },
                   ),
                 ),
@@ -1826,7 +1392,7 @@ class Footer extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8),
                           child: Text(
-                            '(주) 데시그너',
+                            '회사명 : (주) 데시그너',
                             style: TextStyle(
                               color: whiteColor,
                               fontSize: h4FontSize(context),

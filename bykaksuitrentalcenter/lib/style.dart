@@ -22,7 +22,6 @@ var boldText = FontWeight.w700;
 var regularText = FontWeight.w300;
 var lightText = FontWeight.w100;
 
-
 var boxShadows = BoxShadow(
   color: blackColor.withOpacity(0.5),
   blurRadius: 4,
@@ -68,6 +67,7 @@ shopPicHeight(c) {
     return 400;
   }
 }
+
 lookPicHeight(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 320;
@@ -75,6 +75,16 @@ lookPicHeight(c) {
     return 400;
   } else {
     return 480;
+  }
+}
+
+withPicHeight(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 400;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 580;
+  } else {
+    return 560;
   }
 }
 
