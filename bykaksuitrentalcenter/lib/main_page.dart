@@ -6,6 +6,7 @@ import 'package:side_sheet/side_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:image_fade/image_fade.dart';
+import 'package:video_player/video_player.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:flutter/gestures.dart';
@@ -226,71 +227,71 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(right: 8, bottom: 16),
-                            child: Opacity(
-                              opacity: hoverState[1],
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    color: whiteColor,
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [boxShadows]),
-                                child: Text(
-                                  '네이버 톡톡 문의',
-                                  style: TextStyle(
-                                    fontWeight: boldText,
-                                    color: mainColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            child: Container(
-                              padding: EdgeInsets.all(8),
-                              margin: EdgeInsets.only(right: 16, bottom: 12),
-                              width: floatingBtnSize(context),
-                              height: floatingBtnSize(context),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: [boxShadows],
-                                color: naverColor,
-                              ),
-                              child: Image.asset(
-                                'assets/images/logos/logo_talktalk_white.png',
-                                fit: BoxFit.scaleDown,
-                              ),
-                            ),
-                            onHover: (hoverVal) {
-                              if (hoverVal == true) {
-                                setState(() {
-                                  hoverState[1] = 1;
-                                });
-                              } else {
-                                setState(() {
-                                  hoverState[1] = 0;
-                                });
-                              }
-                            },
-                            onTap: () async {
-                              final url = Uri.parse(
-                                'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
-                              );
-                              if (await canLaunchUrl(url)) {
-                                launchUrl(
-                                  url,
-                                  mode: LaunchMode.externalApplication,
-                                );
-                              }
-                            },
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.end,
+                      //   children: [
+                      //     Padding(
+                      //       padding:
+                      //           const EdgeInsets.only(right: 8, bottom: 16),
+                      //       child: Opacity(
+                      //         opacity: hoverState[1],
+                      //         child: Container(
+                      //           padding: EdgeInsets.all(8),
+                      //           decoration: BoxDecoration(
+                      //               color: whiteColor,
+                      //               borderRadius: BorderRadius.circular(8),
+                      //               boxShadow: [boxShadows]),
+                      //           child: Text(
+                      //             '네이버 톡톡 문의',
+                      //             style: TextStyle(
+                      //               fontWeight: boldText,
+                      //               color: mainColor,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     InkWell(
+                      //       child: Container(
+                      //         padding: EdgeInsets.all(8),
+                      //         margin: EdgeInsets.only(right: 16, bottom: 12),
+                      //         width: floatingBtnSize(context),
+                      //         height: floatingBtnSize(context),
+                      //         decoration: BoxDecoration(
+                      //           borderRadius: BorderRadius.circular(8),
+                      //           boxShadow: [boxShadows],
+                      //           color: naverColor,
+                      //         ),
+                      //         child: Image.asset(
+                      //           'assets/images/logos/logo_talktalk_white.png',
+                      //           fit: BoxFit.scaleDown,
+                      //         ),
+                      //       ),
+                      //       onHover: (hoverVal) {
+                      //         if (hoverVal == true) {
+                      //           setState(() {
+                      //             hoverState[1] = 1;
+                      //           });
+                      //         } else {
+                      //           setState(() {
+                      //             hoverState[1] = 0;
+                      //           });
+                      //         }
+                      //       },
+                      //       onTap: () async {
+                      //         final url = Uri.parse(
+                      //           'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
+                      //         );
+                      //         if (await canLaunchUrl(url)) {
+                      //           launchUrl(
+                      //             url,
+                      //             mode: LaunchMode.externalApplication,
+                      //           );
+                      //         }
+                      //       },
+                      //     ),
+                      //   ],
+                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -369,8 +370,34 @@ class _MainPageState extends State<MainPage> {
 }
 
 // ----------------------------------------------- ByKak ------------------------------------------------------------------
-class ByKak extends StatelessWidget {
+class ByKak extends StatefulWidget {
   const ByKak({super.key});
+
+  @override
+  State<ByKak> createState() => _ByKakState();
+}
+
+class _ByKakState extends State<ByKak> {
+  late VideoPlayerController _videoPlayerController;
+
+  @override
+  void initState() {
+    super.initState();
+    _videoPlayerController = VideoPlayerController.network(
+      'assets/videos/bykak_video.mp4',
+    )..initialize().then((_) {
+        setState(() {});
+        _videoPlayerController.play();
+        _videoPlayerController.setVolume(0);
+        _videoPlayerController.setLooping(true);
+      });
+  }
+
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -380,14 +407,53 @@ class ByKak extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           color: blackColor,
-          image: DecorationImage(
-            image: AssetImage(
-              'assets/images/home_video_2.gif',
-            ),
-            opacity: 0.7,
-            fit: BoxFit.cover,
-          ),
+          // image: DecorationImage(
+          //   image: AssetImage(
+          //     'assets/images/bykak_video.gif',
+          //   ),
+          // ),
         ),
+        child: ImageFade(
+          image: AssetImage(
+            'assets/images/bykak_video.gif',
+          ),
+          fit: BoxFit.cover,
+          errorBuilder: (context, exception) => Icon(Icons.error),
+          placeholder: Center(
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: CircularProgressIndicator(
+                color: whiteColor,
+                strokeWidth: 4,
+              ),
+            ),
+          ),
+          duration: Duration(milliseconds: 0),
+          syncDuration: Duration(milliseconds: 0),
+        ),
+        // child: _videoPlayerController.value.isInitialized
+        //     ? FittedBox(
+        //         fit: BoxFit.cover,
+        //         child: SizedBox(
+        //           width: _videoPlayerController.value.size?.width ?? 0,
+        //           height: _videoPlayerController.value.size?.height ?? 0,
+        //           child: AspectRatio(
+        //             aspectRatio: _videoPlayerController.value.aspectRatio,
+        //             child: VideoPlayer(_videoPlayerController),
+        //           ),
+        //         ),
+        //       )
+        //     : Center(
+        //         child: SizedBox(
+        //           width: 40,
+        //           height: 40,
+        //           child: CircularProgressIndicator(
+        //             color: whiteColor,
+        //             strokeWidth: 4,
+        //           ),
+        //         ),
+        //       ),
       );
     });
   }

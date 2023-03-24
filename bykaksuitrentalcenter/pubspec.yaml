@@ -37,6 +37,7 @@ dependencies:
   image_fade: ^0.6.2
   carousel_slider: ^4.2.1
   flutter_staggered_grid_view: ^0.6.2
+  video_player: ^2.6.0
   # cached_network_image: ^3.2.3
 
   firebase_core: ^2.4.1
@@ -83,9 +84,12 @@ flutter:
     - assets/images/products/
     - assets/images/shops/
     - assets/images/with/
+    - assets/videos/
+    - assets/videos/bykak_video.mp4
     # ---------- thumbnail ----------
     - assets/images/home_video_2.gif
     - assets/images/home_video_3.gif
+    - assets/images/bykak_video.gif
     # ---------- lookbook ----------
     - assets/images/lookbooks/lookbook_1.png
     - assets/images/lookbooks/lookbook_2.png
