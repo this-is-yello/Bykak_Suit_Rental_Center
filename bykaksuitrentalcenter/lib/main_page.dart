@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
@@ -6,7 +7,9 @@ import 'package:side_sheet/side_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:image_fade/image_fade.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:cached_network_image/cached_network_image.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:cached_video_player/cached_video_player.dart';
 import 'package:video_player/video_player.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -59,6 +62,8 @@ movePage() {
 
 late Timer _timer;
 bool _isChanging = false;
+late CachedVideoPlayerController _cacheController;
+bool aaa = true;
 
 class _MainPageState extends State<MainPage> {
   void _changeAboutPic() {
@@ -84,6 +89,9 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
+  final List<String> videoUrls = [];
+  bool isDisposed = false;
+
   @override
   void initState() {
     setState(() {
@@ -97,6 +105,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void dispose() {
     _timer.cancel();
+    _cacheController.dispose();
     super.dispose();
   }
 
@@ -334,10 +343,8 @@ class ByKak extends StatefulWidget {
 
 class _ByKakState extends State<ByKak> {
   late VideoPlayerController _videoPlayerController;
-
   @override
   void initState() {
-    super.initState();
     _videoPlayerController = VideoPlayerController.network(
       'https://firebasestorage.googleapis.com/v0/b/bykakrentalcenter.appspot.com/o/bykak_video.mp4?alt=media&token=8d6163b8-8056-4eb5-b334-36d7d6ac3a02',
     )..initialize().then((_) {
@@ -346,12 +353,7 @@ class _ByKakState extends State<ByKak> {
         _videoPlayerController.setVolume(0);
         _videoPlayerController.setLooping(true);
       });
-  }
-
-  @override
-  void dispose() {
-    _videoPlayerController.dispose();
-    super.dispose();
+    super.initState();
   }
 
   @override

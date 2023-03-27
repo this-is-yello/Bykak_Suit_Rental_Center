@@ -19,7 +19,6 @@ import 'package:bykaksuitrentalcenter/products_page.dart';
 // import 'package:bykaksuitrentalcenter/screens/account/log_in_page.dart';
 // import 'package:bykaksuitrentalcenter/screens/account/my_page.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -35,9 +34,14 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
