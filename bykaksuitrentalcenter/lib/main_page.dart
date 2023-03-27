@@ -6,6 +6,7 @@ import 'package:side_sheet/side_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:image_fade/image_fade.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:video_player/video_player.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -53,6 +54,7 @@ movePage() {
     duration: Duration(milliseconds: 1000),
     curve: Curves.linearToEaseOut,
   );
+  print(currentPage);
 }
 
 late Timer _timer;
@@ -142,12 +144,17 @@ class _MainPageState extends State<MainPage> {
           ),
           body: Container(
             child: Stack(
-              alignment: Alignment.bottomRight,
+              alignment: Alignment.bottomCenter,
               children: [
                 PageView(
                   controller: _controller,
+                  physics: ClampingScrollPhysics(),
                   scrollDirection: Axis.vertical,
-                  onPageChanged: (value) {},
+                  pageSnapping: true,
+                  onPageChanged: (value) {
+                    currentPage = value;
+                    print(value);
+                  },
                   children: [
                     ByKak(),
                     About(),
@@ -158,208 +165,156 @@ class _MainPageState extends State<MainPage> {
                     Footer(),
                   ],
                 ),
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(right: 8, bottom: 16),
-                            child: Opacity(
-                              opacity: hoverState[0],
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    color: whiteColor,
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [boxShadows]),
-                                child: Text(
-                                  '카카오톡 문의',
-                                  style: TextStyle(
-                                    fontWeight: boldText,
-                                    color: mainColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            child: Container(
-                              padding: EdgeInsets.all(8),
-                              margin: EdgeInsets.only(right: 16, bottom: 12),
-                              width: floatingBtnSize(context),
-                              height: floatingBtnSize(context),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: [boxShadows],
-                                color: kakaoColor,
-                              ),
-                              child: Image.asset(
-                                'assets/images/logos/logo_kakao_talk_white.png',
-                                fit: BoxFit.scaleDown,
-                              ),
-                            ),
-                            onHover: (hoverVal) {
-                              if (hoverVal == true) {
-                                setState(() {
-                                  hoverState[0] = 1;
-                                });
-                              } else {
-                                setState(() {
-                                  hoverState[0] = 0;
-                                });
-                              }
-                            },
-                            onTap: () async {
-                              final url = Uri.parse(
-                                'http://pf.kakao.com/_WExlxixj/chat',
-                              );
-                              if (await canLaunchUrl(url)) {
-                                launchUrl(
-                                  url,
-                                  mode: LaunchMode.externalApplication,
-                                );
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.end,
-                      //   children: [
-                      //     Padding(
-                      //       padding:
-                      //           const EdgeInsets.only(right: 8, bottom: 16),
-                      //       child: Opacity(
-                      //         opacity: hoverState[1],
-                      //         child: Container(
-                      //           padding: EdgeInsets.all(8),
-                      //           decoration: BoxDecoration(
-                      //               color: whiteColor,
-                      //               borderRadius: BorderRadius.circular(8),
-                      //               boxShadow: [boxShadows]),
-                      //           child: Text(
-                      //             '네이버 톡톡 문의',
-                      //             style: TextStyle(
-                      //               fontWeight: boldText,
-                      //               color: mainColor,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     InkWell(
-                      //       child: Container(
-                      //         padding: EdgeInsets.all(8),
-                      //         margin: EdgeInsets.only(right: 16, bottom: 12),
-                      //         width: floatingBtnSize(context),
-                      //         height: floatingBtnSize(context),
-                      //         decoration: BoxDecoration(
-                      //           borderRadius: BorderRadius.circular(8),
-                      //           boxShadow: [boxShadows],
-                      //           color: naverColor,
-                      //         ),
-                      //         child: Image.asset(
-                      //           'assets/images/logos/logo_talktalk_white.png',
-                      //           fit: BoxFit.scaleDown,
-                      //         ),
-                      //       ),
-                      //       onHover: (hoverVal) {
-                      //         if (hoverVal == true) {
-                      //           setState(() {
-                      //             hoverState[1] = 1;
-                      //           });
-                      //         } else {
-                      //           setState(() {
-                      //             hoverState[1] = 0;
-                      //           });
-                      //         }
-                      //       },
-                      //       onTap: () async {
-                      //         final url = Uri.parse(
-                      //           'http://talk.naver.com/wcc3zi?frm=mnmb&frm=nmb_detail#nafullscreen',
-                      //         );
-                      //         if (await canLaunchUrl(url)) {
-                      //           launchUrl(
-                      //             url,
-                      //             mode: LaunchMode.externalApplication,
-                      //           );
-                      //         }
-                      //       },
-                      //     ),
-                      //   ],
-                      // ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(right: 8, bottom: 16),
-                            child: Opacity(
-                              opacity: hoverState[2],
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    color: whiteColor,
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: [boxShadows]),
-                                child: Text(
-                                  '070-7893-3059',
-                                  style: TextStyle(
-                                    fontWeight: boldText,
-                                    color: mainColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            child: Container(
-                              padding: EdgeInsets.all(8),
-                              margin: EdgeInsets.only(right: 16, bottom: 16),
-                              width: floatingBtnSize(context),
-                              height: floatingBtnSize(context),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: [boxShadows],
-                                color: blackColor,
-                              ),
-                              child: Image.asset(
-                                'assets/images/logos/logo_phone_white.png',
-                                fit: BoxFit.scaleDown,
-                              ),
-                            ),
-                            onHover: (hoverVal) {
-                              if (hoverVal == true) {
-                                setState(() {
-                                  hoverState[2] = 1;
-                                });
-                              } else {
-                                setState(() {
-                                  hoverState[2] = 0;
-                                });
-                              }
-                            },
-                            onTap: () async {
-                              final url = Uri.parse(
-                                'tel:070 7893 3059',
-                              );
-                              if (await canLaunchUrl(url)) {
-                                launchUrl(
-                                  url,
-                                  mode: LaunchMode.externalApplication,
-                                );
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    child: Icon(
+                      Icons.keyboard_arrow_down,
+                      size: 60,
+                      color: mainColor,
+                      shadows: [boxShadows],
+                    ),
+                    onTap: () {
+                      currentPage++;
+                      movePage();
+                    },
                   ),
-                )
+                ),
+              ],
+            ),
+          ),
+          floatingActionButton: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8, bottom: 16),
+                      child: Opacity(
+                        opacity: hoverState[0],
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(4),
+                              boxShadow: [boxShadows]),
+                          child: Text(
+                            '카카오톡 문의',
+                            style: TextStyle(
+                              fontWeight: boldText,
+                              color: mainColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        margin: EdgeInsets.only(right: 16, bottom: 12),
+                        width: floatingBtnSize(context),
+                        height: floatingBtnSize(context),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [boxShadows],
+                          color: kakaoColor,
+                        ),
+                        child: Image.asset(
+                          'assets/images/logos/logo_kakao_talk_white.png',
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ),
+                      onHover: (hoverVal) {
+                        if (hoverVal == true) {
+                          setState(() {
+                            hoverState[0] = 1;
+                          });
+                        } else {
+                          setState(() {
+                            hoverState[0] = 0;
+                          });
+                        }
+                      },
+                      onTap: () async {
+                        final url = Uri.parse(
+                          'http://pf.kakao.com/_WExlxixj/chat',
+                        );
+                        if (await canLaunchUrl(url)) {
+                          launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8, bottom: 16),
+                      child: Opacity(
+                        opacity: hoverState[2],
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(4),
+                              boxShadow: [boxShadows]),
+                          child: Text(
+                            '070-7893-3059',
+                            style: TextStyle(
+                              fontWeight: boldText,
+                              color: mainColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        margin: EdgeInsets.only(right: 16, bottom: 16),
+                        width: floatingBtnSize(context),
+                        height: floatingBtnSize(context),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [boxShadows],
+                          color: blackColor,
+                        ),
+                        child: Image.asset(
+                          'assets/images/logos/logo_phone_white.png',
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ),
+                      onHover: (hoverVal) {
+                        if (hoverVal == true) {
+                          setState(() {
+                            hoverState[2] = 1;
+                          });
+                        } else {
+                          setState(() {
+                            hoverState[2] = 0;
+                          });
+                        }
+                      },
+                      onTap: () async {
+                        final url = Uri.parse(
+                          'tel:070 7893 3059',
+                        );
+                        if (await canLaunchUrl(url)) {
+                          launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -384,7 +339,7 @@ class _ByKakState extends State<ByKak> {
   void initState() {
     super.initState();
     _videoPlayerController = VideoPlayerController.network(
-      'assets/videos/bykak_video.mp4',
+      'https://firebasestorage.googleapis.com/v0/b/bykakrentalcenter.appspot.com/o/bykak_video.mp4?alt=media&token=8d6163b8-8056-4eb5-b334-36d7d6ac3a02',
     )..initialize().then((_) {
         setState(() {});
         _videoPlayerController.play();
@@ -407,53 +362,49 @@ class _ByKakState extends State<ByKak> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           color: blackColor,
-          // image: DecorationImage(
-          //   image: AssetImage(
-          //     'assets/images/bykak_video.gif',
-          //   ),
-          // ),
         ),
-        child: ImageFade(
-          image: AssetImage(
-            'assets/images/bykak_video.gif',
-          ),
-          fit: BoxFit.cover,
-          errorBuilder: (context, exception) => Icon(Icons.error),
-          placeholder: Center(
-            child: SizedBox(
-              width: 40,
-              height: 40,
-              child: CircularProgressIndicator(
-                color: whiteColor,
-                strokeWidth: 4,
-              ),
-            ),
-          ),
-          duration: Duration(milliseconds: 0),
-          syncDuration: Duration(milliseconds: 0),
-        ),
-        // child: _videoPlayerController.value.isInitialized
-        //     ? FittedBox(
-        //         fit: BoxFit.cover,
-        //         child: SizedBox(
-        //           width: _videoPlayerController.value.size?.width ?? 0,
-        //           height: _videoPlayerController.value.size?.height ?? 0,
-        //           child: AspectRatio(
-        //             aspectRatio: _videoPlayerController.value.aspectRatio,
-        //             child: VideoPlayer(_videoPlayerController),
-        //           ),
-        //         ),
-        //       )
-        //     : Center(
-        //         child: SizedBox(
-        //           width: 40,
-        //           height: 40,
-        //           child: CircularProgressIndicator(
-        //             color: whiteColor,
-        //             strokeWidth: 4,
-        //           ),
-        //         ),
+        // child: ImageFade(
+        //   image: AssetImage(
+        //     'assets/images/bykak_video.gif',
+        //   ),
+        //   fit: BoxFit.cover,
+        //   errorBuilder: (context, exception) => Icon(Icons.error),
+        //   placeholder: Center(
+        //     child: SizedBox(
+        //       width: 40,
+        //       height: 40,
+        //       child: CircularProgressIndicator(
+        //         color: whiteColor,
+        //         strokeWidth: 4,
         //       ),
+        //     ),
+        //   ),
+        //   duration: Duration(milliseconds: 0),
+        //   syncDuration: Duration(milliseconds: 0),
+        // ),
+        // ----------------------------------------------------------------------
+        child: _videoPlayerController.value.isInitialized
+            ? FittedBox(
+                fit: BoxFit.cover,
+                child: SizedBox(
+                  width: _videoPlayerController.value.size?.width ?? 0,
+                  height: _videoPlayerController.value.size?.height ?? 0,
+                  child: AspectRatio(
+                    aspectRatio: _videoPlayerController.value.aspectRatio,
+                    child: VideoPlayer(_videoPlayerController),
+                  ),
+                ),
+              )
+            : Center(
+                child: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: CircularProgressIndicator(
+                    color: whiteColor,
+                    strokeWidth: 4,
+                  ),
+                ),
+              ),
       );
     });
   }
@@ -517,9 +468,10 @@ class _AboutState extends State<About> {
                               errorBuilder: (context, exception) =>
                                   Icon(Icons.error),
                               placeholder: Center(
-                                child: SizedBox(
+                                child: Container(
                                   width: 20,
                                   height: 20,
+                                  padding: EdgeInsets.only(top: 20),
                                   child: CircularProgressIndicator(
                                     color: mainColor,
                                     strokeWidth: 2,
@@ -990,11 +942,11 @@ class _ProductState extends State<Product> {
                     InkWell(
                       child: Column(
                         children: [
-                          Icon(
-                            Icons.keyboard_arrow_up,
-                            size: h1FontSize(context),
-                            color: mainColor,
-                          ),
+                          // Icon(
+                          //   Icons.keyboard_arrow_up,
+                          //   size: h1FontSize(context),
+                          //   color: mainColor,
+                          // ),
                           Text(
                             '전체보기',
                             style: TextStyle(

@@ -38,7 +38,7 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_staggered_grid_view: ^0.6.2
   video_player: ^2.6.0
-  # cached_network_image: ^3.2.3
+  cached_network_image: ^3.2.3
 
   firebase_core: ^2.4.1
   firebase_auth: ^4.2.4
@@ -85,10 +85,9 @@ flutter:
     - assets/images/shops/
     - assets/images/with/
     - assets/videos/
-    - assets/videos/bykak_video.mp4
     # ---------- thumbnail ----------
-    - assets/images/home_video_2.gif
-    - assets/images/home_video_3.gif
+    - assets/videos/bykak_video.mp4
+    - assets/videos/12123.mp4
     - assets/images/bykak_video.gif
     # ---------- lookbook ----------
     - assets/images/lookbooks/lookbook_1.png
@@ -179,11 +178,6 @@ flutter:
     - assets/images/products/product_(20).jpg
     - assets/images/products/product_(21).jpg
     # ---------- etc ----------
-    - assets/images/about_bykak.png
-    - assets/images/about_rental_1.png
-    - assets/images/about_rental_2.png
-    - assets/images/bykak_shop.png
-    - assets/images/rental_shop.png
     - assets/images/with_celebrity.png
     - .env # path to your .env file
   #   - images/a_dot_burr.jpeg
