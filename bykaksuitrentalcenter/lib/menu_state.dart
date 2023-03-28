@@ -301,10 +301,9 @@ menuState(context) {
                         child: Text(
                           '예약하기',
                           style: TextStyle(
-                            fontSize: h4FontSize(context),
-                            fontWeight: boldText,
-                            color:mainColor
-                          ),
+                              fontSize: h4FontSize(context),
+                              fontWeight: boldText,
+                              color: mainColor),
                         ),
                       ),
                     ),
@@ -441,10 +440,7 @@ menuState(context) {
                     '예약하기',
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: boldText,
-                      color:mainColor
-                    ),
+                        fontSize: 16, fontWeight: boldText, color: mainColor),
                   ),
                 ),
               ),
@@ -460,6 +456,157 @@ menuState(context) {
                 }
               },
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// -------------------------------------- floatingActionButton --------------------------------------
+class FloatActBtn extends StatefulWidget {
+  const FloatActBtn({super.key});
+
+  @override
+  State<FloatActBtn> createState() => _FloatActBtnState();
+}
+
+class _FloatActBtnState extends State<FloatActBtn> {
+  List hoverState = [0, 0, 0];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8, bottom: 16),
+                child: Opacity(
+                  opacity: hoverState[0],
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        color: whiteColor,
+                        borderRadius: BorderRadius.circular(4),
+                        boxShadow: [boxShadows]),
+                    child: Text(
+                      '카카오톡 문의',
+                      style: TextStyle(
+                        fontWeight: boldText,
+                        color: mainColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  margin: EdgeInsets.only(right: 16, bottom: 12),
+                  width: floatingBtnSize(context),
+                  height: floatingBtnSize(context),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [boxShadows],
+                    color: kakaoColor,
+                  ),
+                  child: Image.asset(
+                    'assets/images/logos/logo_kakao_talk_white.png',
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+                onHover: (hoverVal) {
+                  if (hoverVal == true) {
+                    setState(() {
+                      hoverState[0] = 1;
+                    });
+                  } else {
+                    setState(() {
+                      hoverState[0] = 0;
+                    });
+                  }
+                },
+                onTap: () async {
+                  final url = Uri.parse(
+                    'http://pf.kakao.com/_WExlxixj/chat',
+                  );
+                  if (await canLaunchUrl(url)) {
+                    launchUrl(
+                      url,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8, bottom: 16),
+                child: Opacity(
+                  opacity: hoverState[2],
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        color: whiteColor,
+                        borderRadius: BorderRadius.circular(4),
+                        boxShadow: [boxShadows]),
+                    child: Text(
+                      '070-7893-3059',
+                      style: TextStyle(
+                        fontWeight: boldText,
+                        color: mainColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              InkWell(
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  margin: EdgeInsets.only(right: 16, bottom: 16),
+                  width: floatingBtnSize(context),
+                  height: floatingBtnSize(context),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [boxShadows],
+                    color: blackColor,
+                  ),
+                  child: Image.asset(
+                    'assets/images/logos/logo_phone_white.png',
+                    fit: BoxFit.scaleDown,
+                  ),
+                ),
+                onHover: (hoverVal) {
+                  if (hoverVal == true) {
+                    setState(() {
+                      hoverState[2] = 1;
+                    });
+                  } else {
+                    setState(() {
+                      hoverState[2] = 0;
+                    });
+                  }
+                },
+                onTap: () async {
+                  final url = Uri.parse(
+                    'tel:070 7893 3059',
+                  );
+                  if (await canLaunchUrl(url)) {
+                    launchUrl(
+                      url,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  }
+                },
+              ),
+            ],
           ),
         ],
       ),

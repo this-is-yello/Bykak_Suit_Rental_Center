@@ -32,7 +32,6 @@ int i = 0;
 int currentPage = 0;
 bool _isLoading = true;
 var shopPic;
-List hoverState = [0, 0, 0];
 List aboutShopPics = [
   'assets/images/shops/shop_1.png',
   'assets/images/shops/shop_2.png',
@@ -45,25 +44,23 @@ List aboutShopPics = [
   'assets/images/shops/shop_9.png',
   'assets/images/shops/shop_10.png',
 ];
+late Timer _timer;
+late VideoPlayerController _videoController;
+bool _isChanging = false;
+bool _videoPlay = false;
 
 PageController _controller = PageController(
   initialPage: 0,
   keepPage: true,
 );
-
 movePage() {
   _controller.animateToPage(
     currentPage,
     duration: Duration(milliseconds: 1000),
     curve: Curves.linearToEaseOut,
   );
-  print(currentPage);
+  // print('selectedPage: ' + '$currentPage');
 }
-
-late Timer _timer;
-bool _isChanging = false;
-bool _videoPlay = false;
-late VideoPlayerController _videoController;
 
 class _MainPageState extends State<MainPage> {
   void _changeAboutPic() {
@@ -92,17 +89,13 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  final List<String> videoUrls = [];
-  bool isDisposed = false;
-
   @override
   void initState() {
+    super.initState();
     _videoController = VideoPlayerController.asset(
       'assets/videos/bykak_video.mp4',
     )..initialize().then(
         (_) {
-          // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-
           _videoController.play();
           _videoController.setVolume(0);
           _videoController.setLooping(true);
@@ -113,14 +106,13 @@ class _MainPageState extends State<MainPage> {
       shopPic = aboutShopPics[i];
     });
     _changeAboutPic();
-    super.initState();
   }
 
   @override
   void dispose() {
+    super.dispose();
     _videoController.dispose();
     _timer.cancel();
-    super.dispose();
   }
 
   @override
@@ -176,7 +168,7 @@ class _MainPageState extends State<MainPage> {
                   pageSnapping: true,
                   onPageChanged: (value) {
                     currentPage = value;
-                    print(value);
+                    // print('currentPage: ' + '$value');
                   },
                   children: [
                     ByKak(),
@@ -206,141 +198,7 @@ class _MainPageState extends State<MainPage> {
               ],
             ),
           ),
-          floatingActionButton: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8, bottom: 16),
-                      child: Opacity(
-                        opacity: hoverState[0],
-                        child: Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              color: whiteColor,
-                              borderRadius: BorderRadius.circular(4),
-                              boxShadow: [boxShadows]),
-                          child: Text(
-                            '카카오톡 문의',
-                            style: TextStyle(
-                              fontWeight: boldText,
-                              color: mainColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        margin: EdgeInsets.only(right: 16, bottom: 12),
-                        width: floatingBtnSize(context),
-                        height: floatingBtnSize(context),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [boxShadows],
-                          color: kakaoColor,
-                        ),
-                        child: Image.asset(
-                          'assets/images/logos/logo_kakao_talk_white.png',
-                          fit: BoxFit.scaleDown,
-                        ),
-                      ),
-                      onHover: (hoverVal) {
-                        if (hoverVal == true) {
-                          setState(() {
-                            hoverState[0] = 1;
-                          });
-                        } else {
-                          setState(() {
-                            hoverState[0] = 0;
-                          });
-                        }
-                      },
-                      onTap: () async {
-                        final url = Uri.parse(
-                          'http://pf.kakao.com/_WExlxixj/chat',
-                        );
-                        if (await canLaunchUrl(url)) {
-                          launchUrl(
-                            url,
-                            mode: LaunchMode.externalApplication,
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8, bottom: 16),
-                      child: Opacity(
-                        opacity: hoverState[2],
-                        child: Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              color: whiteColor,
-                              borderRadius: BorderRadius.circular(4),
-                              boxShadow: [boxShadows]),
-                          child: Text(
-                            '070-7893-3059',
-                            style: TextStyle(
-                              fontWeight: boldText,
-                              color: mainColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        margin: EdgeInsets.only(right: 16, bottom: 16),
-                        width: floatingBtnSize(context),
-                        height: floatingBtnSize(context),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: [boxShadows],
-                          color: blackColor,
-                        ),
-                        child: Image.asset(
-                          'assets/images/logos/logo_phone_white.png',
-                          fit: BoxFit.scaleDown,
-                        ),
-                      ),
-                      onHover: (hoverVal) {
-                        if (hoverVal == true) {
-                          setState(() {
-                            hoverState[2] = 1;
-                          });
-                        } else {
-                          setState(() {
-                            hoverState[2] = 0;
-                          });
-                        }
-                      },
-                      onTap: () async {
-                        final url = Uri.parse(
-                          'tel:070 7893 3059',
-                        );
-                        if (await canLaunchUrl(url)) {
-                          launchUrl(
-                            url,
-                            mode: LaunchMode.externalApplication,
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          floatingActionButton: FloatActBtn(),
         );
       },
     );
@@ -373,7 +231,8 @@ class _ByKakState extends State<ByKak> {
 
   @override
   Widget build(BuildContext context) {
-    print("reulst:" + _videoController.value.isInitialized.toString());
+    print("isInitialized: " + _videoController.value.isInitialized.toString());
+    print("_videoPlay: " + _videoPlay.toString());
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return Container(
         width: MediaQuery.of(context).size.width,
@@ -401,17 +260,29 @@ class _ByKakState extends State<ByKak> {
         //   syncDuration: Duration(milliseconds: 0),
         // ),
         // ----------------------------------------------------------------------
-        child: Center(
-          child: _videoPlay
-              //_videoController.value.isInitialized
-              ? AspectRatio(
-                  aspectRatio: _videoController.value.aspectRatio,
-                  child: VideoPlayer(_videoController),
-                )
-              : Container(
-                  color: whiteColor,
+        child: _videoPlay
+            // _videoController.value.isInitialized
+            ? FittedBox(
+                fit: BoxFit.cover,
+                child: SizedBox(
+                  width: _videoController.value.size?.width ?? 0,
+                  height: _videoController.value.size?.height ?? 0,
+                  child: AspectRatio(
+                    aspectRatio: _videoController.value.aspectRatio,
+                    child: VideoPlayer(_videoController),
+                  ),
                 ),
-        ),
+              )
+            : Center(
+                child: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: CircularProgressIndicator(
+                    color: whiteColor,
+                    strokeWidth: 4,
+                  ),
+                ),
+              ),
       );
     });
   }
@@ -431,7 +302,7 @@ class _AboutState extends State<About> {
       i = a;
       shopPic = aboutShopPics[i];
     });
-    print('$i');
+    // print('SelectedPic: ' + '$i');
   }
 
   @override
