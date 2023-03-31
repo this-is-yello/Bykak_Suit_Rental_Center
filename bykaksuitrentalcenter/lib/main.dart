@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       theme: ThemeData(
         primaryColor: mainColor,
-        fontFamily: 'KimjungchulMyungjo',
+        fontFamily: 'ChosunSm',
         scrollbarTheme: ScrollbarThemeData().copyWith(
           thumbColor: MaterialStatePropertyAll(blackColor.withOpacity(0.9)),
           trackColor: MaterialStatePropertyAll(greyColor.withOpacity(0.4)),

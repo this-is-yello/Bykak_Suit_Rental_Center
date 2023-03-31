@@ -53,18 +53,11 @@ menuState(context) {
                           ),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.question_mark_outlined,
-                                color: mainColor,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(4),
-                              ),
                               Text(
                                 'About',
                                 style: TextStyle(
                                   fontWeight: boldText,
-                                  color: blackColor,
+                                  color: mainColor,
                                 ),
                               ),
                               Padding(
@@ -94,18 +87,11 @@ menuState(context) {
                           ),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.collections_outlined,
-                                color: mainColor,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(4),
-                              ),
                               Text(
                                 'LookBook',
                                 style: TextStyle(
                                   fontWeight: boldText,
-                                  color: blackColor,
+                                  color: mainColor,
                                 ),
                               ),
                               Padding(
@@ -135,18 +121,11 @@ menuState(context) {
                           ),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.shopping_cart_outlined,
-                                color: mainColor,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(4),
-                              ),
                               Text(
                                 'Product',
                                 style: TextStyle(
                                   fontWeight: boldText,
-                                  color: blackColor,
+                                  color: mainColor,
                                 ),
                               ),
                               Padding(
@@ -176,18 +155,11 @@ menuState(context) {
                           ),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.handshake_outlined,
-                                color: mainColor,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(4),
-                              ),
                               Text(
                                 'With',
                                 style: TextStyle(
                                   fontWeight: boldText,
-                                  color: blackColor,
+                                  color: mainColor,
                                 ),
                               ),
                               Padding(
@@ -217,18 +189,11 @@ menuState(context) {
                           ),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.location_on_outlined,
-                                color: mainColor,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(4),
-                              ),
                               Text(
                                 'Location',
                                 style: TextStyle(
                                   fontWeight: boldText,
-                                  color: blackColor,
+                                  color: mainColor,
                                 ),
                               ),
                               Padding(
@@ -258,18 +223,11 @@ menuState(context) {
                           ),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.info_outline,
-                                color: mainColor,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(4),
-                              ),
                               Text(
                                 'Information',
                                 style: TextStyle(
                                   fontWeight: boldText,
-                                  color: blackColor,
+                                  color: mainColor,
                                 ),
                               ),
                               Padding(
@@ -480,13 +438,79 @@ class _FloatActBtnState extends State<FloatActBtn> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          MediaQuery.of(context).size.width < 1080
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8, bottom: 16),
+                      child: Opacity(
+                        opacity: hoverState[0],
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(4),
+                              boxShadow: [boxShadows]),
+                          child: Text(
+                            '예약하기',
+                            style: TextStyle(
+                              fontWeight: boldText,
+                              color: mainColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        margin: EdgeInsets.only(right: 16, bottom: 16),
+                        width: floatingBtnSize(context),
+                        height: floatingBtnSize(context),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [boxShadows],
+                          color: naverColor,
+                        ),
+                        child: Image.asset(
+                          'assets/images/logos/logo_naver_white.png',
+                          fit: BoxFit.scaleDown,
+                        ),
+                      ),
+                      onHover: (hoverVal) {
+                        if (hoverVal == true) {
+                          setState(() {
+                            hoverState[0] = 1;
+                          });
+                        } else {
+                          setState(() {
+                            hoverState[0] = 0;
+                          });
+                        }
+                      },
+                      onTap: () async {
+                        final url = Uri.parse(
+                          'https://booking.naver.com/booking/13/bizes/839741',
+                        );
+                        if (await canLaunchUrl(url)) {
+                          launchUrl(
+                            url,
+                            mode: LaunchMode.externalApplication,
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                )
+              : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 8, bottom: 16),
                 child: Opacity(
-                  opacity: hoverState[0],
+                  opacity: hoverState[1],
                   child: Container(
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
@@ -522,17 +546,17 @@ class _FloatActBtnState extends State<FloatActBtn> {
                 onHover: (hoverVal) {
                   if (hoverVal == true) {
                     setState(() {
-                      hoverState[0] = 1;
+                      hoverState[1] = 1;
                     });
                   } else {
                     setState(() {
-                      hoverState[0] = 0;
+                      hoverState[1] = 0;
                     });
                   }
                 },
                 onTap: () async {
                   final url = Uri.parse(
-                    'http://pf.kakao.com/_WExlxixj/chat',
+                    'http://pf.kakao.com/_UxoHxbT/chat',
                   );
                   if (await canLaunchUrl(url)) {
                     launchUrl(

@@ -17,25 +17,28 @@ class ProductsPage extends StatefulWidget {
   State<ProductsPage> createState() => _ProductsPageState();
 }
 
-class _ProductsPageState extends State<ProductsPage> {  
+class _ProductsPageState extends State<ProductsPage> {
   bool _isLoading = true;
   List productList = [];
 
   imgCheck() async {
-    var productImg = await firestore.collection('productImg').doc('imgList').get();
+    var productImg =
+        await firestore.collection('productImg').doc('imgList').get();
     productList = productImg['img'];
     // print(productList);
   }
+
   @override
   void initState() {
     super.initState();
     imgCheck();
   }
 
- @override
- void dispose(){
-  super.dispose();
- }
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 1), () {
@@ -44,43 +47,42 @@ class _ProductsPageState extends State<ProductsPage> {
       });
     });
 
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return Scaffold(
+    return ResponsiveSizer(builder: (context, orientation, screenType) {
+      return Scaffold(
+        backgroundColor: whiteColor,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: whiteColor,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: whiteColor,
-            toolbarHeight: MediaQuery.of(context).size.width < 640
+          toolbarHeight: MediaQuery.of(context).size.width < 640
               ? 56
               : MediaQuery.of(context).size.width < 1080
-              ? 64
-              : 72,
-            title: Center(
-              child: ProductsAppBar(),
-            ),
+                  ? 64
+                  : 72,
+          title: Center(
+            child: ProductsAppBar(),
           ),
-          body: Container(
-            padding: EdgeInsets.all(16),
-            child: ScrollConfiguration(
-              behavior: ScrollConfiguration.of(context).copyWith(
-                dragDevices: {
-                  PointerDeviceKind.mouse,
-                  PointerDeviceKind.touch,
-                },
-              ),
-              child: Center(
-                child: Container(
-                  // width: style.widgetSize(context),
-                  height: double.infinity,
-                  child: GridView.builder(
-                    itemCount: 22,
+        ),
+        body: Container(
+          padding: EdgeInsets.all(16),
+          child: ScrollConfiguration(
+            behavior: ScrollConfiguration.of(context).copyWith(
+              dragDevices: {
+                PointerDeviceKind.mouse,
+                PointerDeviceKind.touch,
+              },
+            ),
+            child: Center(
+              child: Container(
+                // width: style.widgetSize(context),
+                height: double.infinity,
+                child: GridView.builder(
+                    itemCount: 23,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: MediaQuery.of(context).size.width < 640
-                        ? 1
-                        : MediaQuery.of(context).size.width < 1080
-                        ? 2
-                        : 3,
+                          ? 1
+                          : MediaQuery.of(context).size.width < 1080
+                              ? 2
+                              : 3,
                       childAspectRatio: 1 / 1.2,
                       mainAxisSpacing: paddingSize(context),
                       crossAxisSpacing: paddingSize(context),
@@ -97,10 +99,10 @@ class _ProductsPageState extends State<ProductsPage> {
                             borderRadius: BorderRadius.circular(8),
                             child: ImageFade(
                               image: AssetImage(
-                                'assets/images/products/product_(${index}).jpg'
-                              ),
+                                  'assets/images/products/product_(${index}).png'),
                               fit: BoxFit.cover,
-                              errorBuilder: (context, exception) => Icon(Icons.error),
+                              errorBuilder: (context, exception) =>
+                                  Icon(Icons.error),
                               placeholder: Center(
                                 child: SizedBox(
                                   width: 40,
@@ -111,20 +113,6 @@ class _ProductsPageState extends State<ProductsPage> {
                                 ),
                               ),
                             ),
-                            // child: CachedNetworkImage(
-                            //   imageUrl: '${productList[index]}',
-                            //   fit: BoxFit.cover,
-                            //   placeholder: (context, url) => Center(
-                            //     child: SizedBox(
-                            //       width: 40,
-                            //       height: 40,
-                            //       child: CircularProgressIndicator(
-                            //         color: style.mainColor,
-                            //       ),
-                            //     ),
-                            //   ),
-                            //   errorWidget: (context, url, error) => Icon(Icons.error),
-                            // ),
                           ),
                         ),
                         onTap: () {
@@ -158,7 +146,7 @@ class _ProductsPageState extends State<ProductsPage> {
                                         borderRadius: BorderRadius.circular(8),
                                         child: InteractiveViewer(
                                           child: Image.asset(
-                                            'assets/images/products/product_(${index}).jpg',
+                                            'assets/images/products/product_(${index}).png',
                                             fit: BoxFit.contain,
                                           ),
                                         ),
@@ -176,15 +164,13 @@ class _ProductsPageState extends State<ProductsPage> {
                           );
                         },
                       );
-                    }
-                  ),
-                ),
+                    }),
               ),
             ),
           ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 }
 
@@ -203,13 +189,13 @@ class ProductsAppBar extends StatelessWidget {
             child: Text(
               'by覺 렌탈센터',
               style: TextStyle(
-                fontSize: h1FontSize(context),
-                // fontWeight: style.boldText,
+                fontSize: h0FontSize(context),
+                fontWeight: boldText,
                 color: mainColor,
               ),
             ),
             onTap: () {
-              Get.offAllNamed('/');
+              Get.toNamed('/');
             },
           ),
         ],

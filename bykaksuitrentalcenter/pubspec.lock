@@ -798,7 +798,7 @@ packages:
     source: hosted
     version: "5.1.4"
   video_player_web:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: video_player_web
       sha256: fb3bbeaf0302cb0c31340ebd6075487939aa1fe3b379d1a8784ef852b679940e
