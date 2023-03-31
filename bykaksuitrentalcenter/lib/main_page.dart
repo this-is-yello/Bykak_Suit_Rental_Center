@@ -11,6 +11,7 @@ import 'package:image_fade/image_fade.dart';
 // import 'package:cached_network_image/cached_network_image.dart';
 import 'package:video_player/video_player.dart';
 import 'package:video_player_web/video_player_web.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
@@ -1344,8 +1345,16 @@ class WithCelebrity extends StatelessWidget {
 }
 
 // ----------------------------------------------- Location ------------------------------------------------------------------
-class Location extends StatelessWidget {
+class Location extends StatefulWidget {
   const Location({super.key});
+
+  @override
+  State<Location> createState() => _LocationState();
+}
+
+class _LocationState extends State<Location> {
+  late GoogleMapController mapController;
+  final LatLng _center = const LatLng(37.5665, 126.9780);
 
   @override
   Widget build(BuildContext context) {
@@ -1371,6 +1380,19 @@ class Location extends StatelessWidget {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
+                // Container(
+                //   width: widgetSize(context),
+                //   height: 300,
+                //   child: GoogleMap(
+                //     onMapCreated: (GoogleMapController controller) {
+                //       mapController = controller;
+                //     },
+                //     initialCameraPosition: CameraPosition(
+                //       target: _center,
+                //       zoom: 11.0,
+                //     ),
+                //   ),
+                // ),
                 InkWell(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -1381,7 +1403,8 @@ class Location extends StatelessWidget {
                   ),
                   onTap: () async {
                     final url = Uri.parse(
-                      'https://map.naver.com/v5/entry/place/1943136667?placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh',
+                      // 'https://map.naver.com/v5/entry/place/1943136667?placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh',
+                      'https://map.naver.com/v5/search/%EB%B0%94%EC%9D%B4%EA%B0%81?c=16.82,0,0,0,dh',
                     );
                     if (await canLaunchUrl(url)) {
                       launchUrl(url, mode: LaunchMode.externalApplication);
