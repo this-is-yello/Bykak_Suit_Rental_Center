@@ -39,8 +39,10 @@ dependencies:
   flutter_staggered_grid_view: ^0.6.2
   video_player: ^2.6.0
   video_player_web: ^2.0.15
-  google_maps_flutter: ^2.2.5
   # cached_network_image: ^3.2.3
+  geolocator: ^9.0.2
+  flutter_map: ^3.1.0
+  latlong2: ^0.8.1
 
   firebase_core: ^2.4.1
   firebase_auth: ^4.2.4

@@ -220,6 +220,16 @@ c5BoxSize(c) {
   }
 }
 
+mapHeight(c) {
+  if (MediaQuery.of(c).size.width < 640) {
+    return 200;
+  } else if (MediaQuery.of(c).size.width < 1080) {
+    return 250;
+  } else {
+    return 300;
+  }
+}
+
 userInfoBoxHeight(c) {
   if (MediaQuery.of(c).size.width < 640) {
     return 264;
