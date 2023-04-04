@@ -117,8 +117,8 @@ class _MainPageState extends State<MainPage> {
   @override
   void dispose() {
     super.dispose();
+    //_videoController.dispose();
     _timer.cancel();
-    _videoController.dispose();
   }
 
   @override
@@ -151,11 +151,8 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                       onTap: () {
-                        setState(() {
-                          currentPage = 0;
-                        });
+                        currentPage = 0;
                         movePage();
-                        Get.back();
                       },
                     ),
                     Container(
@@ -172,9 +169,16 @@ class _MainPageState extends State<MainPage> {
               children: [
                 PageView(
                   controller: _pageController,
-                  physics: ClampingScrollPhysics(),
+                  physics: PageScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   pageSnapping: true,
+                  scrollBehavior: ScrollConfiguration.of(context).copyWith(
+                    dragDevices: {
+                      PointerDeviceKind.mouse,
+                      PointerDeviceKind.touch,
+                      PointerDeviceKind.trackpad,
+                    },
+                  ),
                   onPageChanged: (value) {
                     setState(() {
                       currentPage = value;
@@ -243,8 +247,6 @@ class ByKak extends StatefulWidget {
 class _ByKakState extends State<ByKak> {
   @override
   Widget build(BuildContext context) {
-    // print("isInitialized: " + _videoController.value.isInitialized.toString());
-    // print("_videoPlay: " + _videoPlay.toString());
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return Container(
         width: MediaQuery.of(context).size.width,
@@ -1378,27 +1380,79 @@ class _LocationState extends State<Location> {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
-                InkWell(
-                  child: Container(
-                    height: mapHeight(context),
-                    child: BykakMap(),
+                // InkWell(
+                Image.asset(
+                  'assets/images/rental_center_location.png',
+                  fit: BoxFit.cover,
+                ),
+                //   onTap: () async {
+                //     final url = Uri.parse(
+                //       'https://map.naver.com/v5/entry/place/1943136667?c=16,0,0,0,dh',
+                //     );
+                //     if (await canLaunchUrl(url)) {
+                //       launchUrl(url, mode: LaunchMode.externalApplication);
+                //     }
+                //   },
+                // ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        fit: FlexFit.tight,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: mainColor,
+                            minimumSize: Size.fromHeight(40),
+                          ),
+                          child: Text(
+                            '바이각 수트렌탈센터 >',
+                            style: TextStyle(
+                              fontSize: h6FontSize(context),
+                            ),
+                          ),
+                          onPressed: () async {
+                            final url = Uri.parse(
+                              'https://map.naver.com/v5/entry/place/1943136667?c=16,0,0,0,dh',
+                            );
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url,
+                                  mode: LaunchMode.externalApplication);
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: paddingSize(context),
+                        ),
+                      ),
+                      Flexible(
+                        fit: FlexFit.tight,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: mainColor,
+                            minimumSize: Size.fromHeight(40),
+                          ),
+                          child: Text(
+                            '김주현바이각 제물포 본점 >',
+                            style: TextStyle(
+                              fontSize: h6FontSize(context),
+                            ),
+                          ),
+                          onPressed: () async {
+                            final url = Uri.parse(
+                              'https://map.naver.com/v5/entry/place/36410973?c=16,0,0,0,dh',
+                            );
+                            if (await canLaunchUrl(url)) {
+                              launchUrl(url,
+                                  mode: LaunchMode.externalApplication);
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  // child: ClipRRect(
-                  //   borderRadius: BorderRadius.circular(8),
-                  //   child: Image.asset(
-                  //     'assets/images/rental_center_location.png',
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // ),
-                  // onTap: () async {
-                  //   final url = Uri.parse(
-                  //     'https://map.naver.com/v5/search/%EB%B0%94%EC%9D%B4%EA%B0%81?c=16,0,0,0,dh',
-                  //     // 'https://map.naver.com/v5/search/%EB%B0%94%EC%9D%B4%EA%B0%81?c=17.46,0,0,0,dh',
-                  //   );
-                  //   if (await canLaunchUrl(url)) {
-                  //     launchUrl(url, mode: LaunchMode.externalApplication);
-                  //   }
-                  // },
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1408,7 +1462,7 @@ class _LocationState extends State<Location> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 8),
+                          padding: const EdgeInsets.only(top: 16),
                           child: Text(
                             '바이각 수트렌탈센터',
                             style: TextStyle(

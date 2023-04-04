@@ -8,8 +8,6 @@ import 'dart:ui';
 
 import 'package:bykaksuitrentalcenter/main_page.dart';
 
-// import 'package:cached_network_image/cached_network_image.dart';
-
 class ProductsPage extends StatefulWidget {
   const ProductsPage({super.key});
 
@@ -18,35 +16,13 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
-  bool _isLoading = true;
-  List productList = [];
-
-  imgCheck() async {
-    var productImg =
-        await firestore.collection('productImg').doc('imgList').get();
-    productList = productImg['img'];
-    // print(productList);
-  }
-
   @override
   void initState() {
     super.initState();
-    imgCheck();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return Scaffold(
         backgroundColor: whiteColor,
@@ -73,7 +49,6 @@ class _ProductsPageState extends State<ProductsPage> {
             ),
             child: Center(
               child: Container(
-                // width: style.widgetSize(context),
                 height: double.infinity,
                 child: GridView.builder(
                     itemCount: 23,
@@ -187,15 +162,15 @@ class ProductsAppBar extends StatelessWidget {
         children: [
           InkWell(
             child: Text(
-              'by覺 렌탈센터',
+              'by覺 수트렌탈센터',
               style: TextStyle(
-                fontSize: h0FontSize(context),
+                fontSize: h1FontSize(context),
                 fontWeight: boldText,
                 color: mainColor,
               ),
             ),
             onTap: () {
-              Get.toNamed('/');
+              Get.offAllNamed('/');
             },
           ),
         ],

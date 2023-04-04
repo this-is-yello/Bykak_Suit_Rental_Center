@@ -107,7 +107,7 @@ class _BykakMapState extends State<BykakMap> {
       ],
       children: [
         TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          urlTemplate: 'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
           userAgentPackageName: 'com.bykak.bykaksuitrentalcenter',
         ),
         MarkerLayer(markers: markers),

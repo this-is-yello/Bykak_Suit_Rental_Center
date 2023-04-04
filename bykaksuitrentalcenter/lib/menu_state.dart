@@ -556,7 +556,7 @@ class _FloatActBtnState extends State<FloatActBtn> {
                 },
                 onTap: () async {
                   final url = Uri.parse(
-                    'http://pf.kakao.com/_UxoHxbT/chat',
+                    'http://pf.kakao.com/_WExlxixj/chat',
                   );
                   if (await canLaunchUrl(url)) {
                     launchUrl(
