@@ -78,15 +78,15 @@ class _ProductsPageState extends State<ProductsPage> {
                               fit: BoxFit.cover,
                               errorBuilder: (context, exception) =>
                                   Icon(Icons.error),
-                              placeholder: Center(
-                                child: SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: CircularProgressIndicator(
-                                    color: mainColor,
-                                  ),
-                                ),
-                              ),
+                              // placeholder: Center(
+                              //   child: SizedBox(
+                              //     width: 40,
+                              //     height: 40,
+                              //     child: CircularProgressIndicator(
+                              //       color: mainColor,
+                              //     ),
+                              //   ),
+                              // ),
                             ),
                           ),
                         ),

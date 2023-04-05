@@ -1,24 +1,20 @@
-import 'dart:math';
-import 'dart:ui';
-import 'dart:async';
-import 'package:bykaksuitrentalcenter/bykak_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:bykaksuitrentalcenter/style.dart';
-
-import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:side_sheet/side_sheet.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:image_fade/image_fade.dart';
-// import 'package:cached_network_image/cached_network_image.dart';
-import 'package:video_player/video_player.dart';
-import 'package:video_player_web/video_player_web.dart';
+import 'dart:async';
+import 'dart:math';
+import 'dart:ui';
 
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_strategy/url_strategy.dart';
+
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:image_fade/image_fade.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_web/video_player_web.dart';
 
 import 'package:bykaksuitrentalcenter/menu_state.dart';
 import 'package:bykaksuitrentalcenter/splash_screen.dart';
@@ -34,27 +30,16 @@ int i = 0;
 int currentPage = 0;
 bool _isLoading = true;
 var shopPic;
-List aboutShopPics = [
-  'assets/images/shops/shop_1.png',
-  'assets/images/shops/shop_2.png',
-  'assets/images/shops/shop_3.png',
-  'assets/images/shops/shop_4.png',
-  'assets/images/shops/shop_5.png',
-  'assets/images/shops/shop_6.png',
-  'assets/images/shops/shop_7.png',
-  'assets/images/shops/shop_8.png',
-  'assets/images/shops/shop_9.png',
-  'assets/images/shops/shop_10.png',
-];
+
 late Timer _timer;
 late VideoPlayerController _videoController;
 bool _isChanging = false;
 bool _videoPlay = false;
-
 PageController _pageController = PageController(
   initialPage: 0,
   keepPage: true,
 );
+
 movePage() {
   _pageController.animateToPage(
     currentPage,
@@ -77,13 +62,13 @@ class _MainPageState extends State<MainPage> {
       setState(() {
         i = 0;
       });
-      shopPic = aboutShopPics[i];
+      shopPic = 'assets/images/shops/shop_${i + 1}.png';
       // print('$i, $shopPic');
     } else {
       setState(() {
         i++;
       });
-      shopPic = aboutShopPics[i];
+      shopPic = 'assets/images/shops/shop_${i + 1}.png';
       // print('$i, $shopPic');
     }
   }
@@ -109,7 +94,7 @@ class _MainPageState extends State<MainPage> {
       );
     setState(() {
       i = 0;
-      shopPic = aboutShopPics[i];
+      shopPic = 'assets/images/shops/shop_${i + 1}.png';
     });
     _changeState();
   }
@@ -117,8 +102,8 @@ class _MainPageState extends State<MainPage> {
   @override
   void dispose() {
     super.dispose();
-    //_videoController.dispose();
-    _timer.cancel();
+    // _videoController.dispose();
+    // _timer.cancel();
   }
 
   @override
@@ -287,7 +272,7 @@ class _ByKakState extends State<ByKak> {
                         child: Text(
                           'by覺 수트렌탈센터',
                           style: TextStyle(
-                            fontSize: h0FontSize(context),
+                            fontSize: h1FontSize(context),
                             fontWeight: boldText,
                             color: whiteColor,
                           ),
@@ -295,7 +280,7 @@ class _ByKakState extends State<ByKak> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                          top: 24,
+                          top: paddingSize(context) * 2,
                           left: 16,
                           right: 16,
                           bottom: 8,
@@ -303,8 +288,7 @@ class _ByKakState extends State<ByKak> {
                         child: Text(
                           'OPEN : Mon to Sat | 10:00 - 19:00',
                           style: TextStyle(
-                            fontSize: h2FontSize(context),
-                            // fontWeight: boldText,
+                            fontSize: h3FontSize(context),
                             color: whiteColor,
                           ),
                         ),
@@ -313,13 +297,12 @@ class _ByKakState extends State<ByKak> {
                         padding: EdgeInsets.only(
                           left: 16,
                           right: 16,
-                          bottom: 120,
+                          bottom: 100,
                         ),
                         child: Text(
                           'TEL : 070-7893-3059',
                           style: TextStyle(
-                            fontSize: h2FontSize(context),
-                            // fontWeight: boldText,
+                            fontSize: h3FontSize(context),
                             color: whiteColor,
                           ),
                         ),
@@ -357,7 +340,7 @@ class _AboutState extends State<About> {
   indexChange(a) {
     setState(() {
       i = a;
-      shopPic = aboutShopPics[i];
+      shopPic = 'assets/images/shops/shop_${i + 1}.png';
     });
     // print('SelectedPic: ' + '$i');
   }
@@ -402,17 +385,17 @@ class _AboutState extends State<About> {
                               fit: BoxFit.fitWidth,
                               errorBuilder: (context, exception) =>
                                   Icon(Icons.error),
-                              placeholder: Center(
-                                child: Container(
-                                  width: 20,
-                                  height: 20,
-                                  padding: EdgeInsets.only(top: 20),
-                                  child: CircularProgressIndicator(
-                                    color: mainColor,
-                                    strokeWidth: 2,
-                                  ),
-                                ),
-                              ),
+                              // placeholder: Center(
+                              //   child: Container(
+                              //     width: 20,
+                              //     height: 20,
+                              //     padding: EdgeInsets.only(top: 20),
+                              //     child: CircularProgressIndicator(
+                              //       color: mainColor,
+                              //       strokeWidth: 2,
+                              //     ),
+                              //   ),
+                              // ),
                               duration: Duration(milliseconds: 500),
                               syncDuration: Duration(milliseconds: 500),
                             ),
@@ -447,16 +430,16 @@ class _AboutState extends State<About> {
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, exception) =>
                                         Icon(Icons.error),
-                                    placeholder: Center(
-                                      child: SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: CircularProgressIndicator(
-                                          color: mainColor,
-                                          strokeWidth: 2,
-                                        ),
-                                      ),
-                                    ),
+                                    // placeholder: Center(
+                                    //   child: SizedBox(
+                                    //     width: 20,
+                                    //     height: 20,
+                                    //     child: CircularProgressIndicator(
+                                    //       color: mainColor,
+                                    //       strokeWidth: 2,
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ),
                                   onTap: () {
                                     indexChange(index);
@@ -488,7 +471,7 @@ class _AboutState extends State<About> {
                                         '바이각 수트렌탈센터는',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: h4FontSize(context),
+                                          fontSize: h5FontSize(context),
                                           height: 1.2,
                                           color: blackColor,
                                         ),
@@ -497,7 +480,7 @@ class _AboutState extends State<About> {
                                         '300벌 이상의 렌탈복과, 100평 규모의',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: h4FontSize(context),
+                                          fontSize: h5FontSize(context),
                                           height: 1.2,
                                           color: blackColor,
                                         ),
@@ -510,7 +493,7 @@ class _AboutState extends State<About> {
                                             '인천 최초/최대',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: h2FontSize(context),
+                                              fontSize: h3FontSize(context),
                                               fontWeight: boldText,
                                               height: 1.2,
                                               color: blackColor,
@@ -520,7 +503,7 @@ class _AboutState extends State<About> {
                                             '정장렌탈 전문샵입니다.',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: h4FontSize(context),
+                                              fontSize: h5FontSize(context),
                                               height: 1.2,
                                               color: blackColor,
                                             ),
@@ -536,7 +519,7 @@ class _AboutState extends State<About> {
                                       '웨딩, 혼주복, 면접, 데일리등으로',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontSize: h4FontSize(context),
+                                        fontSize: h5FontSize(context),
                                         height: 1.2,
                                         color: blackColor,
                                       ),
@@ -549,7 +532,7 @@ class _AboutState extends State<About> {
                                           '그 날',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontSize: h2FontSize(context),
+                                            fontSize: h3FontSize(context),
                                             fontWeight: boldText,
                                             height: 1.2,
                                             color: blackColor,
@@ -559,7 +542,7 @@ class _AboutState extends State<About> {
                                           '에 걸맞은 다양한 수트를 경험하세요.',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontSize: h4FontSize(context),
+                                            fontSize: h5FontSize(context),
                                             height: 1.2,
                                             color: blackColor,
                                           ),
@@ -582,7 +565,7 @@ class _AboutState extends State<About> {
                                             '수트,',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: h2FontSize(context),
+                                              fontSize: h3FontSize(context),
                                               fontWeight: boldText,
                                               height: 1.2,
                                               color: blackColor,
@@ -592,7 +575,7 @@ class _AboutState extends State<About> {
                                             '남성의 고유물이지만',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: h4FontSize(context),
+                                              fontSize: h5FontSize(context),
                                               height: 1.2,
                                               color: blackColor,
                                             ),
@@ -603,7 +586,7 @@ class _AboutState extends State<About> {
                                         '자주 경험하지 못하고 관심이 없던 분들이라면\n다양한 수트와 자켓을 입어보면서',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: h4FontSize(context),
+                                          fontSize: h5FontSize(context),
                                           height: 1.2,
                                           color: blackColor,
                                         ),
@@ -616,7 +599,7 @@ class _AboutState extends State<About> {
                                             '올바른 옷입기와',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: h4FontSize(context),
+                                              fontSize: h5FontSize(context),
                                               height: 1.2,
                                               color: blackColor,
                                             ),
@@ -625,7 +608,7 @@ class _AboutState extends State<About> {
                                             ' 자기갖춤',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: h2FontSize(context),
+                                              fontSize: h3FontSize(context),
                                               fontWeight: boldText,
                                               height: 1.2,
                                               color: blackColor,
@@ -635,7 +618,7 @@ class _AboutState extends State<About> {
                                             '에',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: h4FontSize(context),
+                                              fontSize: h5FontSize(context),
                                               height: 1.2,
                                               color: blackColor,
                                             ),
@@ -646,7 +629,7 @@ class _AboutState extends State<About> {
                                         '큰 도움이 되시리라 강하게 믿습니다.',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: h4FontSize(context),
+                                          fontSize: h5FontSize(context),
                                           height: 1.2,
                                           color: blackColor,
                                         ),
@@ -675,16 +658,16 @@ class _AboutState extends State<About> {
                                   fit: BoxFit.fitHeight,
                                   errorBuilder: (context, exception) =>
                                       Icon(Icons.error),
-                                  placeholder: Center(
-                                    child: SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: CircularProgressIndicator(
-                                        color: mainColor,
-                                        strokeWidth: 2,
-                                      ),
-                                    ),
-                                  ),
+                                  // placeholder: Center(
+                                  //   child: SizedBox(
+                                  //     width: 20,
+                                  //     height: 20,
+                                  //     child: CircularProgressIndicator(
+                                  //       color: mainColor,
+                                  //       strokeWidth: 2,
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   duration: Duration(milliseconds: 500),
                                   syncDuration: Duration(milliseconds: 500),
                                 ),
@@ -903,16 +886,16 @@ class _AboutState extends State<About> {
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, exception) =>
                                         Icon(Icons.error),
-                                    placeholder: Center(
-                                      child: SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: CircularProgressIndicator(
-                                          color: mainColor,
-                                          strokeWidth: 2,
-                                        ),
-                                      ),
-                                    ),
+                                    // placeholder: Center(
+                                    //   child: SizedBox(
+                                    //     width: 20,
+                                    //     height: 20,
+                                    //     child: CircularProgressIndicator(
+                                    //       color: mainColor,
+                                    //       strokeWidth: 2,
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ),
                                   onTap: () {
                                     indexChange(index);
@@ -1006,30 +989,24 @@ class _LookBookState extends State<LookBook> {
                                   fit: BoxFit.fitHeight,
                                   errorBuilder: (context, exception) =>
                                       Icon(Icons.error),
-                                  placeholder: Padding(
-                                    padding: const EdgeInsets.all(56),
-                                    child: Center(
-                                      child: SizedBox(
-                                        width: 40,
-                                        height: 40,
-                                        child: CircularProgressIndicator(
-                                          color: mainColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // placeholder: Padding(
+                                  //   padding: const EdgeInsets.all(56),
+                                  //   child: Center(
+                                  //     child: SizedBox(
+                                  //       width: 40,
+                                  //       height: 40,
+                                  //       child: CircularProgressIndicator(
+                                  //         color: mainColor,
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   duration: Duration(milliseconds: 500),
                                   syncDuration: Duration(milliseconds: 500),
                                 ),
                               );
                             },
                           ),
-                          // Icon(
-                          //   Icons.arrow_forward_ios,
-                          //   color: whiteColor,
-                          //   size: 40,
-                          //   shadows: [boxShadows],
-                          // ),
                         ],
                       ),
                     ),
@@ -1120,15 +1097,15 @@ class _ProductState extends State<Product> {
                               fit: BoxFit.cover,
                               errorBuilder: (context, exception) =>
                                   Icon(Icons.error),
-                              placeholder: Center(
-                                child: SizedBox(
-                                  width: 40,
-                                  height: 40,
-                                  child: CircularProgressIndicator(
-                                    color: mainColor,
-                                  ),
-                                ),
-                              ),
+                              // placeholder: Center(
+                              //   child: SizedBox(
+                              //     width: 40,
+                              //     height: 40,
+                              //     child: CircularProgressIndicator(
+                              //       color: mainColor,
+                              //     ),
+                              //   ),
+                              // ),
                             ),
                           ),
                         ),
@@ -1190,11 +1167,6 @@ class _ProductState extends State<Product> {
                     InkWell(
                       child: Column(
                         children: [
-                          // Icon(
-                          //   Icons.keyboard_arrow_up,
-                          //   size: h1FontSize(context),
-                          //   color: mainColor,
-                          // ),
                           Text(
                             '전체보기',
                             style: TextStyle(
@@ -1252,8 +1224,9 @@ class _PinchUpState extends State<PinchUp> {
             height: c1BoxSize(context),
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-                color: greyColor.withOpacity(0.7),
-                borderRadius: BorderRadius.circular(8)),
+              color: greyColor.withOpacity(0.7),
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Image.asset(
               'assets/images/icon_pinchUp.png',
               fit: BoxFit.contain,
@@ -1292,42 +1265,6 @@ class WithCelebrity extends StatelessWidget {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
-                // Expanded(
-                //   child: ScrollConfiguration(
-                //     behavior: ScrollConfiguration.of(context).copyWith(
-                //       dragDevices: {
-                //         PointerDeviceKind.mouse,
-                //         PointerDeviceKind.touch,
-                //         PointerDeviceKind.trackpad,
-                //       },
-                //     ),
-                //     child: GridView.custom(
-                //       physics: MediaQuery.of(context).size.width < 1080
-                //           ? NeverScrollableScrollPhysics()
-                //           : null,
-                //       gridDelegate: SliverWovenGridDelegate.count(
-                //         crossAxisCount: 4,
-                //         mainAxisSpacing: 8,
-                //         crossAxisSpacing: 8,
-                //         pattern: [
-                //           WovenGridTile(1),
-                //           WovenGridTile(
-                //             5 / 7,
-                //             crossAxisRatio: 0.9,
-                //             alignment: AlignmentDirectional.centerEnd,
-                //           ),
-                //         ],
-                //       ),
-                //       childrenDelegate: SliverChildBuilderDelegate(
-                //         childCount: 12,
-                //         (context, index) => Image.asset(
-                //           'assets/images/with/with_${index + 1}.png',
-                //           fit: BoxFit.contain,
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 Container(
                   width: widgetSize(context),
                   child: ClipRRect(
@@ -1380,20 +1317,10 @@ class _LocationState extends State<Location> {
                   ),
                 ),
                 Padding(padding: EdgeInsets.all(8)),
-                // InkWell(
                 Image.asset(
                   'assets/images/rental_center_location.png',
                   fit: BoxFit.cover,
                 ),
-                //   onTap: () async {
-                //     final url = Uri.parse(
-                //       'https://map.naver.com/v5/entry/place/1943136667?c=16,0,0,0,dh',
-                //     );
-                //     if (await canLaunchUrl(url)) {
-                //       launchUrl(url, mode: LaunchMode.externalApplication);
-                //     }
-                //   },
-                // ),
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
                   child: Row(
@@ -1586,9 +1513,16 @@ class _LocationState extends State<Location> {
 }
 
 // ----------------------------------------------- Footer ------------------------------------------------------------------
-class Footer extends StatelessWidget {
+class Footer extends StatefulWidget {
   const Footer({super.key});
 
+  @override
+  State<Footer> createState() => _FooterState();
+}
+
+bool _snsState = true;
+
+class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
@@ -1606,206 +1540,253 @@ class Footer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(16),
-                  child: InkWell(
-                    child: Text(
-                      'by覺 수트렌탈센터',
-                      style: TextStyle(
-                        fontSize: h1FontSize(context),
-                        color: whiteColor,
+                Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 16, bottom: 16),
+                      child: InkWell(
+                        child: Row(
+                          children: [
+                            Text(
+                              'by覺 수트렌탈센터',
+                              style: TextStyle(
+                                fontSize: _snsState
+                                    ? h2FontSize(context)
+                                    : h4FontSize(context),
+                                color: whiteColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 8, right: 16),
+                              child: Icon(
+                                Icons.keyboard_arrow_down,
+                                color: whiteColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          setState(() {
+                            _snsState = true;
+                          });
+                        },
                       ),
                     ),
-                    onTap: () {
-                      currentPage = 0;
-                      movePage();
-                      Get.back();
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        child: Image.asset(
-                          'assets/images/logos/logo_kakao_talk.png',
-                          fit: BoxFit.contain,
-                          scale: 1.5,
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 16),
+                      child: InkWell(
+                        child: Row(
+                          children: [
+                            Text(
+                              'K!mjuhyeon by覺',
+                              style: TextStyle(
+                                fontSize: _snsState
+                                    ? h4FontSize(context)
+                                    : h2FontSize(context),
+                                color: whiteColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 8),
+                              child: Icon(
+                                Icons.keyboard_arrow_down,
+                                color: whiteColor,
+                              ),
+                            ),
+                          ],
                         ),
-                        onTap: () async {
-                          final url = Uri.parse(
-                            'http://pf.kakao.com/_WExlxixj',
-                          );
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(
-                              url,
-                              mode: LaunchMode.externalApplication,
-                            );
-                          }
+                        onTap: () {
+                          setState(() {
+                            _snsState = false;
+                          });
                         },
-                      ),
-                      // InkWell(
-                      //   child: Image.asset(
-                      //     'assets/images/logos/logo_blog.png',
-                      //     fit: BoxFit.contain,
-                      //     scale: 1.5,
-                      //   ),
-                      //   onTap: () async {
-                      //     final url = Uri.parse(
-                      //       'https://blog.naver.com/kimjuhyeon_',
-                      //     );
-                      //     if (await canLaunchUrl(url)) {
-                      //       launchUrl(
-                      //         url,
-                      //         mode: LaunchMode.externalApplication,
-                      //       );
-                      //     }
-                      //   },
-                      // ),
-                      InkWell(
-                        child: Image.asset(
-                          'assets/images/logos/logo_instagram.png',
-                          fit: BoxFit.contain,
-                          scale: 1.5,
-                        ),
-                        onTap: () async {
-                          final url = Uri.parse(
-                            'https://instagram.com/bykak_rental?igshid=YmMyMTA2M2Y=',
-                          );
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(
-                              url,
-                              mode: LaunchMode.externalApplication,
-                            );
-                          }
-                        },
-                      ),
-                      InkWell(
-                        child: Image.asset(
-                          'assets/images/logos/logo_naver.png',
-                          fit: BoxFit.contain,
-                          scale: 1.5,
-                        ),
-                        onTap: () async {
-                          final url = Uri.parse(
-                            'https://map.naver.com/v5/entry/place/1943136667?lng=126.6570986&lat=37.4671237&placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh',
-                          );
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(
-                              url,
-                              mode: LaunchMode.externalApplication,
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(16),
-                  child: InkWell(
-                    child: Text(
-                      'K!mjuhyeon by覺',
-                      style: TextStyle(
-                        fontSize: h1FontSize(context),
-                        color: whiteColor,
                       ),
                     ),
-                    onTap: () async {
-                      final url = Uri.parse(
-                        'http://www.bykak.com/html/',
-                      );
-                      if (await canLaunchUrl(url)) {
-                        launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
-                        );
-                      }
-                    },
-                  ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        child: Image.asset(
-                          'assets/images/logos/logo_kakao_talk.png',
-                          fit: BoxFit.contain,
-                          scale: 1.5,
-                        ),
-                        onTap: () async {
-                          final url = Uri.parse(
-                            'http://pf.kakao.com/_UxoHxbT',
-                          );
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(
-                              url,
-                              mode: LaunchMode.externalApplication,
-                            );
-                          }
-                        },
-                      ),
-                      InkWell(
-                        child: Image.asset(
-                          'assets/images/logos/logo_blog.png',
-                          fit: BoxFit.contain,
-                          scale: 1.5,
-                        ),
-                        onTap: () async {
-                          final url = Uri.parse(
-                            'https://blog.naver.com/kimjuhyeon_',
-                          );
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(
-                              url,
-                              mode: LaunchMode.externalApplication,
-                            );
-                          }
-                        },
-                      ),
-                      InkWell(
-                        child: Image.asset(
-                          'assets/images/logos/logo_instagram.png',
-                          fit: BoxFit.contain,
-                          scale: 1.5,
-                        ),
-                        onTap: () async {
-                          final url = Uri.parse(
-                            'https://www.instagram.com/kimjuhyeon_by_kak/',
-                          );
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(
-                              url,
-                              mode: LaunchMode.externalApplication,
-                            );
-                          }
-                        },
-                      ),
-                      InkWell(
-                        child: Image.asset(
-                          'assets/images/logos/logo_youtube.png',
-                          fit: BoxFit.contain,
-                          scale: 1.5,
-                        ),
-                        onTap: () async {
-                          final url = Uri.parse(
-                            'https://www.youtube.com/channel/UChLYML6MnztkeOYdtdAQqaw',
-                          );
-                          if (await canLaunchUrl(url)) {
-                            launchUrl(
-                              url,
-                              mode: LaunchMode.externalApplication,
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.all(16),
+                //   child: InkWell(
+                //     child: Text(
+                //       'by覺 수트렌탈센터',
+                //       style: TextStyle(
+                //         fontSize: h1FontSize(context),
+                //         color: whiteColor,
+                //       ),
+                //     ),
+                //     onTap: () {
+                //       currentPage = 0;
+                //       movePage();
+                //       Get.back();
+                //     },
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.all(16),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       InkWell(
+                //         child: Image.asset(
+                //           'assets/images/logos/logo_kakao_talk.png',
+                //           fit: BoxFit.contain,
+                //           scale: 1.5,
+                //         ),
+                //         onTap: () async {
+                //           final url = Uri.parse(
+                //             'http://pf.kakao.com/_WExlxixj',
+                //           );
+                //           if (await canLaunchUrl(url)) {
+                //             launchUrl(
+                //               url,
+                //               mode: LaunchMode.externalApplication,
+                //             );
+                //           }
+                //         },
+                //       ),
+                //       InkWell(
+                //         child: Image.asset(
+                //           'assets/images/logos/logo_instagram.png',
+                //           fit: BoxFit.contain,
+                //           scale: 1.5,
+                //         ),
+                //         onTap: () async {
+                //           final url = Uri.parse(
+                //             'https://instagram.com/bykak_rental?igshid=YmMyMTA2M2Y=',
+                //           );
+                //           if (await canLaunchUrl(url)) {
+                //             launchUrl(
+                //               url,
+                //               mode: LaunchMode.externalApplication,
+                //             );
+                //           }
+                //         },
+                //       ),
+                //       InkWell(
+                //         child: Image.asset(
+                //           'assets/images/logos/logo_naver.png',
+                //           fit: BoxFit.contain,
+                //           scale: 1.5,
+                //         ),
+                //         onTap: () async {
+                //           final url = Uri.parse(
+                //             'https://map.naver.com/v5/entry/place/1943136667?lng=126.6570986&lat=37.4671237&placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh',
+                //           );
+                //           if (await canLaunchUrl(url)) {
+                //             launchUrl(
+                //               url,
+                //               mode: LaunchMode.externalApplication,
+                //             );
+                //           }
+                //         },
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.all(16),
+                //   child: InkWell(
+                //     child: Text(
+                //       'K!mjuhyeon by覺',
+                //       style: TextStyle(
+                //         fontSize: h1FontSize(context),
+                //         color: whiteColor,
+                //       ),
+                //     ),
+                //     onTap: () async {
+                //       final url = Uri.parse(
+                //         'http://www.bykak.com/html/',
+                //       );
+                //       if (await canLaunchUrl(url)) {
+                //         launchUrl(
+                //           url,
+                //           mode: LaunchMode.externalApplication,
+                //         );
+                //       }
+                //     },
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.all(16),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       InkWell(
+                //         child: Image.asset(
+                //           'assets/images/logos/logo_kakao_talk.png',
+                //           fit: BoxFit.contain,
+                //           scale: 1.5,
+                //         ),
+                //         onTap: () async {
+                //           final url = Uri.parse(
+                //             'http://pf.kakao.com/_UxoHxbT',
+                //           );
+                //           if (await canLaunchUrl(url)) {
+                //             launchUrl(
+                //               url,
+                //               mode: LaunchMode.externalApplication,
+                //             );
+                //           }
+                //         },
+                //       ),
+                //       InkWell(
+                //         child: Image.asset(
+                //           'assets/images/logos/logo_blog.png',
+                //           fit: BoxFit.contain,
+                //           scale: 1.5,
+                //         ),
+                //         onTap: () async {
+                //           final url = Uri.parse(
+                //             'https://blog.naver.com/kimjuhyeon_',
+                //           );
+                //           if (await canLaunchUrl(url)) {
+                //             launchUrl(
+                //               url,
+                //               mode: LaunchMode.externalApplication,
+                //             );
+                //           }
+                //         },
+                //       ),
+                //       InkWell(
+                //         child: Image.asset(
+                //           'assets/images/logos/logo_instagram.png',
+                //           fit: BoxFit.contain,
+                //           scale: 1.5,
+                //         ),
+                //         onTap: () async {
+                //           final url = Uri.parse(
+                //             'https://www.instagram.com/kimjuhyeon_by_kak/',
+                //           );
+                //           if (await canLaunchUrl(url)) {
+                //             launchUrl(
+                //               url,
+                //               mode: LaunchMode.externalApplication,
+                //             );
+                //           }
+                //         },
+                //       ),
+                //       InkWell(
+                //         child: Image.asset(
+                //           'assets/images/logos/logo_youtube.png',
+                //           fit: BoxFit.contain,
+                //           scale: 1.5,
+                //         ),
+                //         onTap: () async {
+                //           final url = Uri.parse(
+                //             'https://www.youtube.com/channel/UChLYML6MnztkeOYdtdAQqaw',
+                //           );
+                //           if (await canLaunchUrl(url)) {
+                //             launchUrl(
+                //               url,
+                //               mode: LaunchMode.externalApplication,
+                //             );
+                //           }
+                //         },
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                FooterSns(),
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Container(
@@ -1888,5 +1869,155 @@ class Footer extends StatelessWidget {
         ),
       );
     });
+  }
+}
+
+class FooterSns extends StatelessWidget {
+  const FooterSns({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return _snsState
+        ? Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  child: Image.asset(
+                    'assets/images/logos/logo_kakao_talk.png',
+                    fit: BoxFit.contain,
+                    scale: 1.5,
+                  ),
+                  onTap: () async {
+                    final url = Uri.parse(
+                      'http://pf.kakao.com/_WExlxixj',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                ),
+                InkWell(
+                  child: Image.asset(
+                    'assets/images/logos/logo_instagram.png',
+                    fit: BoxFit.contain,
+                    scale: 1.5,
+                  ),
+                  onTap: () async {
+                    final url = Uri.parse(
+                      'https://instagram.com/bykak_rental?igshid=YmMyMTA2M2Y=',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                ),
+                InkWell(
+                  child: Image.asset(
+                    'assets/images/logos/logo_naver.png',
+                    fit: BoxFit.contain,
+                    scale: 1.5,
+                  ),
+                  onTap: () async {
+                    final url = Uri.parse(
+                      'https://map.naver.com/v5/entry/place/1943136667?lng=126.6570986&lat=37.4671237&placePath=%2Fhome%3Fentry=plt&c=15,0,0,0,dh',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
+          )
+        : Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  child: Image.asset(
+                    'assets/images/logos/logo_kakao_talk.png',
+                    fit: BoxFit.contain,
+                    scale: 1.5,
+                  ),
+                  onTap: () async {
+                    final url = Uri.parse(
+                      'http://pf.kakao.com/_UxoHxbT',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                ),
+                InkWell(
+                  child: Image.asset(
+                    'assets/images/logos/logo_blog.png',
+                    fit: BoxFit.contain,
+                    scale: 1.5,
+                  ),
+                  onTap: () async {
+                    final url = Uri.parse(
+                      'https://blog.naver.com/kimjuhyeon_',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                ),
+                InkWell(
+                  child: Image.asset(
+                    'assets/images/logos/logo_instagram.png',
+                    fit: BoxFit.contain,
+                    scale: 1.5,
+                  ),
+                  onTap: () async {
+                    final url = Uri.parse(
+                      'https://www.instagram.com/kimjuhyeon_by_kak/',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                ),
+                InkWell(
+                  child: Image.asset(
+                    'assets/images/logos/logo_youtube.png',
+                    fit: BoxFit.contain,
+                    scale: 1.5,
+                  ),
+                  onTap: () async {
+                    final url = Uri.parse(
+                      'https://www.youtube.com/channel/UChLYML6MnztkeOYdtdAQqaw',
+                    );
+                    if (await canLaunchUrl(url)) {
+                      launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
+          );
   }
 }
