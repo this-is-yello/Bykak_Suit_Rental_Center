@@ -162,7 +162,7 @@ class ProductsAppBar extends StatelessWidget {
         children: [
           InkWell(
             child: Text(
-              'by覺 수트렌탈센터',
+              'by 覺 수트렌탈센터',
               style: TextStyle(
                 fontSize: h1FontSize(context),
                 fontWeight: boldText,
