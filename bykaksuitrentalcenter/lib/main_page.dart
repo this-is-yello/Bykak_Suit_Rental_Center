@@ -19,8 +19,8 @@ import 'package:video_player/video_player.dart';
 import 'package:video_player_web/video_player_web.dart';
 
 import 'package:bykaksuitrentalcenter/menu_state.dart';
-import 'package:bykaksuitrentalcenter/splash_screen.dart';
-import 'package:bykaksuitrentalcenter/loading_screen.dart';
+
+// ------------------------------------------------------------------------------------------------------------------------------
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -33,6 +33,7 @@ int currentPage = 0;
 var shopPic;
 
 late Timer _timer;
+late Timer _test;
 late VideoPlayerController _videoController;
 late InAppWebViewController _webViewController;
 bool _isChanging = false;
@@ -82,7 +83,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    _timer = Timer.periodic(Duration(milliseconds: 4500), (timer) {
       changeState();
     });
     _videoController = VideoPlayerController.asset(
@@ -357,9 +358,29 @@ class About extends StatefulWidget {
 
 class _AboutState extends State<About> {
   indexChange(a) {
+    _timer.cancel();
     setState(() {
       i = a;
       shopPic = 'assets/images/shops/shop_${i + 1}.png';
+    });
+    _timer = Timer.periodic(Duration(milliseconds: 4500), (timer) {
+      if (i >= 9) {
+        if (this.mounted) {
+          setState(() {
+            i = 0;
+          });
+        }
+        shopPic = 'assets/images/shops/shop_${i + 1}.png';
+        // print('$i, $shopPic');
+      } else {
+        if (this.mounted) {
+          setState(() {
+            i++;
+          });
+        }
+        shopPic = 'assets/images/shops/shop_${i + 1}.png';
+        // print('$i, $shopPic');
+      }
     });
     // print('SelectedPic: ' + '$i');
   }
@@ -935,18 +956,13 @@ class _AboutState extends State<About> {
 }
 
 // ----------------------------------------------- LookBook ------------------------------------------------------------------
-class LookBook extends StatefulWidget {
+class LookBook extends StatelessWidget {
   const LookBook({super.key});
 
   @override
-  State<LookBook> createState() => _LookBookState();
-}
-
-class _LookBookState extends State<LookBook> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
   Widget build(BuildContext context) {
+    final ScrollController _scrollController = ScrollController();
+
     return ResponsiveSizer(builder: (context, orientation, screenType) {
       return Container(
         width: MediaQuery.of(context).size.width,
@@ -1041,14 +1057,9 @@ class _LookBookState extends State<LookBook> {
 }
 
 // ----------------------------------------------- Product ------------------------------------------------------------------
-class Product extends StatefulWidget {
+class Product extends StatelessWidget {
   const Product({super.key});
 
-  @override
-  State<Product> createState() => _ProductState();
-}
-
-class _ProductState extends State<Product> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
@@ -1296,14 +1307,9 @@ class WithCelebrity extends StatelessWidget {
 }
 
 // ----------------------------------------------- Location ------------------------------------------------------------------
-class Location extends StatefulWidget {
+class Location extends StatelessWidget {
   const Location({super.key});
 
-  @override
-  State<Location> createState() => _LocationState();
-}
-
-class _LocationState extends State<Location> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
@@ -1640,16 +1646,9 @@ class _LocationState extends State<Location> {
 }
 
 // ----------------------------------------------- Footer ------------------------------------------------------------------
-class Footer extends StatefulWidget {
+class Footer extends StatelessWidget {
   const Footer({super.key});
 
-  @override
-  State<Footer> createState() => _FooterState();
-}
-
-bool _snsState = true;
-
-class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {

@@ -7,9 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-import 'package:bykaksuitrentalcenter/splash_screen.dart';
 import 'package:bykaksuitrentalcenter/main_page.dart';
-import 'package:bykaksuitrentalcenter/loading_screen.dart';
 import 'package:bykaksuitrentalcenter/products_page.dart';
 
 // import 'package:bykaksuitrentalcenter/home_page.dart';
@@ -55,8 +53,6 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => MainPage()),
         GetPage(name: '/products', page: () => ProductsPage()),
-        GetPage(name: '/splash', page: () => SplashScreen()),
-        GetPage(name: '/loading', page: () => LoadingScreen()),
 
         // GetPage(name: '/home', page: () => HomeScreen()),
         // GetPage(name: '/login', page: () => LogInScreen()),
