@@ -36,10 +36,11 @@ dependencies:
   url_launcher: ^6.1.9
   image_fade: ^0.6.2
   carousel_slider: ^4.2.1
-  video_player: ^2.6.0
-  video_player_web: ^2.0.15
+  video_player: ^2.6.1
+  video_player_web: ^2.0.16
   flutter_inappwebview: ^5.7.2+3
   flutter_native_splash: ^2.2.19
+  meta_seo: ^3.0.5
   # cached_network_image: ^3.2.3
 
   firebase_core: ^2.4.1
@@ -70,7 +71,13 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+flutter_native_splash:
+  color: "#205B48"
+  image: "assets/images/bykak_logo_white.png"
+  android: true
+  ios: true
+  web: true
+  fullscreen: true
 # The following section is specific to Flutter packages.
 flutter:
   # The following line ensures that the Material Icons font is
@@ -86,8 +93,12 @@ flutter:
     - assets/images/products/
     - assets/images/shops/
     - assets/videos/
+    - assets/images/bykak_logo_white.png
 
     - .env # path to your .env file
+
+  # branding: 'assets/loading.gif'
+  # branding_mode: bottom
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

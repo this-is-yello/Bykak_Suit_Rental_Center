@@ -53,7 +53,7 @@
 			<string>http</string>
 		</array>
 		<key>UIStatusBarHidden</key>
-		<false/>
+		<true/>
 		<key>NSAppTransportSecurity</key>
 		<dict>
 			<key>NSAllowsArbitraryLoads</key>

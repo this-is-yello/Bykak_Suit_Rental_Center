@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:bykaksuitrentalcenter/style.dart';
@@ -62,19 +64,19 @@ class _MainPageState extends State<MainPage> {
 
   changeState() {
     if (i >= 9) {
-      if (this.mounted) {
-        setState(() {
-          i = 0;
-        });
-      }
+      //if (this.mounted) {
+      setState(() {
+        i = 0;
+      });
+      // }
       shopPic = 'assets/images/shops/shop_${i + 1}.png';
       // print('$i, $shopPic');
     } else {
-      if (this.mounted) {
-        setState(() {
-          i++;
-        });
-      }
+      // if (this.mounted) {
+      setState(() {
+        i++;
+      });
+      //  }
       shopPic = 'assets/images/shops/shop_${i + 1}.png';
       // print('$i, $shopPic');
     }
@@ -83,22 +85,26 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(milliseconds: 4500), (timer) {
-      changeState();
-    });
+    // _timer = Timer.periodic(Duration(milliseconds: 5000), (timer) {
+    //   changeState();
+    // });
     _videoController = VideoPlayerController.asset(
       'assets/videos/bykak_video.mp4',
     )..initialize().then(
         (_) {
-          if (this.mounted) {
-            setState(() {
-              WidgetsBinding.instance.addPersistentFrameCallback((_) {
-                _videoController.setVolume(0);
-                _videoController.play();
-                _videoController.setLooping(true);
-              });
-            });
-          }
+          // if (this.mounted) {
+          setState(
+            () {
+              WidgetsBinding.instance.addPersistentFrameCallback(
+                (_) {
+                  _videoController.setVolume(0);
+                  _videoController.play();
+                  _videoController.setLooping(true);
+                },
+              );
+            },
+          );
+          //   }
         },
       );
     setState(() {
@@ -252,21 +258,21 @@ class _ByKakState extends State<ByKak> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(builder: (context, orientation, screenType) {
-      return Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-          color: blackColor,
-        ),
-        child: _videoController.value.isInitialized
-            ? Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  Container(
+      return Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              color: blackColor,
+            ),
+            child: _videoController.value.isInitialized
+                ? Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     child: Opacity(
-                      opacity: 0.6,
+                      opacity: 0.8,
                       child: FittedBox(
                         fit: BoxFit.cover,
                         child: SizedBox(
@@ -280,69 +286,69 @@ class _ByKakState extends State<ByKak> {
                         ),
                       ),
                     ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                        ),
-                        child: Text(
-                          'by 覺 수트렌탈센터',
-                          style: TextStyle(
-                            fontSize: h1FontSize(context),
-                            fontWeight: boldText,
-                            color: whiteColor,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: paddingSize(context) * 2,
-                          left: 16,
-                          right: 16,
-                          bottom: 8,
-                        ),
-                        child: Text(
-                          'OPEN : Mon to Sat | 10:00 - 19:00',
-                          style: TextStyle(
-                            fontSize: h3FontSize(context),
-                            color: whiteColor,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                          bottom: 100,
-                        ),
-                        child: Text(
-                          'TEL : 070-7893-3059',
-                          style: TextStyle(
-                            fontSize: h3FontSize(context),
-                            color: whiteColor,
-                          ),
-                        ),
-                      ),
-                    ],
                   )
-                ],
-              )
-            : Container(
-                child: Center(
-                  child: SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: CircularProgressIndicator(
-                      color: whiteColor,
-                      strokeWidth: 2,
+                : Container(
+                    child: Center(
+                      child: SizedBox(
+                        width: 40,
+                        height: 40,
+                        child: CircularProgressIndicator(
+                          color: whiteColor,
+                          strokeWidth: 2,
+                        ),
+                      ),
                     ),
+                  ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                ),
+                child: Text(
+                  'by 覺 수트렌탈센터',
+                  style: TextStyle(
+                    fontSize: h1FontSize(context),
+                    fontWeight: boldText,
+                    color: whiteColor,
                   ),
                 ),
               ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: paddingSize(context) * 2,
+                  left: 16,
+                  right: 16,
+                  bottom: 8,
+                ),
+                child: Text(
+                  'OPEN : Mon to Sat | 10:00 - 19:00',
+                  style: TextStyle(
+                    fontSize: h3FontSize(context),
+                    color: whiteColor,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  bottom: 100,
+                ),
+                child: Text(
+                  'TEL : 070-7893-3059',
+                  style: TextStyle(
+                    fontSize: h3FontSize(context),
+                    color: whiteColor,
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
       );
     });
   }
@@ -363,21 +369,21 @@ class _AboutState extends State<About> {
       i = a;
       shopPic = 'assets/images/shops/shop_${i + 1}.png';
     });
-    _timer = Timer.periodic(Duration(milliseconds: 4500), (timer) {
+    _timer = Timer.periodic(Duration(milliseconds: 5000), (timer) {
       if (i >= 9) {
-        if (this.mounted) {
-          setState(() {
-            i = 0;
-          });
-        }
+        // if (this.mounted) {
+        setState(() {
+          i = 0;
+        });
+        //  }
         shopPic = 'assets/images/shops/shop_${i + 1}.png';
         // print('$i, $shopPic');
       } else {
-        if (this.mounted) {
-          setState(() {
-            i++;
-          });
-        }
+        //if (this.mounted) {
+        setState(() {
+          i++;
+        });
+        // }
         shopPic = 'assets/images/shops/shop_${i + 1}.png';
         // print('$i, $shopPic');
       }
@@ -425,17 +431,17 @@ class _AboutState extends State<About> {
                               fit: BoxFit.fitWidth,
                               errorBuilder: (context, exception) =>
                                   Icon(Icons.error),
-                              // placeholder: Center(
-                              //   child: Container(
-                              //     width: 20,
-                              //     height: 20,
-                              //     padding: EdgeInsets.only(top: 20),
-                              //     child: CircularProgressIndicator(
-                              //       color: mainColor,
-                              //       strokeWidth: 2,
-                              //     ),
-                              //   ),
-                              // ),
+                              placeholder: Center(
+                                child: Container(
+                                  width: 20,
+                                  height: 20,
+                                  padding: EdgeInsets.all(20),
+                                  child: CircularProgressIndicator(
+                                    color: mainColor,
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                              ),
                               duration: Duration(milliseconds: 500),
                               syncDuration: Duration(milliseconds: 500),
                             ),
@@ -470,16 +476,16 @@ class _AboutState extends State<About> {
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, exception) =>
                                         Icon(Icons.error),
-                                    // placeholder: Center(
-                                    //   child: SizedBox(
-                                    //     width: 20,
-                                    //     height: 20,
-                                    //     child: CircularProgressIndicator(
-                                    //       color: mainColor,
-                                    //       strokeWidth: 2,
-                                    //     ),
-                                    //   ),
-                                    // ),
+                                    placeholder: Center(
+                                      child: SizedBox(
+                                        width: 16,
+                                        height: 16,
+                                        child: CircularProgressIndicator(
+                                          color: mainColor,
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                   onTap: () {
                                     indexChange(index);
@@ -698,16 +704,16 @@ class _AboutState extends State<About> {
                                   fit: BoxFit.fitHeight,
                                   errorBuilder: (context, exception) =>
                                       Icon(Icons.error),
-                                  // placeholder: Center(
-                                  //   child: SizedBox(
-                                  //     width: 20,
-                                  //     height: 20,
-                                  //     child: CircularProgressIndicator(
-                                  //       color: mainColor,
-                                  //       strokeWidth: 2,
-                                  //     ),
-                                  //   ),
-                                  // ),
+                                  placeholder: Center(
+                                    child: SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                        color: mainColor,
+                                        strokeWidth: 2,
+                                      ),
+                                    ),
+                                  ),
                                   duration: Duration(milliseconds: 500),
                                   syncDuration: Duration(milliseconds: 500),
                                 ),
@@ -926,16 +932,16 @@ class _AboutState extends State<About> {
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, exception) =>
                                         Icon(Icons.error),
-                                    // placeholder: Center(
-                                    //   child: SizedBox(
-                                    //     width: 20,
-                                    //     height: 20,
-                                    //     child: CircularProgressIndicator(
-                                    //       color: mainColor,
-                                    //       strokeWidth: 2,
-                                    //     ),
-                                    //   ),
-                                    // ),
+                                    placeholder: Center(
+                                      child: SizedBox(
+                                        width: 16,
+                                        height: 16,
+                                        child: CircularProgressIndicator(
+                                          color: mainColor,
+                                          strokeWidth: 2,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                   onTap: () {
                                     indexChange(index);
@@ -1024,18 +1030,18 @@ class LookBook extends StatelessWidget {
                                   fit: BoxFit.fitHeight,
                                   errorBuilder: (context, exception) =>
                                       Icon(Icons.error),
-                                  // placeholder: Padding(
-                                  //   padding: const EdgeInsets.all(56),
-                                  //   child: Center(
-                                  //     child: SizedBox(
-                                  //       width: 40,
-                                  //       height: 40,
-                                  //       child: CircularProgressIndicator(
-                                  //         color: mainColor,
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  // ),
+                                  placeholder: Padding(
+                                    padding: const EdgeInsets.all(64),
+                                    child: Center(
+                                      child: SizedBox(
+                                        width: 40,
+                                        height: 40,
+                                        child: CircularProgressIndicator(
+                                          color: mainColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   duration: Duration(milliseconds: 500),
                                   syncDuration: Duration(milliseconds: 500),
                                 ),
@@ -1127,15 +1133,15 @@ class Product extends StatelessWidget {
                               fit: BoxFit.cover,
                               errorBuilder: (context, exception) =>
                                   Icon(Icons.error),
-                              // placeholder: Center(
-                              //   child: SizedBox(
-                              //     width: 40,
-                              //     height: 40,
-                              //     child: CircularProgressIndicator(
-                              //       color: mainColor,
-                              //     ),
-                              //   ),
-                              // ),
+                              placeholder: Center(
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: CircularProgressIndicator(
+                                    color: mainColor,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -1235,11 +1241,11 @@ class _PinchUpState extends State<PinchUp> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(milliseconds: 650), () {
-      if (this.mounted) {
-        setState(() {
-          _showPinchUp = false;
-        });
-      }
+      //  if (this.mounted) {
+      setState(() {
+        _showPinchUp = false;
+      });
+      // }
     });
 
     return _showPinchUp
@@ -1290,11 +1296,25 @@ class WithCelebrity extends StatelessWidget {
                 Padding(padding: EdgeInsets.all(8)),
                 Container(
                   width: widgetSize(context),
-                  child: ClipRRect(
-                    child: Image.asset(
+                  child: ImageFade(
+                    image: AssetImage(
                       'assets/images/with_celebrity.png',
-                      fit: BoxFit.fitWidth,
                     ),
+                    fit: BoxFit.fitWidth,
+                    errorBuilder: (context, exception) => Icon(Icons.error),
+                    placeholder: Center(
+                      child: Container(
+                        width: 20,
+                        height: 20,
+                        padding: EdgeInsets.all(20),
+                        child: CircularProgressIndicator(
+                          color: mainColor,
+                          strokeWidth: 2,
+                        ),
+                      ),
+                    ),
+                    duration: Duration(milliseconds: 500),
+                    syncDuration: Duration(milliseconds: 500),
                   ),
                 ),
               ],
@@ -1334,9 +1354,25 @@ class Location extends StatelessWidget {
                 //   ),
                 // ),
                 Padding(padding: EdgeInsets.all(8)),
-                Image.asset(
-                  'assets/images/rental_center_location.png',
-                  fit: BoxFit.cover,
+                ImageFade(
+                  image: AssetImage(
+                    'assets/images/rental_center_location.png',
+                  ),
+                  fit: BoxFit.fitWidth,
+                  errorBuilder: (context, exception) => Icon(Icons.error),
+                  placeholder: Center(
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      padding: EdgeInsets.all(20),
+                      child: CircularProgressIndicator(
+                        color: mainColor,
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  ),
+                  duration: Duration(milliseconds: 500),
+                  syncDuration: Duration(milliseconds: 500),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
