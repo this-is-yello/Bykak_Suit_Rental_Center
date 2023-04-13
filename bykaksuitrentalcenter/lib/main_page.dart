@@ -85,9 +85,9 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    // _timer = Timer.periodic(Duration(milliseconds: 5000), (timer) {
-    //   changeState();
-    // });
+    _timer = Timer.periodic(Duration(milliseconds: 5000), (timer) {
+      changeState();
+    });
     _videoController = VideoPlayerController.asset(
       'assets/videos/bykak_video.mp4',
     )..initialize().then(
@@ -364,7 +364,7 @@ class About extends StatefulWidget {
 
 class _AboutState extends State<About> {
   indexChange(a) {
-    _timer.cancel();
+    // _timer.cancel();
     setState(() {
       i = a;
       shopPic = 'assets/images/shops/shop_${i + 1}.png';
