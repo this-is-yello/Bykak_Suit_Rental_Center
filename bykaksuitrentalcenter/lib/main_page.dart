@@ -34,12 +34,8 @@ int i = 0;
 int currentPage = 0;
 var shopPic;
 
-late Timer _timer;
-late Timer _test;
 late VideoPlayerController _videoController;
 late InAppWebViewController _webViewController;
-bool _isChanging = false;
-bool _videoPlay = false;
 PageController _pageController = PageController(
   initialPage: 0,
   keepPage: true,
@@ -48,46 +44,16 @@ PageController _pageController = PageController(
 movePage() {
   _pageController.animateToPage(
     currentPage,
-    duration: Duration(milliseconds: 1500),
+    duration: Duration(milliseconds: 1700),
     curve: Curves.linearToEaseOut,
   );
   // print('selectedPage: ' + '$currentPage');
 }
 
 class _MainPageState extends State<MainPage> {
-  void _changeState() {
-    setState(() {
-      _videoPlay = true;
-    });
-    _isChanging = true;
-  }
-
-  changeState() {
-    if (i >= 9) {
-      //if (this.mounted) {
-      setState(() {
-        i = 0;
-      });
-      // }
-      shopPic = 'assets/images/shops/shop_${i + 1}.png';
-      // print('$i, $shopPic');
-    } else {
-      // if (this.mounted) {
-      setState(() {
-        i++;
-      });
-      //  }
-      shopPic = 'assets/images/shops/shop_${i + 1}.png';
-      // print('$i, $shopPic');
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(milliseconds: 5000), (timer) {
-      changeState();
-    });
     _videoController = VideoPlayerController.asset(
       'assets/videos/bykak_video.mp4',
     )..initialize().then(
@@ -111,7 +77,6 @@ class _MainPageState extends State<MainPage> {
       i = 0;
       shopPic = 'assets/images/shops/shop_${i + 1}.png';
     });
-    _changeState();
   }
 
   // @override
@@ -362,33 +327,44 @@ class About extends StatefulWidget {
   State<About> createState() => _AboutState();
 }
 
+late Timer _timer;
+
 class _AboutState extends State<About> {
+  changeState() {
+    if (i >= 9) {
+      //if (this.mounted) {
+      setState(() {
+        i = 0;
+      });
+      // }
+      shopPic = 'assets/images/shops/shop_${i + 1}.png';
+      // print('$i, $shopPic');
+    } else {
+      // if (this.mounted) {
+      setState(() {
+        i++;
+      });
+      //  }
+      shopPic = 'assets/images/shops/shop_${i + 1}.png';
+      // print('$i, $shopPic');
+    }
+  }
+
   indexChange(a) {
-    // _timer.cancel();
+    _timer.cancel();
     setState(() {
       i = a;
       shopPic = 'assets/images/shops/shop_${i + 1}.png';
     });
-    _timer = Timer.periodic(Duration(milliseconds: 5000), (timer) {
-      if (i >= 9) {
-        // if (this.mounted) {
-        setState(() {
-          i = 0;
-        });
-        //  }
-        shopPic = 'assets/images/shops/shop_${i + 1}.png';
-        // print('$i, $shopPic');
-      } else {
-        //if (this.mounted) {
-        setState(() {
-          i++;
-        });
-        // }
-        shopPic = 'assets/images/shops/shop_${i + 1}.png';
-        // print('$i, $shopPic');
-      }
+    _timer = Timer.periodic(Duration(milliseconds: 4500), (timer) {
+      changeState();
     });
-    // print('SelectedPic: ' + '$i');
+  }
+
+  void initState() {
+    _timer = Timer.periodic(Duration(milliseconds: 4500), (timer) {
+      changeState();
+    });
   }
 
   @override
