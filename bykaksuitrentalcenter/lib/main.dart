@@ -11,7 +11,7 @@ import 'firebase_options.dart';
 import 'package:meta_seo/meta_seo.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:bykaksuitrentalcenter/main_page.dart';
+import 'package:bykaksuitrentalcenter/about_page.dart';
 import 'package:bykaksuitrentalcenter/products_page.dart';
 
 // import 'package:bykaksuitrentalcenter/home_page.dart';

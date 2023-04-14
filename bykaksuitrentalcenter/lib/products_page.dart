@@ -6,7 +6,7 @@ import 'package:url_strategy/url_strategy.dart';
 import 'package:get/get.dart';
 import 'dart:ui';
 
-import 'package:bykaksuitrentalcenter/main_page.dart';
+import 'package:bykaksuitrentalcenter/about_page.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart';
-import 'package:bykaksuitrentalcenter/main_page.dart';
+import 'package:bykaksuitrentalcenter/about_page.dart';
 import 'package:side_sheet/side_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
