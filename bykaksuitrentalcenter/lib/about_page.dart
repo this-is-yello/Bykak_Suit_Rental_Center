@@ -304,7 +304,7 @@ class _ByKakState extends State<ByKak> {
                   bottom: 100,
                 ),
                 child: Text(
-                  'TEL : 070-7893-3059',
+                  'TEL : 070-7839-3059',
                   style: TextStyle(
                     fontSize: h3FontSize(context),
                     color: whiteColor,
@@ -1517,7 +1517,7 @@ class Location extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '김주현바이각 제물포 본점 / 제물포북부역 공영주차장 2시간 무료',
+                            '김주현바이각 제물포 본점 / 제물포북부역 공영주차장 1시간 800원',
                             style: TextStyle(
                               fontSize: h5FontSize(context),
                               color: blackColor,
@@ -1960,7 +1960,7 @@ class Footer extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8),
                           child: Text(
-                            '전화번호 : 070-7893-3059',
+                            '전화번호 : 070-7839-3059',
                             style: TextStyle(
                               color: whiteColor,
                               fontSize: h4FontSize(context),

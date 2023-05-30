@@ -40,6 +40,7 @@ dependencies:
   video_player_web: ^2.0.16
   flutter_inappwebview: ^5.7.2+3
   flutter_native_splash: ^2.2.19
+  intl: ^0.18.1
   meta_seo: ^3.0.5
   # cached_network_image: ^3.2.3
 

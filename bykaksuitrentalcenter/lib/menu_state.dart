@@ -582,7 +582,7 @@ class _FloatActBtnState extends State<FloatActBtn> {
                         borderRadius: BorderRadius.circular(4),
                         boxShadow: [boxShadows]),
                     child: Text(
-                      '070-7893-3059',
+                      '070-7839-3059',
                       style: TextStyle(
                         fontWeight: boldText,
                         color: mainColor,
@@ -620,7 +620,7 @@ class _FloatActBtnState extends State<FloatActBtn> {
                 },
                 onTap: () async {
                   final url = Uri.parse(
-                    'tel:070 7893 3059',
+                    'tel:070 7839 3059',
                   );
                   if (await canLaunchUrl(url)) {
                     launchUrl(
