@@ -1386,7 +1386,7 @@ class Location extends StatelessWidget {
                                   text: '(22102) 인천 미추홀구 숙골로 43번길 158-19 3층\n',
                                 ),
                                 TextSpan(
-                                  text: '070-4897-3059',
+                                  text: '070-7839-3059',
                                 ),
                               ],
                               style: TextStyle(
