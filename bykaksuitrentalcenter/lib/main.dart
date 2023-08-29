@@ -1,13 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bykaksuitrentalcenter/style.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:intl/intl.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:meta_seo/meta_seo.dart';
 import 'package:flutter/foundation.dart';
 
@@ -50,9 +53,48 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   void initState() {
     super.initState();
     FlutterNativeSplash.remove();
+    countVisitor();
+  }
+
+  countVisitor() async {
+    var visitingNum1;
+    var visitingNum2;
+    var today = DateTime.now();
+    DateFormat formatter = DateFormat('yyyy-MM-dd');
+
+    var allCounting =
+        await firestore.collection('visitor').doc('allCounting').get();
+    visitingNum1 = await allCounting.get('countAllVisitor');
+    var plusAllVisitor = visitingNum1 + 1;
+    await firestore
+        .collection('visitor')
+        .doc('allCounting')
+        .update({'countAllVisitor': plusAllVisitor});
+
+    var dayCounting;
+    var checkDoc = await firestore.collection('visitor').doc('dayCounting');
+    checkDoc.get().then((doc) async {
+      if (doc.data()!.containsKey(formatter.format(today))) {
+        dayCounting =
+            await firestore.collection('visitor').doc('dayCounting').get();
+        visitingNum2 = await dayCounting.get(formatter.format(today));
+        var plusDayVisitor = visitingNum2 + 1;
+        await firestore
+            .collection('visitor')
+            .doc('dayCounting')
+            .update({formatter.format(today): plusDayVisitor});
+      } else {
+        await firestore
+            .collection('visitor')
+            .doc('dayCounting')
+            .set({formatter.format(today): 1});
+      }
+    });
   }
 
   @override
@@ -75,6 +117,9 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
+      ],
       title: '바이각수트렌탈센터',
       // home: HomeScreen(),
       initialRoute: '/',

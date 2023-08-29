@@ -44,10 +44,11 @@ dependencies:
   meta_seo: ^3.0.5
   # cached_network_image: ^3.2.3
 
-  firebase_core: ^2.4.1
-  firebase_auth: ^4.2.4
-  firebase_storage: ^11.0.11
-  cloud_firestore: ^4.3.1
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
+  firebase_storage: ^11.2.3
+  cloud_firestore: ^4.8.1
+  firebase_analytics: ^10.4.5
   get: ^4.6.5
   url_strategy: ^0.2.0
 
