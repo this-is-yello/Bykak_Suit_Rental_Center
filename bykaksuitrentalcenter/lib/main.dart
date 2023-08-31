@@ -59,6 +59,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     FlutterNativeSplash.remove();
     countVisitor();
+    print(DateTime.now());
   }
 
   countVisitor() async {
@@ -92,7 +93,7 @@ class _MyAppState extends State<MyApp> {
         await firestore
             .collection('visitor')
             .doc('dayCounting')
-            .set({formatter.format(today): 1});
+            .update({formatter.format(today): 1});
       }
     });
   }
