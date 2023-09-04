@@ -107,6 +107,9 @@ class _MyAppState extends State<MyApp> {
       meta.keywords(
           keywords:
               '면접정장, 양복대여, 정장대여, 혼주복, 턱시도 대여, 맞춤예복, 바이각수트렌탈센터, 바이각슈트렌탈센터, 바이각렌탈센터');
+      meta.ogImage(
+          ogImage:
+              'https://github.com/this-is-yello/Bykak_Suit_Rental_Center/blob/main/bykaksuitrentalcenter/assets/images/UrlThumb.png?raw=true');
     }
     return GetMaterialApp(
       theme: ThemeData(
